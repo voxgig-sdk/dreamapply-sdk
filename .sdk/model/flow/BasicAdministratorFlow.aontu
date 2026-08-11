@@ -1,0 +1,44 @@
+# BasicAdministratorFlow
+
+main: kit: flow: BasicAdministratorFlow:
+{
+  entity: "administrator",
+  kind: "basic",
+  name: "BasicAdministratorFlow",
+  step: [
+    {
+      op: "list",
+      valid: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "administrator_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      input: {
+        ref: "administrator_ref01",
+        srcdatavar: "administrator_ref01_data",
+        suffix: "_dt0"
+      }
+
+      match: {
+        id: "administrator01"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-administrator_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicAdministratorFlow"
+}

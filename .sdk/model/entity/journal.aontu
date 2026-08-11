@@ -1,0 +1,107 @@
+# Entity: journal
+
+main: kit: entity: journal: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "administrator"
+      req: false
+      type: "`$OBJECT`"
+    }
+    {
+      name: "applicant"
+      req: false
+      type: "`$OBJECT`"
+    }
+    {
+      name: "application"
+      req: false
+      type: "`$OBJECT`"
+    }
+    {
+      name: "bind"
+      req: false
+      type: "`$ARRAY`"
+    }
+    {
+      name: "course"
+      req: false
+      type: "`$OBJECT`"
+    }
+    {
+      name: "document"
+      req: false
+      type: "`$OBJECT`"
+    }
+    {
+      name: "event"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "flag"
+      req: false
+      type: "`$OBJECT`"
+    }
+    {
+      name: "id"
+      req: false
+      type: "`$INTEGER`"
+    }
+    {
+      name: "institution"
+      req: false
+      type: "`$OBJECT`"
+    }
+    {
+      name: "invoice"
+      req: false
+      type: "`$OBJECT`"
+    }
+    {
+      name: "logged"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "offer"
+      req: false
+      type: "`$OBJECT`"
+    }
+    {
+      name: "tracker"
+      req: false
+      type: "`$OBJECT`"
+    }
+  ]
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "journal"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          method: "GET"
+          orig: "/journal"
+          parts: [
+            "journal"
+          ]
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

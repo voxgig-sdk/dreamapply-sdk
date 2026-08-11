@@ -1,0 +1,221 @@
+# Entity: course
+
+main: kit: entity: course: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "accreditation"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "address"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "awards_abbr"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "awards_full"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "code"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "codeInternal"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "country"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "credits"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "departments"
+      req: false
+      type: "`$OBJECT`"
+    }
+    {
+      name: "duration"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "erasmus"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "featured"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "iban"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "id"
+      req: false
+      type: "`$INTEGER`"
+    }
+    {
+      name: "institution"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "language"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "location"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "mode"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "name"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "prospect_uri"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "quota"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "registration"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "status"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "type"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "updated"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "vat"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "www"
+      req: false
+      type: "`$STRING`"
+    }
+  ]
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "course"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          method: "POST"
+          orig: "/courses"
+          parts: [
+            "courses"
+          ]
+          transform: {
+            req: "`reqdata`"
+            res: "`body.institution`"
+          }
+        }
+      ]
+    }
+    list: {
+      name: "list"
+      points: [
+        {
+          method: "GET"
+          orig: "/courses"
+          parts: [
+            "courses"
+          ]
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                kind: "param"
+                name: "id"
+                orig: "id"
+                reqd: true
+                type: "`$INTEGER`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/courses/{id}"
+          parts: [
+            "courses"
+            "{id}"
+          ]
+          select: {
+            exist: [
+              "id"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body.institution`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

@@ -1,0 +1,65 @@
+{
+  "existing": {
+    "institution": {
+      "INSTITUTION00": {
+        "address": "s78",
+        "country": "s79",
+        "departments": {},
+        "erasmus": "s7b",
+        "iban": "s7c",
+        "id": "INSTITUTION00",
+        "location": "s7e",
+        "name": "s7f",
+        "registration": "s80",
+        "status": "s81",
+        "vat": "s82",
+        "www": "s83"
+      },
+      "INSTITUTION01": {
+        "address": "sf0",
+        "country": "sf1",
+        "departments": {},
+        "erasmus": "sf3",
+        "iban": "sf4",
+        "id": "INSTITUTION01",
+        "location": "sf6",
+        "name": "sf7",
+        "registration": "sf8",
+        "status": "sf9",
+        "vat": "sfa",
+        "www": "sfb"
+      },
+      "INSTITUTION02": {
+        "address": "s168",
+        "country": "s169",
+        "departments": {},
+        "erasmus": "s16b",
+        "iban": "s16c",
+        "id": "INSTITUTION02",
+        "location": "s16e",
+        "name": "s16f",
+        "registration": "s170",
+        "status": "s171",
+        "vat": "s172",
+        "www": "s173"
+      }
+    }
+  },
+  "new": {
+    "institution": {
+      "institution_ref01": {
+        "address": "s1e0",
+        "country": "s1e1",
+        "departments": {},
+        "erasmus": "s1e3",
+        "iban": "s1e4",
+        "location": "s1e6",
+        "name": "s1e7",
+        "registration": "s1e8",
+        "status": "s1e9",
+        "vat": "s1ea",
+        "www": "s1eb"
+      }
+    }
+  }
+}

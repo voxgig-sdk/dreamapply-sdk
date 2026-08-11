@@ -1,0 +1,73 @@
+{
+  "existing": {
+    "invoice": {
+      "INVOICE00": {
+        "applicant": {},
+        "application": {},
+        "collected": "s8e",
+        "course": {},
+        "currency": "s90",
+        "deadline": "s91",
+        "delivered": "s92",
+        "id": "INVOICE00",
+        "instructions": "s94",
+        "issued": "s95",
+        "nr": "s96",
+        "payer": {},
+        "reminded": "s98",
+        "smallprint": "s99"
+      },
+      "INVOICE01": {
+        "applicant": {},
+        "application": {},
+        "collected": "s11a",
+        "course": {},
+        "currency": "s11c",
+        "deadline": "s11d",
+        "delivered": "s11e",
+        "id": "INVOICE01",
+        "instructions": "s120",
+        "issued": "s121",
+        "nr": "s122",
+        "payer": {},
+        "reminded": "s124",
+        "smallprint": "s125"
+      },
+      "INVOICE02": {
+        "applicant": {},
+        "application": {},
+        "collected": "s1a6",
+        "course": {},
+        "currency": "s1a8",
+        "deadline": "s1a9",
+        "delivered": "s1aa",
+        "id": "INVOICE02",
+        "instructions": "s1ac",
+        "issued": "s1ad",
+        "nr": "s1ae",
+        "payer": {},
+        "reminded": "s1b0",
+        "smallprint": "s1b1"
+      }
+    }
+  },
+  "new": {
+    "invoice": {
+      "invoice_ref01": {
+        "applicant": {},
+        "application": {},
+        "collected": "s232",
+        "course": {},
+        "currency": "s234",
+        "deadline": "s235",
+        "delivered": "s236",
+        "instructions": "s238",
+        "issued": "s239",
+        "nr": "s23a",
+        "payer": {},
+        "reminded": "s23c",
+        "smallprint": "s23d"
+      }
+    }
+  }
+}

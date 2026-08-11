@@ -1,0 +1,150 @@
+# Entity: scoresheet
+
+main: kit: entity: scoresheet: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "confirmed"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "created"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "date"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "depth"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "group"
+      req: false
+      type: "`$OBJECT`"
+    }
+    {
+      name: "instructions"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "language"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "maps"
+      req: false
+      type: "`$ARRAY`"
+    }
+    {
+      name: "name"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "rangeMax"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "rangeMin"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "reference"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "scale"
+      req: false
+      type: "`$INTEGER`"
+    }
+    {
+      name: "scored"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "scores"
+      req: false
+      type: "`$OBJECT`"
+    }
+    {
+      name: "subject"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "type"
+      req: false
+      type: "`$STRING`"
+    }
+  ]
+
+  name: "scoresheet"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          method: "GET"
+          orig: "/scoresheets"
+          parts: [
+            "scoresheets"
+          ]
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                kind: "param"
+                name: "id"
+                orig: "id"
+                reqd: true
+                type: "`$INTEGER`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/scoresheets/{id}"
+          parts: [
+            "scoresheets"
+            "{id}"
+          ]
+          select: {
+            exist: [
+              "id"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

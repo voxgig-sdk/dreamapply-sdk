@@ -1,0 +1,29 @@
+{
+  "existing": {
+    "academic_year": {
+      "ACADEMIC_YEAR00": {
+        "name": "s14",
+        "start": "s15",
+        "id": "ACADEMIC_YEAR00"
+      },
+      "ACADEMIC_YEAR01": {
+        "name": "s28",
+        "start": "s29",
+        "id": "ACADEMIC_YEAR01"
+      },
+      "ACADEMIC_YEAR02": {
+        "name": "s3c",
+        "start": "s3d",
+        "id": "ACADEMIC_YEAR02"
+      }
+    }
+  },
+  "new": {
+    "academic_year": {
+      "academic_year_ref01": {
+        "name": "s50",
+        "start": "s51"
+      }
+    }
+  }
+}

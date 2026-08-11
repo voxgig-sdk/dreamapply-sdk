@@ -1,0 +1,85 @@
+{
+  "existing": {
+    "applicant": {
+      "APPLICANT00": {
+        "address": "saa",
+        "citizenship": "sab",
+        "email": "sac",
+        "id": "APPLICANT00",
+        "matriculation": "sae",
+        "name": {},
+        "name_family": "sb0",
+        "name_given": "sb1",
+        "notes": "sb2",
+        "phone": "sb3",
+        "photo": {},
+        "reference": "sb5",
+        "region": "sb6",
+        "registered": "sb7",
+        "tracker_ID": "sb8",
+        "type": "sb9",
+        "vatin": "sba"
+      },
+      "APPLICANT01": {
+        "address": "s154",
+        "citizenship": "s155",
+        "email": "s156",
+        "id": "APPLICANT01",
+        "matriculation": "s158",
+        "name": {},
+        "name_family": "s15a",
+        "name_given": "s15b",
+        "notes": "s15c",
+        "phone": "s15d",
+        "photo": {},
+        "reference": "s15f",
+        "region": "s160",
+        "registered": "s161",
+        "tracker_ID": "s162",
+        "type": "s163",
+        "vatin": "s164"
+      },
+      "APPLICANT02": {
+        "address": "s1fe",
+        "citizenship": "s1ff",
+        "email": "s200",
+        "id": "APPLICANT02",
+        "matriculation": "s202",
+        "name": {},
+        "name_family": "s204",
+        "name_given": "s205",
+        "notes": "s206",
+        "phone": "s207",
+        "photo": {},
+        "reference": "s209",
+        "region": "s20a",
+        "registered": "s20b",
+        "tracker_ID": "s20c",
+        "type": "s20d",
+        "vatin": "s20e"
+      }
+    }
+  },
+  "new": {
+    "applicant": {
+      "applicant_ref01": {
+        "address": "s2a8",
+        "citizenship": "s2a9",
+        "email": "s2aa",
+        "matriculation": "s2ac",
+        "name": {},
+        "name_family": "s2ae",
+        "name_given": "s2af",
+        "notes": "s2b0",
+        "phone": "s2b1",
+        "photo": {},
+        "reference": "s2b3",
+        "region": "s2b4",
+        "registered": "s2b5",
+        "tracker_ID": "s2b6",
+        "type": "s2b7",
+        "vatin": "s2b8"
+      }
+    }
+  }
+}

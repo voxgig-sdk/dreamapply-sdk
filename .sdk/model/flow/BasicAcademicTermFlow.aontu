@@ -1,0 +1,44 @@
+# BasicAcademicTermFlow
+
+main: kit: flow: BasicAcademicTermFlow:
+{
+  entity: "academic_term",
+  kind: "basic",
+  name: "BasicAcademicTermFlow",
+  step: [
+    {
+      op: "list",
+      valid: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "academic_term_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      input: {
+        ref: "academic_term_ref01",
+        srcdatavar: "academic_term_ref01_data",
+        suffix: "_dt0"
+      }
+
+      match: {
+        id: "academic_term01"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-academic_term_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicAcademicTermFlow"
+}

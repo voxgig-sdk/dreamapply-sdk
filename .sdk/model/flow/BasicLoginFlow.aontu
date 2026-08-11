@@ -1,0 +1,22 @@
+# BasicLoginFlow
+
+main: kit: flow: BasicLoginFlow:
+{
+  entity: "login",
+  kind: "basic",
+  name: "BasicLoginFlow",
+  step: [
+    {
+      op: "list",
+      valid: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "login_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicLoginFlow"
+}

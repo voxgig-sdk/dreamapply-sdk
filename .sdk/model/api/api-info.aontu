@@ -1,0 +1,41 @@
+# API Information
+
+
+main: {
+  kit: {
+    info: {
+      description: `Student admissions and application management API.
+
+UNOFFICIAL SPEC. DreamApply publishes no OpenAPI description. This spec was DERIVED MECHANICALLY from the vendor's own MIT-licensed PHP SDK (github.com/dream-group/dream-apply-sdk), whose gen/ directory is itself @generated and encodes field names, PHP types, nullability, enum domains and URL structure.
+
+Known limits, stated plainly: HTTP verbs are inferred from the SDK's base classes and traits rather than declared; PHP types carry no JSON formats, so dates appear as plain strings; and the SDK may lag the live API. Nothing here has been verified against a running instance.`
+      license: {
+        name: "MIT"
+      }
+      security: {
+        in: "header"
+        name: "Authorization"
+        prefix: "Bearer"
+        scheme: "apiKey"
+        type: "http"
+      }
+      servers: [
+        {
+          description: "Per-tenant instance"
+          url: "https://{instance}.dreamapply.com/api"
+          variables: {
+            instance: {
+              default: "demo"
+              description: "Your DreamApply instance name"
+            }
+          }
+        }
+      ]
+      summary: "Student admissions and application management API."
+      title: "DreamApply API"
+      version: "8"
+      website: "https://{instance}.dreamapply.com"
+    }
+  }
+}
+

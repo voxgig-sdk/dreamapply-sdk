@@ -1,0 +1,44 @@
+# BasicInstitutionFlow
+
+main: kit: flow: BasicInstitutionFlow:
+{
+  entity: "institution",
+  kind: "basic",
+  name: "BasicInstitutionFlow",
+  step: [
+    {
+      op: "list",
+      valid: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "institution_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      input: {
+        ref: "institution_ref01",
+        srcdatavar: "institution_ref01_data",
+        suffix: "_dt0"
+      }
+
+      match: {
+        id: "institution01"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-institution_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicInstitutionFlow"
+}

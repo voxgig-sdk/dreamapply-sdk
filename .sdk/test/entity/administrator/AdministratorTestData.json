@@ -1,0 +1,45 @@
+{
+  "existing": {
+    "administrator": {
+      "ADMINISTRATOR00": {
+        "email": "s46",
+        "function": "s47",
+        "id": "ADMINISTRATOR00",
+        "name": "s49",
+        "outgoingEmail": "s4a",
+        "outgoingName": "s4b",
+        "phone": "s4c"
+      },
+      "ADMINISTRATOR01": {
+        "email": "s8c",
+        "function": "s8d",
+        "id": "ADMINISTRATOR01",
+        "name": "s8f",
+        "outgoingEmail": "s90",
+        "outgoingName": "s91",
+        "phone": "s92"
+      },
+      "ADMINISTRATOR02": {
+        "email": "sd2",
+        "function": "sd3",
+        "id": "ADMINISTRATOR02",
+        "name": "sd5",
+        "outgoingEmail": "sd6",
+        "outgoingName": "sd7",
+        "phone": "sd8"
+      }
+    }
+  },
+  "new": {
+    "administrator": {
+      "administrator_ref01": {
+        "email": "s118",
+        "function": "s119",
+        "name": "s11b",
+        "outgoingEmail": "s11c",
+        "outgoingName": "s11d",
+        "phone": "s11e"
+      }
+    }
+  }
+}

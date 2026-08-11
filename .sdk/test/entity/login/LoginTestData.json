@@ -1,0 +1,41 @@
+{
+  "existing": {
+    "login": {
+      "LOGIN00": {
+        "id": "LOGIN00",
+        "ip": "s3d",
+        "logged": "s3e",
+        "result": "s3f",
+        "role": "s40",
+        "roleId": "s41"
+      },
+      "LOGIN01": {
+        "id": "LOGIN01",
+        "ip": "s79",
+        "logged": "s7a",
+        "result": "s7b",
+        "role": "s7c",
+        "roleId": "s7d"
+      },
+      "LOGIN02": {
+        "id": "LOGIN02",
+        "ip": "sb5",
+        "logged": "sb6",
+        "result": "sb7",
+        "role": "sb8",
+        "roleId": "sb9"
+      }
+    }
+  },
+  "new": {
+    "login": {
+      "login_ref01": {
+        "ip": "sf1",
+        "logged": "sf2",
+        "result": "sf3",
+        "role": "sf4",
+        "roleId": "sf5"
+      }
+    }
+  }
+}

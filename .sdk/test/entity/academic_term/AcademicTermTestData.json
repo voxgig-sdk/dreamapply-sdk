@@ -1,0 +1,45 @@
+{
+  "existing": {
+    "academic_term": {
+      "ACADEMIC_TERM00": {
+        "finish": "s46",
+        "grace": "s47",
+        "id": "ACADEMIC_TERM00",
+        "name": "s49",
+        "start": "s4a",
+        "type": {},
+        "year": {}
+      },
+      "ACADEMIC_TERM01": {
+        "finish": "s8c",
+        "grace": "s8d",
+        "id": "ACADEMIC_TERM01",
+        "name": "s8f",
+        "start": "s90",
+        "type": {},
+        "year": {}
+      },
+      "ACADEMIC_TERM02": {
+        "finish": "sd2",
+        "grace": "sd3",
+        "id": "ACADEMIC_TERM02",
+        "name": "sd5",
+        "start": "sd6",
+        "type": {},
+        "year": {}
+      }
+    }
+  },
+  "new": {
+    "academic_term": {
+      "academic_term_ref01": {
+        "finish": "s118",
+        "grace": "s119",
+        "name": "s11b",
+        "start": "s11c",
+        "type": {},
+        "year": {}
+      }
+    }
+  }
+}

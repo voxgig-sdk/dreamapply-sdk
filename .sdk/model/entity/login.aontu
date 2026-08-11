@@ -1,0 +1,67 @@
+# Entity: login
+
+main: kit: entity: login: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "id"
+      req: false
+      type: "`$INTEGER`"
+    }
+    {
+      name: "ip"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "logged"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "result"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "role"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "roleId"
+      req: false
+      type: "`$INTEGER`"
+    }
+  ]
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "login"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          method: "GET"
+          orig: "/logins"
+          parts: [
+            "logins"
+          ]
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

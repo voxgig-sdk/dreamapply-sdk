@@ -1,0 +1,33 @@
+{
+  "existing": {
+    "fee": {
+      "FEE00": {
+        "name": "s1e",
+        "notes": "s1f",
+        "type": "s20",
+        "id": "FEE00"
+      },
+      "FEE01": {
+        "name": "s3c",
+        "notes": "s3d",
+        "type": "s3e",
+        "id": "FEE01"
+      },
+      "FEE02": {
+        "name": "s5a",
+        "notes": "s5b",
+        "type": "s5c",
+        "id": "FEE02"
+      }
+    }
+  },
+  "new": {
+    "fee": {
+      "fee_ref01": {
+        "name": "s78",
+        "notes": "s79",
+        "type": "s7a"
+      }
+    }
+  }
+}

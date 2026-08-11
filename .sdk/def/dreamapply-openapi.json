@@ -1,0 +1,1761 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "DreamApply API",
+    "version": "8",
+    "description": "Student admissions and application management API.\n\nUNOFFICIAL SPEC. DreamApply publishes no OpenAPI description. This spec was DERIVED MECHANICALLY from the vendor's own MIT-licensed PHP SDK (github.com/dream-group/dream-apply-sdk), whose gen/ directory is itself @generated and encodes field names, PHP types, nullability, enum domains and URL structure.\n\nKnown limits, stated plainly: HTTP verbs are inferred from the SDK's base classes and traits rather than declared; PHP types carry no JSON formats, so dates appear as plain strings; and the SDK may lag the live API. Nothing here has been verified against a running instance.",
+    "license": {
+      "name": "MIT"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://{instance}.dreamapply.com/api",
+      "description": "Per-tenant instance",
+      "variables": {
+        "instance": {
+          "default": "demo",
+          "description": "Your DreamApply instance name"
+        }
+      }
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "apiKey": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    },
+    "schemas": {
+      "AcademicTerm": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "start": {
+            "type": "string"
+          },
+          "grace": {
+            "type": "string"
+          },
+          "finish": {
+            "type": "string"
+          },
+          "year": {
+            "$ref": "#/components/schemas/AcademicYear"
+          },
+          "type": {
+            "$ref": "#/components/schemas/AcademicTermType"
+          }
+        }
+      },
+      "AcademicTermType": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "enum": [
+              "Legacy"
+            ]
+          }
+        }
+      },
+      "AcademicYear": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "start": {
+            "type": "string"
+          }
+        }
+      },
+      "Administrator": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "outgoingName": {
+            "type": "string"
+          },
+          "outgoingEmail": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "function": {
+            "type": "string"
+          }
+        }
+      },
+      "Applicant": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "Child",
+              "Legal",
+              "Natural"
+            ]
+          },
+          "registered": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "reference": {
+            "type": "string"
+          },
+          "matriculation": {
+            "type": "string"
+          },
+          "citizenship": {
+            "type": "string"
+          },
+          "notes": {
+            "type": "string"
+          },
+          "address": {
+            "type": "string",
+            "nullable": true
+          },
+          "vatin": {
+            "type": "string",
+            "nullable": true
+          },
+          "name": {
+            "$ref": "#/components/schemas/ApplicantName"
+          },
+          "photo": {
+            "$ref": "#/components/schemas/BinaryRecord"
+          }
+        }
+      },
+      "ApplicantCreate": {
+        "type": "object",
+        "properties": {
+          "citizenship": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "matriculation": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "name_family": {
+            "type": "string"
+          },
+          "name_given": {
+            "type": "string"
+          },
+          "notes": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "reference": {
+            "type": "string"
+          },
+          "region": {
+            "type": "string"
+          },
+          "tracker_ID": {
+            "type": "string"
+          }
+        }
+      },
+      "ApplicantName": {
+        "type": "object",
+        "properties": {
+          "full": {
+            "type": "string"
+          },
+          "given": {
+            "type": "string"
+          },
+          "middle": {
+            "type": "string"
+          },
+          "family": {
+            "type": "string"
+          },
+          "parent": {
+            "type": "string"
+          },
+          "legal": {
+            "type": "string"
+          }
+        }
+      },
+      "Application": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "created": {
+            "type": "string"
+          },
+          "revised": {
+            "type": "string",
+            "nullable": true
+          },
+          "submitted": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "Blank",
+              "Closed",
+              "Draft",
+              "Inactive",
+              "Reopened",
+              "Submitted",
+              "Withdrawn"
+            ]
+          },
+          "profile": {
+            "type": "array"
+          },
+          "legal": {
+            "type": "array"
+          },
+          "contact": {
+            "type": "array"
+          },
+          "home": {
+            "type": "array"
+          },
+          "host": {
+            "type": "array"
+          },
+          "education": {
+            "type": "array"
+          },
+          "grades": {
+            "type": "array"
+          },
+          "languages": {
+            "type": "array"
+          },
+          "career": {
+            "type": "array"
+          },
+          "activities": {
+            "type": "array"
+          },
+          "residences": {
+            "type": "array"
+          },
+          "motivation": {
+            "type": "array"
+          },
+          "visa": {
+            "type": "array"
+          },
+          "misc": {
+            "type": "array"
+          },
+          "extras": {
+            "type": "array"
+          },
+          "academicTerm": {
+            "type": "object",
+            "description": "Sub-resource (AcademicTerm); see the DreamApply SDK."
+          },
+          "applicant": {
+            "$ref": "#/components/schemas/Applicant"
+          },
+          "pdf": {
+            "$ref": "#/components/schemas/BinaryRecord"
+          }
+        }
+      },
+      "BinaryRecord": {
+        "type": "object",
+        "properties": {
+          "uploaded": {
+            "type": "string",
+            "nullable": true
+          },
+          "name": {
+            "type": "string"
+          },
+          "mime": {
+            "type": "string"
+          },
+          "size": {
+            "type": "integer"
+          },
+          "content": {
+            "type": "object",
+            "description": "Sub-resource (StreamInterface); see the DreamApply SDK."
+          },
+          "expires": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "Course": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "Archived",
+              "Closed",
+              "Draft",
+              "Online",
+              "Private",
+              "Standby"
+            ]
+          },
+          "updated": {
+            "type": "string"
+          },
+          "featured": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "mode": {
+            "type": "string"
+          },
+          "duration": {
+            "type": "string"
+          },
+          "credits": {
+            "type": "string"
+          },
+          "language": {
+            "type": "string"
+          },
+          "country": {
+            "type": "string"
+          },
+          "location": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          },
+          "accreditation": {
+            "type": "string"
+          },
+          "quota": {
+            "type": "string"
+          },
+          "codeInternal": {
+            "type": "string",
+            "nullable": true
+          },
+          "institution": {
+            "$ref": "#/components/schemas/Institution"
+          }
+        }
+      },
+      "CourseCreate": {
+        "type": "object",
+        "properties": {
+          "awards_abbr": {
+            "type": "string"
+          },
+          "awards_full": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          },
+          "country": {
+            "type": "string"
+          },
+          "institution": {
+            "type": "string"
+          },
+          "language": {
+            "type": "string"
+          },
+          "location": {
+            "type": "string"
+          },
+          "mode": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "prospect_uri": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          }
+        }
+      },
+      "Fee": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "notes": {
+            "type": "string"
+          }
+        }
+      },
+      "Flag": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "created": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "Institution": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "status": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "country": {
+            "type": "string"
+          },
+          "location": {
+            "type": "string"
+          },
+          "www": {
+            "type": "string"
+          },
+          "erasmus": {
+            "type": "string"
+          },
+          "address": {
+            "type": "string"
+          },
+          "vat": {
+            "type": "string"
+          },
+          "iban": {
+            "type": "string"
+          },
+          "registration": {
+            "type": "string"
+          },
+          "departments": {
+            "type": "object",
+            "description": "Sub-resource (InstitutionDepartments); see the DreamApply SDK."
+          }
+        }
+      },
+      "Intake": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "start": {
+            "type": "string"
+          },
+          "policy": {
+            "type": "string",
+            "enum": [
+              "Flexible",
+              "Rolling"
+            ]
+          },
+          "arrival": {
+            "type": "string"
+          },
+          "commence": {
+            "type": "string"
+          },
+          "pre": {
+            "$ref": "#/components/schemas/IntakePre"
+          },
+          "decision": {
+            "$ref": "#/components/schemas/IntakeDecision"
+          }
+        }
+      },
+      "IntakeDecision": {
+        "type": "object",
+        "properties": {
+          "policy": {
+            "type": "string"
+          },
+          "days": {
+            "type": "integer",
+            "nullable": true
+          },
+          "date": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "IntakePre": {
+        "type": "object",
+        "properties": {
+          "deadline": {
+            "type": "string"
+          },
+          "info": {
+            "type": "string"
+          },
+          "mask": {
+            "type": "boolean"
+          }
+        }
+      },
+      "Invoice": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "nr": {
+            "type": "string"
+          },
+          "issued": {
+            "type": "string"
+          },
+          "deadline": {
+            "type": "string"
+          },
+          "delivered": {
+            "type": "string"
+          },
+          "reminded": {
+            "type": "string"
+          },
+          "collected": {
+            "type": "string"
+          },
+          "currency": {
+            "type": "string"
+          },
+          "instructions": {
+            "type": "string"
+          },
+          "smallprint": {
+            "type": "string"
+          },
+          "applicant": {
+            "$ref": "#/components/schemas/Applicant"
+          },
+          "application": {
+            "$ref": "#/components/schemas/Application"
+          },
+          "course": {
+            "$ref": "#/components/schemas/Course"
+          },
+          "payer": {
+            "$ref": "#/components/schemas/InvoicePayer"
+          }
+        }
+      },
+      "InvoicePayer": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          }
+        }
+      },
+      "JournalItem": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "logged": {
+            "type": "string"
+          },
+          "event": {
+            "type": "string"
+          },
+          "bind": {
+            "type": "array"
+          },
+          "administrator": {
+            "$ref": "#/components/schemas/Administrator"
+          },
+          "applicant": {
+            "$ref": "#/components/schemas/Applicant"
+          },
+          "application": {
+            "$ref": "#/components/schemas/Application"
+          },
+          "course": {
+            "$ref": "#/components/schemas/Course"
+          },
+          "institution": {
+            "$ref": "#/components/schemas/Institution"
+          },
+          "invoice": {
+            "$ref": "#/components/schemas/Invoice"
+          },
+          "offer": {
+            "$ref": "#/components/schemas/Offer"
+          },
+          "document": {
+            "$ref": "#/components/schemas/BinaryRecord"
+          },
+          "flag": {
+            "$ref": "#/components/schemas/Flag"
+          },
+          "tracker": {
+            "$ref": "#/components/schemas/Tracker"
+          }
+        }
+      },
+      "Login": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "logged": {
+            "type": "string"
+          },
+          "ip": {
+            "type": "string"
+          },
+          "roleId": {
+            "type": "integer"
+          },
+          "role": {
+            "type": "string"
+          },
+          "result": {
+            "type": "string"
+          }
+        }
+      },
+      "Offer": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "priority": {
+            "type": "integer"
+          },
+          "inserted": {
+            "type": "integer"
+          },
+          "saved": {
+            "type": "integer"
+          },
+          "confirmed": {
+            "type": "integer"
+          },
+          "comments": {
+            "type": "string"
+          },
+          "commentsConfirmed": {
+            "type": "string"
+          },
+          "decision": {
+            "type": "string",
+            "enum": [
+              "Declined",
+              "Final",
+              "None"
+            ]
+          },
+          "decisionPolicy": {
+            "type": "string"
+          },
+          "decisionDeadline": {
+            "type": "string"
+          },
+          "decided": {
+            "type": "integer",
+            "nullable": true
+          },
+          "scored": {
+            "type": "integer"
+          },
+          "notes": {
+            "type": "string"
+          },
+          "subject": {
+            "type": "string"
+          },
+          "course": {
+            "$ref": "#/components/schemas/Course"
+          },
+          "intake": {
+            "$ref": "#/components/schemas/Intake"
+          },
+          "score": {
+            "$ref": "#/components/schemas/OfferScore"
+          },
+          "reason": {
+            "$ref": "#/components/schemas/OfferTypeReason"
+          },
+          "type": {
+            "$ref": "#/components/schemas/OfferType"
+          },
+          "typeConfirmed": {
+            "type": "object",
+            "description": "Sub-resource (OfferType); see the DreamApply SDK."
+          }
+        }
+      },
+      "OfferScore": {
+        "type": "object",
+        "properties": {
+          "auto": {
+            "type": "string",
+            "nullable": true
+          },
+          "extra": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "OfferType": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "title": {
+            "type": "string"
+          },
+          "colour": {
+            "type": "string"
+          },
+          "ranking": {
+            "type": "string",
+            "enum": [
+              "Eliminated",
+              "Pending"
+            ]
+          },
+          "bcc": {
+            "type": "object",
+            "description": "Sub-resource (array<int,string>); see the DreamApply SDK."
+          },
+          "confirm": {
+            "type": "boolean"
+          },
+          "freeze": {
+            "type": "boolean"
+          },
+          "decide": {
+            "type": "boolean"
+          },
+          "decline": {
+            "type": "boolean"
+          },
+          "reopen": {
+            "type": "boolean"
+          },
+          "silence": {
+            "type": "boolean"
+          },
+          "subject": {
+            "type": "string"
+          },
+          "comments": {
+            "type": "string"
+          }
+        }
+      },
+      "OfferTypeReason": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "nullable": true
+          },
+          "reason": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "Scoresheet": {
+        "type": "object",
+        "properties": {
+          "created": {
+            "type": "string"
+          },
+          "scored": {
+            "type": "string"
+          },
+          "confirmed": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "maps": {
+            "type": "array",
+            "nullable": true
+          },
+          "date": {
+            "type": "string"
+          },
+          "depth": {
+            "type": "string"
+          },
+          "rangeMin": {
+            "type": "string"
+          },
+          "rangeMax": {
+            "type": "string"
+          },
+          "scale": {
+            "type": "integer"
+          },
+          "instructions": {
+            "type": "string"
+          },
+          "reference": {
+            "type": "string"
+          },
+          "subject": {
+            "type": "string"
+          },
+          "language": {
+            "type": "string"
+          },
+          "group": {
+            "type": "object",
+            "description": "Sub-resource (object); see the DreamApply SDK.",
+            "nullable": true
+          },
+          "scores": {
+            "type": "object",
+            "description": "Sub-resource (Scores); see the DreamApply SDK."
+          }
+        }
+      },
+      "TableView": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "created": {
+            "type": "string"
+          },
+          "modified": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "tabledata": {
+            "$ref": "#/components/schemas/BinaryRecord"
+          }
+        }
+      },
+      "Tracker": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "created": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          },
+          "notes": {
+            "type": "string"
+          },
+          "reduction": {
+            "$ref": "#/components/schemas/TrackerReduction"
+          }
+        }
+      },
+      "TrackerReduction": {
+        "type": "object",
+        "properties": {
+          "reduction": {
+            "type": "string"
+          },
+          "percent": {
+            "type": "string",
+            "nullable": true
+          },
+          "amount": {
+            "type": "string",
+            "nullable": true
+          },
+          "cents": {
+            "type": "integer",
+            "nullable": true
+          },
+          "currency": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      }
+    }
+  },
+  "security": [
+    {
+      "apiKey": []
+    }
+  ],
+  "paths": {
+    "/academic-terms": {
+      "get": {
+        "tags": [
+          "AcademicTerms"
+        ],
+        "operationId": "listAcademicTerms",
+        "summary": "List AcademicTerms",
+        "responses": {
+          "200": {
+            "description": "AcademicTerms list",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AcademicTerm"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/academic-terms/{id}": {
+      "get": {
+        "tags": [
+          "AcademicTerms"
+        ],
+        "operationId": "getAcademicTerm",
+        "summary": "Fetch one AcademicTerm",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "AcademicTerm",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AcademicTerm"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/academic-years": {
+      "get": {
+        "tags": [
+          "AcademicYears"
+        ],
+        "operationId": "listAcademicYears",
+        "summary": "List AcademicYears",
+        "responses": {
+          "200": {
+            "description": "AcademicYears list",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AcademicYear"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/academic-years/{id}": {
+      "get": {
+        "tags": [
+          "AcademicYears"
+        ],
+        "operationId": "getAcademicYear",
+        "summary": "Fetch one AcademicYear",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "AcademicYear",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AcademicYear"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/administrators": {
+      "get": {
+        "tags": [
+          "Administrators"
+        ],
+        "operationId": "listAdministrators",
+        "summary": "List Administrators",
+        "responses": {
+          "200": {
+            "description": "Administrators list",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Administrator"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/administrators/{id}": {
+      "get": {
+        "tags": [
+          "Administrators"
+        ],
+        "operationId": "getAdministrator",
+        "summary": "Fetch one Administrator",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Administrator",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Administrator"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/applicants": {
+      "get": {
+        "tags": [
+          "Applicants"
+        ],
+        "operationId": "listApplicants",
+        "summary": "List Applicants",
+        "responses": {
+          "200": {
+            "description": "Applicants list",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Applicant"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Applicants"
+        ],
+        "operationId": "createApplicant",
+        "summary": "Create a Applicant",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ApplicantCreate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Applicant created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Applicant"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/applicants/{id}": {
+      "get": {
+        "tags": [
+          "Applicants"
+        ],
+        "operationId": "getApplicant",
+        "summary": "Fetch one Applicant",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Applicant",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Applicant"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/applications": {
+      "get": {
+        "tags": [
+          "Applications"
+        ],
+        "operationId": "listApplications",
+        "summary": "List Applications",
+        "responses": {
+          "200": {
+            "description": "Applications list",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Application"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/applications/{id}": {
+      "get": {
+        "tags": [
+          "Applications"
+        ],
+        "operationId": "getApplication",
+        "summary": "Fetch one Application",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Application",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/courses": {
+      "get": {
+        "tags": [
+          "Courses"
+        ],
+        "operationId": "listCourses",
+        "summary": "List Courses",
+        "responses": {
+          "200": {
+            "description": "Courses list",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Course"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Courses"
+        ],
+        "operationId": "createCourse",
+        "summary": "Create a Course",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CourseCreate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Course created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Course"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/courses/{id}": {
+      "get": {
+        "tags": [
+          "Courses"
+        ],
+        "operationId": "getCourse",
+        "summary": "Fetch one Course",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Course",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Course"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/fees": {
+      "get": {
+        "tags": [
+          "Fees"
+        ],
+        "operationId": "listFees",
+        "summary": "List Fees",
+        "responses": {
+          "200": {
+            "description": "Fees list",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Fee"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/fees/{id}": {
+      "get": {
+        "tags": [
+          "Fees"
+        ],
+        "operationId": "getFee",
+        "summary": "Fetch one Fee",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Fee",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Fee"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/institutions": {
+      "get": {
+        "tags": [
+          "Institutions"
+        ],
+        "operationId": "listInstitutions",
+        "summary": "List Institutions",
+        "responses": {
+          "200": {
+            "description": "Institutions list",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Institution"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/institutions/{id}": {
+      "get": {
+        "tags": [
+          "Institutions"
+        ],
+        "operationId": "getInstitution",
+        "summary": "Fetch one Institution",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Institution",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Institution"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/intakes": {
+      "get": {
+        "tags": [
+          "Intakes"
+        ],
+        "operationId": "listIntakes",
+        "summary": "List Intakes",
+        "responses": {
+          "200": {
+            "description": "Intakes list",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Intake"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/intakes/{id}": {
+      "get": {
+        "tags": [
+          "Intakes"
+        ],
+        "operationId": "getIntake",
+        "summary": "Fetch one Intake",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Intake",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Intake"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/invoices": {
+      "get": {
+        "tags": [
+          "Invoices"
+        ],
+        "operationId": "listInvoices",
+        "summary": "List Invoices",
+        "responses": {
+          "200": {
+            "description": "Invoices list",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Invoice"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/invoices/{id}": {
+      "get": {
+        "tags": [
+          "Invoices"
+        ],
+        "operationId": "getInvoice",
+        "summary": "Fetch one Invoice",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Invoice",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Invoice"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Invoices"
+        ],
+        "operationId": "deleteInvoice",
+        "summary": "Delete a Invoice",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Deleted"
+          }
+        }
+      }
+    },
+    "/journal": {
+      "get": {
+        "tags": [
+          "Journal"
+        ],
+        "operationId": "listJournal",
+        "summary": "List Journal",
+        "responses": {
+          "200": {
+            "description": "Journal list",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/JournalItem"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/logins": {
+      "get": {
+        "tags": [
+          "Logins"
+        ],
+        "operationId": "listLogins",
+        "summary": "List Logins",
+        "responses": {
+          "200": {
+            "description": "Logins list",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Login"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/scoresheets": {
+      "get": {
+        "tags": [
+          "Scoresheets"
+        ],
+        "operationId": "listScoresheets",
+        "summary": "List Scoresheets",
+        "responses": {
+          "200": {
+            "description": "Scoresheets list",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Scoresheet"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/scoresheets/{id}": {
+      "get": {
+        "tags": [
+          "Scoresheets"
+        ],
+        "operationId": "getScoresheet",
+        "summary": "Fetch one Scoresheet",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Scoresheet",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Scoresheet"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tableviews": {
+      "get": {
+        "tags": [
+          "TableViews"
+        ],
+        "operationId": "listTableViews",
+        "summary": "List TableViews",
+        "responses": {
+          "200": {
+            "description": "TableViews list",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TableView"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tableviews/{id}": {
+      "get": {
+        "tags": [
+          "TableViews"
+        ],
+        "operationId": "getTableView",
+        "summary": "Fetch one TableView",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "TableView",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TableView"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,44 @@
+# BasicIntakeFlow
+
+main: kit: flow: BasicIntakeFlow:
+{
+  entity: "intake",
+  kind: "basic",
+  name: "BasicIntakeFlow",
+  step: [
+    {
+      op: "list",
+      valid: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "intake_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      input: {
+        ref: "intake_ref01",
+        srcdatavar: "intake_ref01_data",
+        suffix: "_dt0"
+      }
+
+      match: {
+        id: "intake01"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-intake_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicIntakeFlow"
+}

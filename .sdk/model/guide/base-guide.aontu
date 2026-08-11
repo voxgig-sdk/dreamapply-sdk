@@ -1,0 +1,135 @@
+# Guide
+
+guide: {
+  metrics: count: entity: 14
+  metrics: count: path: 26
+  metrics: count: method: 29
+
+  entity: academic_term: {
+    path: "/academic-terms": {
+      op: list: method: *GET
+    }
+    path: "/academic-terms/{id}": {
+      op: load: method: *GET
+    }
+  }
+
+  entity: academic_year: {
+    path: "/academic-years": {
+      op: list: method: *GET
+    }
+    path: "/academic-years/{id}": {
+      op: load: method: *GET
+    }
+  }
+
+  entity: administrator: {
+    path: "/administrators": {
+      op: list: method: *GET
+    }
+    path: "/administrators/{id}": {
+      op: load: method: *GET
+    }
+  }
+
+  entity: applicant: {
+    path: "/applicants": {
+      op: create: method: *POST
+      op: list: method: *GET
+    }
+    path: "/applicants/{id}": {
+      op: load: method: *GET
+    }
+  }
+
+  entity: application: {
+    path: "/applications": {
+      op: list: method: *GET
+    }
+    path: "/applications/{id}": {
+      op: load: method: *GET
+    }
+  }
+
+  entity: course: {
+    path: "/courses": {
+      op: create: method: *POST
+      op: create: transform: res: *("`body.institution`")|top
+      op: list: method: *GET
+    }
+    path: "/courses/{id}": {
+      op: load: method: *GET
+      op: load: transform: res: *("`body.institution`")|top
+    }
+  }
+
+  entity: fee: {
+    path: "/fees": {
+      op: list: method: *GET
+    }
+    path: "/fees/{id}": {
+      op: load: method: *GET
+    }
+  }
+
+  entity: institution: {
+    path: "/institutions": {
+      op: list: method: *GET
+    }
+    path: "/institutions/{id}": {
+      op: load: method: *GET
+      op: load: transform: res: *("`body.departments`")|top
+    }
+  }
+
+  entity: intake: {
+    path: "/intakes": {
+      op: list: method: *GET
+    }
+    path: "/intakes/{id}": {
+      op: load: method: *GET
+    }
+  }
+
+  entity: invoice: {
+    path: "/invoices": {
+      op: list: method: *GET
+    }
+    path: "/invoices/{id}": {
+      op: load: method: *GET
+      op: remove: method: *DELETE
+    }
+  }
+
+  entity: journal: {
+    path: "/journal": {
+      op: list: method: *GET
+    }
+  }
+
+  entity: login: {
+    path: "/logins": {
+      op: list: method: *GET
+    }
+  }
+
+  entity: scoresheet: {
+    path: "/scoresheets": {
+      op: list: method: *GET
+    }
+    path: "/scoresheets/{id}": {
+      op: load: method: *GET
+    }
+  }
+
+  entity: table_view: {
+    path: "/tableviews": {
+      op: list: method: *GET
+    }
+    path: "/tableviews/{id}": {
+      op: load: method: *GET
+      op: load: transform: res: *("`body.tabledata`")|top
+    }
+  }
+
+}

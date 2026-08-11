@@ -1,0 +1,73 @@
+{
+  "existing": {
+    "journal": {
+      "JOURNAL00": {
+        "administrator": {},
+        "applicant": {},
+        "application": {},
+        "bind": [],
+        "course": {},
+        "document": {},
+        "event": "s92",
+        "flag": {},
+        "id": "JOURNAL00",
+        "institution": {},
+        "invoice": {},
+        "logged": "s97",
+        "offer": {},
+        "tracker": {}
+      },
+      "JOURNAL01": {
+        "administrator": {},
+        "applicant": {},
+        "application": {},
+        "bind": [],
+        "course": {},
+        "document": {},
+        "event": "s11e",
+        "flag": {},
+        "id": "JOURNAL01",
+        "institution": {},
+        "invoice": {},
+        "logged": "s123",
+        "offer": {},
+        "tracker": {}
+      },
+      "JOURNAL02": {
+        "administrator": {},
+        "applicant": {},
+        "application": {},
+        "bind": [],
+        "course": {},
+        "document": {},
+        "event": "s1aa",
+        "flag": {},
+        "id": "JOURNAL02",
+        "institution": {},
+        "invoice": {},
+        "logged": "s1af",
+        "offer": {},
+        "tracker": {}
+      }
+    }
+  },
+  "new": {
+    "journal": {
+      "journal_ref01": {
+        "administrator": {},
+        "applicant": {},
+        "application": {},
+        "bind": [],
+        "course": {},
+        "document": {},
+        "event": "s236",
+        "flag": {},
+        "institution": {},
+        "invoice": {},
+        "logged": "s23b",
+        "offer": {},
+        "tracker": {}
+      }
+    }
+  }
+}

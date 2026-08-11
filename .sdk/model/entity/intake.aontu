@@ -1,0 +1,110 @@
+# Entity: intake
+
+main: kit: entity: intake: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "arrival"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "commence"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "decision"
+      req: false
+      type: "`$OBJECT`"
+    }
+    {
+      name: "id"
+      req: false
+      type: "`$INTEGER`"
+    }
+    {
+      name: "name"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "policy"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "pre"
+      req: false
+      type: "`$OBJECT`"
+    }
+    {
+      name: "start"
+      req: false
+      type: "`$STRING`"
+    }
+  ]
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "intake"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          method: "GET"
+          orig: "/intakes"
+          parts: [
+            "intakes"
+          ]
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                kind: "param"
+                name: "id"
+                orig: "id"
+                reqd: true
+                type: "`$INTEGER`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/intakes/{id}"
+          parts: [
+            "intakes"
+            "{id}"
+          ]
+          select: {
+            exist: [
+              "id"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

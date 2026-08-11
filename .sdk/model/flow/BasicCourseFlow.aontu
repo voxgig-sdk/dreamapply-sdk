@@ -1,0 +1,52 @@
+# BasicCourseFlow
+
+main: kit: flow: BasicCourseFlow:
+{
+  entity: "course",
+  kind: "basic",
+  name: "BasicCourseFlow",
+  step: [
+    {
+      input: {
+        ref: "course_ref01"
+      }
+
+      op: "create"
+    }
+
+    {
+      op: "list",
+      valid: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "course_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      input: {
+        ref: "course_ref01",
+        srcdatavar: "course_ref01_data",
+        suffix: "_dt0"
+      }
+
+      match: {
+        id: "course01"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-course_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicCourseFlow"
+}

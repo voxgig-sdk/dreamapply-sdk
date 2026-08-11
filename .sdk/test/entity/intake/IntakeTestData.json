@@ -1,0 +1,49 @@
+{
+  "existing": {
+    "intake": {
+      "INTAKE00": {
+        "arrival": "s50",
+        "commence": "s51",
+        "decision": {},
+        "id": "INTAKE00",
+        "name": "s54",
+        "policy": "s55",
+        "pre": {},
+        "start": "s57"
+      },
+      "INTAKE01": {
+        "arrival": "sa0",
+        "commence": "sa1",
+        "decision": {},
+        "id": "INTAKE01",
+        "name": "sa4",
+        "policy": "sa5",
+        "pre": {},
+        "start": "sa7"
+      },
+      "INTAKE02": {
+        "arrival": "sf0",
+        "commence": "sf1",
+        "decision": {},
+        "id": "INTAKE02",
+        "name": "sf4",
+        "policy": "sf5",
+        "pre": {},
+        "start": "sf7"
+      }
+    }
+  },
+  "new": {
+    "intake": {
+      "intake_ref01": {
+        "arrival": "s140",
+        "commence": "s141",
+        "decision": {},
+        "name": "s144",
+        "policy": "s145",
+        "pre": {},
+        "start": "s147"
+      }
+    }
+  }
+}

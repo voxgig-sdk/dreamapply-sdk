@@ -1,0 +1,171 @@
+# Entity: applicant
+
+main: kit: entity: applicant: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "address"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "citizenship"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "email"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "id"
+      req: false
+      type: "`$INTEGER`"
+    }
+    {
+      name: "matriculation"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "name"
+      req: false
+      type: "`$OBJECT`"
+    }
+    {
+      name: "name_family"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "name_given"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "notes"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "phone"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "photo"
+      req: false
+      type: "`$OBJECT`"
+    }
+    {
+      name: "reference"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "region"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "registered"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "tracker_ID"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "type"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "vatin"
+      req: false
+      type: "`$STRING`"
+    }
+  ]
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "applicant"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          method: "POST"
+          orig: "/applicants"
+          parts: [
+            "applicants"
+          ]
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    list: {
+      name: "list"
+      points: [
+        {
+          method: "GET"
+          orig: "/applicants"
+          parts: [
+            "applicants"
+          ]
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                kind: "param"
+                name: "id"
+                orig: "id"
+                reqd: true
+                type: "`$INTEGER`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/applicants/{id}"
+          parts: [
+            "applicants"
+            "{id}"
+          ]
+          select: {
+            exist: [
+              "id"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

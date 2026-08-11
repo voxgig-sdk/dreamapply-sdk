@@ -1,0 +1,44 @@
+# BasicTableViewFlow
+
+main: kit: flow: BasicTableViewFlow:
+{
+  entity: "table_view",
+  kind: "basic",
+  name: "BasicTableViewFlow",
+  step: [
+    {
+      op: "list",
+      valid: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "table_view_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      input: {
+        ref: "table_view_ref01",
+        srcdatavar: "table_view_ref01_data",
+        suffix: "_dt0"
+      }
+
+      match: {
+        id: "table_view01"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-table_view_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicTableViewFlow"
+}

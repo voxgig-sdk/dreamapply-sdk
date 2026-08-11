@@ -1,0 +1,61 @@
+{
+  "existing": {
+    "table_view": {
+      "TABLE_VIEW00": {
+        "content": {},
+        "created": "s6f",
+        "expires": "s70",
+        "id": "TABLE_VIEW00",
+        "mime": "s72",
+        "modified": "s73",
+        "name": "s74",
+        "size": "s75",
+        "tabledata": {},
+        "title": "s77",
+        "uploaded": "s78"
+      },
+      "TABLE_VIEW01": {
+        "content": {},
+        "created": "sdd",
+        "expires": "sde",
+        "id": "TABLE_VIEW01",
+        "mime": "se0",
+        "modified": "se1",
+        "name": "se2",
+        "size": "se3",
+        "tabledata": {},
+        "title": "se5",
+        "uploaded": "se6"
+      },
+      "TABLE_VIEW02": {
+        "content": {},
+        "created": "s14b",
+        "expires": "s14c",
+        "id": "TABLE_VIEW02",
+        "mime": "s14e",
+        "modified": "s14f",
+        "name": "s150",
+        "size": "s151",
+        "tabledata": {},
+        "title": "s153",
+        "uploaded": "s154"
+      }
+    }
+  },
+  "new": {
+    "table_view": {
+      "table_view_ref01": {
+        "content": {},
+        "created": "s1b9",
+        "expires": "s1ba",
+        "mime": "s1bc",
+        "modified": "s1bd",
+        "name": "s1be",
+        "size": "s1bf",
+        "tabledata": {},
+        "title": "s1c1",
+        "uploaded": "s1c2"
+      }
+    }
+  }
+}

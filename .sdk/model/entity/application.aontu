@@ -1,0 +1,185 @@
+# Entity: application
+
+main: kit: entity: application: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "academicTerm"
+      req: false
+      type: "`$OBJECT`"
+    }
+    {
+      name: "activities"
+      req: false
+      type: "`$ARRAY`"
+    }
+    {
+      name: "applicant"
+      req: false
+      type: "`$OBJECT`"
+    }
+    {
+      name: "career"
+      req: false
+      type: "`$ARRAY`"
+    }
+    {
+      name: "contact"
+      req: false
+      type: "`$ARRAY`"
+    }
+    {
+      name: "created"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "education"
+      req: false
+      type: "`$ARRAY`"
+    }
+    {
+      name: "extras"
+      req: false
+      type: "`$ARRAY`"
+    }
+    {
+      name: "grades"
+      req: false
+      type: "`$ARRAY`"
+    }
+    {
+      name: "home"
+      req: false
+      type: "`$ARRAY`"
+    }
+    {
+      name: "host"
+      req: false
+      type: "`$ARRAY`"
+    }
+    {
+      name: "id"
+      req: false
+      type: "`$INTEGER`"
+    }
+    {
+      name: "languages"
+      req: false
+      type: "`$ARRAY`"
+    }
+    {
+      name: "legal"
+      req: false
+      type: "`$ARRAY`"
+    }
+    {
+      name: "misc"
+      req: false
+      type: "`$ARRAY`"
+    }
+    {
+      name: "motivation"
+      req: false
+      type: "`$ARRAY`"
+    }
+    {
+      name: "pdf"
+      req: false
+      type: "`$OBJECT`"
+    }
+    {
+      name: "profile"
+      req: false
+      type: "`$ARRAY`"
+    }
+    {
+      name: "residences"
+      req: false
+      type: "`$ARRAY`"
+    }
+    {
+      name: "revised"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "status"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "submitted"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "visa"
+      req: false
+      type: "`$ARRAY`"
+    }
+  ]
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "application"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          method: "GET"
+          orig: "/applications"
+          parts: [
+            "applications"
+          ]
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                kind: "param"
+                name: "id"
+                orig: "id"
+                reqd: true
+                type: "`$INTEGER`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/applications/{id}"
+          parts: [
+            "applications"
+            "{id}"
+          ]
+          select: {
+            exist: [
+              "id"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

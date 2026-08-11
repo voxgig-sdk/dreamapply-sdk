@@ -1,0 +1,173 @@
+# Entity: invoice
+
+main: kit: entity: invoice: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "applicant"
+      req: false
+      type: "`$OBJECT`"
+    }
+    {
+      name: "application"
+      req: false
+      type: "`$OBJECT`"
+    }
+    {
+      name: "collected"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "course"
+      req: false
+      type: "`$OBJECT`"
+    }
+    {
+      name: "currency"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "deadline"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "delivered"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "id"
+      req: false
+      type: "`$INTEGER`"
+    }
+    {
+      name: "instructions"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "issued"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "nr"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "payer"
+      req: false
+      type: "`$OBJECT`"
+    }
+    {
+      name: "reminded"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "smallprint"
+      req: false
+      type: "`$STRING`"
+    }
+  ]
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "invoice"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          method: "GET"
+          orig: "/invoices"
+          parts: [
+            "invoices"
+          ]
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                kind: "param"
+                name: "id"
+                orig: "id"
+                reqd: true
+                type: "`$INTEGER`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/invoices/{id}"
+          parts: [
+            "invoices"
+            "{id}"
+          ]
+          select: {
+            exist: [
+              "id"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    remove: {
+      name: "remove"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                kind: "param"
+                name: "id"
+                orig: "id"
+                reqd: true
+                type: "`$INTEGER`"
+              }
+            ]
+          }
+          method: "DELETE"
+          orig: "/invoices/{id}"
+          parts: [
+            "invoices"
+            "{id}"
+          ]
+          select: {
+            exist: [
+              "id"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}
