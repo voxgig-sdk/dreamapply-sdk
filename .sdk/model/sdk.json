@@ -1,6 +1,15 @@
 {
+  "NAME": "DREAMAPPLY",
+  "Name": "Dreamapply",
   "def": "dreamapply-openapi.json",
   "main": {
+    "api": {
+      "entity": {},
+      "guide": {}
+    },
+    "custom": {
+      "plurals": {}
+    },
     "def": {
       "desc": ""
     },
@@ -3055,5 +3064,8 @@
     }
   },
   "name": "dreamapply",
+  "name-": "dreamapply",
+  "name_": "dreamapply",
+  "name__orig": "dreamapply",
   "origin": "voxgig-sdk"
 }
