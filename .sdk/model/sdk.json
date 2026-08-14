@@ -2847,7 +2847,7 @@
         "summary": "Student admissions and application management API.",
         "title": "DreamApply API",
         "version": "8",
-        "website": "https://{instance}.dreamapply.com"
+        "website": "https://help.dreamapply.com/api/"
       },
       "option": {},
       "repo": {
