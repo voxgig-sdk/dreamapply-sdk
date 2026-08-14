@@ -75,7 +75,7 @@ const utility_1 = require("../../utility");
         // LIST
         const academic_year_ref01_ent = client.AcademicYear();
         const academic_year_ref01_match = {};
-        const academic_year_ref01_list = await academic_year_ref01_ent.list(academic_year_ref01_match);
+        const academic_year_ref01_list = (await academic_year_ref01_ent.list(academic_year_ref01_match)).map((e) => e.data());
     });
 });
 function basicSetup(extra) {

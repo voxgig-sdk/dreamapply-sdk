@@ -5,7 +5,7 @@ import type { TableView, TableViewLoadMatch, TableViewListMatch } from '../Dream
 declare class TableViewEntity extends DreamapplyEntityBase<TableView> {
     constructor(client: DreamapplySDK, entopts: any);
     make(this: TableViewEntity): TableViewEntity;
-    load(this: any, reqmatch?: TableViewLoadMatch, ctrl?: Control): Promise<TableView>;
-    list(this: any, reqmatch?: TableViewListMatch, ctrl?: Control): Promise<TableView[]>;
+    load(this: any, reqmatch?: TableViewLoadMatch, ctrl?: Control): Promise<TableViewEntity>;
+    list(this: any, reqmatch?: TableViewListMatch, ctrl?: Control): Promise<TableViewEntity[]>;
 }
 export { TableViewEntity };

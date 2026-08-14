@@ -75,7 +75,7 @@ const utility_1 = require("../../utility");
         // LIST
         const login_ref01_ent = client.Login();
         const login_ref01_match = {};
-        const login_ref01_list = await login_ref01_ent.list(login_ref01_match);
+        const login_ref01_list = (await login_ref01_ent.list(login_ref01_match)).map((e) => e.data());
     });
 });
 function basicSetup(extra) {

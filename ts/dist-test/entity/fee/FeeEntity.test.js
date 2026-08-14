@@ -75,7 +75,7 @@ const utility_1 = require("../../utility");
         // LIST
         const fee_ref01_ent = client.Fee();
         const fee_ref01_match = {};
-        const fee_ref01_list = await fee_ref01_ent.list(fee_ref01_match);
+        const fee_ref01_list = (await fee_ref01_ent.list(fee_ref01_match)).map((e) => e.data());
     });
 });
 function basicSetup(extra) {

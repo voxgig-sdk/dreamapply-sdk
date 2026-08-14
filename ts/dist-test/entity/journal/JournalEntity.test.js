@@ -75,7 +75,7 @@ const utility_1 = require("../../utility");
         // LIST
         const journal_ref01_ent = client.Journal();
         const journal_ref01_match = {};
-        const journal_ref01_list = await journal_ref01_ent.list(journal_ref01_match);
+        const journal_ref01_list = (await journal_ref01_ent.list(journal_ref01_match)).map((e) => e.data());
     });
 });
 function basicSetup(extra) {

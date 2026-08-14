@@ -74,16 +74,16 @@ const utility_1 = require("../../utility");
         // CREATE
         const applicant_ref01_ent = client.Applicant();
         let applicant_ref01_data = setup.data.new.applicant['applicant_ref01'];
-        applicant_ref01_data = await applicant_ref01_ent.create(applicant_ref01_data);
+        applicant_ref01_data = (await applicant_ref01_ent.create(applicant_ref01_data)).data();
         (0, node_assert_1.default)(null != applicant_ref01_data.id);
         // LIST
         const applicant_ref01_match = {};
-        const applicant_ref01_list = await applicant_ref01_ent.list(applicant_ref01_match);
+        const applicant_ref01_list = (await applicant_ref01_ent.list(applicant_ref01_match)).map((e) => e.data());
         (0, node_assert_1.default)(!isempty(select(applicant_ref01_list, { id: applicant_ref01_data.id })));
         // LOAD
         const applicant_ref01_match_dt0 = {};
         applicant_ref01_match_dt0.id = applicant_ref01_data.id;
-        const applicant_ref01_data_dt0 = await applicant_ref01_ent.load(applicant_ref01_match_dt0);
+        const applicant_ref01_data_dt0 = (await applicant_ref01_ent.load(applicant_ref01_match_dt0)).data();
         (0, node_assert_1.default)(applicant_ref01_data_dt0.id === applicant_ref01_data.id);
     });
 });

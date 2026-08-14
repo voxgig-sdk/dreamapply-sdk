@@ -75,11 +75,11 @@ const utility_1 = require("../../utility");
         // LIST
         const invoice_ref01_ent = client.Invoice();
         const invoice_ref01_match = {};
-        const invoice_ref01_list = await invoice_ref01_ent.list(invoice_ref01_match);
+        const invoice_ref01_list = (await invoice_ref01_ent.list(invoice_ref01_match)).map((e) => e.data());
         // LOAD
         const invoice_ref01_match_dt0 = {};
         invoice_ref01_match_dt0.id = invoice_ref01_data.id;
-        const invoice_ref01_data_dt0 = await invoice_ref01_ent.load(invoice_ref01_match_dt0);
+        const invoice_ref01_data_dt0 = (await invoice_ref01_ent.load(invoice_ref01_match_dt0)).data();
         (0, node_assert_1.default)(invoice_ref01_data_dt0.id === invoice_ref01_data.id);
     });
 });

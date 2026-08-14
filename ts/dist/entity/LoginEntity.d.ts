@@ -5,6 +5,6 @@ import type { Login, LoginListMatch } from '../DreamapplyTypes';
 declare class LoginEntity extends DreamapplyEntityBase<Login> {
     constructor(client: DreamapplySDK, entopts: any);
     make(this: LoginEntity): LoginEntity;
-    list(this: any, reqmatch?: LoginListMatch, ctrl?: Control): Promise<Login[]>;
+    list(this: any, reqmatch?: LoginListMatch, ctrl?: Control): Promise<LoginEntity[]>;
 }
 export { LoginEntity };

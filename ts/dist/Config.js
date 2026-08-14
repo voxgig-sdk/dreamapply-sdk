@@ -23,7 +23,7 @@ class Config {
         },
     };
     options = {
-        base: 'https://{instance}.dreamapply.com/api',
+        base: "https://{instance}.dreamapply.com/api",
         server: {
             "instance": "demo",
         },
@@ -54,53 +54,32 @@ class Config {
         "academic_term": {
             "fields": [
                 {
-                    "active": true,
                     "name": "finish",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 0
+                    "type": "`$STRING`"
                 },
                 {
-                    "active": true,
                     "name": "grace",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 1
+                    "type": "`$STRING`"
                 },
                 {
-                    "active": true,
                     "name": "id",
-                    "req": false,
-                    "type": "`$INTEGER`",
-                    "index$": 2
+                    "type": "`$INTEGER`"
                 },
                 {
-                    "active": true,
                     "name": "name",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 3
+                    "type": "`$STRING`"
                 },
                 {
-                    "active": true,
                     "name": "start",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 4
+                    "type": "`$STRING`"
                 },
                 {
-                    "active": true,
                     "name": "type",
-                    "req": false,
-                    "type": "`$OBJECT`",
-                    "index$": 5
+                    "type": "`$OBJECT`"
                 },
                 {
-                    "active": true,
                     "name": "year",
-                    "req": false,
-                    "type": "`$OBJECT`",
-                    "index$": 6
+                    "type": "`$OBJECT`"
                 }
             ],
             "name": "academic_term",
@@ -110,7 +89,6 @@ class Config {
                     "name": "list",
                     "points": [
                         {
-                            "active": true,
                             "args": {},
                             "kind": "http",
                             "method": "GET",
@@ -122,28 +100,23 @@ class Config {
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
-                            },
-                            "index$": 0
+                            }
                         }
-                    ],
-                    "key$": "list"
+                    ]
                 },
                 "load": {
                     "input": "data",
                     "name": "load",
                     "points": [
                         {
-                            "active": true,
                             "args": {
                                 "params": [
                                     {
-                                        "active": true,
                                         "kind": "param",
                                         "name": "id",
                                         "orig": "id",
                                         "reqd": true,
-                                        "type": "`$INTEGER`",
-                                        "index$": 0
+                                        "type": "`$INTEGER`"
                                     }
                                 ]
                             },
@@ -162,11 +135,9 @@ class Config {
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
-                            },
-                            "index$": 0
+                            }
                         }
-                    ],
-                    "key$": "load"
+                    ]
                 }
             },
             "relations": {
@@ -176,18 +147,12 @@ class Config {
         "academic_year": {
             "fields": [
                 {
-                    "active": true,
                     "name": "name",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 0
+                    "type": "`$STRING`"
                 },
                 {
-                    "active": true,
                     "name": "start",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 1
+                    "type": "`$STRING`"
                 }
             ],
             "name": "academic_year",
@@ -197,7 +162,6 @@ class Config {
                     "name": "list",
                     "points": [
                         {
-                            "active": true,
                             "args": {},
                             "kind": "http",
                             "method": "GET",
@@ -209,28 +173,23 @@ class Config {
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
-                            },
-                            "index$": 0
+                            }
                         }
-                    ],
-                    "key$": "list"
+                    ]
                 },
                 "load": {
                     "input": "data",
                     "name": "load",
                     "points": [
                         {
-                            "active": true,
                             "args": {
                                 "params": [
                                     {
-                                        "active": true,
                                         "kind": "param",
                                         "name": "id",
                                         "orig": "id",
                                         "reqd": true,
-                                        "type": "`$INTEGER`",
-                                        "index$": 0
+                                        "type": "`$INTEGER`"
                                     }
                                 ]
                             },
@@ -249,11 +208,9 @@ class Config {
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
-                            },
-                            "index$": 0
+                            }
                         }
-                    ],
-                    "key$": "load"
+                    ]
                 }
             },
             "relations": {
@@ -263,53 +220,32 @@ class Config {
         "administrator": {
             "fields": [
                 {
-                    "active": true,
                     "name": "email",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 0
+                    "type": "`$STRING`"
                 },
                 {
-                    "active": true,
                     "name": "function",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 1
+                    "type": "`$STRING`"
                 },
                 {
-                    "active": true,
                     "name": "id",
-                    "req": false,
-                    "type": "`$INTEGER`",
-                    "index$": 2
+                    "type": "`$INTEGER`"
                 },
                 {
-                    "active": true,
                     "name": "name",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 3
+                    "type": "`$STRING`"
                 },
                 {
-                    "active": true,
                     "name": "outgoingEmail",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 4
+                    "type": "`$STRING`"
                 },
                 {
-                    "active": true,
                     "name": "outgoingName",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 5
+                    "type": "`$STRING`"
                 },
                 {
-                    "active": true,
                     "name": "phone",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 6
+                    "type": "`$STRING`"
                 }
             ],
             "name": "administrator",
@@ -319,7 +255,6 @@ class Config {
                     "name": "list",
                     "points": [
                         {
-                            "active": true,
                             "args": {},
                             "kind": "http",
                             "method": "GET",
@@ -331,28 +266,23 @@ class Config {
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
-                            },
-                            "index$": 0
+                            }
                         }
-                    ],
-                    "key$": "list"
+                    ]
                 },
                 "load": {
                     "input": "data",
                     "name": "load",
                     "points": [
                         {
-                            "active": true,
                             "args": {
                                 "params": [
                                     {
-                                        "active": true,
                                         "kind": "param",
                                         "name": "id",
                                         "orig": "id",
                                         "reqd": true,
-                                        "type": "`$INTEGER`",
-                                        "index$": 0
+                                        "type": "`$INTEGER`"
                                     }
                                 ]
                             },
@@ -371,11 +301,9 @@ class Config {
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
-                            },
-                            "index$": 0
+                            }
                         }
-                    ],
-                    "key$": "load"
+                    ]
                 }
             },
             "relations": {
@@ -385,123 +313,72 @@ class Config {
         "applicant": {
             "fields": [
                 {
-                    "active": true,
                     "name": "address",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 0
+                    "type": "`$STRING`"
                 },
                 {
-                    "active": true,
                     "name": "citizenship",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 1
+                    "type": "`$STRING`"
                 },
                 {
-                    "active": true,
                     "name": "email",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 2
+                    "type": "`$STRING`"
                 },
                 {
-                    "active": true,
                     "name": "id",
-                    "req": false,
-                    "type": "`$INTEGER`",
-                    "index$": 3
+                    "type": "`$INTEGER`"
                 },
                 {
-                    "active": true,
                     "name": "matriculation",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 4
+                    "type": "`$STRING`"
                 },
                 {
-                    "active": true,
                     "name": "name",
-                    "req": false,
-                    "type": "`$OBJECT`",
-                    "index$": 5
+                    "type": "`$OBJECT`"
                 },
                 {
-                    "active": true,
                     "name": "name_family",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 6
+                    "type": "`$STRING`"
                 },
                 {
-                    "active": true,
                     "name": "name_given",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 7
+                    "type": "`$STRING`"
                 },
                 {
-                    "active": true,
                     "name": "notes",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 8
+                    "type": "`$STRING`"
                 },
                 {
-                    "active": true,
                     "name": "phone",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 9
+                    "type": "`$STRING`"
                 },
                 {
-                    "active": true,
                     "name": "photo",
-                    "req": false,
-                    "type": "`$OBJECT`",
-                    "index$": 10
+                    "type": "`$OBJECT`"
                 },
                 {
-                    "active": true,
                     "name": "reference",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 11
+                    "type": "`$STRING`"
                 },
                 {
-                    "active": true,
                     "name": "region",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 12
+                    "type": "`$STRING`"
                 },
                 {
-                    "active": true,
                     "name": "registered",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 13
+                    "type": "`$STRING`"
                 },
                 {
-                    "active": true,
                     "name": "tracker_ID",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 14
+                    "type": "`$STRING`"
                 },
                 {
-                    "active": true,
                     "name": "type",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 15
+                    "type": "`$STRING`"
                 },
                 {
-                    "active": true,
                     "name": "vatin",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 16
+                    "type": "`$STRING`"
                 }
             ],
             "name": "applicant",
@@ -511,7 +388,6 @@ class Config {
                     "name": "create",
                     "points": [
                         {
-                            "active": true,
                             "args": {},
                             "kind": "http",
                             "method": "POST",
@@ -523,18 +399,15 @@ class Config {
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
-                            },
-                            "index$": 0
+                            }
                         }
-                    ],
-                    "key$": "create"
+                    ]
                 },
                 "list": {
                     "input": "data",
                     "name": "list",
                     "points": [
                         {
-                            "active": true,
                             "args": {},
                             "kind": "http",
                             "method": "GET",
@@ -546,28 +419,23 @@ class Config {
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
-                            },
-                            "index$": 0
+                            }
                         }
-                    ],
-                    "key$": "list"
+                    ]
                 },
                 "load": {
                     "input": "data",
                     "name": "load",
                     "points": [
                         {
-                            "active": true,
                             "args": {
                                 "params": [
                                     {
-                                        "active": true,
                                         "kind": "param",
                                         "name": "id",
                                         "orig": "id",
                                         "reqd": true,
-                                        "type": "`$INTEGER`",
-                                        "index$": 0
+                                        "type": "`$INTEGER`"
                                     }
                                 ]
                             },
@@ -586,11 +454,9 @@ class Config {
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
-                            },
-                            "index$": 0
+                            }
                         }
-                    ],
-                    "key$": "load"
+                    ]
                 }
             },
             "relations": {
@@ -600,165 +466,96 @@ class Config {
         "application": {
             "fields": [
                 {
-                    "active": true,
                     "name": "academicTerm",
-                    "req": false,
-                    "type": "`$OBJECT`",
-                    "index$": 0
+                    "type": "`$OBJECT`"
                 },
                 {
-                    "active": true,
                     "name": "activities",
-                    "req": false,
-                    "type": "`$ARRAY`",
-                    "index$": 1
+                    "type": "`$ARRAY`"
                 },
                 {
-                    "active": true,
                     "name": "applicant",
-                    "req": false,
-                    "type": "`$OBJECT`",
-                    "index$": 2
+                    "type": "`$OBJECT`"
                 },
                 {
-                    "active": true,
                     "name": "career",
-                    "req": false,
-                    "type": "`$ARRAY`",
-                    "index$": 3
+                    "type": "`$ARRAY`"
                 },
                 {
-                    "active": true,
                     "name": "contact",
-                    "req": false,
-                    "type": "`$ARRAY`",
-                    "index$": 4
+                    "type": "`$ARRAY`"
                 },
                 {
-                    "active": true,
                     "name": "created",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 5
+                    "type": "`$STRING`"
                 },
                 {
-                    "active": true,
                     "name": "education",
-                    "req": false,
-                    "type": "`$ARRAY`",
-                    "index$": 6
+                    "type": "`$ARRAY`"
                 },
                 {
-                    "active": true,
                     "name": "extras",
-                    "req": false,
-                    "type": "`$ARRAY`",
-                    "index$": 7
+                    "type": "`$ARRAY`"
                 },
                 {
-                    "active": true,
                     "name": "grades",
-                    "req": false,
-                    "type": "`$ARRAY`",
-                    "index$": 8
+                    "type": "`$ARRAY`"
                 },
                 {
-                    "active": true,
                     "name": "home",
-                    "req": false,
-                    "type": "`$ARRAY`",
-                    "index$": 9
+                    "type": "`$ARRAY`"
                 },
                 {
-                    "active": true,
                     "name": "host",
-                    "req": false,
-                    "type": "`$ARRAY`",
-                    "index$": 10
+                    "type": "`$ARRAY`"
                 },
                 {
-                    "active": true,
                     "name": "id",
-                    "req": false,
-                    "type": "`$INTEGER`",
-                    "index$": 11
+                    "type": "`$INTEGER`"
                 },
                 {
-                    "active": true,
                     "name": "languages",
-                    "req": false,
-                    "type": "`$ARRAY`",
-                    "index$": 12
+                    "type": "`$ARRAY`"
                 },
                 {
-                    "active": true,
                     "name": "legal",
-                    "req": false,
-                    "type": "`$ARRAY`",
-                    "index$": 13
+                    "type": "`$ARRAY`"
                 },
                 {
-                    "active": true,
                     "name": "misc",
-                    "req": false,
-                    "type": "`$ARRAY`",
-                    "index$": 14
+                    "type": "`$ARRAY`"
                 },
                 {
-                    "active": true,
                     "name": "motivation",
-                    "req": false,
-                    "type": "`$ARRAY`",
-                    "index$": 15
+                    "type": "`$ARRAY`"
                 },
                 {
-                    "active": true,
                     "name": "pdf",
-                    "req": false,
-                    "type": "`$OBJECT`",
-                    "index$": 16
+                    "type": "`$OBJECT`"
                 },
                 {
-                    "active": true,
                     "name": "profile",
-                    "req": false,
-                    "type": "`$ARRAY`",
-                    "index$": 17
+                    "type": "`$ARRAY`"
                 },
                 {
-                    "active": true,
                     "name": "residences",
-                    "req": false,
-                    "type": "`$ARRAY`",
-                    "index$": 18
+                    "type": "`$ARRAY`"
                 },
                 {
-                    "active": true,
                     "name": "revised",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 19
+                    "type": "`$STRING`"
                 },
                 {
-                    "active": true,
                     "name": "status",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 20
+                    "type": "`$STRING`"
                 },
                 {
-                    "active": true,
                     "name": "submitted",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 21
+                    "type": "`$STRING`"
                 },
                 {
-                    "active": true,
                     "name": "visa",
-                    "req": false,
-                    "type": "`$ARRAY`",
-                    "index$": 22
+                    "type": "`$ARRAY`"
                 }
             ],
             "name": "application",
@@ -768,7 +565,6 @@ class Config {
                     "name": "list",
                     "points": [
                         {
-                            "active": true,
                             "args": {},
                             "kind": "http",
                             "method": "GET",
@@ -780,28 +576,23 @@ class Config {
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
-                            },
-                            "index$": 0
+                            }
                         }
-                    ],
-                    "key$": "list"
+                    ]
                 },
                 "load": {
                     "input": "data",
                     "name": "load",
                     "points": [
                         {
-                            "active": true,
                             "args": {
                                 "params": [
                                     {
-                                        "active": true,
                                         "kind": "param",
                                         "name": "id",
                                         "orig": "id",
                                         "reqd": true,
-                                        "type": "`$INTEGER`",
-                                        "index$": 0
+                                        "type": "`$INTEGER`"
                                     }
                                 ]
                             },
@@ -820,11 +611,9 @@ class Config {
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
-                            },
-                            "index$": 0
+                            }
                         }
-                    ],
-                    "key$": "load"
+                    ]
                 }
             },
             "relations": {
@@ -834,193 +623,112 @@ class Config {
         "course": {
             "fields": [
                 {
-                    "active": true,
                     "name": "accreditation",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 0
+                    "type": "`$STRING`"
                 },
                 {
-                    "active": true,
                     "name": "address",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 1
+                    "type": "`$STRING`"
                 },
                 {
-                    "active": true,
                     "name": "awards_abbr",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 2
+                    "type": "`$STRING`"
                 },
                 {
-                    "active": true,
                     "name": "awards_full",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 3
+                    "type": "`$STRING`"
                 },
                 {
-                    "active": true,
                     "name": "code",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 4
+                    "type": "`$STRING`"
                 },
                 {
-                    "active": true,
                     "name": "codeInternal",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 5
+                    "type": "`$STRING`"
                 },
                 {
-                    "active": true,
                     "name": "country",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 6
+                    "type": "`$STRING`"
                 },
                 {
-                    "active": true,
                     "name": "credits",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 7
+                    "type": "`$STRING`"
                 },
                 {
-                    "active": true,
                     "name": "departments",
-                    "req": false,
-                    "type": "`$OBJECT`",
-                    "index$": 8
+                    "type": "`$OBJECT`"
                 },
                 {
-                    "active": true,
                     "name": "duration",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 9
+                    "type": "`$STRING`"
                 },
                 {
-                    "active": true,
                     "name": "erasmus",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 10
+                    "type": "`$STRING`"
                 },
                 {
-                    "active": true,
                     "name": "featured",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 11
+                    "type": "`$STRING`"
                 },
                 {
-                    "active": true,
                     "name": "iban",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 12
+                    "type": "`$STRING`"
                 },
                 {
-                    "active": true,
                     "name": "id",
-                    "req": false,
-                    "type": "`$INTEGER`",
-                    "index$": 13
+                    "type": "`$INTEGER`"
                 },
                 {
-                    "active": true,
                     "name": "institution",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 14
+                    "type": "`$STRING`"
                 },
                 {
-                    "active": true,
                     "name": "language",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 15
+                    "type": "`$STRING`"
                 },
                 {
-                    "active": true,
                     "name": "location",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 16
+                    "type": "`$STRING`"
                 },
                 {
-                    "active": true,
                     "name": "mode",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 17
+                    "type": "`$STRING`"
                 },
                 {
-                    "active": true,
                     "name": "name",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 18
+                    "type": "`$STRING`"
                 },
                 {
-                    "active": true,
                     "name": "prospect_uri",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 19
+                    "type": "`$STRING`"
                 },
                 {
-                    "active": true,
                     "name": "quota",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 20
+                    "type": "`$STRING`"
                 },
                 {
-                    "active": true,
                     "name": "registration",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 21
+                    "type": "`$STRING`"
                 },
                 {
-                    "active": true,
                     "name": "status",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 22
+                    "type": "`$STRING`"
                 },
                 {
-                    "active": true,
                     "name": "type",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 23
+                    "type": "`$STRING`"
                 },
                 {
-                    "active": true,
                     "name": "updated",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 24
+                    "type": "`$STRING`"
                 },
                 {
-                    "active": true,
                     "name": "vat",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 25
+                    "type": "`$STRING`"
                 },
                 {
-                    "active": true,
                     "name": "www",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 26
+                    "type": "`$STRING`"
                 }
             ],
             "name": "course",
@@ -1030,7 +738,6 @@ class Config {
                     "name": "create",
                     "points": [
                         {
-                            "active": true,
                             "args": {},
                             "kind": "http",
                             "method": "POST",
@@ -1042,18 +749,15 @@ class Config {
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body.institution`"
-                            },
-                            "index$": 0
+                            }
                         }
-                    ],
-                    "key$": "create"
+                    ]
                 },
                 "list": {
                     "input": "data",
                     "name": "list",
                     "points": [
                         {
-                            "active": true,
                             "args": {},
                             "kind": "http",
                             "method": "GET",
@@ -1065,28 +769,23 @@ class Config {
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
-                            },
-                            "index$": 0
+                            }
                         }
-                    ],
-                    "key$": "list"
+                    ]
                 },
                 "load": {
                     "input": "data",
                     "name": "load",
                     "points": [
                         {
-                            "active": true,
                             "args": {
                                 "params": [
                                     {
-                                        "active": true,
                                         "kind": "param",
                                         "name": "id",
                                         "orig": "id",
                                         "reqd": true,
-                                        "type": "`$INTEGER`",
-                                        "index$": 0
+                                        "type": "`$INTEGER`"
                                     }
                                 ]
                             },
@@ -1105,11 +804,9 @@ class Config {
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body.institution`"
-                            },
-                            "index$": 0
+                            }
                         }
-                    ],
-                    "key$": "load"
+                    ]
                 }
             },
             "relations": {
@@ -1119,25 +816,16 @@ class Config {
         "fee": {
             "fields": [
                 {
-                    "active": true,
                     "name": "name",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 0
+                    "type": "`$STRING`"
                 },
                 {
-                    "active": true,
                     "name": "notes",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 1
+                    "type": "`$STRING`"
                 },
                 {
-                    "active": true,
                     "name": "type",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 2
+                    "type": "`$STRING`"
                 }
             ],
             "name": "fee",
@@ -1147,7 +835,6 @@ class Config {
                     "name": "list",
                     "points": [
                         {
-                            "active": true,
                             "args": {},
                             "kind": "http",
                             "method": "GET",
@@ -1159,28 +846,23 @@ class Config {
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
-                            },
-                            "index$": 0
+                            }
                         }
-                    ],
-                    "key$": "list"
+                    ]
                 },
                 "load": {
                     "input": "data",
                     "name": "load",
                     "points": [
                         {
-                            "active": true,
                             "args": {
                                 "params": [
                                     {
-                                        "active": true,
                                         "kind": "param",
                                         "name": "id",
                                         "orig": "id",
                                         "reqd": true,
-                                        "type": "`$INTEGER`",
-                                        "index$": 0
+                                        "type": "`$INTEGER`"
                                     }
                                 ]
                             },
@@ -1199,11 +881,9 @@ class Config {
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
-                            },
-                            "index$": 0
+                            }
                         }
-                    ],
-                    "key$": "load"
+                    ]
                 }
             },
             "relations": {
@@ -1213,88 +893,52 @@ class Config {
         "institution": {
             "fields": [
                 {
-                    "active": true,
                     "name": "address",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 0
+                    "type": "`$STRING`"
                 },
                 {
-                    "active": true,
                     "name": "country",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 1
+                    "type": "`$STRING`"
                 },
                 {
-                    "active": true,
                     "name": "departments",
-                    "req": false,
-                    "type": "`$OBJECT`",
-                    "index$": 2
+                    "type": "`$OBJECT`"
                 },
                 {
-                    "active": true,
                     "name": "erasmus",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 3
+                    "type": "`$STRING`"
                 },
                 {
-                    "active": true,
                     "name": "iban",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 4
+                    "type": "`$STRING`"
                 },
                 {
-                    "active": true,
                     "name": "id",
-                    "req": false,
-                    "type": "`$INTEGER`",
-                    "index$": 5
+                    "type": "`$INTEGER`"
                 },
                 {
-                    "active": true,
                     "name": "location",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 6
+                    "type": "`$STRING`"
                 },
                 {
-                    "active": true,
                     "name": "name",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 7
+                    "type": "`$STRING`"
                 },
                 {
-                    "active": true,
                     "name": "registration",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 8
+                    "type": "`$STRING`"
                 },
                 {
-                    "active": true,
                     "name": "status",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 9
+                    "type": "`$STRING`"
                 },
                 {
-                    "active": true,
                     "name": "vat",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 10
+                    "type": "`$STRING`"
                 },
                 {
-                    "active": true,
                     "name": "www",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 11
+                    "type": "`$STRING`"
                 }
             ],
             "name": "institution",
@@ -1304,7 +948,6 @@ class Config {
                     "name": "list",
                     "points": [
                         {
-                            "active": true,
                             "args": {},
                             "kind": "http",
                             "method": "GET",
@@ -1316,28 +959,23 @@ class Config {
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
-                            },
-                            "index$": 0
+                            }
                         }
-                    ],
-                    "key$": "list"
+                    ]
                 },
                 "load": {
                     "input": "data",
                     "name": "load",
                     "points": [
                         {
-                            "active": true,
                             "args": {
                                 "params": [
                                     {
-                                        "active": true,
                                         "kind": "param",
                                         "name": "id",
                                         "orig": "id",
                                         "reqd": true,
-                                        "type": "`$INTEGER`",
-                                        "index$": 0
+                                        "type": "`$INTEGER`"
                                     }
                                 ]
                             },
@@ -1356,11 +994,9 @@ class Config {
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body.departments`"
-                            },
-                            "index$": 0
+                            }
                         }
-                    ],
-                    "key$": "load"
+                    ]
                 }
             },
             "relations": {
@@ -1370,60 +1006,36 @@ class Config {
         "intake": {
             "fields": [
                 {
-                    "active": true,
                     "name": "arrival",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 0
+                    "type": "`$STRING`"
                 },
                 {
-                    "active": true,
                     "name": "commence",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 1
+                    "type": "`$STRING`"
                 },
                 {
-                    "active": true,
                     "name": "decision",
-                    "req": false,
-                    "type": "`$OBJECT`",
-                    "index$": 2
+                    "type": "`$OBJECT`"
                 },
                 {
-                    "active": true,
                     "name": "id",
-                    "req": false,
-                    "type": "`$INTEGER`",
-                    "index$": 3
+                    "type": "`$INTEGER`"
                 },
                 {
-                    "active": true,
                     "name": "name",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 4
+                    "type": "`$STRING`"
                 },
                 {
-                    "active": true,
                     "name": "policy",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 5
+                    "type": "`$STRING`"
                 },
                 {
-                    "active": true,
                     "name": "pre",
-                    "req": false,
-                    "type": "`$OBJECT`",
-                    "index$": 6
+                    "type": "`$OBJECT`"
                 },
                 {
-                    "active": true,
                     "name": "start",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 7
+                    "type": "`$STRING`"
                 }
             ],
             "name": "intake",
@@ -1433,7 +1045,6 @@ class Config {
                     "name": "list",
                     "points": [
                         {
-                            "active": true,
                             "args": {},
                             "kind": "http",
                             "method": "GET",
@@ -1445,28 +1056,23 @@ class Config {
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
-                            },
-                            "index$": 0
+                            }
                         }
-                    ],
-                    "key$": "list"
+                    ]
                 },
                 "load": {
                     "input": "data",
                     "name": "load",
                     "points": [
                         {
-                            "active": true,
                             "args": {
                                 "params": [
                                     {
-                                        "active": true,
                                         "kind": "param",
                                         "name": "id",
                                         "orig": "id",
                                         "reqd": true,
-                                        "type": "`$INTEGER`",
-                                        "index$": 0
+                                        "type": "`$INTEGER`"
                                     }
                                 ]
                             },
@@ -1485,11 +1091,9 @@ class Config {
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
-                            },
-                            "index$": 0
+                            }
                         }
-                    ],
-                    "key$": "load"
+                    ]
                 }
             },
             "relations": {
@@ -1499,102 +1103,60 @@ class Config {
         "invoice": {
             "fields": [
                 {
-                    "active": true,
                     "name": "applicant",
-                    "req": false,
-                    "type": "`$OBJECT`",
-                    "index$": 0
+                    "type": "`$OBJECT`"
                 },
                 {
-                    "active": true,
                     "name": "application",
-                    "req": false,
-                    "type": "`$OBJECT`",
-                    "index$": 1
+                    "type": "`$OBJECT`"
                 },
                 {
-                    "active": true,
                     "name": "collected",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 2
+                    "type": "`$STRING`"
                 },
                 {
-                    "active": true,
                     "name": "course",
-                    "req": false,
-                    "type": "`$OBJECT`",
-                    "index$": 3
+                    "type": "`$OBJECT`"
                 },
                 {
-                    "active": true,
                     "name": "currency",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 4
+                    "type": "`$STRING`"
                 },
                 {
-                    "active": true,
                     "name": "deadline",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 5
+                    "type": "`$STRING`"
                 },
                 {
-                    "active": true,
                     "name": "delivered",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 6
+                    "type": "`$STRING`"
                 },
                 {
-                    "active": true,
                     "name": "id",
-                    "req": false,
-                    "type": "`$INTEGER`",
-                    "index$": 7
+                    "type": "`$INTEGER`"
                 },
                 {
-                    "active": true,
                     "name": "instructions",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 8
+                    "type": "`$STRING`"
                 },
                 {
-                    "active": true,
                     "name": "issued",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 9
+                    "type": "`$STRING`"
                 },
                 {
-                    "active": true,
                     "name": "nr",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 10
+                    "type": "`$STRING`"
                 },
                 {
-                    "active": true,
                     "name": "payer",
-                    "req": false,
-                    "type": "`$OBJECT`",
-                    "index$": 11
+                    "type": "`$OBJECT`"
                 },
                 {
-                    "active": true,
                     "name": "reminded",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 12
+                    "type": "`$STRING`"
                 },
                 {
-                    "active": true,
                     "name": "smallprint",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 13
+                    "type": "`$STRING`"
                 }
             ],
             "name": "invoice",
@@ -1604,7 +1166,6 @@ class Config {
                     "name": "list",
                     "points": [
                         {
-                            "active": true,
                             "args": {},
                             "kind": "http",
                             "method": "GET",
@@ -1616,28 +1177,23 @@ class Config {
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
-                            },
-                            "index$": 0
+                            }
                         }
-                    ],
-                    "key$": "list"
+                    ]
                 },
                 "load": {
                     "input": "data",
                     "name": "load",
                     "points": [
                         {
-                            "active": true,
                             "args": {
                                 "params": [
                                     {
-                                        "active": true,
                                         "kind": "param",
                                         "name": "id",
                                         "orig": "id",
                                         "reqd": true,
-                                        "type": "`$INTEGER`",
-                                        "index$": 0
+                                        "type": "`$INTEGER`"
                                     }
                                 ]
                             },
@@ -1656,28 +1212,23 @@ class Config {
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
-                            },
-                            "index$": 0
+                            }
                         }
-                    ],
-                    "key$": "load"
+                    ]
                 },
                 "remove": {
                     "input": "data",
                     "name": "remove",
                     "points": [
                         {
-                            "active": true,
                             "args": {
                                 "params": [
                                     {
-                                        "active": true,
                                         "kind": "param",
                                         "name": "id",
                                         "orig": "id",
                                         "reqd": true,
-                                        "type": "`$INTEGER`",
-                                        "index$": 0
+                                        "type": "`$INTEGER`"
                                     }
                                 ]
                             },
@@ -1696,11 +1247,9 @@ class Config {
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
-                            },
-                            "index$": 0
+                            }
                         }
-                    ],
-                    "key$": "remove"
+                    ]
                 }
             },
             "relations": {
@@ -1710,102 +1259,60 @@ class Config {
         "journal": {
             "fields": [
                 {
-                    "active": true,
                     "name": "administrator",
-                    "req": false,
-                    "type": "`$OBJECT`",
-                    "index$": 0
+                    "type": "`$OBJECT`"
                 },
                 {
-                    "active": true,
                     "name": "applicant",
-                    "req": false,
-                    "type": "`$OBJECT`",
-                    "index$": 1
+                    "type": "`$OBJECT`"
                 },
                 {
-                    "active": true,
                     "name": "application",
-                    "req": false,
-                    "type": "`$OBJECT`",
-                    "index$": 2
+                    "type": "`$OBJECT`"
                 },
                 {
-                    "active": true,
                     "name": "bind",
-                    "req": false,
-                    "type": "`$ARRAY`",
-                    "index$": 3
+                    "type": "`$ARRAY`"
                 },
                 {
-                    "active": true,
                     "name": "course",
-                    "req": false,
-                    "type": "`$OBJECT`",
-                    "index$": 4
+                    "type": "`$OBJECT`"
                 },
                 {
-                    "active": true,
                     "name": "document",
-                    "req": false,
-                    "type": "`$OBJECT`",
-                    "index$": 5
+                    "type": "`$OBJECT`"
                 },
                 {
-                    "active": true,
                     "name": "event",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 6
+                    "type": "`$STRING`"
                 },
                 {
-                    "active": true,
                     "name": "flag",
-                    "req": false,
-                    "type": "`$OBJECT`",
-                    "index$": 7
+                    "type": "`$OBJECT`"
                 },
                 {
-                    "active": true,
                     "name": "id",
-                    "req": false,
-                    "type": "`$INTEGER`",
-                    "index$": 8
+                    "type": "`$INTEGER`"
                 },
                 {
-                    "active": true,
                     "name": "institution",
-                    "req": false,
-                    "type": "`$OBJECT`",
-                    "index$": 9
+                    "type": "`$OBJECT`"
                 },
                 {
-                    "active": true,
                     "name": "invoice",
-                    "req": false,
-                    "type": "`$OBJECT`",
-                    "index$": 10
+                    "type": "`$OBJECT`"
                 },
                 {
-                    "active": true,
                     "name": "logged",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 11
+                    "type": "`$STRING`"
                 },
                 {
-                    "active": true,
                     "name": "offer",
-                    "req": false,
-                    "type": "`$OBJECT`",
-                    "index$": 12
+                    "type": "`$OBJECT`"
                 },
                 {
-                    "active": true,
                     "name": "tracker",
-                    "req": false,
-                    "type": "`$OBJECT`",
-                    "index$": 13
+                    "type": "`$OBJECT`"
                 }
             ],
             "name": "journal",
@@ -1815,7 +1322,6 @@ class Config {
                     "name": "list",
                     "points": [
                         {
-                            "active": true,
                             "args": {},
                             "kind": "http",
                             "method": "GET",
@@ -1827,11 +1333,9 @@ class Config {
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
-                            },
-                            "index$": 0
+                            }
                         }
-                    ],
-                    "key$": "list"
+                    ]
                 }
             },
             "relations": {
@@ -1841,46 +1345,28 @@ class Config {
         "login": {
             "fields": [
                 {
-                    "active": true,
                     "name": "id",
-                    "req": false,
-                    "type": "`$INTEGER`",
-                    "index$": 0
+                    "type": "`$INTEGER`"
                 },
                 {
-                    "active": true,
                     "name": "ip",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 1
+                    "type": "`$STRING`"
                 },
                 {
-                    "active": true,
                     "name": "logged",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 2
+                    "type": "`$STRING`"
                 },
                 {
-                    "active": true,
                     "name": "result",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 3
+                    "type": "`$STRING`"
                 },
                 {
-                    "active": true,
                     "name": "role",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 4
+                    "type": "`$STRING`"
                 },
                 {
-                    "active": true,
                     "name": "roleId",
-                    "req": false,
-                    "type": "`$INTEGER`",
-                    "index$": 5
+                    "type": "`$INTEGER`"
                 }
             ],
             "name": "login",
@@ -1890,7 +1376,6 @@ class Config {
                     "name": "list",
                     "points": [
                         {
-                            "active": true,
                             "args": {},
                             "kind": "http",
                             "method": "GET",
@@ -1902,11 +1387,9 @@ class Config {
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
-                            },
-                            "index$": 0
+                            }
                         }
-                    ],
-                    "key$": "list"
+                    ]
                 }
             },
             "relations": {
@@ -1916,123 +1399,72 @@ class Config {
         "scoresheet": {
             "fields": [
                 {
-                    "active": true,
                     "name": "confirmed",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 0
+                    "type": "`$STRING`"
                 },
                 {
-                    "active": true,
                     "name": "created",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 1
+                    "type": "`$STRING`"
                 },
                 {
-                    "active": true,
                     "name": "date",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 2
+                    "type": "`$STRING`"
                 },
                 {
-                    "active": true,
                     "name": "depth",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 3
+                    "type": "`$STRING`"
                 },
                 {
-                    "active": true,
                     "name": "group",
-                    "req": false,
-                    "type": "`$OBJECT`",
-                    "index$": 4
+                    "type": "`$OBJECT`"
                 },
                 {
-                    "active": true,
                     "name": "instructions",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 5
+                    "type": "`$STRING`"
                 },
                 {
-                    "active": true,
                     "name": "language",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 6
+                    "type": "`$STRING`"
                 },
                 {
-                    "active": true,
                     "name": "maps",
-                    "req": false,
-                    "type": "`$ARRAY`",
-                    "index$": 7
+                    "type": "`$ARRAY`"
                 },
                 {
-                    "active": true,
                     "name": "name",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 8
+                    "type": "`$STRING`"
                 },
                 {
-                    "active": true,
                     "name": "rangeMax",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 9
+                    "type": "`$STRING`"
                 },
                 {
-                    "active": true,
                     "name": "rangeMin",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 10
+                    "type": "`$STRING`"
                 },
                 {
-                    "active": true,
                     "name": "reference",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 11
+                    "type": "`$STRING`"
                 },
                 {
-                    "active": true,
                     "name": "scale",
-                    "req": false,
-                    "type": "`$INTEGER`",
-                    "index$": 12
+                    "type": "`$INTEGER`"
                 },
                 {
-                    "active": true,
                     "name": "scored",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 13
+                    "type": "`$STRING`"
                 },
                 {
-                    "active": true,
                     "name": "scores",
-                    "req": false,
-                    "type": "`$OBJECT`",
-                    "index$": 14
+                    "type": "`$OBJECT`"
                 },
                 {
-                    "active": true,
                     "name": "subject",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 15
+                    "type": "`$STRING`"
                 },
                 {
-                    "active": true,
                     "name": "type",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 16
+                    "type": "`$STRING`"
                 }
             ],
             "name": "scoresheet",
@@ -2042,7 +1474,6 @@ class Config {
                     "name": "list",
                     "points": [
                         {
-                            "active": true,
                             "args": {},
                             "kind": "http",
                             "method": "GET",
@@ -2054,28 +1485,23 @@ class Config {
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
-                            },
-                            "index$": 0
+                            }
                         }
-                    ],
-                    "key$": "list"
+                    ]
                 },
                 "load": {
                     "input": "data",
                     "name": "load",
                     "points": [
                         {
-                            "active": true,
                             "args": {
                                 "params": [
                                     {
-                                        "active": true,
                                         "kind": "param",
                                         "name": "id",
                                         "orig": "id",
                                         "reqd": true,
-                                        "type": "`$INTEGER`",
-                                        "index$": 0
+                                        "type": "`$INTEGER`"
                                     }
                                 ]
                             },
@@ -2094,11 +1520,9 @@ class Config {
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
-                            },
-                            "index$": 0
+                            }
                         }
-                    ],
-                    "key$": "load"
+                    ]
                 }
             },
             "relations": {
@@ -2108,81 +1532,48 @@ class Config {
         "table_view": {
             "fields": [
                 {
-                    "active": true,
                     "name": "content",
-                    "req": false,
-                    "type": "`$OBJECT`",
-                    "index$": 0
+                    "type": "`$OBJECT`"
                 },
                 {
-                    "active": true,
                     "name": "created",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 1
+                    "type": "`$STRING`"
                 },
                 {
-                    "active": true,
                     "name": "expires",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 2
+                    "type": "`$STRING`"
                 },
                 {
-                    "active": true,
                     "name": "id",
-                    "req": false,
-                    "type": "`$INTEGER`",
-                    "index$": 3
+                    "type": "`$INTEGER`"
                 },
                 {
-                    "active": true,
                     "name": "mime",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 4
+                    "type": "`$STRING`"
                 },
                 {
-                    "active": true,
                     "name": "modified",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 5
+                    "type": "`$STRING`"
                 },
                 {
-                    "active": true,
                     "name": "name",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 6
+                    "type": "`$STRING`"
                 },
                 {
-                    "active": true,
                     "name": "size",
-                    "req": false,
-                    "type": "`$INTEGER`",
-                    "index$": 7
+                    "type": "`$INTEGER`"
                 },
                 {
-                    "active": true,
                     "name": "tabledata",
-                    "req": false,
-                    "type": "`$OBJECT`",
-                    "index$": 8
+                    "type": "`$OBJECT`"
                 },
                 {
-                    "active": true,
                     "name": "title",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 9
+                    "type": "`$STRING`"
                 },
                 {
-                    "active": true,
                     "name": "uploaded",
-                    "req": false,
-                    "type": "`$STRING`",
-                    "index$": 10
+                    "type": "`$STRING`"
                 }
             ],
             "name": "table_view",
@@ -2192,7 +1583,6 @@ class Config {
                     "name": "list",
                     "points": [
                         {
-                            "active": true,
                             "args": {},
                             "kind": "http",
                             "method": "GET",
@@ -2204,28 +1594,23 @@ class Config {
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
-                            },
-                            "index$": 0
+                            }
                         }
-                    ],
-                    "key$": "list"
+                    ]
                 },
                 "load": {
                     "input": "data",
                     "name": "load",
                     "points": [
                         {
-                            "active": true,
                             "args": {
                                 "params": [
                                     {
-                                        "active": true,
                                         "kind": "param",
                                         "name": "id",
                                         "orig": "id",
                                         "reqd": true,
-                                        "type": "`$INTEGER`",
-                                        "index$": 0
+                                        "type": "`$INTEGER`"
                                     }
                                 ]
                             },
@@ -2244,11 +1629,9 @@ class Config {
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body.tabledata`"
-                            },
-                            "index$": 0
+                            }
                         }
-                    ],
-                    "key$": "load"
+                    ]
                 }
             },
             "relations": {

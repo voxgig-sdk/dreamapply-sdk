@@ -36,7 +36,7 @@ class Config {
 
 
   options = {
-    base: 'https://{instance}.dreamapply.com/api',
+    base: "https://{instance}.dreamapply.com/api",
 
     server: {
       "instance": "demo",

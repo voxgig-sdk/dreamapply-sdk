@@ -75,11 +75,11 @@ const utility_1 = require("../../utility");
         // LIST
         const institution_ref01_ent = client.Institution();
         const institution_ref01_match = {};
-        const institution_ref01_list = await institution_ref01_ent.list(institution_ref01_match);
+        const institution_ref01_list = (await institution_ref01_ent.list(institution_ref01_match)).map((e) => e.data());
         // LOAD
         const institution_ref01_match_dt0 = {};
         institution_ref01_match_dt0.id = institution_ref01_data.id;
-        const institution_ref01_data_dt0 = await institution_ref01_ent.load(institution_ref01_match_dt0);
+        const institution_ref01_data_dt0 = (await institution_ref01_ent.load(institution_ref01_match_dt0)).data();
         (0, node_assert_1.default)(institution_ref01_data_dt0.id === institution_ref01_data.id);
     });
 });

@@ -5,7 +5,7 @@ import type { Application, ApplicationLoadMatch, ApplicationListMatch } from '..
 declare class ApplicationEntity extends DreamapplyEntityBase<Application> {
     constructor(client: DreamapplySDK, entopts: any);
     make(this: ApplicationEntity): ApplicationEntity;
-    load(this: any, reqmatch?: ApplicationLoadMatch, ctrl?: Control): Promise<Application>;
-    list(this: any, reqmatch?: ApplicationListMatch, ctrl?: Control): Promise<Application[]>;
+    load(this: any, reqmatch?: ApplicationLoadMatch, ctrl?: Control): Promise<ApplicationEntity>;
+    list(this: any, reqmatch?: ApplicationListMatch, ctrl?: Control): Promise<ApplicationEntity[]>;
 }
 export { ApplicationEntity };

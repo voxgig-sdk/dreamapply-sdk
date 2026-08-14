@@ -75,11 +75,11 @@ const utility_1 = require("../../utility");
         // LIST
         const administrator_ref01_ent = client.Administrator();
         const administrator_ref01_match = {};
-        const administrator_ref01_list = await administrator_ref01_ent.list(administrator_ref01_match);
+        const administrator_ref01_list = (await administrator_ref01_ent.list(administrator_ref01_match)).map((e) => e.data());
         // LOAD
         const administrator_ref01_match_dt0 = {};
         administrator_ref01_match_dt0.id = administrator_ref01_data.id;
-        const administrator_ref01_data_dt0 = await administrator_ref01_ent.load(administrator_ref01_match_dt0);
+        const administrator_ref01_data_dt0 = (await administrator_ref01_ent.load(administrator_ref01_match_dt0)).data();
         (0, node_assert_1.default)(administrator_ref01_data_dt0.id === administrator_ref01_data.id);
     });
 });

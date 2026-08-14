@@ -74,16 +74,16 @@ const utility_1 = require("../../utility");
         // CREATE
         const course_ref01_ent = client.Course();
         let course_ref01_data = setup.data.new.course['course_ref01'];
-        course_ref01_data = await course_ref01_ent.create(course_ref01_data);
+        course_ref01_data = (await course_ref01_ent.create(course_ref01_data)).data();
         (0, node_assert_1.default)(null != course_ref01_data.id);
         // LIST
         const course_ref01_match = {};
-        const course_ref01_list = await course_ref01_ent.list(course_ref01_match);
+        const course_ref01_list = (await course_ref01_ent.list(course_ref01_match)).map((e) => e.data());
         (0, node_assert_1.default)(!isempty(select(course_ref01_list, { id: course_ref01_data.id })));
         // LOAD
         const course_ref01_match_dt0 = {};
         course_ref01_match_dt0.id = course_ref01_data.id;
-        const course_ref01_data_dt0 = await course_ref01_ent.load(course_ref01_match_dt0);
+        const course_ref01_data_dt0 = (await course_ref01_ent.load(course_ref01_match_dt0)).data();
         (0, node_assert_1.default)(course_ref01_data_dt0.id === course_ref01_data.id);
     });
 });

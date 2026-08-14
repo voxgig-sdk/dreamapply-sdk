@@ -5,8 +5,8 @@ import type { Invoice, InvoiceLoadMatch, InvoiceListMatch, InvoiceRemoveMatch } 
 declare class InvoiceEntity extends DreamapplyEntityBase<Invoice> {
     constructor(client: DreamapplySDK, entopts: any);
     make(this: InvoiceEntity): InvoiceEntity;
-    load(this: any, reqmatch?: InvoiceLoadMatch, ctrl?: Control): Promise<Invoice>;
-    list(this: any, reqmatch?: InvoiceListMatch, ctrl?: Control): Promise<Invoice[]>;
-    remove(this: any, reqmatch?: InvoiceRemoveMatch, ctrl?: Control): Promise<Invoice>;
+    load(this: any, reqmatch?: InvoiceLoadMatch, ctrl?: Control): Promise<InvoiceEntity>;
+    list(this: any, reqmatch?: InvoiceListMatch, ctrl?: Control): Promise<InvoiceEntity[]>;
+    remove(this: any, reqmatch?: InvoiceRemoveMatch, ctrl?: Control): Promise<InvoiceEntity>;
 }
 export { InvoiceEntity };

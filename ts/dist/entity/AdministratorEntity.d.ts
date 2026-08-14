@@ -5,7 +5,7 @@ import type { Administrator, AdministratorLoadMatch, AdministratorListMatch } fr
 declare class AdministratorEntity extends DreamapplyEntityBase<Administrator> {
     constructor(client: DreamapplySDK, entopts: any);
     make(this: AdministratorEntity): AdministratorEntity;
-    load(this: any, reqmatch?: AdministratorLoadMatch, ctrl?: Control): Promise<Administrator>;
-    list(this: any, reqmatch?: AdministratorListMatch, ctrl?: Control): Promise<Administrator[]>;
+    load(this: any, reqmatch?: AdministratorLoadMatch, ctrl?: Control): Promise<AdministratorEntity>;
+    list(this: any, reqmatch?: AdministratorListMatch, ctrl?: Control): Promise<AdministratorEntity[]>;
 }
 export { AdministratorEntity };

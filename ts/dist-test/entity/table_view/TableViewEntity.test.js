@@ -75,11 +75,11 @@ const utility_1 = require("../../utility");
         // LIST
         const table_view_ref01_ent = client.TableView();
         const table_view_ref01_match = {};
-        const table_view_ref01_list = await table_view_ref01_ent.list(table_view_ref01_match);
+        const table_view_ref01_list = (await table_view_ref01_ent.list(table_view_ref01_match)).map((e) => e.data());
         // LOAD
         const table_view_ref01_match_dt0 = {};
         table_view_ref01_match_dt0.id = table_view_ref01_data.id;
-        const table_view_ref01_data_dt0 = await table_view_ref01_ent.load(table_view_ref01_match_dt0);
+        const table_view_ref01_data_dt0 = (await table_view_ref01_ent.load(table_view_ref01_match_dt0)).data();
         (0, node_assert_1.default)(table_view_ref01_data_dt0.id === table_view_ref01_data.id);
     });
 });

@@ -75,11 +75,11 @@ const utility_1 = require("../../utility");
         // LIST
         const academic_term_ref01_ent = client.AcademicTerm();
         const academic_term_ref01_match = {};
-        const academic_term_ref01_list = await academic_term_ref01_ent.list(academic_term_ref01_match);
+        const academic_term_ref01_list = (await academic_term_ref01_ent.list(academic_term_ref01_match)).map((e) => e.data());
         // LOAD
         const academic_term_ref01_match_dt0 = {};
         academic_term_ref01_match_dt0.id = academic_term_ref01_data.id;
-        const academic_term_ref01_data_dt0 = await academic_term_ref01_ent.load(academic_term_ref01_match_dt0);
+        const academic_term_ref01_data_dt0 = (await academic_term_ref01_ent.load(academic_term_ref01_match_dt0)).data();
         (0, node_assert_1.default)(academic_term_ref01_data_dt0.id === academic_term_ref01_data.id);
     });
 });

@@ -5,7 +5,7 @@ import type { AcademicTerm, AcademicTermLoadMatch, AcademicTermListMatch } from 
 declare class AcademicTermEntity extends DreamapplyEntityBase<AcademicTerm> {
     constructor(client: DreamapplySDK, entopts: any);
     make(this: AcademicTermEntity): AcademicTermEntity;
-    load(this: any, reqmatch?: AcademicTermLoadMatch, ctrl?: Control): Promise<AcademicTerm>;
-    list(this: any, reqmatch?: AcademicTermListMatch, ctrl?: Control): Promise<AcademicTerm[]>;
+    load(this: any, reqmatch?: AcademicTermLoadMatch, ctrl?: Control): Promise<AcademicTermEntity>;
+    list(this: any, reqmatch?: AcademicTermListMatch, ctrl?: Control): Promise<AcademicTermEntity[]>;
 }
 export { AcademicTermEntity };

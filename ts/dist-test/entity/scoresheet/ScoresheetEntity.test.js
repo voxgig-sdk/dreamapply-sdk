@@ -75,7 +75,7 @@ const utility_1 = require("../../utility");
         // LIST
         const scoresheet_ref01_ent = client.Scoresheet();
         const scoresheet_ref01_match = {};
-        const scoresheet_ref01_list = await scoresheet_ref01_ent.list(scoresheet_ref01_match);
+        const scoresheet_ref01_list = (await scoresheet_ref01_ent.list(scoresheet_ref01_match)).map((e) => e.data());
     });
 });
 function basicSetup(extra) {

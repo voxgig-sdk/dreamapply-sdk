@@ -255,7 +255,7 @@ unofficial client and is not affiliated with the API provider.
 The OpenAPI spec(s) this SDK was generated from are kept in the
 [`.sdk/def/`](.sdk/def/) folder.
 
-- Upstream API: [https://{instance}.dreamapply.com/api](https://{instance}.dreamapply.com/api)
+- Upstream API: `https://{instance}.dreamapply.com/api`
 
 ## Security
 

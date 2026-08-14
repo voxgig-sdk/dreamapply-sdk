@@ -43,6 +43,20 @@ declare class DreamapplySDK {
         headers?: undefined;
         data?: undefined;
     }>;
+    _rawRequest(fetchargs?: any): Promise<Error | {
+        ok: boolean;
+        status: number;
+        headers: any;
+        data: any;
+        err?: undefined;
+    } | {
+        ok: boolean;
+        err: any;
+        status?: undefined;
+        headers?: undefined;
+        data?: undefined;
+    }>;
+    graphql(query: string, variables?: any, ctrl?: any): Promise<any>;
     AcademicTerm(entopts?: Record<string, any>): AcademicTermEntity;
     AcademicYear(entopts?: Record<string, any>): AcademicYearEntity;
     Administrator(entopts?: Record<string, any>): AdministratorEntity;

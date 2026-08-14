@@ -5,7 +5,7 @@ import type { Scoresheet, ScoresheetLoadMatch, ScoresheetListMatch } from '../Dr
 declare class ScoresheetEntity extends DreamapplyEntityBase<Scoresheet> {
     constructor(client: DreamapplySDK, entopts: any);
     make(this: ScoresheetEntity): ScoresheetEntity;
-    load(this: any, reqmatch?: ScoresheetLoadMatch, ctrl?: Control): Promise<Scoresheet>;
-    list(this: any, reqmatch?: ScoresheetListMatch, ctrl?: Control): Promise<Scoresheet[]>;
+    load(this: any, reqmatch?: ScoresheetLoadMatch, ctrl?: Control): Promise<ScoresheetEntity>;
+    list(this: any, reqmatch?: ScoresheetListMatch, ctrl?: Control): Promise<ScoresheetEntity[]>;
 }
 export { ScoresheetEntity };

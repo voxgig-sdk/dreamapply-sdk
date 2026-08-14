@@ -5,7 +5,7 @@ import type { Intake, IntakeLoadMatch, IntakeListMatch } from '../DreamapplyType
 declare class IntakeEntity extends DreamapplyEntityBase<Intake> {
     constructor(client: DreamapplySDK, entopts: any);
     make(this: IntakeEntity): IntakeEntity;
-    load(this: any, reqmatch?: IntakeLoadMatch, ctrl?: Control): Promise<Intake>;
-    list(this: any, reqmatch?: IntakeListMatch, ctrl?: Control): Promise<Intake[]>;
+    load(this: any, reqmatch?: IntakeLoadMatch, ctrl?: Control): Promise<IntakeEntity>;
+    list(this: any, reqmatch?: IntakeListMatch, ctrl?: Control): Promise<IntakeEntity[]>;
 }
 export { IntakeEntity };
