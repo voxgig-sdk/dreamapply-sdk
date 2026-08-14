@@ -37,7 +37,7 @@ class JournalEntity extends DreamapplyEntityBase<Journal> {
 
 
 
-  async list(this: any, reqmatch?: JournalListMatch, ctrl?: Control): Promise<Journal[]> {
+  async list(this: any, reqmatch?: JournalListMatch, ctrl?: Control): Promise<JournalEntity[]> {
 
     const utility = this._utility
 

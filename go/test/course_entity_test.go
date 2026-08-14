@@ -51,7 +51,7 @@ func TestCourseEntity(t *testing.T) {
 
 		// Inbound: streaming active -> yields each item from the feature iterator.
 		hasStreaming := false
-		if fm, ok := core.MakeConfig()["feature"].(map[string]any); ok {
+		if fm, ok := core.SharedConfig()["feature"].(map[string]any); ok {
 			_, hasStreaming = fm["streaming"]
 		}
 		if hasStreaming {
@@ -106,7 +106,7 @@ func TestCourseEntity(t *testing.T) {
 		if err != nil {
 			t.Fatalf("create failed: %v", err)
 		}
-		courseRef01Data = core.ToMapAny(courseRef01DataResult)
+		courseRef01Data = core.ToMapAny(entityData(courseRef01DataResult))
 		if courseRef01Data == nil {
 			t.Fatal("expected create result to be a map")
 		}
@@ -139,7 +139,7 @@ func TestCourseEntity(t *testing.T) {
 		if err != nil {
 			t.Fatalf("load failed: %v", err)
 		}
-		courseRef01DataDt0LoadResult := core.ToMapAny(courseRef01DataDt0Loaded)
+		courseRef01DataDt0LoadResult := core.ToMapAny(entityData(courseRef01DataDt0Loaded))
 		if courseRef01DataDt0LoadResult == nil {
 			t.Fatal("expected load result to be a map")
 		}

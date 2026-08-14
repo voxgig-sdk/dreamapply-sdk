@@ -62,14 +62,14 @@ describe('ApplicantEntity', async () => {
     const applicant_ref01_ent = client.Applicant()
     let applicant_ref01_data = setup.data.new.applicant['applicant_ref01']
 
-    applicant_ref01_data = await applicant_ref01_ent.create(applicant_ref01_data)
+    applicant_ref01_data = (await applicant_ref01_ent.create(applicant_ref01_data)).data()
     assert(null != applicant_ref01_data.id)
 
 
     // LIST
     const applicant_ref01_match: any = {}
 
-    const applicant_ref01_list = await applicant_ref01_ent.list(applicant_ref01_match)
+    const applicant_ref01_list = (await applicant_ref01_ent.list(applicant_ref01_match)).map((e: any) => e.data())
 
     assert(!isempty(select(applicant_ref01_list, { id: applicant_ref01_data.id })))
 
@@ -77,7 +77,7 @@ describe('ApplicantEntity', async () => {
     // LOAD
     const applicant_ref01_match_dt0: any = {}
     applicant_ref01_match_dt0.id = applicant_ref01_data.id
-    const applicant_ref01_data_dt0 = await applicant_ref01_ent.load(applicant_ref01_match_dt0)
+    const applicant_ref01_data_dt0 = (await applicant_ref01_ent.load(applicant_ref01_match_dt0)).data()
     assert(applicant_ref01_data_dt0.id === applicant_ref01_data.id)
 
 

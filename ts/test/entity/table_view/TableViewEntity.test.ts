@@ -63,13 +63,13 @@ describe('TableViewEntity', async () => {
     const table_view_ref01_ent = client.TableView()
     const table_view_ref01_match: any = {}
 
-    const table_view_ref01_list = await table_view_ref01_ent.list(table_view_ref01_match)
+    const table_view_ref01_list = (await table_view_ref01_ent.list(table_view_ref01_match)).map((e: any) => e.data())
 
 
     // LOAD
     const table_view_ref01_match_dt0: any = {}
     table_view_ref01_match_dt0.id = table_view_ref01_data.id
-    const table_view_ref01_data_dt0 = await table_view_ref01_ent.load(table_view_ref01_match_dt0)
+    const table_view_ref01_data_dt0 = (await table_view_ref01_ent.load(table_view_ref01_match_dt0)).data()
     assert(table_view_ref01_data_dt0.id === table_view_ref01_data.id)
 
 

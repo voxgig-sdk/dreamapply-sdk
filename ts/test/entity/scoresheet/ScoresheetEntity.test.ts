@@ -63,7 +63,7 @@ describe('ScoresheetEntity', async () => {
     const scoresheet_ref01_ent = client.Scoresheet()
     const scoresheet_ref01_match: any = {}
 
-    const scoresheet_ref01_list = await scoresheet_ref01_ent.list(scoresheet_ref01_match)
+    const scoresheet_ref01_list = (await scoresheet_ref01_ent.list(scoresheet_ref01_match)).map((e: any) => e.data())
 
 
 

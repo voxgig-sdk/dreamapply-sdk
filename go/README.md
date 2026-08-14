@@ -1,6 +1,6 @@
 # Dreamapply Golang SDK
 
-DreamApply API clients in TypeScript, Python and Go, generated from a spec derived mechanically from DreamApply's own open source PHP SDK.
+
 
 The Golang SDK for the Dreamapply API — an entity-oriented client using standard Go conventions. No generics required; data flows as `map[string]any`.
 

@@ -37,7 +37,7 @@ class LoginEntity extends DreamapplyEntityBase<Login> {
 
 
 
-  async list(this: any, reqmatch?: LoginListMatch, ctrl?: Control): Promise<Login[]> {
+  async list(this: any, reqmatch?: LoginListMatch, ctrl?: Control): Promise<LoginEntity[]> {
 
     const utility = this._utility
 

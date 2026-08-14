@@ -42,8 +42,8 @@ class TestCourseEntity:
         assert len(seen) == 3
 
         # Inbound: streaming active -> yields each item from the feature.
-        from dreamapply_sdk.config import make_config
-        cfg = make_config()
+        from dreamapply_sdk.config import shared_config
+        cfg = shared_config()
         if isinstance(cfg.get("feature"), dict) and "streaming" in cfg["feature"]:
             sdk = DreamapplySDK.test(
                 seed, {"feature": {"streaming": {"active": True}}})
@@ -78,7 +78,7 @@ class TestCourseEntity:
         course_ref01_data = helpers.to_map(vs.getprop(
             vs.getpath(setup["data"], "new.course"), "course_ref01"))
 
-        course_ref01_data = helpers.to_map(course_ref01_ent.create(course_ref01_data, None))
+        course_ref01_data = helpers.to_map(runner.entity_data(course_ref01_ent.create(course_ref01_data, None)))
         assert course_ref01_data is not None
         assert course_ref01_data["id"] is not None
 
@@ -98,7 +98,7 @@ class TestCourseEntity:
             "id": course_ref01_data["id"],
         }
         course_ref01_data_dt0_loaded = course_ref01_ent.load(course_ref01_match_dt0, None)
-        course_ref01_data_dt0_load_result = helpers.to_map(course_ref01_data_dt0_loaded)
+        course_ref01_data_dt0_load_result = helpers.to_map(runner.entity_data(course_ref01_data_dt0_loaded))
         assert course_ref01_data_dt0_load_result is not None
         assert course_ref01_data_dt0_load_result["id"] == course_ref01_data["id"]
 

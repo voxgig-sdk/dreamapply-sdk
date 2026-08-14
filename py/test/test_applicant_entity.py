@@ -42,8 +42,8 @@ class TestApplicantEntity:
         assert len(seen) == 3
 
         # Inbound: streaming active -> yields each item from the feature.
-        from dreamapply_sdk.config import make_config
-        cfg = make_config()
+        from dreamapply_sdk.config import shared_config
+        cfg = shared_config()
         if isinstance(cfg.get("feature"), dict) and "streaming" in cfg["feature"]:
             sdk = DreamapplySDK.test(
                 seed, {"feature": {"streaming": {"active": True}}})
@@ -78,7 +78,7 @@ class TestApplicantEntity:
         applicant_ref01_data = helpers.to_map(vs.getprop(
             vs.getpath(setup["data"], "new.applicant"), "applicant_ref01"))
 
-        applicant_ref01_data = helpers.to_map(applicant_ref01_ent.create(applicant_ref01_data, None))
+        applicant_ref01_data = helpers.to_map(runner.entity_data(applicant_ref01_ent.create(applicant_ref01_data, None)))
         assert applicant_ref01_data is not None
         assert applicant_ref01_data["id"] is not None
 
@@ -98,7 +98,7 @@ class TestApplicantEntity:
             "id": applicant_ref01_data["id"],
         }
         applicant_ref01_data_dt0_loaded = applicant_ref01_ent.load(applicant_ref01_match_dt0, None)
-        applicant_ref01_data_dt0_load_result = helpers.to_map(applicant_ref01_data_dt0_loaded)
+        applicant_ref01_data_dt0_load_result = helpers.to_map(runner.entity_data(applicant_ref01_data_dt0_loaded))
         assert applicant_ref01_data_dt0_load_result is not None
         assert applicant_ref01_data_dt0_load_result["id"] == applicant_ref01_data["id"]
 

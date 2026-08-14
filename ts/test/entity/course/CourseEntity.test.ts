@@ -62,14 +62,14 @@ describe('CourseEntity', async () => {
     const course_ref01_ent = client.Course()
     let course_ref01_data = setup.data.new.course['course_ref01']
 
-    course_ref01_data = await course_ref01_ent.create(course_ref01_data)
+    course_ref01_data = (await course_ref01_ent.create(course_ref01_data)).data()
     assert(null != course_ref01_data.id)
 
 
     // LIST
     const course_ref01_match: any = {}
 
-    const course_ref01_list = await course_ref01_ent.list(course_ref01_match)
+    const course_ref01_list = (await course_ref01_ent.list(course_ref01_match)).map((e: any) => e.data())
 
     assert(!isempty(select(course_ref01_list, { id: course_ref01_data.id })))
 
@@ -77,7 +77,7 @@ describe('CourseEntity', async () => {
     // LOAD
     const course_ref01_match_dt0: any = {}
     course_ref01_match_dt0.id = course_ref01_data.id
-    const course_ref01_data_dt0 = await course_ref01_ent.load(course_ref01_match_dt0)
+    const course_ref01_data_dt0 = (await course_ref01_ent.load(course_ref01_match_dt0)).data()
     assert(course_ref01_data_dt0.id === course_ref01_data.id)
 
 

@@ -63,13 +63,13 @@ describe('AcademicTermEntity', async () => {
     const academic_term_ref01_ent = client.AcademicTerm()
     const academic_term_ref01_match: any = {}
 
-    const academic_term_ref01_list = await academic_term_ref01_ent.list(academic_term_ref01_match)
+    const academic_term_ref01_list = (await academic_term_ref01_ent.list(academic_term_ref01_match)).map((e: any) => e.data())
 
 
     // LOAD
     const academic_term_ref01_match_dt0: any = {}
     academic_term_ref01_match_dt0.id = academic_term_ref01_data.id
-    const academic_term_ref01_data_dt0 = await academic_term_ref01_ent.load(academic_term_ref01_match_dt0)
+    const academic_term_ref01_data_dt0 = (await academic_term_ref01_ent.load(academic_term_ref01_match_dt0)).data()
     assert(academic_term_ref01_data_dt0.id === academic_term_ref01_data.id)
 
 

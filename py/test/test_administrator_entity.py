@@ -42,8 +42,8 @@ class TestAdministratorEntity:
         assert len(seen) == 3
 
         # Inbound: streaming active -> yields each item from the feature.
-        from dreamapply_sdk.config import make_config
-        cfg = make_config()
+        from dreamapply_sdk.config import shared_config
+        cfg = shared_config()
         if isinstance(cfg.get("feature"), dict) and "streaming" in cfg["feature"]:
             sdk = DreamapplySDK.test(
                 seed, {"feature": {"streaming": {"active": True}}})
@@ -92,7 +92,7 @@ class TestAdministratorEntity:
             "id": administrator_ref01_data["id"],
         }
         administrator_ref01_data_dt0_loaded = administrator_ref01_ent.load(administrator_ref01_match_dt0, None)
-        administrator_ref01_data_dt0_load_result = helpers.to_map(administrator_ref01_data_dt0_loaded)
+        administrator_ref01_data_dt0_load_result = helpers.to_map(runner.entity_data(administrator_ref01_data_dt0_loaded))
         assert administrator_ref01_data_dt0_load_result is not None
         assert administrator_ref01_data_dt0_load_result["id"] == administrator_ref01_data["id"]
 

@@ -1,6 +1,6 @@
 # Dreamapply TypeScript SDK
 
-DreamApply API clients in TypeScript, Python and Go, generated from a spec derived mechanically from DreamApply's own open source PHP SDK.
+
 
 The TypeScript SDK for the Dreamapply API — a type-safe, entity-oriented client with full async/await support.
 
@@ -37,7 +37,9 @@ const client = new DreamapplySDK({
 
 ### 2. List academicterm records
 
-`list()` resolves to an array of AcademicTerm objects — iterate it directly:
+`list()` resolves to an array of AcademicTerm ENTITIES — every operation
+resolves to entities, not raw records. Iterate them directly, and call
+`.data()` on one for the record it holds:
 
 ```ts
 const academicterms = await client.AcademicTerm().list()
@@ -135,7 +137,8 @@ Create a mock client for unit testing — no server required:
 const client = DreamapplySDK.test()
 
 const tableview = await client.TableView().list()
-// tableview is a bare entity populated with mock response data
+// tableview is the entity, populated with mock response data
+// — call tableview.data() for the record itself
 console.log(tableview)
 ```
 

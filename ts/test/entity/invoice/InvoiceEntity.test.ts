@@ -63,13 +63,13 @@ describe('InvoiceEntity', async () => {
     const invoice_ref01_ent = client.Invoice()
     const invoice_ref01_match: any = {}
 
-    const invoice_ref01_list = await invoice_ref01_ent.list(invoice_ref01_match)
+    const invoice_ref01_list = (await invoice_ref01_ent.list(invoice_ref01_match)).map((e: any) => e.data())
 
 
     // LOAD
     const invoice_ref01_match_dt0: any = {}
     invoice_ref01_match_dt0.id = invoice_ref01_data.id
-    const invoice_ref01_data_dt0 = await invoice_ref01_ent.load(invoice_ref01_match_dt0)
+    const invoice_ref01_data_dt0 = (await invoice_ref01_ent.load(invoice_ref01_match_dt0)).data()
     assert(invoice_ref01_data_dt0.id === invoice_ref01_data.id)
 
 

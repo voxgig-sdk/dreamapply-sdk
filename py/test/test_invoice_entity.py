@@ -42,8 +42,8 @@ class TestInvoiceEntity:
         assert len(seen) == 3
 
         # Inbound: streaming active -> yields each item from the feature.
-        from dreamapply_sdk.config import make_config
-        cfg = make_config()
+        from dreamapply_sdk.config import shared_config
+        cfg = shared_config()
         if isinstance(cfg.get("feature"), dict) and "streaming" in cfg["feature"]:
             sdk = DreamapplySDK.test(
                 seed, {"feature": {"streaming": {"active": True}}})
@@ -92,7 +92,7 @@ class TestInvoiceEntity:
             "id": invoice_ref01_data["id"],
         }
         invoice_ref01_data_dt0_loaded = invoice_ref01_ent.load(invoice_ref01_match_dt0, None)
-        invoice_ref01_data_dt0_load_result = helpers.to_map(invoice_ref01_data_dt0_loaded)
+        invoice_ref01_data_dt0_load_result = helpers.to_map(runner.entity_data(invoice_ref01_data_dt0_loaded))
         assert invoice_ref01_data_dt0_load_result is not None
         assert invoice_ref01_data_dt0_load_result["id"] == invoice_ref01_data["id"]
 

@@ -63,7 +63,7 @@ describe('LoginEntity', async () => {
     const login_ref01_ent = client.Login()
     const login_ref01_match: any = {}
 
-    const login_ref01_list = await login_ref01_ent.list(login_ref01_match)
+    const login_ref01_list = (await login_ref01_ent.list(login_ref01_match)).map((e: any) => e.data())
 
 
   })

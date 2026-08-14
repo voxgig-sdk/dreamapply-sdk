@@ -63,13 +63,13 @@ describe('ApplicationEntity', async () => {
     const application_ref01_ent = client.Application()
     const application_ref01_match: any = {}
 
-    const application_ref01_list = await application_ref01_ent.list(application_ref01_match)
+    const application_ref01_list = (await application_ref01_ent.list(application_ref01_match)).map((e: any) => e.data())
 
 
     // LOAD
     const application_ref01_match_dt0: any = {}
     application_ref01_match_dt0.id = application_ref01_data.id
-    const application_ref01_data_dt0 = await application_ref01_ent.load(application_ref01_match_dt0)
+    const application_ref01_data_dt0 = (await application_ref01_ent.load(application_ref01_match_dt0)).data()
     assert(application_ref01_data_dt0.id === application_ref01_data.id)
 
 

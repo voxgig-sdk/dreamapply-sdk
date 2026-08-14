@@ -1,19 +1,14 @@
 {
-  "NAME": "DREAMAPPLY",
-  "Name": "Dreamapply",
   "def": "dreamapply-openapi.json",
   "main": {
-    "api": {
-      "entity": {},
-      "guide": {}
-    },
-    "custom": {
-      "plurals": {}
-    },
     "def": {
       "desc": ""
     },
     "kit": {
+      "author": {
+        "name": "",
+        "url": ""
+      },
       "config": {
         "docs_order": [
           "ts",
@@ -27,6 +22,7 @@
           "content-type": "application/json"
         }
       },
+      "contributor": {},
       "entity": {
         "academic_term": {
           "active": true,
@@ -2825,9 +2821,7 @@
         }
       },
       "info": {
-        "about_md": "## About this SDK\n\nDreamApply publishes no OpenAPI description, so there was nothing to generate from\ndirectly. Their own PHP SDK, [dream-group/dream-apply-sdk](https://github.com/dream-group/dream-apply-sdk),\nturned out to be the better source: it is itself **@generated**, and its **gen/**\ndirectory encodes field names, types, nullability, enum domains and URL structure.\n\nThe spec in [.sdk/def/](.sdk/def/) was derived from it **mechanically**, by the\nscript committed alongside it. Nothing was hand-written, and re-running the script\nagainst a fresh checkout reproduces the spec byte for byte. See\n[.sdk/def/README.md](.sdk/def/README.md) for the full mapping.\n\n### What that means for accuracy\n\nBeing honest about where this is solid and where it is not:\n\n- Field names, types, nullability and enum values come from the vendor's own\n  generated code, so they are as good as their SDK.\n- **HTTP verbs are inferred** from the SDK's base classes and traits, not declared.\n- **PHP types carry no JSON formats**, so dates arrive as plain strings.\n- **The SDK may lag the live API** — last upstream push 2025-12-18, tracking v8.\n- **Nothing here has been run against a live instance.** DreamApply has no\n  self-serve sandbox, so no request in this SDK has been executed against a real\n  server. Treat it as a well-founded draft, not a tested client.\n\nIf any of that is wrong, the fix belongs in the derivation script, not in the\ngenerated output.",
         "description": "Student admissions and application management API.\n\nUNOFFICIAL SPEC. DreamApply publishes no OpenAPI description. This spec was DERIVED MECHANICALLY from the vendor's own MIT-licensed PHP SDK (github.com/dream-group/dream-apply-sdk), whose gen/ directory is itself @generated and encodes field names, PHP types, nullability, enum domains and URL structure.\n\nKnown limits, stated plainly: HTTP verbs are inferred from the SDK's base classes and traits rather than declared; PHP types carry no JSON formats, so dates appear as plain strings; and the SDK may lag the live API. Nothing here has been verified against a running instance.",
-        "docs_url": "https://help.dreamapply.com/api/",
         "license": {
           "name": "MIT"
         },
@@ -2851,24 +2845,46 @@
           }
         ],
         "summary": "Student admissions and application management API.",
-        "tagline": "DreamApply API clients in TypeScript, Python and Go, generated from a spec derived mechanically from DreamApply's own open source PHP SDK.",
         "title": "DreamApply API",
         "version": "8",
         "website": "https://{instance}.dreamapply.com"
       },
       "option": {},
+      "repo": {
+        "host": "github.com",
+        "path": ""
+      },
       "target": {
         "go": {
           "active": true,
+          "author": {
+            "name": "",
+            "url": ""
+          },
           "comment": {
             "line": "//"
           },
           "deps": {},
           "ext": "go",
+          "feature": {
+            "fullset": [
+              "test/feature_test.go"
+            ],
+            "trim": true
+          },
           "module": {
-            "name": "dreamapply"
+            "goversion": "",
+            "name": "dreamapply",
+            "package": "",
+            "path": ""
           },
           "name": "go",
+          "output": {
+            "adopt": false,
+            "path": "",
+            "repo": "",
+            "sdkrel": ""
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -2890,13 +2906,18 @@
                 "recipe": "github"
               },
               "via": "port"
-            }
+            },
+            "version": "0.0.1"
           },
           "srcfeature": false,
           "title": "Golang"
         },
         "py": {
           "active": true,
+          "author": {
+            "name": "",
+            "url": ""
+          },
           "comment": {
             "line": "#"
           },
@@ -2908,10 +2929,23 @@
             }
           },
           "ext": "py",
+          "feature": {
+            "fullset": [],
+            "trim": true
+          },
           "module": {
-            "name": "dreamapply"
+            "goversion": "",
+            "name": "dreamapply",
+            "package": "",
+            "path": ""
           },
           "name": "py",
+          "output": {
+            "adopt": false,
+            "path": "",
+            "repo": "",
+            "sdkrel": ""
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -2933,13 +2967,18 @@
                 "recipe": "github"
               },
               "via": "port"
-            }
+            },
+            "version": "0.0.1"
           },
           "srcfeature": false,
           "title": "Python"
         },
         "ts": {
           "active": true,
+          "author": {
+            "name": "",
+            "url": ""
+          },
           "base": "node_modules/@voxgig/sdkgen/project/.sdk",
           "comment": {
             "line": "//"
@@ -2962,10 +3001,23 @@
             }
           },
           "ext": "ts",
+          "feature": {
+            "fullset": [],
+            "trim": true
+          },
           "module": {
-            "name": "dreamapply"
+            "goversion": "",
+            "name": "dreamapply",
+            "package": "",
+            "path": ""
           },
           "name": "ts",
+          "output": {
+            "adopt": false,
+            "path": "",
+            "repo": "",
+            "sdkrel": ""
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -2987,16 +3039,21 @@
                 "recipe": "github"
               },
               "via": "port"
-            }
+            },
+            "version": "0.0.1"
           },
           "title": "TypeScript"
+        }
+      },
+      "test": {
+        "live": {
+          "app": false,
+          "base": "",
+          "strict": false
         }
       }
     }
   },
   "name": "dreamapply",
-  "name-": "dreamapply",
-  "name_": "dreamapply",
-  "name__orig": "dreamapply",
   "origin": "voxgig-sdk"
 }

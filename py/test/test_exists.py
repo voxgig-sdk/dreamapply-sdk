@@ -1,4 +1,4 @@
-# ProjectName SDK exists test
+# Dreamapply SDK exists test
 
 import pytest
 from dreamapply_sdk import DreamapplySDK

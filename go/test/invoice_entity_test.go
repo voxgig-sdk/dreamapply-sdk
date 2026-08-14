@@ -51,7 +51,7 @@ func TestInvoiceEntity(t *testing.T) {
 
 		// Inbound: streaming active -> yields each item from the feature iterator.
 		hasStreaming := false
-		if fm, ok := core.MakeConfig()["feature"].(map[string]any); ok {
+		if fm, ok := core.SharedConfig()["feature"].(map[string]any); ok {
 			_, hasStreaming = fm["streaming"]
 		}
 		if hasStreaming {
@@ -128,7 +128,7 @@ func TestInvoiceEntity(t *testing.T) {
 		if err != nil {
 			t.Fatalf("load failed: %v", err)
 		}
-		invoiceRef01DataDt0LoadResult := core.ToMapAny(invoiceRef01DataDt0Loaded)
+		invoiceRef01DataDt0LoadResult := core.ToMapAny(entityData(invoiceRef01DataDt0Loaded))
 		if invoiceRef01DataDt0LoadResult == nil {
 			t.Fatal("expected load result to be a map")
 		}

@@ -63,13 +63,13 @@ describe('IntakeEntity', async () => {
     const intake_ref01_ent = client.Intake()
     const intake_ref01_match: any = {}
 
-    const intake_ref01_list = await intake_ref01_ent.list(intake_ref01_match)
+    const intake_ref01_list = (await intake_ref01_ent.list(intake_ref01_match)).map((e: any) => e.data())
 
 
     // LOAD
     const intake_ref01_match_dt0: any = {}
     intake_ref01_match_dt0.id = intake_ref01_data.id
-    const intake_ref01_data_dt0 = await intake_ref01_ent.load(intake_ref01_match_dt0)
+    const intake_ref01_data_dt0 = (await intake_ref01_ent.load(intake_ref01_match_dt0)).data()
     assert(intake_ref01_data_dt0.id === intake_ref01_data.id)
 
 

@@ -63,13 +63,13 @@ describe('InstitutionEntity', async () => {
     const institution_ref01_ent = client.Institution()
     const institution_ref01_match: any = {}
 
-    const institution_ref01_list = await institution_ref01_ent.list(institution_ref01_match)
+    const institution_ref01_list = (await institution_ref01_ent.list(institution_ref01_match)).map((e: any) => e.data())
 
 
     // LOAD
     const institution_ref01_match_dt0: any = {}
     institution_ref01_match_dt0.id = institution_ref01_data.id
-    const institution_ref01_data_dt0 = await institution_ref01_ent.load(institution_ref01_match_dt0)
+    const institution_ref01_data_dt0 = (await institution_ref01_ent.load(institution_ref01_match_dt0)).data()
     assert(institution_ref01_data_dt0.id === institution_ref01_data.id)
 
 
