@@ -8,6 +8,10 @@
       "name": "MIT"
     }
   },
+  "externalDocs": {
+    "url": "https://help.dreamapply.com/api/",
+    "description": "DreamApply API documentation"
+  },
   "servers": [
     {
       "url": "https://{instance}.dreamapply.com/api",

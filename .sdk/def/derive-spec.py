@@ -262,6 +262,18 @@ spec = {
         ),
         'license': {'name': 'MIT'},
     },
+    # The vendor's API documentation. Without this, apidef derives the SDK's
+    # "website" from servers[0] and produces https://{instance}.dreamapply.com —
+    # a clickable README link no browser can resolve, because `instance` is a
+    # per-tenant OpenAPI server variable rather than a real host. externalDocs
+    # is the highest-priority source, so stating it outright settles the matter.
+    #
+    # NOT the older DokuWiki at docs.dreamgroup.info that the vendor's own PHP
+    # SDK README still links to: that host returns 522 (checked 2026-08-14).
+    'externalDocs': {
+        'url': 'https://help.dreamapply.com/api/',
+        'description': 'DreamApply API documentation',
+    },
     'servers': [{
         'url': 'https://{instance}.dreamapply.com/api',
         'description': 'Per-tenant instance',
