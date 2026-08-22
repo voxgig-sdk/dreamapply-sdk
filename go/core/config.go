@@ -12,7 +12,7 @@ func MakeConfig() map[string]any {
 		"main": map[string]any{
 			"name": "Dreamapply",
 			"slug": "dreamapply",
-			"version": "0.0.1",
+			"version": "0.1.2",
 			"target": "go",
 		},
 		"feature": map[string]any{

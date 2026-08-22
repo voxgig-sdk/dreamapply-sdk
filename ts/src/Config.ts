@@ -30,7 +30,7 @@ class Config {
   main = {
     name: 'Dreamapply',
         slug: "dreamapply",
-    version: "0.0.1",
+    version: "0.1.2",
     target: "ts",
 
   }

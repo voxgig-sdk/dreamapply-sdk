@@ -1,0 +1,16 @@
+# Flows
+
+@"BasicAcademicTermFlow.aon"
+@"BasicAcademicYearFlow.aon"
+@"BasicAdministratorFlow.aon"
+@"BasicApplicantFlow.aon"
+@"BasicApplicationFlow.aon"
+@"BasicCourseFlow.aon"
+@"BasicFeeFlow.aon"
+@"BasicInstitutionFlow.aon"
+@"BasicIntakeFlow.aon"
+@"BasicInvoiceFlow.aon"
+@"BasicJournalFlow.aon"
+@"BasicLoginFlow.aon"
+@"BasicScoresheetFlow.aon"
+@"BasicTableViewFlow.aon"

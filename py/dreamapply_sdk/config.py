@@ -29,7 +29,7 @@ def make_config():
         "main": {
             "name": "Dreamapply",
             "slug": "dreamapply",
-            "version": "0.0.1",
+            "version": "0.1.2",
             "target": "py",
         },
         "feature": {

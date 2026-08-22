@@ -1,0 +1,16 @@
+# Entity Models
+
+@"academic_term.aon"
+@"academic_year.aon"
+@"administrator.aon"
+@"applicant.aon"
+@"application.aon"
+@"course.aon"
+@"fee.aon"
+@"institution.aon"
+@"intake.aon"
+@"invoice.aon"
+@"journal.aon"
+@"login.aon"
+@"scoresheet.aon"
+@"table_view.aon"
