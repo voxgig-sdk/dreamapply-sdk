@@ -345,7 +345,7 @@ API path: `/applicants`
 
 | Field | Description |
 | --- | --- |
-| `academicTerm` |  |
+| `academicTerm` | Sub-resource (AcademicTerm); see the DreamApply SDK. |
 | `activities` |  |
 | `applicant` |  |
 | `career` |  |
@@ -385,7 +385,7 @@ API path: `/applications`
 | `codeInternal` |  |
 | `country` |  |
 | `credits` |  |
-| `departments` |  |
+| `departments` | Sub-resource (InstitutionDepartments); see the DreamApply SDK. |
 | `duration` |  |
 | `erasmus` |  |
 | `featured` |  |
@@ -427,7 +427,7 @@ API path: `/fees`
 | --- | --- |
 | `address` |  |
 | `country` |  |
-| `departments` |  |
+| `departments` | Sub-resource (InstitutionDepartments); see the DreamApply SDK. |
 | `erasmus` |  |
 | `iban` |  |
 | `id` |  |
@@ -528,7 +528,7 @@ API path: `/logins`
 | `created` |  |
 | `date` |  |
 | `depth` |  |
-| `group` |  |
+| `group` | Sub-resource (object); see the DreamApply SDK. |
 | `instructions` |  |
 | `language` |  |
 | `maps` |  |
@@ -538,7 +538,7 @@ API path: `/logins`
 | `reference` |  |
 | `scale` |  |
 | `scored` |  |
-| `scores` |  |
+| `scores` | Sub-resource (Scores); see the DreamApply SDK. |
 | `subject` |  |
 | `type` |  |
 
@@ -550,7 +550,7 @@ API path: `/scoresheets`
 
 | Field | Description |
 | --- | --- |
-| `content` |  |
+| `content` | Sub-resource (StreamInterface); see the DreamApply SDK. |
 | `created` |  |
 | `expires` |  |
 | `id` |  |
@@ -743,7 +743,7 @@ Create an instance: `application = client.Application()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `academicTerm` | `dict` |  |
+| `academicTerm` | `dict` | Sub-resource (AcademicTerm); see the DreamApply SDK. |
 | `activities` | `list` |  |
 | `applicant` | `dict` |  |
 | `career` | `list` |  |
@@ -804,7 +804,7 @@ Create an instance: `course = client.Course()`
 | `codeInternal` | `str` |  |
 | `country` | `str` |  |
 | `credits` | `str` |  |
-| `departments` | `dict` |  |
+| `departments` | `dict` | Sub-resource (InstitutionDepartments); see the DreamApply SDK. |
 | `duration` | `str` |  |
 | `erasmus` | `str` |  |
 | `featured` | `str` |  |
@@ -893,7 +893,7 @@ Create an instance: `institution = client.Institution()`
 | --- | --- | --- |
 | `address` | `str` |  |
 | `country` | `str` |  |
-| `departments` | `dict` |  |
+| `departments` | `dict` | Sub-resource (InstitutionDepartments); see the DreamApply SDK. |
 | `erasmus` | `str` |  |
 | `iban` | `str` |  |
 | `id` | `int` |  |
@@ -1081,7 +1081,7 @@ Create an instance: `scoresheet = client.Scoresheet()`
 | `created` | `str` |  |
 | `date` | `str` |  |
 | `depth` | `str` |  |
-| `group` | `dict` |  |
+| `group` | `dict` | Sub-resource (object); see the DreamApply SDK. |
 | `instructions` | `str` |  |
 | `language` | `str` |  |
 | `maps` | `list` |  |
@@ -1091,7 +1091,7 @@ Create an instance: `scoresheet = client.Scoresheet()`
 | `reference` | `str` |  |
 | `scale` | `int` |  |
 | `scored` | `str` |  |
-| `scores` | `dict` |  |
+| `scores` | `dict` | Sub-resource (Scores); see the DreamApply SDK. |
 | `subject` | `str` |  |
 | `type` | `str` |  |
 
@@ -1123,7 +1123,7 @@ Create an instance: `table_view = client.TableView()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `content` | `dict` |  |
+| `content` | `dict` | Sub-resource (StreamInterface); see the DreamApply SDK. |
 | `created` | `str` |  |
 | `expires` | `str` |  |
 | `id` | `int` |  |

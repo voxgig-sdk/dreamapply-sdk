@@ -28,6 +28,9 @@ def make_config():
     return {
         "main": {
             "name": "Dreamapply",
+            "slug": "dreamapply",
+            "version": "0.0.1",
+            "target": "py",
         },
         "feature": {
             "test": {
@@ -481,6 +484,7 @@ def make_config():
         "fields": [
           {
             "name": "academicTerm",
+            "short": "Sub-resource (AcademicTerm); see the DreamApply SDK.",
             "type": "`$OBJECT`",
           },
           {
@@ -670,6 +674,7 @@ def make_config():
           },
           {
             "name": "departments",
+            "short": "Sub-resource (InstitutionDepartments); see the DreamApply SDK.",
             "type": "`$OBJECT`",
           },
           {
@@ -916,6 +921,7 @@ def make_config():
           },
           {
             "name": "departments",
+            "short": "Sub-resource (InstitutionDepartments); see the DreamApply SDK.",
             "type": "`$OBJECT`",
           },
           {
@@ -1430,6 +1436,7 @@ def make_config():
           },
           {
             "name": "group",
+            "short": "Sub-resource (object); see the DreamApply SDK.",
             "type": "`$OBJECT`",
           },
           {
@@ -1470,6 +1477,7 @@ def make_config():
           },
           {
             "name": "scores",
+            "short": "Sub-resource (Scores); see the DreamApply SDK.",
             "type": "`$OBJECT`",
           },
           {
@@ -1547,6 +1555,7 @@ def make_config():
         "fields": [
           {
             "name": "content",
+            "short": "Sub-resource (StreamInterface); see the DreamApply SDK.",
             "type": "`$OBJECT`",
           },
           {

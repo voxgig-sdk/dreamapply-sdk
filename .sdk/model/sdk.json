@@ -24,6 +24,7 @@
         "repr": "auto"
       },
       "contributor": {},
+      "docs": {},
       "entity": {
         "academic_term": {
           "active": true,
@@ -554,6 +555,7 @@
               "active": true,
               "name": "academicTerm",
               "req": false,
+              "short": "Sub-resource (AcademicTerm); see the DreamApply SDK.",
               "type": "`$OBJECT`"
             },
             {
@@ -816,6 +818,7 @@
               "active": true,
               "name": "departments",
               "req": false,
+              "short": "Sub-resource (InstitutionDepartments); see the DreamApply SDK.",
               "type": "`$OBJECT`"
             },
             {
@@ -1129,6 +1132,7 @@
               "active": true,
               "name": "departments",
               "req": false,
+              "short": "Sub-resource (InstitutionDepartments); see the DreamApply SDK.",
               "type": "`$OBJECT`"
             },
             {
@@ -1808,6 +1812,7 @@
               "active": true,
               "name": "group",
               "req": false,
+              "short": "Sub-resource (object); see the DreamApply SDK.",
               "type": "`$OBJECT`"
             },
             {
@@ -1868,6 +1873,7 @@
               "active": true,
               "name": "scores",
               "req": false,
+              "short": "Sub-resource (Scores); see the DreamApply SDK.",
               "type": "`$OBJECT`"
             },
             {
@@ -1958,6 +1964,7 @@
               "active": true,
               "name": "content",
               "req": false,
+              "short": "Sub-resource (StreamInterface); see the DreamApply SDK.",
               "type": "`$OBJECT`"
             },
             {
@@ -2094,6 +2101,7 @@
       "feature": {
         "test": {
           "active": true,
+          "base": "node_modules/@voxgig/sdkgen/project/.sdk",
           "config": {
             "options": {
               "active": false
@@ -2154,6 +2162,8 @@
             }
           },
           "name": "test",
+          "origname": "",
+          "package": "@voxgig/sdkgen",
           "target": {
             "go": {
               "deps": {}
@@ -2862,6 +2872,7 @@
             "name": "",
             "url": ""
           },
+          "base": "node_modules/@voxgig/sdkgen/project/.sdk",
           "comment": {
             "line": "//"
           },
@@ -2880,12 +2891,14 @@
             "path": ""
           },
           "name": "go",
+          "origname": "",
           "output": {
             "adopt": false,
             "path": "",
             "repo": "",
             "sdkrel": ""
           },
+          "package": "@voxgig/sdkgen",
           "publish": {
             "registry": {
               "active": false,
@@ -2919,6 +2932,7 @@
             "name": "",
             "url": ""
           },
+          "base": "node_modules/@voxgig/sdkgen/project/.sdk",
           "comment": {
             "line": "#"
           },
@@ -2941,12 +2955,14 @@
             "path": ""
           },
           "name": "py",
+          "origname": "",
           "output": {
             "adopt": false,
             "path": "",
             "repo": "",
             "sdkrel": ""
           },
+          "package": "@voxgig/sdkgen",
           "publish": {
             "registry": {
               "active": false,
@@ -3013,12 +3029,14 @@
             "path": ""
           },
           "name": "ts",
+          "origname": "",
           "output": {
             "adopt": false,
             "path": "",
             "repo": "",
             "sdkrel": ""
           },
+          "package": "@voxgig/sdkgen",
           "publish": {
             "registry": {
               "active": false,

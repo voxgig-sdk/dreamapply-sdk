@@ -6,7 +6,7 @@ The Golang SDK for the Dreamapply API — an entity-oriented client using standa
 
 It exposes the API as capitalised, semantic **Entities** — e.g. `client.AcademicTerm(nil)` — each with the same small set of operations (`List`, `Load`, `Create`, `Remove`) instead of raw URL paths and query strings. You call meaning, not endpoints, which keeps the cognitive load low.
 
-> Other languages, the CLI, and MCP server live alongside this one — see
+> Also generated from this model: `py`, `ts` — see
 > the [top-level README](../README.md).
 
 
@@ -358,7 +358,7 @@ API path: `/applicants`
 
 | Field | Description |
 | --- | --- |
-| `"academicTerm"` |  |
+| `"academicTerm"` | Sub-resource (AcademicTerm); see the DreamApply SDK. |
 | `"activities"` |  |
 | `"applicant"` |  |
 | `"career"` |  |
@@ -398,7 +398,7 @@ API path: `/applications`
 | `"codeInternal"` |  |
 | `"country"` |  |
 | `"credits"` |  |
-| `"departments"` |  |
+| `"departments"` | Sub-resource (InstitutionDepartments); see the DreamApply SDK. |
 | `"duration"` |  |
 | `"erasmus"` |  |
 | `"featured"` |  |
@@ -440,7 +440,7 @@ API path: `/fees`
 | --- | --- |
 | `"address"` |  |
 | `"country"` |  |
-| `"departments"` |  |
+| `"departments"` | Sub-resource (InstitutionDepartments); see the DreamApply SDK. |
 | `"erasmus"` |  |
 | `"iban"` |  |
 | `"id"` |  |
@@ -541,7 +541,7 @@ API path: `/logins`
 | `"created"` |  |
 | `"date"` |  |
 | `"depth"` |  |
-| `"group"` |  |
+| `"group"` | Sub-resource (object); see the DreamApply SDK. |
 | `"instructions"` |  |
 | `"language"` |  |
 | `"maps"` |  |
@@ -551,7 +551,7 @@ API path: `/logins`
 | `"reference"` |  |
 | `"scale"` |  |
 | `"scored"` |  |
-| `"scores"` |  |
+| `"scores"` | Sub-resource (Scores); see the DreamApply SDK. |
 | `"subject"` |  |
 | `"type"` |  |
 
@@ -563,7 +563,7 @@ API path: `/scoresheets`
 
 | Field | Description |
 | --- | --- |
-| `"content"` |  |
+| `"content"` | Sub-resource (StreamInterface); see the DreamApply SDK. |
 | `"created"` |  |
 | `"expires"` |  |
 | `"id"` |  |
@@ -792,7 +792,7 @@ Create an instance: `application := client.Application(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `academicTerm` | `map[string]any` |  |
+| `academicTerm` | `map[string]any` | Sub-resource (AcademicTerm); see the DreamApply SDK. |
 | `activities` | `[]any` |  |
 | `applicant` | `map[string]any` |  |
 | `career` | `[]any` |  |
@@ -861,7 +861,7 @@ Create an instance: `course := client.Course(nil)`
 | `codeInternal` | `string` |  |
 | `country` | `string` |  |
 | `credits` | `string` |  |
-| `departments` | `map[string]any` |  |
+| `departments` | `map[string]any` | Sub-resource (InstitutionDepartments); see the DreamApply SDK. |
 | `duration` | `string` |  |
 | `erasmus` | `string` |  |
 | `featured` | `string` |  |
@@ -970,7 +970,7 @@ Create an instance: `institution := client.Institution(nil)`
 | --- | --- | --- |
 | `address` | `string` |  |
 | `country` | `string` |  |
-| `departments` | `map[string]any` |  |
+| `departments` | `map[string]any` | Sub-resource (InstitutionDepartments); see the DreamApply SDK. |
 | `erasmus` | `string` |  |
 | `iban` | `string` |  |
 | `id` | `int` |  |
@@ -1190,7 +1190,7 @@ Create an instance: `scoresheet := client.Scoresheet(nil)`
 | `created` | `string` |  |
 | `date` | `string` |  |
 | `depth` | `string` |  |
-| `group` | `map[string]any` |  |
+| `group` | `map[string]any` | Sub-resource (object); see the DreamApply SDK. |
 | `instructions` | `string` |  |
 | `language` | `string` |  |
 | `maps` | `[]any` |  |
@@ -1200,7 +1200,7 @@ Create an instance: `scoresheet := client.Scoresheet(nil)`
 | `reference` | `string` |  |
 | `scale` | `int` |  |
 | `scored` | `string` |  |
-| `scores` | `map[string]any` |  |
+| `scores` | `map[string]any` | Sub-resource (Scores); see the DreamApply SDK. |
 | `subject` | `string` |  |
 | `type` | `string` |  |
 
@@ -1240,7 +1240,7 @@ Create an instance: `tableView := client.TableView(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `content` | `map[string]any` |  |
+| `content` | `map[string]any` | Sub-resource (StreamInterface); see the DreamApply SDK. |
 | `created` | `string` |  |
 | `expires` | `string` |  |
 | `id` | `int` |  |

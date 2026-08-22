@@ -19,9 +19,20 @@ class Config {
     return fi
   }
 
+  // False for a feature added at runtime via options.extend (station's
+  // adopt path) - the constructor uses this to skip makeFeature for names
+  // no generated class backs.
+  hasFeature(this: any, fn: string) {
+    return null != FEATURE_CLASS[fn]
+  }
+
 
   main = {
     name: 'Dreamapply',
+        slug: "dreamapply",
+    version: "0.0.1",
+    target: "ts",
+
   }
 
 
@@ -515,6 +526,7 @@ class Config {
       "fields": [
         {
           "name": "academicTerm",
+          "short": "Sub-resource (AcademicTerm); see the DreamApply SDK.",
           "type": "`$OBJECT`"
         },
         {
@@ -704,6 +716,7 @@ class Config {
         },
         {
           "name": "departments",
+          "short": "Sub-resource (InstitutionDepartments); see the DreamApply SDK.",
           "type": "`$OBJECT`"
         },
         {
@@ -950,6 +963,7 @@ class Config {
         },
         {
           "name": "departments",
+          "short": "Sub-resource (InstitutionDepartments); see the DreamApply SDK.",
           "type": "`$OBJECT`"
         },
         {
@@ -1464,6 +1478,7 @@ class Config {
         },
         {
           "name": "group",
+          "short": "Sub-resource (object); see the DreamApply SDK.",
           "type": "`$OBJECT`"
         },
         {
@@ -1504,6 +1519,7 @@ class Config {
         },
         {
           "name": "scores",
+          "short": "Sub-resource (Scores); see the DreamApply SDK.",
           "type": "`$OBJECT`"
         },
         {
@@ -1581,6 +1597,7 @@ class Config {
       "fields": [
         {
           "name": "content",
+          "short": "Sub-resource (StreamInterface); see the DreamApply SDK.",
           "type": "`$OBJECT`"
         },
         {

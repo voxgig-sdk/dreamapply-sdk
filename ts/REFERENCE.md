@@ -543,7 +543,7 @@ const application = client.Application()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `academicTerm` | `Record<string, any>` | No |  |
+| `academicTerm` | `Record<string, any>` | No | Sub-resource (AcademicTerm); see the DreamApply SDK. |
 | `activities` | `any[]` | No |  |
 | `applicant` | `Record<string, any>` | No |  |
 | `career` | `any[]` | No |  |
@@ -631,7 +631,7 @@ const course = client.Course()
 | `codeInternal` | `string` | No |  |
 | `country` | `string` | No |  |
 | `credits` | `string` | No |  |
-| `departments` | `Record<string, any>` | No |  |
+| `departments` | `Record<string, any>` | No | Sub-resource (InstitutionDepartments); see the DreamApply SDK. |
 | `duration` | `string` | No |  |
 | `erasmus` | `string` | No |  |
 | `featured` | `string` | No |  |
@@ -778,7 +778,7 @@ const institution = client.Institution()
 | --- | --- | --- | --- |
 | `address` | `string` | No |  |
 | `country` | `string` | No |  |
-| `departments` | `Record<string, any>` | No |  |
+| `departments` | `Record<string, any>` | No | Sub-resource (InstitutionDepartments); see the DreamApply SDK. |
 | `erasmus` | `string` | No |  |
 | `iban` | `string` | No |  |
 | `id` | `number` | No |  |
@@ -1111,7 +1111,7 @@ const scoresheet = client.Scoresheet()
 | `created` | `string` | No |  |
 | `date` | `string` | No |  |
 | `depth` | `string` | No |  |
-| `group` | `Record<string, any>` | No |  |
+| `group` | `Record<string, any>` | No | Sub-resource (object); see the DreamApply SDK. |
 | `instructions` | `string` | No |  |
 | `language` | `string` | No |  |
 | `maps` | `any[]` | No |  |
@@ -1121,7 +1121,7 @@ const scoresheet = client.Scoresheet()
 | `reference` | `string` | No |  |
 | `scale` | `number` | No |  |
 | `scored` | `string` | No |  |
-| `scores` | `Record<string, any>` | No |  |
+| `scores` | `Record<string, any>` | No | Sub-resource (Scores); see the DreamApply SDK. |
 | `subject` | `string` | No |  |
 | `type` | `string` | No |  |
 
@@ -1181,7 +1181,7 @@ const table_view = client.TableView()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `content` | `Record<string, any>` | No |  |
+| `content` | `Record<string, any>` | No | Sub-resource (StreamInterface); see the DreamApply SDK. |
 | `created` | `string` | No |  |
 | `expires` | `string` | No |  |
 | `id` | `number` | No |  |

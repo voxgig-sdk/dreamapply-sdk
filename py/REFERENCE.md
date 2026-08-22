@@ -422,7 +422,7 @@ application = client.Application()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `academicTerm` | `dict` | No |  |
+| `academicTerm` | `dict` | No | Sub-resource (AcademicTerm); see the DreamApply SDK. |
 | `activities` | `list` | No |  |
 | `applicant` | `dict` | No |  |
 | `career` | `list` | No |  |
@@ -513,7 +513,7 @@ course = client.Course()
 | `codeInternal` | `str` | No |  |
 | `country` | `str` | No |  |
 | `credits` | `str` | No |  |
-| `departments` | `dict` | No |  |
+| `departments` | `dict` | No | Sub-resource (InstitutionDepartments); see the DreamApply SDK. |
 | `duration` | `str` | No |  |
 | `erasmus` | `str` | No |  |
 | `featured` | `str` | No |  |
@@ -666,7 +666,7 @@ institution = client.Institution()
 | --- | --- | --- | --- |
 | `address` | `str` | No |  |
 | `country` | `str` | No |  |
-| `departments` | `dict` | No |  |
+| `departments` | `dict` | No | Sub-resource (InstitutionDepartments); see the DreamApply SDK. |
 | `erasmus` | `str` | No |  |
 | `iban` | `str` | No |  |
 | `id` | `int` | No |  |
@@ -1014,7 +1014,7 @@ scoresheet = client.Scoresheet()
 | `created` | `str` | No |  |
 | `date` | `str` | No |  |
 | `depth` | `str` | No |  |
-| `group` | `dict` | No |  |
+| `group` | `dict` | No | Sub-resource (object); see the DreamApply SDK. |
 | `instructions` | `str` | No |  |
 | `language` | `str` | No |  |
 | `maps` | `list` | No |  |
@@ -1024,7 +1024,7 @@ scoresheet = client.Scoresheet()
 | `reference` | `str` | No |  |
 | `scale` | `int` | No |  |
 | `scored` | `str` | No |  |
-| `scores` | `dict` | No |  |
+| `scores` | `dict` | No | Sub-resource (Scores); see the DreamApply SDK. |
 | `subject` | `str` | No |  |
 | `type` | `str` | No |  |
 
@@ -1087,7 +1087,7 @@ table_view = client.TableView()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `content` | `dict` | No |  |
+| `content` | `dict` | No | Sub-resource (StreamInterface); see the DreamApply SDK. |
 | `created` | `str` | No |  |
 | `expires` | `str` | No |  |
 | `id` | `int` | No |  |

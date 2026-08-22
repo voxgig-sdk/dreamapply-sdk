@@ -28,6 +28,7 @@ main: kit: entity: scoresheet: {
     {
       name: "group"
       req: false
+      short: "Sub-resource (object); see the DreamApply SDK."
       type: "`$OBJECT`"
     }
     {
@@ -78,6 +79,7 @@ main: kit: entity: scoresheet: {
     {
       name: "scores"
       req: false
+      short: "Sub-resource (Scores); see the DreamApply SDK."
       type: "`$OBJECT`"
     }
     {

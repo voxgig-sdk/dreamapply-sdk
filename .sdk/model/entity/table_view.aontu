@@ -8,6 +8,7 @@ main: kit: entity: table_view: {
     {
       name: "content"
       req: false
+      short: "Sub-resource (StreamInterface); see the DreamApply SDK."
       type: "`$OBJECT`"
     }
     {

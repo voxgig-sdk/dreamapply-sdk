@@ -9,7 +9,7 @@ The API is exposed as capitalised, semantic **Entities** — e.g.
 instead of raw URL paths and query parameters. This keeps the surface
 predictable and low-friction for both humans and AI agents.
 
-> Other languages, the CLI, and MCP server live alongside this one — see
+> Also generated from this model: `go`, `py` — see
 > the [top-level README](../README.md).
 
 
@@ -393,7 +393,7 @@ API path: `/applicants`
 
 | Field | Description |
 | --- | --- |
-| `academicTerm` |  |
+| `academicTerm` | Sub-resource (AcademicTerm); see the DreamApply SDK. |
 | `activities` |  |
 | `applicant` |  |
 | `career` |  |
@@ -433,7 +433,7 @@ API path: `/applications`
 | `codeInternal` |  |
 | `country` |  |
 | `credits` |  |
-| `departments` |  |
+| `departments` | Sub-resource (InstitutionDepartments); see the DreamApply SDK. |
 | `duration` |  |
 | `erasmus` |  |
 | `featured` |  |
@@ -475,7 +475,7 @@ API path: `/fees`
 | --- | --- |
 | `address` |  |
 | `country` |  |
-| `departments` |  |
+| `departments` | Sub-resource (InstitutionDepartments); see the DreamApply SDK. |
 | `erasmus` |  |
 | `iban` |  |
 | `id` |  |
@@ -576,7 +576,7 @@ API path: `/logins`
 | `created` |  |
 | `date` |  |
 | `depth` |  |
-| `group` |  |
+| `group` | Sub-resource (object); see the DreamApply SDK. |
 | `instructions` |  |
 | `language` |  |
 | `maps` |  |
@@ -586,7 +586,7 @@ API path: `/logins`
 | `reference` |  |
 | `scale` |  |
 | `scored` |  |
-| `scores` |  |
+| `scores` | Sub-resource (Scores); see the DreamApply SDK. |
 | `subject` |  |
 | `type` |  |
 
@@ -598,7 +598,7 @@ API path: `/scoresheets`
 
 | Field | Description |
 | --- | --- |
-| `content` |  |
+| `content` | Sub-resource (StreamInterface); see the DreamApply SDK. |
 | `created` |  |
 | `expires` |  |
 | `id` |  |
@@ -791,7 +791,7 @@ Create an instance: `const application = client.Application()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `academicTerm` | `Record<string, any>` |  |
+| `academicTerm` | `Record<string, any>` | Sub-resource (AcademicTerm); see the DreamApply SDK. |
 | `activities` | `any[]` |  |
 | `applicant` | `Record<string, any>` |  |
 | `career` | `any[]` |  |
@@ -852,7 +852,7 @@ Create an instance: `const course = client.Course()`
 | `codeInternal` | `string` |  |
 | `country` | `string` |  |
 | `credits` | `string` |  |
-| `departments` | `Record<string, any>` |  |
+| `departments` | `Record<string, any>` | Sub-resource (InstitutionDepartments); see the DreamApply SDK. |
 | `duration` | `string` |  |
 | `erasmus` | `string` |  |
 | `featured` | `string` |  |
@@ -941,7 +941,7 @@ Create an instance: `const institution = client.Institution()`
 | --- | --- | --- |
 | `address` | `string` |  |
 | `country` | `string` |  |
-| `departments` | `Record<string, any>` |  |
+| `departments` | `Record<string, any>` | Sub-resource (InstitutionDepartments); see the DreamApply SDK. |
 | `erasmus` | `string` |  |
 | `iban` | `string` |  |
 | `id` | `number` |  |
@@ -1129,7 +1129,7 @@ Create an instance: `const scoresheet = client.Scoresheet()`
 | `created` | `string` |  |
 | `date` | `string` |  |
 | `depth` | `string` |  |
-| `group` | `Record<string, any>` |  |
+| `group` | `Record<string, any>` | Sub-resource (object); see the DreamApply SDK. |
 | `instructions` | `string` |  |
 | `language` | `string` |  |
 | `maps` | `any[]` |  |
@@ -1139,7 +1139,7 @@ Create an instance: `const scoresheet = client.Scoresheet()`
 | `reference` | `string` |  |
 | `scale` | `number` |  |
 | `scored` | `string` |  |
-| `scores` | `Record<string, any>` |  |
+| `scores` | `Record<string, any>` | Sub-resource (Scores); see the DreamApply SDK. |
 | `subject` | `string` |  |
 | `type` | `string` |  |
 
@@ -1171,7 +1171,7 @@ Create an instance: `const table_view = client.TableView()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `content` | `Record<string, any>` |  |
+| `content` | `Record<string, any>` | Sub-resource (StreamInterface); see the DreamApply SDK. |
 | `created` | `string` |  |
 | `expires` | `string` |  |
 | `id` | `number` |  |

@@ -445,7 +445,7 @@ fmt.Println(application.GetName()) // "application"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `academicTerm` | `map[string]any` | No |  |
+| `academicTerm` | `map[string]any` | No | Sub-resource (AcademicTerm); see the DreamApply SDK. |
 | `activities` | `[]any` | No |  |
 | `applicant` | `map[string]any` | No |  |
 | `career` | `[]any` | No |  |
@@ -538,7 +538,7 @@ fmt.Println(course.GetName()) // "course"
 | `codeInternal` | `string` | No |  |
 | `country` | `string` | No |  |
 | `credits` | `string` | No |  |
-| `departments` | `map[string]any` | No |  |
+| `departments` | `map[string]any` | No | Sub-resource (InstitutionDepartments); see the DreamApply SDK. |
 | `duration` | `string` | No |  |
 | `erasmus` | `string` | No |  |
 | `featured` | `string` | No |  |
@@ -699,7 +699,7 @@ fmt.Println(institution.GetName()) // "institution"
 | --- | --- | --- | --- |
 | `address` | `string` | No |  |
 | `country` | `string` | No |  |
-| `departments` | `map[string]any` | No |  |
+| `departments` | `map[string]any` | No | Sub-resource (InstitutionDepartments); see the DreamApply SDK. |
 | `erasmus` | `string` | No |  |
 | `iban` | `string` | No |  |
 | `id` | `int` | No |  |
@@ -1053,7 +1053,7 @@ fmt.Println(scoresheet.GetName()) // "scoresheet"
 | `created` | `string` | No |  |
 | `date` | `string` | No |  |
 | `depth` | `string` | No |  |
-| `group` | `map[string]any` | No |  |
+| `group` | `map[string]any` | No | Sub-resource (object); see the DreamApply SDK. |
 | `instructions` | `string` | No |  |
 | `language` | `string` | No |  |
 | `maps` | `[]any` | No |  |
@@ -1063,7 +1063,7 @@ fmt.Println(scoresheet.GetName()) // "scoresheet"
 | `reference` | `string` | No |  |
 | `scale` | `int` | No |  |
 | `scored` | `string` | No |  |
-| `scores` | `map[string]any` | No |  |
+| `scores` | `map[string]any` | No | Sub-resource (Scores); see the DreamApply SDK. |
 | `subject` | `string` | No |  |
 | `type` | `string` | No |  |
 
@@ -1128,7 +1128,7 @@ fmt.Println(tableView.GetName()) // "table_view"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `content` | `map[string]any` | No |  |
+| `content` | `map[string]any` | No | Sub-resource (StreamInterface); see the DreamApply SDK. |
 | `created` | `string` | No |  |
 | `expires` | `string` | No |  |
 | `id` | `int` | No |  |

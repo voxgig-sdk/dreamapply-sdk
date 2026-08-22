@@ -18,6 +18,7 @@ main: kit: entity: institution: {
     {
       name: "departments"
       req: false
+      short: "Sub-resource (InstitutionDepartments); see the DreamApply SDK."
       type: "`$OBJECT`"
     }
     {

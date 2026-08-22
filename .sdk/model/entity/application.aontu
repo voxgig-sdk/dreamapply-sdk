@@ -8,6 +8,7 @@ main: kit: entity: application: {
     {
       name: "academicTerm"
       req: false
+      short: "Sub-resource (AcademicTerm); see the DreamApply SDK."
       type: "`$OBJECT`"
     }
     {

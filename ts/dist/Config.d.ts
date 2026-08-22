@@ -1,8 +1,12 @@
 import { BaseFeature } from './feature/base/BaseFeature';
 declare class Config {
     makeFeature(this: any, fn: string): BaseFeature;
+    hasFeature(this: any, fn: string): boolean;
     main: {
         name: string;
+        slug: string;
+        version: string;
+        target: string;
     };
     feature: {
         test: {
@@ -273,10 +277,15 @@ declare class Config {
             };
         };
         application: {
-            fields: {
+            fields: ({
+                name: string;
+                short: string;
+                type: string;
+            } | {
                 name: string;
                 type: string;
-            }[];
+                short?: undefined;
+            })[];
             name: string;
             op: {
                 list: {
@@ -327,10 +336,15 @@ declare class Config {
             };
         };
         course: {
-            fields: {
+            fields: ({
                 name: string;
                 type: string;
-            }[];
+                short?: undefined;
+            } | {
+                name: string;
+                short: string;
+                type: string;
+            })[];
             name: string;
             op: {
                 create: {
@@ -451,10 +465,15 @@ declare class Config {
             };
         };
         institution: {
-            fields: {
+            fields: ({
                 name: string;
                 type: string;
-            }[];
+                short?: undefined;
+            } | {
+                name: string;
+                short: string;
+                type: string;
+            })[];
             name: string;
             op: {
                 list: {
@@ -695,10 +714,15 @@ declare class Config {
             };
         };
         scoresheet: {
-            fields: {
+            fields: ({
                 name: string;
                 type: string;
-            }[];
+                short?: undefined;
+            } | {
+                name: string;
+                short: string;
+                type: string;
+            })[];
             name: string;
             op: {
                 list: {
@@ -749,10 +773,15 @@ declare class Config {
             };
         };
         table_view: {
-            fields: {
+            fields: ({
+                name: string;
+                short: string;
+                type: string;
+            } | {
                 name: string;
                 type: string;
-            }[];
+                short?: undefined;
+            })[];
             name: string;
             op: {
                 list: {
