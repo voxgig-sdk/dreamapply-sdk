@@ -121,13 +121,19 @@ func TestScoresheetEntity(t *testing.T) {
 		}
 
 		// LOAD
-		scoresheetRef01MatchDt0 := map[string]any{}
+		scoresheetRef01MatchDt0 := map[string]any{
+			"id": scoresheetRef01Data["id"],
+		}
 		scoresheetRef01DataDt0Loaded, err := scoresheetRef01Ent.Load(scoresheetRef01MatchDt0, nil)
 		if err != nil {
 			t.Fatalf("load failed: %v", err)
 		}
-		if scoresheetRef01DataDt0Loaded == nil {
-			t.Fatal("expected load result to be non-nil")
+		scoresheetRef01DataDt0LoadResult := core.ToMapAny(entityData(scoresheetRef01DataDt0Loaded))
+		if scoresheetRef01DataDt0LoadResult == nil {
+			t.Fatal("expected load result to be a map")
+		}
+		if scoresheetRef01DataDt0LoadResult["id"] != scoresheetRef01Data["id"] {
+			t.Fatal("expected load result id to match")
 		}
 
 	})

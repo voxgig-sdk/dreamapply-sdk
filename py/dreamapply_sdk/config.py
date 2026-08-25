@@ -165,6 +165,10 @@ def make_config():
       "academic_year": {
         "fields": [
           {
+            "name": "id",
+            "type": "`$STRING`",
+          },
+          {
             "name": "name",
             "type": "`$STRING`",
           },
@@ -836,6 +840,10 @@ def make_config():
       "fee": {
         "fields": [
           {
+            "name": "id",
+            "type": "`$STRING`",
+          },
+          {
             "name": "name",
             "type": "`$STRING`",
           },
@@ -1439,6 +1447,10 @@ def make_config():
             "name": "group",
             "short": "Sub-resource (object); see the DreamApply SDK.",
             "type": "`$OBJECT`",
+          },
+          {
+            "name": "id",
+            "type": "`$STRING`",
           },
           {
             "name": "instructions",

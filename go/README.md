@@ -305,6 +305,7 @@ API path: `/academic-terms`
 
 | Field | Description |
 | --- | --- |
+| `"id"` |  |
 | `"name"` |  |
 | `"start"` |  |
 
@@ -426,6 +427,7 @@ API path: `/courses`
 
 | Field | Description |
 | --- | --- |
+| `"id"` |  |
 | `"name"` |  |
 | `"notes"` |  |
 | `"type"` |  |
@@ -542,6 +544,7 @@ API path: `/logins`
 | `"date"` |  |
 | `"depth"` |  |
 | `"group"` | Sub-resource (object); see the DreamApply SDK. |
+| `"id"` |  |
 | `"instructions"` |  |
 | `"language"` |  |
 | `"maps"` |  |
@@ -643,6 +646,7 @@ Create an instance: `academicYear := client.AcademicYear(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
+| `id` | `string` |  |
 | `name` | `string` |  |
 | `start` | `string` |  |
 
@@ -928,6 +932,7 @@ Create an instance: `fee := client.Fee(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
+| `id` | `string` |  |
 | `name` | `string` |  |
 | `notes` | `string` |  |
 | `type` | `string` |  |
@@ -1191,6 +1196,7 @@ Create an instance: `scoresheet := client.Scoresheet(nil)`
 | `date` | `string` |  |
 | `depth` | `string` |  |
 | `group` | `map[string]any` | Sub-resource (object); see the DreamApply SDK. |
+| `id` | `string` |  |
 | `instructions` | `string` |  |
 | `language` | `string` |  |
 | `maps` | `[]any` |  |

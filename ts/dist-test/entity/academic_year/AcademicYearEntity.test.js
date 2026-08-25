@@ -76,6 +76,11 @@ const utility_1 = require("../../utility");
         const academic_year_ref01_ent = client.AcademicYear();
         const academic_year_ref01_match = {};
         const academic_year_ref01_list = (await academic_year_ref01_ent.list(academic_year_ref01_match)).map((e) => e.data());
+        // LOAD
+        const academic_year_ref01_match_dt0 = {};
+        academic_year_ref01_match_dt0.id = academic_year_ref01_data.id;
+        const academic_year_ref01_data_dt0 = (await academic_year_ref01_ent.load(academic_year_ref01_match_dt0)).data();
+        (0, node_assert_1.default)(academic_year_ref01_data_dt0.id === academic_year_ref01_data.id);
     });
 });
 function basicSetup(extra) {

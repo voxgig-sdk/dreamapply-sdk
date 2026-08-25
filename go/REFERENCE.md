@@ -220,6 +220,7 @@ fmt.Println(academicYear.GetName()) // "academic_year"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
+| `id` | `string` | No |  |
 | `name` | `string` | No |  |
 | `start` | `string` | No |  |
 
@@ -632,6 +633,7 @@ fmt.Println(fee.GetName()) // "fee"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
+| `id` | `string` | No |  |
 | `name` | `string` | No |  |
 | `notes` | `string` | No |  |
 | `type` | `string` | No |  |
@@ -1054,6 +1056,7 @@ fmt.Println(scoresheet.GetName()) // "scoresheet"
 | `date` | `string` | No |  |
 | `depth` | `string` | No |  |
 | `group` | `map[string]any` | No | Sub-resource (object); see the DreamApply SDK. |
+| `id` | `string` | No |  |
 | `instructions` | `string` | No |  |
 | `language` | `string` | No |  |
 | `maps` | `[]any` | No |  |

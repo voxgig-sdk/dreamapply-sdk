@@ -6,6 +6,11 @@ main: kit: entity: fee: {
 
   fields: [
     {
+      name: "id"
+      req: false
+      type: "`$STRING`"
+    }
+    {
       name: "name"
       req: false
       type: "`$STRING`"
@@ -21,6 +26,11 @@ main: kit: entity: fee: {
       type: "`$STRING`"
     }
   ]
+
+  id: {
+    field: "id"
+    name: "id"
+  }
 
   name: "fee"
   op: {

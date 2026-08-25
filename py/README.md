@@ -292,6 +292,7 @@ API path: `/academic-terms`
 
 | Field | Description |
 | --- | --- |
+| `id` |  |
 | `name` |  |
 | `start` |  |
 
@@ -413,6 +414,7 @@ API path: `/courses`
 
 | Field | Description |
 | --- | --- |
+| `id` |  |
 | `name` |  |
 | `notes` |  |
 | `type` |  |
@@ -529,6 +531,7 @@ API path: `/logins`
 | `date` |  |
 | `depth` |  |
 | `group` | Sub-resource (object); see the DreamApply SDK. |
+| `id` |  |
 | `instructions` |  |
 | `language` |  |
 | `maps` |  |
@@ -622,6 +625,7 @@ Create an instance: `academic_year = client.AcademicYear()`
 
 | Field | Type | Description |
 | --- | --- | --- |
+| `id` | `str` |  |
 | `name` | `str` |  |
 | `start` | `str` |  |
 
@@ -859,6 +863,7 @@ Create an instance: `fee = client.Fee()`
 
 | Field | Type | Description |
 | --- | --- | --- |
+| `id` | `str` |  |
 | `name` | `str` |  |
 | `notes` | `str` |  |
 | `type` | `str` |  |
@@ -1082,6 +1087,7 @@ Create an instance: `scoresheet = client.Scoresheet()`
 | `date` | `str` |  |
 | `depth` | `str` |  |
 | `group` | `dict` | Sub-resource (object); see the DreamApply SDK. |
+| `id` | `str` |  |
 | `instructions` | `str` |  |
 | `language` | `str` |  |
 | `maps` | `list` |  |

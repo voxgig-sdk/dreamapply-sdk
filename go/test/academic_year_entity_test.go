@@ -121,13 +121,19 @@ func TestAcademicYearEntity(t *testing.T) {
 		}
 
 		// LOAD
-		academicYearRef01MatchDt0 := map[string]any{}
+		academicYearRef01MatchDt0 := map[string]any{
+			"id": academicYearRef01Data["id"],
+		}
 		academicYearRef01DataDt0Loaded, err := academicYearRef01Ent.Load(academicYearRef01MatchDt0, nil)
 		if err != nil {
 			t.Fatalf("load failed: %v", err)
 		}
-		if academicYearRef01DataDt0Loaded == nil {
-			t.Fatal("expected load result to be non-nil")
+		academicYearRef01DataDt0LoadResult := core.ToMapAny(entityData(academicYearRef01DataDt0Loaded))
+		if academicYearRef01DataDt0LoadResult == nil {
+			t.Fatal("expected load result to be a map")
+		}
+		if academicYearRef01DataDt0LoadResult["id"] != academicYearRef01Data["id"] {
+			t.Fatal("expected load result id to match")
 		}
 
 	})

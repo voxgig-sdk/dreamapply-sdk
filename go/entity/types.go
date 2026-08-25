@@ -41,6 +41,7 @@ type AcademicTermListMatch struct {
 
 // AcademicYear is the typed data model for the academic_year entity.
 type AcademicYear struct {
+	Id *string `json:"id,omitempty"`
 	Name *string `json:"name,omitempty"`
 	Start *string `json:"start,omitempty"`
 }
@@ -52,6 +53,7 @@ type AcademicYearLoadMatch struct {
 
 // AcademicYearListMatch is the typed request payload for AcademicYear.ListTyped.
 type AcademicYearListMatch struct {
+	Id *string `json:"id,omitempty"`
 	Name *string `json:"name,omitempty"`
 	Start *string `json:"start,omitempty"`
 }
@@ -310,6 +312,7 @@ type CourseCreateData struct {
 
 // Fee is the typed data model for the fee entity.
 type Fee struct {
+	Id *string `json:"id,omitempty"`
 	Name *string `json:"name,omitempty"`
 	Notes *string `json:"notes,omitempty"`
 	Type *string `json:"type,omitempty"`
@@ -322,6 +325,7 @@ type FeeLoadMatch struct {
 
 // FeeListMatch is the typed request payload for Fee.ListTyped.
 type FeeListMatch struct {
+	Id *string `json:"id,omitempty"`
 	Name *string `json:"name,omitempty"`
 	Notes *string `json:"notes,omitempty"`
 	Type *string `json:"type,omitempty"`
@@ -502,6 +506,7 @@ type Scoresheet struct {
 	Date *string `json:"date,omitempty"`
 	Depth *string `json:"depth,omitempty"`
 	Group *map[string]any `json:"group,omitempty"`
+	Id *string `json:"id,omitempty"`
 	Instructions *string `json:"instructions,omitempty"`
 	Language *string `json:"language,omitempty"`
 	Maps *[]any `json:"maps,omitempty"`
@@ -528,6 +533,7 @@ type ScoresheetListMatch struct {
 	Date *string `json:"date,omitempty"`
 	Depth *string `json:"depth,omitempty"`
 	Group *map[string]any `json:"group,omitempty"`
+	Id *string `json:"id,omitempty"`
 	Instructions *string `json:"instructions,omitempty"`
 	Language *string `json:"language,omitempty"`
 	Maps *[]any `json:"maps,omitempty"`

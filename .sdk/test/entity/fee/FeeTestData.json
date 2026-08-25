@@ -2,31 +2,31 @@
   "existing": {
     "fee": {
       "FEE00": {
-        "name": "s1e",
-        "notes": "s1f",
-        "type": "s20",
-        "id": "FEE00"
+        "id": "FEE00",
+        "name": "s29",
+        "notes": "s2a",
+        "type": "s2b"
       },
       "FEE01": {
-        "name": "s3c",
-        "notes": "s3d",
-        "type": "s3e",
-        "id": "FEE01"
+        "id": "FEE01",
+        "name": "s51",
+        "notes": "s52",
+        "type": "s53"
       },
       "FEE02": {
-        "name": "s5a",
-        "notes": "s5b",
-        "type": "s5c",
-        "id": "FEE02"
+        "id": "FEE02",
+        "name": "s79",
+        "notes": "s7a",
+        "type": "s7b"
       }
     }
   },
   "new": {
     "fee": {
       "fee_ref01": {
-        "name": "s78",
-        "notes": "s79",
-        "type": "s7a"
+        "name": "sa1",
+        "notes": "sa2",
+        "type": "sa3"
       }
     }
   }

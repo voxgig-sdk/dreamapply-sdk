@@ -41,6 +41,7 @@ class AcademicTermListMatch(TypedDict, total=False):
 
 
 class AcademicYear(TypedDict, total=False):
+    id: str
     name: str
     start: str
 
@@ -50,6 +51,7 @@ class AcademicYearLoadMatch(TypedDict):
 
 
 class AcademicYearListMatch(TypedDict, total=False):
+    id: str
     name: str
     start: str
 
@@ -293,6 +295,7 @@ class CourseCreateData(TypedDict, total=False):
 
 
 class Fee(TypedDict, total=False):
+    id: str
     name: str
     notes: str
     type: str
@@ -303,6 +306,7 @@ class FeeLoadMatch(TypedDict):
 
 
 class FeeListMatch(TypedDict, total=False):
+    id: str
     name: str
     notes: str
     type: str
@@ -468,6 +472,7 @@ class Scoresheet(TypedDict, total=False):
     date: str
     depth: str
     group: dict
+    id: str
     instructions: str
     language: str
     maps: list
@@ -492,6 +497,7 @@ class ScoresheetListMatch(TypedDict, total=False):
     date: str
     depth: str
     group: dict
+    id: str
     instructions: str
     language: str
     maps: list

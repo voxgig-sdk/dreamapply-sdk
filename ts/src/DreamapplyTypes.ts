@@ -30,6 +30,7 @@ export interface AcademicTermListMatch {
 }
 
 export interface AcademicYear {
+  id?: string
   name?: string
   start?: string
 }
@@ -39,6 +40,7 @@ export interface AcademicYearLoadMatch {
 }
 
 export interface AcademicYearListMatch {
+  id?: string
   name?: string
   start?: string
 }
@@ -282,6 +284,7 @@ export interface CourseCreateData {
 }
 
 export interface Fee {
+  id?: string
   name?: string
   notes?: string
   type?: string
@@ -292,6 +295,7 @@ export interface FeeLoadMatch {
 }
 
 export interface FeeListMatch {
+  id?: string
   name?: string
   notes?: string
   type?: string
@@ -457,6 +461,7 @@ export interface Scoresheet {
   date?: string
   depth?: string
   group?: Record<string, any>
+  id?: string
   instructions?: string
   language?: string
   maps?: any[]
@@ -481,6 +486,7 @@ export interface ScoresheetListMatch {
   date?: string
   depth?: string
   group?: Record<string, any>
+  id?: string
   instructions?: string
   language?: string
   maps?: any[]

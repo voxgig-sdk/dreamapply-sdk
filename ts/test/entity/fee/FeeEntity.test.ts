@@ -66,6 +66,12 @@ describe('FeeEntity', async () => {
     const fee_ref01_list = (await fee_ref01_ent.list(fee_ref01_match)).map((e: any) => e.data())
 
 
+    // LOAD
+    const fee_ref01_match_dt0: any = {}
+    fee_ref01_match_dt0.id = fee_ref01_data.id
+    const fee_ref01_data_dt0 = (await fee_ref01_ent.load(fee_ref01_match_dt0)).data()
+    assert(fee_ref01_data_dt0.id === fee_ref01_data.id)
+
 
   })
 })

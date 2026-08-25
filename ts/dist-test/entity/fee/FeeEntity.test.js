@@ -76,6 +76,11 @@ const utility_1 = require("../../utility");
         const fee_ref01_ent = client.Fee();
         const fee_ref01_match = {};
         const fee_ref01_list = (await fee_ref01_ent.list(fee_ref01_match)).map((e) => e.data());
+        // LOAD
+        const fee_ref01_match_dt0 = {};
+        fee_ref01_match_dt0.id = fee_ref01_data.id;
+        const fee_ref01_data_dt0 = (await fee_ref01_ent.load(fee_ref01_match_dt0)).data();
+        (0, node_assert_1.default)(fee_ref01_data_dt0.id === fee_ref01_data.id);
     });
 });
 function basicSetup(extra) {

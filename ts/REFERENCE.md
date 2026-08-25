@@ -337,6 +337,7 @@ const academic_year = client.AcademicYear()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
+| `id` | `string` | No |  |
 | `name` | `string` | No |  |
 | `start` | `string` | No |  |
 
@@ -716,6 +717,7 @@ const fee = client.Fee()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
+| `id` | `string` | No |  |
 | `name` | `string` | No |  |
 | `notes` | `string` | No |  |
 | `type` | `string` | No |  |
@@ -1112,6 +1114,7 @@ const scoresheet = client.Scoresheet()
 | `date` | `string` | No |  |
 | `depth` | `string` | No |  |
 | `group` | `Record<string, any>` | No | Sub-resource (object); see the DreamApply SDK. |
+| `id` | `string` | No |  |
 | `instructions` | `string` | No |  |
 | `language` | `string` | No |  |
 | `maps` | `any[]` | No |  |

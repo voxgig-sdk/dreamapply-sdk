@@ -88,9 +88,13 @@ class TestScoresheetEntity:
         assert isinstance(scoresheet_ref01_list_result, list)
 
         # LOAD
-        scoresheet_ref01_match_dt0 = {}
+        scoresheet_ref01_match_dt0 = {
+            "id": scoresheet_ref01_data["id"],
+        }
         scoresheet_ref01_data_dt0_loaded = scoresheet_ref01_ent.load(scoresheet_ref01_match_dt0, None)
-        assert scoresheet_ref01_data_dt0_loaded is not None
+        scoresheet_ref01_data_dt0_load_result = helpers.to_map(runner.entity_data(scoresheet_ref01_data_dt0_loaded))
+        assert scoresheet_ref01_data_dt0_load_result is not None
+        assert scoresheet_ref01_data_dt0_load_result["id"] == scoresheet_ref01_data["id"]
 
 
 

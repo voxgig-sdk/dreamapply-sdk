@@ -88,9 +88,13 @@ class TestFeeEntity:
         assert isinstance(fee_ref01_list_result, list)
 
         # LOAD
-        fee_ref01_match_dt0 = {}
+        fee_ref01_match_dt0 = {
+            "id": fee_ref01_data["id"],
+        }
         fee_ref01_data_dt0_loaded = fee_ref01_ent.load(fee_ref01_match_dt0, None)
-        assert fee_ref01_data_dt0_loaded is not None
+        fee_ref01_data_dt0_load_result = helpers.to_map(runner.entity_data(fee_ref01_data_dt0_loaded))
+        assert fee_ref01_data_dt0_load_result is not None
+        assert fee_ref01_data_dt0_load_result["id"] == fee_ref01_data["id"]
 
 
 

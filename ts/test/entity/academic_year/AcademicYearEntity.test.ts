@@ -66,6 +66,12 @@ describe('AcademicYearEntity', async () => {
     const academic_year_ref01_list = (await academic_year_ref01_ent.list(academic_year_ref01_match)).map((e: any) => e.data())
 
 
+    // LOAD
+    const academic_year_ref01_match_dt0: any = {}
+    academic_year_ref01_match_dt0.id = academic_year_ref01_data.id
+    const academic_year_ref01_data_dt0 = (await academic_year_ref01_ent.load(academic_year_ref01_match_dt0)).data()
+    assert(academic_year_ref01_data_dt0.id === academic_year_ref01_data.id)
+
 
   })
 })

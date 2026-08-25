@@ -207,6 +207,10 @@ class Config {
     "academic_year": {
       "fields": [
         {
+          "name": "id",
+          "type": "`$STRING`"
+        },
+        {
           "name": "name",
           "type": "`$STRING`"
         },
@@ -878,6 +882,10 @@ class Config {
     "fee": {
       "fields": [
         {
+          "name": "id",
+          "type": "`$STRING`"
+        },
+        {
           "name": "name",
           "type": "`$STRING`"
         },
@@ -1481,6 +1489,10 @@ class Config {
           "name": "group",
           "short": "Sub-resource (object); see the DreamApply SDK.",
           "type": "`$OBJECT`"
+        },
+        {
+          "name": "id",
+          "type": "`$STRING`"
         },
         {
           "name": "instructions",

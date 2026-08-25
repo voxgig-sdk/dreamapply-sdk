@@ -88,9 +88,13 @@ class TestAcademicYearEntity:
         assert isinstance(academic_year_ref01_list_result, list)
 
         # LOAD
-        academic_year_ref01_match_dt0 = {}
+        academic_year_ref01_match_dt0 = {
+            "id": academic_year_ref01_data["id"],
+        }
         academic_year_ref01_data_dt0_loaded = academic_year_ref01_ent.load(academic_year_ref01_match_dt0, None)
-        assert academic_year_ref01_data_dt0_loaded is not None
+        academic_year_ref01_data_dt0_load_result = helpers.to_map(runner.entity_data(academic_year_ref01_data_dt0_loaded))
+        assert academic_year_ref01_data_dt0_load_result is not None
+        assert academic_year_ref01_data_dt0_load_result["id"] == academic_year_ref01_data["id"]
 
 
 

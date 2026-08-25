@@ -32,6 +32,11 @@ main: kit: entity: scoresheet: {
       type: "`$OBJECT`"
     }
     {
+      name: "id"
+      req: false
+      type: "`$STRING`"
+    }
+    {
       name: "instructions"
       req: false
       type: "`$STRING`"
@@ -93,6 +98,11 @@ main: kit: entity: scoresheet: {
       type: "`$STRING`"
     }
   ]
+
+  id: {
+    field: "id"
+    name: "id"
+  }
 
   name: "scoresheet"
   op: {

@@ -66,6 +66,12 @@ describe('ScoresheetEntity', async () => {
     const scoresheet_ref01_list = (await scoresheet_ref01_ent.list(scoresheet_ref01_match)).map((e: any) => e.data())
 
 
+    // LOAD
+    const scoresheet_ref01_match_dt0: any = {}
+    scoresheet_ref01_match_dt0.id = scoresheet_ref01_data.id
+    const scoresheet_ref01_data_dt0 = (await scoresheet_ref01_ent.load(scoresheet_ref01_match_dt0)).data()
+    assert(scoresheet_ref01_data_dt0.id === scoresheet_ref01_data.id)
+
 
   })
 })

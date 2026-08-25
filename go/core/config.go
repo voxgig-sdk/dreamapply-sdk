@@ -148,6 +148,10 @@ func MakeConfig() map[string]any {
 			"academic_year": map[string]any{
 				"fields": []any{
 					map[string]any{
+						"name": "id",
+						"type": "`$STRING`",
+					},
+					map[string]any{
 						"name": "name",
 						"type": "`$STRING`",
 					},
@@ -819,6 +823,10 @@ func MakeConfig() map[string]any {
 			"fee": map[string]any{
 				"fields": []any{
 					map[string]any{
+						"name": "id",
+						"type": "`$STRING`",
+					},
+					map[string]any{
 						"name": "name",
 						"type": "`$STRING`",
 					},
@@ -1422,6 +1430,10 @@ func MakeConfig() map[string]any {
 						"name": "group",
 						"short": "Sub-resource (object); see the DreamApply SDK.",
 						"type": "`$OBJECT`",
+					},
+					map[string]any{
+						"name": "id",
+						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "instructions",

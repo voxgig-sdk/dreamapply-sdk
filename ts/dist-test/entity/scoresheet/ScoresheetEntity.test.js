@@ -76,6 +76,11 @@ const utility_1 = require("../../utility");
         const scoresheet_ref01_ent = client.Scoresheet();
         const scoresheet_ref01_match = {};
         const scoresheet_ref01_list = (await scoresheet_ref01_ent.list(scoresheet_ref01_match)).map((e) => e.data());
+        // LOAD
+        const scoresheet_ref01_match_dt0 = {};
+        scoresheet_ref01_match_dt0.id = scoresheet_ref01_data.id;
+        const scoresheet_ref01_data_dt0 = (await scoresheet_ref01_ent.load(scoresheet_ref01_match_dt0)).data();
+        (0, node_assert_1.default)(scoresheet_ref01_data_dt0.id === scoresheet_ref01_data.id);
     });
 });
 function basicSetup(extra) {
