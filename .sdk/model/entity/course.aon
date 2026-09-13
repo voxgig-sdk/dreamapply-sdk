@@ -156,8 +156,10 @@ main: kit: entity: course: {
         {
           method: "POST"
           orig: "/courses"
-          parts: [
-            "courses"
+          segments: [
+            {
+              lit: "courses"
+            }
           ]
           transform: {
             req: "`reqdata`"
@@ -172,8 +174,10 @@ main: kit: entity: course: {
         {
           method: "GET"
           orig: "/courses"
-          parts: [
-            "courses"
+          segments: [
+            {
+              lit: "courses"
+            }
           ]
           transform: {
             req: "`reqdata`"
@@ -199,9 +203,13 @@ main: kit: entity: course: {
           }
           method: "GET"
           orig: "/courses/{id}"
-          parts: [
-            "courses"
-            "{id}"
+          segments: [
+            {
+              lit: "courses"
+            }
+            {
+              var: "id"
+            }
           ]
           select: {
             exist: [

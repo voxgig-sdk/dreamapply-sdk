@@ -91,8 +91,10 @@
                   "kind": "http",
                   "method": "GET",
                   "orig": "/academic-terms",
-                  "parts": [
-                    "academic-terms"
+                  "segments": [
+                    {
+                      "lit": "academic-terms"
+                    }
                   ],
                   "select": {},
                   "transform": {
@@ -123,9 +125,13 @@
                   "kind": "http",
                   "method": "GET",
                   "orig": "/academic-terms/{id}",
-                  "parts": [
-                    "academic-terms",
-                    "{id}"
+                  "segments": [
+                    {
+                      "lit": "academic-terms"
+                    },
+                    {
+                      "var": "id"
+                    }
                   ],
                   "select": {
                     "exist": [
@@ -185,8 +191,10 @@
                   "kind": "http",
                   "method": "GET",
                   "orig": "/academic-years",
-                  "parts": [
-                    "academic-years"
+                  "segments": [
+                    {
+                      "lit": "academic-years"
+                    }
                   ],
                   "select": {},
                   "transform": {
@@ -217,9 +225,13 @@
                   "kind": "http",
                   "method": "GET",
                   "orig": "/academic-years/{id}",
-                  "parts": [
-                    "academic-years",
-                    "{id}"
+                  "segments": [
+                    {
+                      "lit": "academic-years"
+                    },
+                    {
+                      "var": "id"
+                    }
                   ],
                   "select": {
                     "exist": [
@@ -303,8 +315,10 @@
                   "kind": "http",
                   "method": "GET",
                   "orig": "/administrators",
-                  "parts": [
-                    "administrators"
+                  "segments": [
+                    {
+                      "lit": "administrators"
+                    }
                   ],
                   "select": {},
                   "transform": {
@@ -335,9 +349,13 @@
                   "kind": "http",
                   "method": "GET",
                   "orig": "/administrators/{id}",
-                  "parts": [
-                    "administrators",
-                    "{id}"
+                  "segments": [
+                    {
+                      "lit": "administrators"
+                    },
+                    {
+                      "var": "id"
+                    }
                   ],
                   "select": {
                     "exist": [
@@ -481,8 +499,10 @@
                   "kind": "http",
                   "method": "POST",
                   "orig": "/applicants",
-                  "parts": [
-                    "applicants"
+                  "segments": [
+                    {
+                      "lit": "applicants"
+                    }
                   ],
                   "select": {},
                   "transform": {
@@ -502,8 +522,10 @@
                   "kind": "http",
                   "method": "GET",
                   "orig": "/applicants",
-                  "parts": [
-                    "applicants"
+                  "segments": [
+                    {
+                      "lit": "applicants"
+                    }
                   ],
                   "select": {},
                   "transform": {
@@ -534,9 +556,13 @@
                   "kind": "http",
                   "method": "GET",
                   "orig": "/applicants/{id}",
-                  "parts": [
-                    "applicants",
-                    "{id}"
+                  "segments": [
+                    {
+                      "lit": "applicants"
+                    },
+                    {
+                      "var": "id"
+                    }
                   ],
                   "select": {
                     "exist": [
@@ -717,8 +743,10 @@
                   "kind": "http",
                   "method": "GET",
                   "orig": "/applications",
-                  "parts": [
-                    "applications"
+                  "segments": [
+                    {
+                      "lit": "applications"
+                    }
                   ],
                   "select": {},
                   "transform": {
@@ -749,9 +777,13 @@
                   "kind": "http",
                   "method": "GET",
                   "orig": "/applications/{id}",
-                  "parts": [
-                    "applications",
-                    "{id}"
+                  "segments": [
+                    {
+                      "lit": "applications"
+                    },
+                    {
+                      "var": "id"
+                    }
                   ],
                   "select": {
                     "exist": [
@@ -956,8 +988,10 @@
                   "kind": "http",
                   "method": "POST",
                   "orig": "/courses",
-                  "parts": [
-                    "courses"
+                  "segments": [
+                    {
+                      "lit": "courses"
+                    }
                   ],
                   "select": {},
                   "transform": {
@@ -977,8 +1011,10 @@
                   "kind": "http",
                   "method": "GET",
                   "orig": "/courses",
-                  "parts": [
-                    "courses"
+                  "segments": [
+                    {
+                      "lit": "courses"
+                    }
                   ],
                   "select": {},
                   "transform": {
@@ -1009,9 +1045,13 @@
                   "kind": "http",
                   "method": "GET",
                   "orig": "/courses/{id}",
-                  "parts": [
-                    "courses",
-                    "{id}"
+                  "segments": [
+                    {
+                      "lit": "courses"
+                    },
+                    {
+                      "var": "id"
+                    }
                   ],
                   "select": {
                     "exist": [
@@ -1077,8 +1117,10 @@
                   "kind": "http",
                   "method": "GET",
                   "orig": "/fees",
-                  "parts": [
-                    "fees"
+                  "segments": [
+                    {
+                      "lit": "fees"
+                    }
                   ],
                   "select": {},
                   "transform": {
@@ -1109,9 +1151,13 @@
                   "kind": "http",
                   "method": "GET",
                   "orig": "/fees/{id}",
-                  "parts": [
-                    "fees",
-                    "{id}"
+                  "segments": [
+                    {
+                      "lit": "fees"
+                    },
+                    {
+                      "var": "id"
+                    }
                   ],
                   "select": {
                     "exist": [
@@ -1226,8 +1272,10 @@
                   "kind": "http",
                   "method": "GET",
                   "orig": "/institutions",
-                  "parts": [
-                    "institutions"
+                  "segments": [
+                    {
+                      "lit": "institutions"
+                    }
                   ],
                   "select": {},
                   "transform": {
@@ -1258,9 +1306,13 @@
                   "kind": "http",
                   "method": "GET",
                   "orig": "/institutions/{id}",
-                  "parts": [
-                    "institutions",
-                    "{id}"
+                  "segments": [
+                    {
+                      "lit": "institutions"
+                    },
+                    {
+                      "var": "id"
+                    }
                   ],
                   "select": {
                     "exist": [
@@ -1350,8 +1402,10 @@
                   "kind": "http",
                   "method": "GET",
                   "orig": "/intakes",
-                  "parts": [
-                    "intakes"
+                  "segments": [
+                    {
+                      "lit": "intakes"
+                    }
                   ],
                   "select": {},
                   "transform": {
@@ -1382,9 +1436,13 @@
                   "kind": "http",
                   "method": "GET",
                   "orig": "/intakes/{id}",
-                  "parts": [
-                    "intakes",
-                    "{id}"
+                  "segments": [
+                    {
+                      "lit": "intakes"
+                    },
+                    {
+                      "var": "id"
+                    }
                   ],
                   "select": {
                     "exist": [
@@ -1510,8 +1568,10 @@
                   "kind": "http",
                   "method": "GET",
                   "orig": "/invoices",
-                  "parts": [
-                    "invoices"
+                  "segments": [
+                    {
+                      "lit": "invoices"
+                    }
                   ],
                   "select": {},
                   "transform": {
@@ -1542,9 +1602,13 @@
                   "kind": "http",
                   "method": "GET",
                   "orig": "/invoices/{id}",
-                  "parts": [
-                    "invoices",
-                    "{id}"
+                  "segments": [
+                    {
+                      "lit": "invoices"
+                    },
+                    {
+                      "var": "id"
+                    }
                   ],
                   "select": {
                     "exist": [
@@ -1579,9 +1643,13 @@
                   "kind": "http",
                   "method": "DELETE",
                   "orig": "/invoices/{id}",
-                  "parts": [
-                    "invoices",
-                    "{id}"
+                  "segments": [
+                    {
+                      "lit": "invoices"
+                    },
+                    {
+                      "var": "id"
+                    }
                   ],
                   "select": {
                     "exist": [
@@ -1707,8 +1775,10 @@
                   "kind": "http",
                   "method": "GET",
                   "orig": "/journal",
-                  "parts": [
-                    "journal"
+                  "segments": [
+                    {
+                      "lit": "journal"
+                    }
                   ],
                   "select": {},
                   "transform": {
@@ -1782,8 +1852,10 @@
                   "kind": "http",
                   "method": "GET",
                   "orig": "/logins",
-                  "parts": [
-                    "logins"
+                  "segments": [
+                    {
+                      "lit": "logins"
+                    }
                   ],
                   "select": {},
                   "transform": {
@@ -1931,8 +2003,10 @@
                   "kind": "http",
                   "method": "GET",
                   "orig": "/scoresheets",
-                  "parts": [
-                    "scoresheets"
+                  "segments": [
+                    {
+                      "lit": "scoresheets"
+                    }
                   ],
                   "select": {},
                   "transform": {
@@ -1963,9 +2037,13 @@
                   "kind": "http",
                   "method": "GET",
                   "orig": "/scoresheets/{id}",
-                  "parts": [
-                    "scoresheets",
-                    "{id}"
+                  "segments": [
+                    {
+                      "lit": "scoresheets"
+                    },
+                    {
+                      "var": "id"
+                    }
                   ],
                   "select": {
                     "exist": [
@@ -2074,8 +2152,10 @@
                   "kind": "http",
                   "method": "GET",
                   "orig": "/tableviews",
-                  "parts": [
-                    "tableviews"
+                  "segments": [
+                    {
+                      "lit": "tableviews"
+                    }
                   ],
                   "select": {},
                   "transform": {
@@ -2106,9 +2186,13 @@
                   "kind": "http",
                   "method": "GET",
                   "orig": "/tableviews/{id}",
-                  "parts": [
-                    "tableviews",
-                    "{id}"
+                  "segments": [
+                    {
+                      "lit": "tableviews"
+                    },
+                    {
+                      "var": "id"
+                    }
                   ],
                   "select": {
                     "exist": [
@@ -2192,8 +2276,11 @@
             }
           },
           "name": "test",
+          "needs": {},
           "origname": "",
           "package": "@voxgig/sdkgen",
+          "plugin": {},
+          "spec": {},
           "target": {
             "go": {
               "deps": {}
@@ -2931,6 +3018,9 @@
             "sdkrel": ""
           },
           "package": "@voxgig/sdkgen",
+          "provides": {
+            "sekreto": true
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -2956,6 +3046,10 @@
             "version": "0.1.2"
           },
           "srcfeature": false,
+          "superseded": [
+            "test/runner_test.go",
+            "test/struct_runner_test.go"
+          ],
           "title": "Golang"
         },
         "py": {
@@ -2996,6 +3090,9 @@
             "sdkrel": ""
           },
           "package": "@voxgig/sdkgen",
+          "provides": {
+            "sekreto": true
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -3021,6 +3118,9 @@
             "version": "0.1.2"
           },
           "srcfeature": false,
+          "superseded": [
+            "test/struct_runner.py"
+          ],
           "title": "Python"
         },
         "ts": {
@@ -3038,11 +3138,6 @@
               "active": true,
               "kind": "dev",
               "version": "^25.6.0"
-            },
-            "dotenv": {
-              "active": true,
-              "kind": "dev",
-              "version": "^17.4.2"
             },
             "typescript": {
               "active": true,
@@ -3071,6 +3166,9 @@
             "sdkrel": ""
           },
           "package": "@voxgig/sdkgen",
+          "provides": {
+            "sekreto": true
+          },
           "publish": {
             "registry": {
               "active": false,
@@ -3095,6 +3193,14 @@
             },
             "version": "0.1.2"
           },
+          "superseded": [
+            "test/runner.ts",
+            "test/vendor/omni/compat.ts",
+            "src/feature/secrets/sekreto/Providers.ts",
+            "src/feature/secrets/sekreto/Sigv4.ts",
+            "src/feature/secrets/sekreto/provider/Registry.ts",
+            "src/feature/secrets/sekreto/provider/http.ts"
+          ],
           "title": "TypeScript"
         }
       },

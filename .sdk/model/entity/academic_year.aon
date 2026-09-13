@@ -35,8 +35,10 @@ main: kit: entity: academic_year: {
         {
           method: "GET"
           orig: "/academic-years"
-          parts: [
-            "academic-years"
+          segments: [
+            {
+              lit: "academic-years"
+            }
           ]
           transform: {
             req: "`reqdata`"
@@ -62,9 +64,13 @@ main: kit: entity: academic_year: {
           }
           method: "GET"
           orig: "/academic-years/{id}"
-          parts: [
-            "academic-years"
-            "{id}"
+          segments: [
+            {
+              lit: "academic-years"
+            }
+            {
+              var: "id"
+            }
           ]
           select: {
             exist: [

@@ -90,8 +90,10 @@ main: kit: entity: invoice: {
         {
           method: "GET"
           orig: "/invoices"
-          parts: [
-            "invoices"
+          segments: [
+            {
+              lit: "invoices"
+            }
           ]
           transform: {
             req: "`reqdata`"
@@ -117,9 +119,13 @@ main: kit: entity: invoice: {
           }
           method: "GET"
           orig: "/invoices/{id}"
-          parts: [
-            "invoices"
-            "{id}"
+          segments: [
+            {
+              lit: "invoices"
+            }
+            {
+              var: "id"
+            }
           ]
           select: {
             exist: [
@@ -150,9 +156,13 @@ main: kit: entity: invoice: {
           }
           method: "DELETE"
           orig: "/invoices/{id}"
-          parts: [
-            "invoices"
-            "{id}"
+          segments: [
+            {
+              lit: "invoices"
+            }
+            {
+              var: "id"
+            }
           ]
           select: {
             exist: [

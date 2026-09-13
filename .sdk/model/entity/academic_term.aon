@@ -55,8 +55,10 @@ main: kit: entity: academic_term: {
         {
           method: "GET"
           orig: "/academic-terms"
-          parts: [
-            "academic-terms"
+          segments: [
+            {
+              lit: "academic-terms"
+            }
           ]
           transform: {
             req: "`reqdata`"
@@ -82,9 +84,13 @@ main: kit: entity: academic_term: {
           }
           method: "GET"
           orig: "/academic-terms/{id}"
-          parts: [
-            "academic-terms"
-            "{id}"
+          segments: [
+            {
+              lit: "academic-terms"
+            }
+            {
+              var: "id"
+            }
           ]
           select: {
             exist: [

@@ -55,8 +55,10 @@ main: kit: entity: administrator: {
         {
           method: "GET"
           orig: "/administrators"
-          parts: [
-            "administrators"
+          segments: [
+            {
+              lit: "administrators"
+            }
           ]
           transform: {
             req: "`reqdata`"
@@ -82,9 +84,13 @@ main: kit: entity: administrator: {
           }
           method: "GET"
           orig: "/administrators/{id}"
-          parts: [
-            "administrators"
-            "{id}"
+          segments: [
+            {
+              lit: "administrators"
+            }
+            {
+              var: "id"
+            }
           ]
           select: {
             exist: [

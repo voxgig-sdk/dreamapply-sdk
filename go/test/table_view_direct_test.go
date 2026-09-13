@@ -196,14 +196,26 @@ func table_viewDirectSetup(mockres any) *table_viewDirectSetupResult {
 	env := envOverride(map[string]any{
 		"DREAMAPPLY_TEST_TABLE_VIEW_ENTID": map[string]any{},
 		"DREAMAPPLY_TEST_LIVE":    "FALSE",
-		"DREAMAPPLY_APIKEY":       "NONE",
+		"DREAMAPPLY_APIKEY":       "",
+		"DREAMAPPLY_SERVER_INSTANCE": "demo",
 	})
 
 	live := env["DREAMAPPLY_TEST_LIVE"] == "TRUE"
 
 	if live {
-		mergedOpts := map[string]any{
+		// sdk-test-control.json's test.client.options seeds the live
+		// client; the generated fields below overwrite anything they name.
+		mergedOpts := map[string]any{}
+		for k, v := range liveClientOptions() {
+			mergedOpts[k] = v
+		}
+		for k, v := range map[string]any{
 			"apikey": env["DREAMAPPLY_APIKEY"],
+		"server": map[string]any{
+			"instance": env["DREAMAPPLY_SERVER_INSTANCE"],
+		},
+		} {
+			mergedOpts[k] = v
 		}
 		client := sdk.NewDreamapplySDK(mergedOpts)
 

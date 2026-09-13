@@ -90,8 +90,10 @@ main: kit: entity: journal: {
         {
           method: "GET"
           orig: "/journal"
-          parts: [
-            "journal"
+          segments: [
+            {
+              lit: "journal"
+            }
           ]
           transform: {
             req: "`reqdata`"

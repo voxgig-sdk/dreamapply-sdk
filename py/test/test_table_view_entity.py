@@ -134,7 +134,8 @@ def _table_view_basic_setup(extra):
         "DREAMAPPLY_TEST_TABLE_VIEW_ENTID": idmap,
         "DREAMAPPLY_TEST_LIVE": "FALSE",
         "DREAMAPPLY_TEST_EXPLAIN": "FALSE",
-        "DREAMAPPLY_APIKEY": "NONE",
+        "DREAMAPPLY_APIKEY": "",
+        "DREAMAPPLY_SERVER_INSTANCE": "demo",
     })
 
     idmap_resolved = helpers.to_map(
@@ -144,8 +145,15 @@ def _table_view_basic_setup(extra):
 
     if env.get("DREAMAPPLY_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
+            # FIRST, so the generated fields below win: sdk-test-control.json's
+            # test.client.options adds to the live client, it does not
+            # redirect it.
+            runner.live_client_options(),
             {
                 "apikey": env.get("DREAMAPPLY_APIKEY"),
+                "server": {
+                    "instance": env.get("DREAMAPPLY_SERVER_INSTANCE"),
+                },
             },
             extra or {},
         ])

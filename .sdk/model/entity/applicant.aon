@@ -105,8 +105,10 @@ main: kit: entity: applicant: {
         {
           method: "POST"
           orig: "/applicants"
-          parts: [
-            "applicants"
+          segments: [
+            {
+              lit: "applicants"
+            }
           ]
           transform: {
             req: "`reqdata`"
@@ -121,8 +123,10 @@ main: kit: entity: applicant: {
         {
           method: "GET"
           orig: "/applicants"
-          parts: [
-            "applicants"
+          segments: [
+            {
+              lit: "applicants"
+            }
           ]
           transform: {
             req: "`reqdata`"
@@ -148,9 +152,13 @@ main: kit: entity: applicant: {
           }
           method: "GET"
           orig: "/applicants/{id}"
-          parts: [
-            "applicants"
-            "{id}"
+          segments: [
+            {
+              lit: "applicants"
+            }
+            {
+              var: "id"
+            }
           ]
           select: {
             exist: [

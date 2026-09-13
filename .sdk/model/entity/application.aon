@@ -136,8 +136,10 @@ main: kit: entity: application: {
         {
           method: "GET"
           orig: "/applications"
-          parts: [
-            "applications"
+          segments: [
+            {
+              lit: "applications"
+            }
           ]
           transform: {
             req: "`reqdata`"
@@ -163,9 +165,13 @@ main: kit: entity: application: {
           }
           method: "GET"
           orig: "/applications/{id}"
-          parts: [
-            "applications"
-            "{id}"
+          segments: [
+            {
+              lit: "applications"
+            }
+            {
+              var: "id"
+            }
           ]
           select: {
             exist: [

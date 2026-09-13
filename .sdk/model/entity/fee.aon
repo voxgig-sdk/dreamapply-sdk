@@ -40,8 +40,10 @@ main: kit: entity: fee: {
         {
           method: "GET"
           orig: "/fees"
-          parts: [
-            "fees"
+          segments: [
+            {
+              lit: "fees"
+            }
           ]
           transform: {
             req: "`reqdata`"
@@ -67,9 +69,13 @@ main: kit: entity: fee: {
           }
           method: "GET"
           orig: "/fees/{id}"
-          parts: [
-            "fees"
-            "{id}"
+          segments: [
+            {
+              lit: "fees"
+            }
+            {
+              var: "id"
+            }
           ]
           select: {
             exist: [

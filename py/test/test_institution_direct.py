@@ -107,15 +107,22 @@ def _institution_direct_setup(mockres):
     env = runner.env_override({
         "DREAMAPPLY_TEST_INSTITUTION_ENTID": {},
         "DREAMAPPLY_TEST_LIVE": "FALSE",
-        "DREAMAPPLY_APIKEY": "NONE",
+        "DREAMAPPLY_APIKEY": "",
+        "DREAMAPPLY_SERVER_INSTANCE": "demo",
     })
 
     live = env.get("DREAMAPPLY_TEST_LIVE") == "TRUE"
 
     if live:
-        merged_opts = {
+        # sdk-test-control.json's test.client.options seeds the live
+        # client; the generated fields below overwrite anything they name.
+        merged_opts = dict(runner.live_client_options())
+        merged_opts.update({
             "apikey": env.get("DREAMAPPLY_APIKEY"),
-        }
+            "server": {
+                "instance": env.get("DREAMAPPLY_SERVER_INSTANCE"),
+            },
+        })
         client = DreamapplySDK(merged_opts)
         return {
             "client": client,

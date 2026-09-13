@@ -76,8 +76,10 @@ main: kit: entity: table_view: {
         {
           method: "GET"
           orig: "/tableviews"
-          parts: [
-            "tableviews"
+          segments: [
+            {
+              lit: "tableviews"
+            }
           ]
           transform: {
             req: "`reqdata`"
@@ -103,9 +105,13 @@ main: kit: entity: table_view: {
           }
           method: "GET"
           orig: "/tableviews/{id}"
-          parts: [
-            "tableviews"
-            "{id}"
+          segments: [
+            {
+              lit: "tableviews"
+            }
+            {
+              var: "id"
+            }
           ]
           select: {
             exist: [

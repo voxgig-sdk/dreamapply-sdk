@@ -81,8 +81,10 @@ main: kit: entity: institution: {
         {
           method: "GET"
           orig: "/institutions"
-          parts: [
-            "institutions"
+          segments: [
+            {
+              lit: "institutions"
+            }
           ]
           transform: {
             req: "`reqdata`"
@@ -108,9 +110,13 @@ main: kit: entity: institution: {
           }
           method: "GET"
           orig: "/institutions/{id}"
-          parts: [
-            "institutions"
-            "{id}"
+          segments: [
+            {
+              lit: "institutions"
+            }
+            {
+              var: "id"
+            }
           ]
           select: {
             exist: [

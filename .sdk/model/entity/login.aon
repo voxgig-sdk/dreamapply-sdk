@@ -50,8 +50,10 @@ main: kit: entity: login: {
         {
           method: "GET"
           orig: "/logins"
-          parts: [
-            "logins"
+          segments: [
+            {
+              lit: "logins"
+            }
           ]
           transform: {
             req: "`reqdata`"

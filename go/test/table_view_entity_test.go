@@ -98,7 +98,7 @@ func TestTableViewEntity(t *testing.T) {
 		client := setup.client
 
 		// Bootstrap entity data from existing test data (no create step in flow).
-		tableViewRef01DataRaw := vs.Items(core.ToMapAny(vs.GetPath("existing.table_view", setup.data)))
+		tableViewRef01DataRaw := vs.Items(core.ToMapAny(vs.GetPath(setup.data, "existing.table_view")))
 		var tableViewRef01Data map[string]any
 		if len(tableViewRef01DataRaw) > 0 {
 			tableViewRef01Data = core.ToMapAny(tableViewRef01DataRaw[0][1])
@@ -163,7 +163,7 @@ func table_viewBasicSetup(extra map[string]any) *entityTestSetup {
 	client := sdk.TestSDK(options, extra)
 
 	// Generate idmap via transform, matching TS pattern.
-	idmap := vs.Transform(
+	idmap, _ := vs.Transform(
 		[]any{"table_view01", "table_view02", "table_view03"},
 		map[string]any{
 			"`$PACK`": []any{"", map[string]any{
@@ -183,7 +183,8 @@ func table_viewBasicSetup(extra map[string]any) *entityTestSetup {
 		"DREAMAPPLY_TEST_TABLE_VIEW_ENTID": idmap,
 		"DREAMAPPLY_TEST_LIVE":      "FALSE",
 		"DREAMAPPLY_TEST_EXPLAIN":   "FALSE",
-		"DREAMAPPLY_APIKEY":         "NONE",
+		"DREAMAPPLY_APIKEY":         "",
+		"DREAMAPPLY_SERVER_INSTANCE": "demo",
 	})
 
 	idmapResolved := core.ToMapAny(env["DREAMAPPLY_TEST_TABLE_VIEW_ENTID"])
@@ -192,11 +193,26 @@ func table_viewBasicSetup(extra map[string]any) *entityTestSetup {
 	}
 
 	if env["DREAMAPPLY_TEST_LIVE"] == "TRUE" {
+		// An empty map, not a nil one: Merge returns nil when its last entry
+		// is nil, and BasicSetup is normally called with no extras - so a
+		// bare nil silently discarded the apikey and server values below.
+		extraOpts := extra
+		if extraOpts == nil {
+			extraOpts = map[string]any{}
+		}
+
 		mergedOpts := vs.Merge([]any{
+			// liveClientOptions() FIRST, so the generated fields below win:
+			// sdk-test-control.json's test.client.options adds to the live
+			// client, it does not redirect it.
+			liveClientOptions(),
 			map[string]any{
 				"apikey": env["DREAMAPPLY_APIKEY"],
+				"server": map[string]any{
+					"instance": env["DREAMAPPLY_SERVER_INSTANCE"],
+				},
 			},
-			extra,
+			extraOpts,
 		})
 		client = sdk.NewDreamapplySDK(core.ToMapAny(mergedOpts))
 	}

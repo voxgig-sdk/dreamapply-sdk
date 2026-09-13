@@ -1,6 +1,14 @@
 # Dreamapply SDK configuration
 
 
+# The sekreto plugin DEFINITIONS the model selected per feature, imported
+# above by name from the modules the catalogue's active `plugin.def`
+# entries declare. Handed to each feature (secrets builds its Sekreto
+# with them): a provider kind not listed here is unknown to that SDK.
+FEATURE_PLUGINS = {
+}
+
+
 _shared_config = None
 
 
@@ -100,6 +108,10 @@ def make_config():
             "type": "`$OBJECT`",
           },
         ],
+        "id": {
+          "field": "id",
+          "name": "id",
+        },
         "name": "academic_term",
         "op": {
           "list": {
@@ -111,14 +123,19 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/academic-terms",
-                "parts": [
-                  "academic-terms",
+                "segments": [
+                  {
+                    "lit": "academic-terms",
+                  },
                 ],
                 "select": {},
                 "transform": {
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "academic-terms",
+                ],
               },
             ],
           },
@@ -141,9 +158,13 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/academic-terms/{id}",
-                "parts": [
-                  "academic-terms",
-                  "{id}",
+                "segments": [
+                  {
+                    "lit": "academic-terms",
+                  },
+                  {
+                    "var": "id",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -154,6 +175,10 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "academic-terms",
+                  "{id}",
+                ],
               },
             ],
           },
@@ -177,6 +202,10 @@ def make_config():
             "type": "`$STRING`",
           },
         ],
+        "id": {
+          "field": "id",
+          "name": "id",
+        },
         "name": "academic_year",
         "op": {
           "list": {
@@ -188,14 +217,19 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/academic-years",
-                "parts": [
-                  "academic-years",
+                "segments": [
+                  {
+                    "lit": "academic-years",
+                  },
                 ],
                 "select": {},
                 "transform": {
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "academic-years",
+                ],
               },
             ],
           },
@@ -218,9 +252,13 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/academic-years/{id}",
-                "parts": [
-                  "academic-years",
-                  "{id}",
+                "segments": [
+                  {
+                    "lit": "academic-years",
+                  },
+                  {
+                    "var": "id",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -231,6 +269,10 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "academic-years",
+                  "{id}",
+                ],
               },
             ],
           },
@@ -270,6 +312,10 @@ def make_config():
             "type": "`$STRING`",
           },
         ],
+        "id": {
+          "field": "id",
+          "name": "id",
+        },
         "name": "administrator",
         "op": {
           "list": {
@@ -281,14 +327,19 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/administrators",
-                "parts": [
-                  "administrators",
+                "segments": [
+                  {
+                    "lit": "administrators",
+                  },
                 ],
                 "select": {},
                 "transform": {
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "administrators",
+                ],
               },
             ],
           },
@@ -311,9 +362,13 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/administrators/{id}",
-                "parts": [
-                  "administrators",
-                  "{id}",
+                "segments": [
+                  {
+                    "lit": "administrators",
+                  },
+                  {
+                    "var": "id",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -324,6 +379,10 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "administrators",
+                  "{id}",
+                ],
               },
             ],
           },
@@ -403,6 +462,10 @@ def make_config():
             "type": "`$STRING`",
           },
         ],
+        "id": {
+          "field": "id",
+          "name": "id",
+        },
         "name": "applicant",
         "op": {
           "create": {
@@ -414,14 +477,19 @@ def make_config():
                 "kind": "http",
                 "method": "POST",
                 "orig": "/applicants",
-                "parts": [
-                  "applicants",
+                "segments": [
+                  {
+                    "lit": "applicants",
+                  },
                 ],
                 "select": {},
                 "transform": {
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "applicants",
+                ],
               },
             ],
           },
@@ -434,14 +502,19 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/applicants",
-                "parts": [
-                  "applicants",
+                "segments": [
+                  {
+                    "lit": "applicants",
+                  },
                 ],
                 "select": {},
                 "transform": {
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "applicants",
+                ],
               },
             ],
           },
@@ -464,9 +537,13 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/applicants/{id}",
-                "parts": [
-                  "applicants",
-                  "{id}",
+                "segments": [
+                  {
+                    "lit": "applicants",
+                  },
+                  {
+                    "var": "id",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -477,6 +554,10 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "applicants",
+                  "{id}",
+                ],
               },
             ],
           },
@@ -581,6 +662,10 @@ def make_config():
             "type": "`$ARRAY`",
           },
         ],
+        "id": {
+          "field": "id",
+          "name": "id",
+        },
         "name": "application",
         "op": {
           "list": {
@@ -592,14 +677,19 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/applications",
-                "parts": [
-                  "applications",
+                "segments": [
+                  {
+                    "lit": "applications",
+                  },
                 ],
                 "select": {},
                 "transform": {
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "applications",
+                ],
               },
             ],
           },
@@ -622,9 +712,13 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/applications/{id}",
-                "parts": [
-                  "applications",
-                  "{id}",
+                "segments": [
+                  {
+                    "lit": "applications",
+                  },
+                  {
+                    "var": "id",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -635,6 +729,10 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "applications",
+                  "{id}",
+                ],
               },
             ],
           },
@@ -755,6 +853,10 @@ def make_config():
             "type": "`$STRING`",
           },
         ],
+        "id": {
+          "field": "id",
+          "name": "id",
+        },
         "name": "course",
         "op": {
           "create": {
@@ -766,14 +868,19 @@ def make_config():
                 "kind": "http",
                 "method": "POST",
                 "orig": "/courses",
-                "parts": [
-                  "courses",
+                "segments": [
+                  {
+                    "lit": "courses",
+                  },
                 ],
                 "select": {},
                 "transform": {
                   "req": "`reqdata`",
                   "res": "`body.institution`",
                 },
+                "parts": [
+                  "courses",
+                ],
               },
             ],
           },
@@ -786,14 +893,19 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/courses",
-                "parts": [
-                  "courses",
+                "segments": [
+                  {
+                    "lit": "courses",
+                  },
                 ],
                 "select": {},
                 "transform": {
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "courses",
+                ],
               },
             ],
           },
@@ -816,9 +928,13 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/courses/{id}",
-                "parts": [
-                  "courses",
-                  "{id}",
+                "segments": [
+                  {
+                    "lit": "courses",
+                  },
+                  {
+                    "var": "id",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -829,6 +945,10 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body.institution`",
                 },
+                "parts": [
+                  "courses",
+                  "{id}",
+                ],
               },
             ],
           },
@@ -856,6 +976,10 @@ def make_config():
             "type": "`$STRING`",
           },
         ],
+        "id": {
+          "field": "id",
+          "name": "id",
+        },
         "name": "fee",
         "op": {
           "list": {
@@ -867,14 +991,19 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/fees",
-                "parts": [
-                  "fees",
+                "segments": [
+                  {
+                    "lit": "fees",
+                  },
                 ],
                 "select": {},
                 "transform": {
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "fees",
+                ],
               },
             ],
           },
@@ -897,9 +1026,13 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/fees/{id}",
-                "parts": [
-                  "fees",
-                  "{id}",
+                "segments": [
+                  {
+                    "lit": "fees",
+                  },
+                  {
+                    "var": "id",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -910,6 +1043,10 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "fees",
+                  "{id}",
+                ],
               },
             ],
           },
@@ -970,6 +1107,10 @@ def make_config():
             "type": "`$STRING`",
           },
         ],
+        "id": {
+          "field": "id",
+          "name": "id",
+        },
         "name": "institution",
         "op": {
           "list": {
@@ -981,14 +1122,19 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/institutions",
-                "parts": [
-                  "institutions",
+                "segments": [
+                  {
+                    "lit": "institutions",
+                  },
                 ],
                 "select": {},
                 "transform": {
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "institutions",
+                ],
               },
             ],
           },
@@ -1011,9 +1157,13 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/institutions/{id}",
-                "parts": [
-                  "institutions",
-                  "{id}",
+                "segments": [
+                  {
+                    "lit": "institutions",
+                  },
+                  {
+                    "var": "id",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -1024,6 +1174,10 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body.departments`",
                 },
+                "parts": [
+                  "institutions",
+                  "{id}",
+                ],
               },
             ],
           },
@@ -1067,6 +1221,10 @@ def make_config():
             "type": "`$STRING`",
           },
         ],
+        "id": {
+          "field": "id",
+          "name": "id",
+        },
         "name": "intake",
         "op": {
           "list": {
@@ -1078,14 +1236,19 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/intakes",
-                "parts": [
-                  "intakes",
+                "segments": [
+                  {
+                    "lit": "intakes",
+                  },
                 ],
                 "select": {},
                 "transform": {
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "intakes",
+                ],
               },
             ],
           },
@@ -1108,9 +1271,13 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/intakes/{id}",
-                "parts": [
-                  "intakes",
-                  "{id}",
+                "segments": [
+                  {
+                    "lit": "intakes",
+                  },
+                  {
+                    "var": "id",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -1121,6 +1288,10 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "intakes",
+                  "{id}",
+                ],
               },
             ],
           },
@@ -1188,6 +1359,10 @@ def make_config():
             "type": "`$STRING`",
           },
         ],
+        "id": {
+          "field": "id",
+          "name": "id",
+        },
         "name": "invoice",
         "op": {
           "list": {
@@ -1199,14 +1374,19 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/invoices",
-                "parts": [
-                  "invoices",
+                "segments": [
+                  {
+                    "lit": "invoices",
+                  },
                 ],
                 "select": {},
                 "transform": {
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "invoices",
+                ],
               },
             ],
           },
@@ -1229,9 +1409,13 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/invoices/{id}",
-                "parts": [
-                  "invoices",
-                  "{id}",
+                "segments": [
+                  {
+                    "lit": "invoices",
+                  },
+                  {
+                    "var": "id",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -1242,6 +1426,10 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "invoices",
+                  "{id}",
+                ],
               },
             ],
           },
@@ -1264,9 +1452,13 @@ def make_config():
                 "kind": "http",
                 "method": "DELETE",
                 "orig": "/invoices/{id}",
-                "parts": [
-                  "invoices",
-                  "{id}",
+                "segments": [
+                  {
+                    "lit": "invoices",
+                  },
+                  {
+                    "var": "id",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -1277,6 +1469,10 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "invoices",
+                  "{id}",
+                ],
               },
             ],
           },
@@ -1344,6 +1540,10 @@ def make_config():
             "type": "`$OBJECT`",
           },
         ],
+        "id": {
+          "field": "id",
+          "name": "id",
+        },
         "name": "journal",
         "op": {
           "list": {
@@ -1355,14 +1555,19 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/journal",
-                "parts": [
-                  "journal",
+                "segments": [
+                  {
+                    "lit": "journal",
+                  },
                 ],
                 "select": {},
                 "transform": {
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "journal",
+                ],
               },
             ],
           },
@@ -1398,6 +1603,10 @@ def make_config():
             "type": "`$INTEGER`",
           },
         ],
+        "id": {
+          "field": "id",
+          "name": "id",
+        },
         "name": "login",
         "op": {
           "list": {
@@ -1409,14 +1618,19 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/logins",
-                "parts": [
-                  "logins",
+                "segments": [
+                  {
+                    "lit": "logins",
+                  },
                 ],
                 "select": {},
                 "transform": {
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "logins",
+                ],
               },
             ],
           },
@@ -1502,6 +1716,10 @@ def make_config():
             "type": "`$STRING`",
           },
         ],
+        "id": {
+          "field": "id",
+          "name": "id",
+        },
         "name": "scoresheet",
         "op": {
           "list": {
@@ -1513,14 +1731,19 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/scoresheets",
-                "parts": [
-                  "scoresheets",
+                "segments": [
+                  {
+                    "lit": "scoresheets",
+                  },
                 ],
                 "select": {},
                 "transform": {
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "scoresheets",
+                ],
               },
             ],
           },
@@ -1543,9 +1766,13 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/scoresheets/{id}",
-                "parts": [
-                  "scoresheets",
-                  "{id}",
+                "segments": [
+                  {
+                    "lit": "scoresheets",
+                  },
+                  {
+                    "var": "id",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -1556,6 +1783,10 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "scoresheets",
+                  "{id}",
+                ],
               },
             ],
           },
@@ -1612,6 +1843,10 @@ def make_config():
             "type": "`$STRING`",
           },
         ],
+        "id": {
+          "field": "id",
+          "name": "id",
+        },
         "name": "table_view",
         "op": {
           "list": {
@@ -1623,14 +1858,19 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/tableviews",
-                "parts": [
-                  "tableviews",
+                "segments": [
+                  {
+                    "lit": "tableviews",
+                  },
                 ],
                 "select": {},
                 "transform": {
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "tableviews",
+                ],
               },
             ],
           },
@@ -1653,9 +1893,13 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/tableviews/{id}",
-                "parts": [
-                  "tableviews",
-                  "{id}",
+                "segments": [
+                  {
+                    "lit": "tableviews",
+                  },
+                  {
+                    "var": "id",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -1666,6 +1910,10 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body.tabledata`",
                 },
+                "parts": [
+                  "tableviews",
+                  "{id}",
+                ],
               },
             ],
           },

@@ -112,8 +112,10 @@ main: kit: entity: scoresheet: {
         {
           method: "GET"
           orig: "/scoresheets"
-          parts: [
-            "scoresheets"
+          segments: [
+            {
+              lit: "scoresheets"
+            }
           ]
           transform: {
             req: "`reqdata`"
@@ -139,9 +141,13 @@ main: kit: entity: scoresheet: {
           }
           method: "GET"
           orig: "/scoresheets/{id}"
-          parts: [
-            "scoresheets"
-            "{id}"
+          segments: [
+            {
+              lit: "scoresheets"
+            }
+            {
+              var: "id"
+            }
           ]
           select: {
             exist: [
