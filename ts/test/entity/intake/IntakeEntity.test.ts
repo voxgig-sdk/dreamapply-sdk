@@ -5,6 +5,8 @@ import * as Fs from 'node:fs'
 
 import { test, describe, afterEach } from 'node:test'
 import assert from 'node:assert'
+import { createLiveTransport } from '../../live-runner'
+import { runLiveEntity } from '../../live-entity'
 
 
 import { DreamapplySDK, BaseFeature, stdutil } from '../../..'
@@ -47,16 +49,13 @@ describe('IntakeEntity', async () => {
 
     const live = 'TRUE' === process.env.DREAMAPPLY_TEST_LIVE
     for (const op of ['list', 'load']) {
-      if (maybeSkipControl(t, 'entityOp', 'intake.' + op, live)) return
+      if (!live && maybeSkipControl(t, 'entityOp', 'intake.' + op, live)) return
     }
 
+    
     const setup = basicSetup()
-    // The basic flow consumes synthetic IDs and field values from the
-    // fixture (entity TestData.json). Those don't exist on the live API.
-    // Skip live runs unless the user provided a real ENTID env override.
-    if (setup.syntheticOnly) {
-      t.skip('live entity test uses synthetic IDs from fixture — set DREAMAPPLY_TEST_INTAKE_ENTID JSON to run live')
-      return
+    if (setup.live) {
+      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":[{"active":true,"name":"arrival","req":false,"type":"`$STRING`","index$":0},{"active":true,"name":"commence","req":false,"type":"`$STRING`","index$":1},{"active":true,"name":"decision","req":false,"type":"`$OBJECT`","index$":2},{"active":true,"name":"id","req":false,"type":"`$INTEGER`","index$":3},{"active":true,"name":"name","req":false,"type":"`$STRING`","index$":4},{"active":true,"name":"policy","req":false,"type":"`$STRING`","index$":5},{"active":true,"name":"pre","req":false,"type":"`$OBJECT`","index$":6},{"active":true,"name":"start","req":false,"type":"`$STRING`","index$":7}],"id":{"field":"id","name":"id"},"name":"intake","op":{"list":{"input":"data","name":"list","points":[{"active":true,"args":{},"contract":{"id":"GET /intakes","json":"{\"operationId\":\"listIntakes\",\"parameters\":[],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"items\":{\"properties\":{\"arrival\":{\"type\":\"string\"},\"commence\":{\"type\":\"string\"},\"decision\":{\"properties\":{\"date\":{\"nullable\":true,\"type\":\"string\"},\"days\":{\"nullable\":true,\"type\":\"integer\"},\"policy\":{\"type\":\"string\"}},\"type\":\"object\"},\"id\":{\"type\":\"integer\"},\"name\":{\"type\":\"string\"},\"policy\":{\"enum\":[\"Flexible\",\"Rolling\"],\"type\":\"string\"},\"pre\":{\"properties\":{\"deadline\":{\"type\":\"string\"},\"info\":{\"type\":\"string\"},\"mask\":{\"type\":\"boolean\"}},\"type\":\"object\"},\"start\":{\"type\":\"string\"}},\"type\":\"object\"},\"type\":\"array\"}}},\"description\":\"Intakes list\"}},\"security\":[{\"apiKey\":[]}],\"securitySchemes\":{\"apiKey\":{\"scheme\":\"bearer\",\"type\":\"http\"}},\"securitySource\":\"definition\"}","source":"openapi3","version":1},"kind":"http","method":"GET","orig":"/intakes","segments":[{"lit":"intakes"}],"select":{},"transform":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"list"},"load":{"input":"data","name":"load","points":[{"active":true,"args":{"params":[{"active":true,"kind":"param","name":"id","orig":"id","reqd":true,"type":"`$INTEGER`","index$":0}]},"contract":{"id":"GET /intakes/{id}","json":"{\"operationId\":\"getIntake\",\"parameters\":[{\"in\":\"path\",\"name\":\"id\",\"required\":true,\"schema\":{\"type\":\"integer\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"arrival\":{\"type\":\"string\"},\"commence\":{\"type\":\"string\"},\"decision\":{\"properties\":{\"date\":{\"nullable\":true,\"type\":\"string\"},\"days\":{\"nullable\":true,\"type\":\"integer\"},\"policy\":{\"type\":\"string\"}},\"type\":\"object\"},\"id\":{\"type\":\"integer\"},\"name\":{\"type\":\"string\"},\"policy\":{\"enum\":[\"Flexible\",\"Rolling\"],\"type\":\"string\"},\"pre\":{\"properties\":{\"deadline\":{\"type\":\"string\"},\"info\":{\"type\":\"string\"},\"mask\":{\"type\":\"boolean\"}},\"type\":\"object\"},\"start\":{\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Intake\"}},\"security\":[{\"apiKey\":[]}],\"securitySchemes\":{\"apiKey\":{\"scheme\":\"bearer\",\"type\":\"http\"}},\"securitySource\":\"definition\"}","source":"openapi3","version":1},"kind":"http","method":"GET","orig":"/intakes/{id}","segments":[{"lit":"intakes"},{"var":"id"}],"select":{"exist":["id"]},"transform":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"load"}},"relations":{"ancestors":[]},"key$":"intake","name__orig":"intake","Name":"Intake","name_":"intake","name-":"intake","NAME":"INTAKE","index$":8}, {"active":true,"entity":"intake","key$":"BasicIntakeFlow","kind":"basic","name":"BasicIntakeFlow","param":{},"step":[{"active":true,"data":{},"input":{},"match":{},"op":"list","spec":[],"valid":[{"apply":"ItemExists","def":{"ref":"intake_ref01"}}],"index$":0},{"active":true,"data":{},"input":{"ref":"intake_ref01","srcdatavar":"intake_ref01_data","suffix":"_dt0"},"match":{"id":"intake01"},"op":"load","spec":[],"valid":[{"apply":"TextFieldMark","def":{"mark":"Mark01-intake_ref01"}}],"index$":1}]}, 'Intake')
     }
     const client = setup.client
     const struct = setup.struct
@@ -116,13 +115,6 @@ function basicSetup(extra?: any) {
       }]
     })
 
-  // Detect whether the user provided a real ENTID JSON via env var. The
-  // basic flow consumes synthetic IDs from the fixture file; without an
-  // override those synthetic IDs reach the live API and 4xx. Surface this
-  // to the test so it can skip rather than fail.
-  const idmapEnvVal = process.env['DREAMAPPLY_TEST_INTAKE_ENTID']
-  const idmapOverridden = null != idmapEnvVal && idmapEnvVal.trim().startsWith('{')
-
   const env = envOverride({
     'DREAMAPPLY_TEST_INTAKE_ENTID': idmap,
     'DREAMAPPLY_TEST_LIVE': 'FALSE',
@@ -135,7 +127,13 @@ function basicSetup(extra?: any) {
 
   const live = 'TRUE' === env.DREAMAPPLY_TEST_LIVE
 
+  const transport = createLiveTransport()
   if (live) {
+    const rawIds = process.env['DREAMAPPLY_TEST_INTAKE_ENTID']
+    idmap = rawIds && rawIds.trim() ? JSON.parse(rawIds) : {}
+    if (!idmap || Array.isArray(idmap) || typeof idmap !== 'object') {
+      throw new Error('Live ENTID must be a JSON object')
+    }
     client = new DreamapplySDK(merge([
       // FIRST, so the generated fields below win: sdk-test-control.json's
       // test.client.options adds to the live client, it does not redirect it.
@@ -151,7 +149,8 @@ function basicSetup(extra?: any) {
       // argument at all - so a bare 'extra' silently discarded the apikey
       // and server values above and handed the SDK undefined. Harmless
       // while there was nothing in that object; not harmless now.
-      extra || {}
+      extra || {},
+      { system: { fetch: transport.fetch } }
     ]))
   }
 
@@ -164,7 +163,7 @@ function basicSetup(extra?: any) {
     data: entityData,
     explain: 'TRUE' === env.DREAMAPPLY_TEST_EXPLAIN,
     live,
-    syntheticOnly: live && !idmapOverridden,
+    transport,
     now: Date.now(),
   }
 

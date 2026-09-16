@@ -29,5 +29,105 @@
         "type": "sa3"
       }
     }
+  },
+  "requests": {
+    "GET /fees": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "listFees",
+        "parameters": [],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "properties": {
+                      "name": {
+                        "type": "string"
+                      },
+                      "notes": {
+                        "type": "string"
+                      },
+                      "type": {
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Fees list"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "securitySchemes": {
+          "apiKey": {
+            "scheme": "bearer",
+            "type": "http"
+          }
+        },
+        "securitySource": "definition"
+      }
+    },
+    "GET /fees/{id}": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "getFee",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "notes": {
+                      "type": "string"
+                    },
+                    "type": {
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Fee"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "securitySchemes": {
+          "apiKey": {
+            "scheme": "bearer",
+            "type": "http"
+          }
+        },
+        "securitySource": "definition"
+      }
+    }
   }
 }

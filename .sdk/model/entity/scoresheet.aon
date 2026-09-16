@@ -110,6 +110,12 @@ main: kit: entity: scoresheet: {
       name: "list"
       points: [
         {
+          contract: {
+            id: "GET /scoresheets"
+            json: "{\"operationId\":\"listScoresheets\",\"parameters\":[],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"items\":{\"properties\":{\"confirmed\":{\"type\":\"string\"},\"created\":{\"type\":\"string\"},\"date\":{\"type\":\"string\"},\"depth\":{\"type\":\"string\"},\"group\":{\"description\":\"Sub-resource (object); see the DreamApply SDK.\",\"nullable\":true,\"type\":\"object\"},\"instructions\":{\"type\":\"string\"},\"language\":{\"type\":\"string\"},\"maps\":{\"nullable\":true,\"type\":\"array\"},\"name\":{\"type\":\"string\"},\"rangeMax\":{\"type\":\"string\"},\"rangeMin\":{\"type\":\"string\"},\"reference\":{\"type\":\"string\"},\"scale\":{\"type\":\"integer\"},\"scored\":{\"type\":\"string\"},\"scores\":{\"description\":\"Sub-resource (Scores); see the DreamApply SDK.\",\"type\":\"object\"},\"subject\":{\"type\":\"string\"},\"type\":{\"type\":\"string\"}},\"type\":\"object\"},\"type\":\"array\"}}},\"description\":\"Scoresheets list\"}},\"security\":[{\"apiKey\":[]}],\"securitySchemes\":{\"apiKey\":{\"scheme\":\"bearer\",\"type\":\"http\"}},\"securitySource\":\"definition\"}"
+            source: "openapi3"
+            version: 1
+          }
           method: "GET"
           orig: "/scoresheets"
           segments: [
@@ -138,6 +144,12 @@ main: kit: entity: scoresheet: {
                 type: "`$INTEGER`"
               }
             ]
+          }
+          contract: {
+            id: "GET /scoresheets/{id}"
+            json: "{\"operationId\":\"getScoresheet\",\"parameters\":[{\"in\":\"path\",\"name\":\"id\",\"required\":true,\"schema\":{\"type\":\"integer\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"confirmed\":{\"type\":\"string\"},\"created\":{\"type\":\"string\"},\"date\":{\"type\":\"string\"},\"depth\":{\"type\":\"string\"},\"group\":{\"description\":\"Sub-resource (object); see the DreamApply SDK.\",\"nullable\":true,\"type\":\"object\"},\"instructions\":{\"type\":\"string\"},\"language\":{\"type\":\"string\"},\"maps\":{\"nullable\":true,\"type\":\"array\"},\"name\":{\"type\":\"string\"},\"rangeMax\":{\"type\":\"string\"},\"rangeMin\":{\"type\":\"string\"},\"reference\":{\"type\":\"string\"},\"scale\":{\"type\":\"integer\"},\"scored\":{\"type\":\"string\"},\"scores\":{\"description\":\"Sub-resource (Scores); see the DreamApply SDK.\",\"type\":\"object\"},\"subject\":{\"type\":\"string\"},\"type\":{\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Scoresheet\"}},\"security\":[{\"apiKey\":[]}],\"securitySchemes\":{\"apiKey\":{\"scheme\":\"bearer\",\"type\":\"http\"}},\"securitySource\":\"definition\"}"
+            source: "openapi3"
+            version: 1
           }
           method: "GET"
           orig: "/scoresheets/{id}"

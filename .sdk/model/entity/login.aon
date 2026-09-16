@@ -48,6 +48,12 @@ main: kit: entity: login: {
       name: "list"
       points: [
         {
+          contract: {
+            id: "GET /logins"
+            json: "{\"operationId\":\"listLogins\",\"parameters\":[],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"items\":{\"properties\":{\"id\":{\"type\":\"integer\"},\"ip\":{\"type\":\"string\"},\"logged\":{\"type\":\"string\"},\"result\":{\"type\":\"string\"},\"role\":{\"type\":\"string\"},\"roleId\":{\"type\":\"integer\"}},\"type\":\"object\"},\"type\":\"array\"}}},\"description\":\"Logins list\"}},\"security\":[{\"apiKey\":[]}],\"securitySchemes\":{\"apiKey\":{\"scheme\":\"bearer\",\"type\":\"http\"}},\"securitySource\":\"definition\"}"
+            source: "openapi3"
+            version: 1
+          }
           method: "GET"
           orig: "/logins"
           segments: [

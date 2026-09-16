@@ -40,6 +40,8 @@ const node_path_1 = __importDefault(require("node:path"));
 const Fs = __importStar(require("node:fs"));
 const node_test_1 = require("node:test");
 const node_assert_1 = __importDefault(require("node:assert"));
+const live_runner_1 = require("../../live-runner");
+const live_entity_1 = require("../../live-entity");
 const __1 = require("../../..");
 const utility_1 = require("../../utility");
 // AFTER the imports on purpose: TypeScript hoists `import` above any
@@ -59,16 +61,12 @@ const utility_1 = require("../../utility");
     (0, node_test_1.test)('basic', async (t) => {
         const live = 'TRUE' === process.env.DREAMAPPLY_TEST_LIVE;
         for (const op of ['list', 'load']) {
-            if ((0, utility_1.maybeSkipControl)(t, 'entityOp', 'table_view.' + op, live))
+            if (!live && (0, utility_1.maybeSkipControl)(t, 'entityOp', 'table_view.' + op, live))
                 return;
         }
         const setup = basicSetup();
-        // The basic flow consumes synthetic IDs and field values from the
-        // fixture (entity TestData.json). Those don't exist on the live API.
-        // Skip live runs unless the user provided a real ENTID env override.
-        if (setup.syntheticOnly) {
-            t.skip('live entity test uses synthetic IDs from fixture — set DREAMAPPLY_TEST_TABLE_VIEW_ENTID JSON to run live');
-            return;
+        if (setup.live) {
+            return (0, live_entity_1.runLiveEntity)(setup, { "active": true, "alias": { "field": {} }, "fields": [{ "active": true, "name": "content", "req": false, "short": "Sub-resource (StreamInterface); see the DreamApply SDK.", "type": "`$OBJECT`", "index$": 0 }, { "active": true, "name": "created", "req": false, "type": "`$STRING`", "index$": 1 }, { "active": true, "name": "expires", "req": false, "type": "`$STRING`", "index$": 2 }, { "active": true, "name": "id", "req": false, "type": "`$INTEGER`", "index$": 3 }, { "active": true, "name": "mime", "req": false, "type": "`$STRING`", "index$": 4 }, { "active": true, "name": "modified", "req": false, "type": "`$STRING`", "index$": 5 }, { "active": true, "name": "name", "req": false, "type": "`$STRING`", "index$": 6 }, { "active": true, "name": "size", "req": false, "type": "`$INTEGER`", "index$": 7 }, { "active": true, "name": "tabledata", "req": false, "type": "`$OBJECT`", "index$": 8 }, { "active": true, "name": "title", "req": false, "type": "`$STRING`", "index$": 9 }, { "active": true, "name": "uploaded", "req": false, "type": "`$STRING`", "index$": 10 }], "id": { "field": "id", "name": "id" }, "name": "table_view", "op": { "list": { "input": "data", "name": "list", "points": [{ "active": true, "args": {}, "contract": { "id": "GET /tableviews", "json": "{\"operationId\":\"listTableViews\",\"parameters\":[],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"items\":{\"properties\":{\"created\":{\"type\":\"string\"},\"id\":{\"type\":\"integer\"},\"modified\":{\"type\":\"string\"},\"tabledata\":{\"properties\":{\"content\":{\"description\":\"Sub-resource (StreamInterface); see the DreamApply SDK.\",\"type\":\"object\"},\"expires\":{\"nullable\":true,\"type\":\"string\"},\"mime\":{\"type\":\"string\"},\"name\":{\"type\":\"string\"},\"size\":{\"type\":\"integer\"},\"uploaded\":{\"nullable\":true,\"type\":\"string\"}},\"type\":\"object\"},\"title\":{\"type\":\"string\"}},\"type\":\"object\"},\"type\":\"array\"}}},\"description\":\"TableViews list\"}},\"security\":[{\"apiKey\":[]}],\"securitySchemes\":{\"apiKey\":{\"scheme\":\"bearer\",\"type\":\"http\"}},\"securitySource\":\"definition\"}", "source": "openapi3", "version": 1 }, "kind": "http", "method": "GET", "orig": "/tableviews", "segments": [{ "lit": "tableviews" }], "select": {}, "transform": { "req": "`reqdata`", "res": "`body`" }, "index$": 0 }], "key$": "list" }, "load": { "input": "data", "name": "load", "points": [{ "active": true, "args": { "params": [{ "active": true, "kind": "param", "name": "id", "orig": "id", "reqd": true, "type": "`$INTEGER`", "index$": 0 }] }, "contract": { "id": "GET /tableviews/{id}", "json": "{\"operationId\":\"getTableView\",\"parameters\":[{\"in\":\"path\",\"name\":\"id\",\"required\":true,\"schema\":{\"type\":\"integer\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"created\":{\"type\":\"string\"},\"id\":{\"type\":\"integer\"},\"modified\":{\"type\":\"string\"},\"tabledata\":{\"properties\":{\"content\":{\"description\":\"Sub-resource (StreamInterface); see the DreamApply SDK.\",\"type\":\"object\"},\"expires\":{\"nullable\":true,\"type\":\"string\"},\"mime\":{\"type\":\"string\"},\"name\":{\"type\":\"string\"},\"size\":{\"type\":\"integer\"},\"uploaded\":{\"nullable\":true,\"type\":\"string\"}},\"type\":\"object\"},\"title\":{\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"TableView\"}},\"security\":[{\"apiKey\":[]}],\"securitySchemes\":{\"apiKey\":{\"scheme\":\"bearer\",\"type\":\"http\"}},\"securitySource\":\"definition\"}", "source": "openapi3", "version": 1 }, "kind": "http", "method": "GET", "orig": "/tableviews/{id}", "segments": [{ "lit": "tableviews" }, { "var": "id" }], "select": { "exist": ["id"] }, "transform": { "req": "`reqdata`", "res": "`body.tabledata`" }, "index$": 0 }], "key$": "load" } }, "relations": { "ancestors": [] }, "key$": "table_view", "name__orig": "table_view", "Name": "TableView", "name_": "table_view", "name-": "table-view", "NAME": "TABLE_VIEW", "index$": 13 }, { "active": true, "entity": "table_view", "key$": "BasicTableViewFlow", "kind": "basic", "name": "BasicTableViewFlow", "param": {}, "step": [{ "active": true, "data": {}, "input": {}, "match": {}, "op": "list", "spec": [], "valid": [{ "apply": "ItemExists", "def": { "ref": "table_view_ref01" } }], "index$": 0 }, { "active": true, "data": {}, "input": { "ref": "table_view_ref01", "srcdatavar": "table_view_ref01_data", "suffix": "_dt0" }, "match": { "id": "table_view01" }, "op": "load", "spec": [], "valid": [{ "apply": "TextFieldMark", "def": { "mark": "Mark01-table_view_ref01" } }], "index$": 1 }] }, 'TableView');
         }
         const client = setup.client;
         const struct = setup.struct;
@@ -106,12 +104,6 @@ function basicSetup(extra) {
                 '`$VAL`': ['`$FORMAT`', 'upper', '`$COPY`']
             }]
     });
-    // Detect whether the user provided a real ENTID JSON via env var. The
-    // basic flow consumes synthetic IDs from the fixture file; without an
-    // override those synthetic IDs reach the live API and 4xx. Surface this
-    // to the test so it can skip rather than fail.
-    const idmapEnvVal = process.env['DREAMAPPLY_TEST_TABLE_VIEW_ENTID'];
-    const idmapOverridden = null != idmapEnvVal && idmapEnvVal.trim().startsWith('{');
     const env = (0, utility_1.envOverride)({
         'DREAMAPPLY_TEST_TABLE_VIEW_ENTID': idmap,
         'DREAMAPPLY_TEST_LIVE': 'FALSE',
@@ -121,7 +113,13 @@ function basicSetup(extra) {
     });
     idmap = env['DREAMAPPLY_TEST_TABLE_VIEW_ENTID'];
     const live = 'TRUE' === env.DREAMAPPLY_TEST_LIVE;
+    const transport = (0, live_runner_1.createLiveTransport)();
     if (live) {
+        const rawIds = process.env['DREAMAPPLY_TEST_TABLE_VIEW_ENTID'];
+        idmap = rawIds && rawIds.trim() ? JSON.parse(rawIds) : {};
+        if (!idmap || Array.isArray(idmap) || typeof idmap !== 'object') {
+            throw new Error('Live ENTID must be a JSON object');
+        }
         client = new __1.DreamapplySDK(merge([
             // FIRST, so the generated fields below win: sdk-test-control.json's
             // test.client.options adds to the live client, it does not redirect it.
@@ -137,7 +135,8 @@ function basicSetup(extra) {
             // argument at all - so a bare 'extra' silently discarded the apikey
             // and server values above and handed the SDK undefined. Harmless
             // while there was nothing in that object; not harmless now.
-            extra || {}
+            extra || {},
+            { system: { fetch: transport.fetch } }
         ]));
     }
     const setup = {
@@ -149,7 +148,7 @@ function basicSetup(extra) {
         data: entityData,
         explain: 'TRUE' === env.DREAMAPPLY_TEST_EXPLAIN,
         live,
-        syntheticOnly: live && !idmapOverridden,
+        transport,
         now: Date.now(),
     };
     return setup;

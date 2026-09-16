@@ -9,7 +9,7 @@
         "mime": "s72",
         "modified": "s73",
         "name": "s74",
-        "size": "s75",
+        "size": 117,
         "tabledata": {},
         "title": "s77",
         "uploaded": "s78"
@@ -22,7 +22,7 @@
         "mime": "se0",
         "modified": "se1",
         "name": "se2",
-        "size": "se3",
+        "size": 227,
         "tabledata": {},
         "title": "se5",
         "uploaded": "se6"
@@ -35,7 +35,7 @@
         "mime": "s14e",
         "modified": "s14f",
         "name": "s150",
-        "size": "s151",
+        "size": 337,
         "tabledata": {},
         "title": "s153",
         "uploaded": "s154"
@@ -51,10 +51,168 @@
         "mime": "s1bc",
         "modified": "s1bd",
         "name": "s1be",
-        "size": "s1bf",
+        "size": 447,
         "tabledata": {},
         "title": "s1c1",
         "uploaded": "s1c2"
+      }
+    }
+  },
+  "requests": {
+    "GET /tableviews": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "listTableViews",
+        "parameters": [],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "properties": {
+                      "created": {
+                        "type": "string"
+                      },
+                      "id": {
+                        "type": "integer"
+                      },
+                      "modified": {
+                        "type": "string"
+                      },
+                      "tabledata": {
+                        "properties": {
+                          "content": {
+                            "description": "Sub-resource (StreamInterface); see the DreamApply SDK.",
+                            "type": "object"
+                          },
+                          "expires": {
+                            "nullable": true,
+                            "type": "string"
+                          },
+                          "mime": {
+                            "type": "string"
+                          },
+                          "name": {
+                            "type": "string"
+                          },
+                          "size": {
+                            "type": "integer"
+                          },
+                          "uploaded": {
+                            "nullable": true,
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "title": {
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "type": "array"
+                }
+              }
+            },
+            "description": "TableViews list"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "securitySchemes": {
+          "apiKey": {
+            "scheme": "bearer",
+            "type": "http"
+          }
+        },
+        "securitySource": "definition"
+      }
+    },
+    "GET /tableviews/{id}": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "getTableView",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "created": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "integer"
+                    },
+                    "modified": {
+                      "type": "string"
+                    },
+                    "tabledata": {
+                      "properties": {
+                        "content": {
+                          "description": "Sub-resource (StreamInterface); see the DreamApply SDK.",
+                          "type": "object"
+                        },
+                        "expires": {
+                          "nullable": true,
+                          "type": "string"
+                        },
+                        "mime": {
+                          "type": "string"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "size": {
+                          "type": "integer"
+                        },
+                        "uploaded": {
+                          "nullable": true,
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "title": {
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "TableView"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "securitySchemes": {
+          "apiKey": {
+            "scheme": "bearer",
+            "type": "http"
+          }
+        },
+        "securitySource": "definition"
       }
     }
   }

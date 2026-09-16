@@ -105,5 +105,477 @@
         "visa": []
       }
     }
+  },
+  "requests": {
+    "GET /applications": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "listApplications",
+        "parameters": [],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "properties": {
+                      "academicTerm": {
+                        "description": "Sub-resource (AcademicTerm); see the DreamApply SDK.",
+                        "type": "object"
+                      },
+                      "activities": {
+                        "type": "array"
+                      },
+                      "applicant": {
+                        "properties": {
+                          "address": {
+                            "nullable": true,
+                            "type": "string"
+                          },
+                          "citizenship": {
+                            "type": "string"
+                          },
+                          "email": {
+                            "type": "string"
+                          },
+                          "id": {
+                            "type": "integer"
+                          },
+                          "matriculation": {
+                            "type": "string"
+                          },
+                          "name": {
+                            "properties": {
+                              "family": {
+                                "type": "string"
+                              },
+                              "full": {
+                                "type": "string"
+                              },
+                              "given": {
+                                "type": "string"
+                              },
+                              "legal": {
+                                "type": "string"
+                              },
+                              "middle": {
+                                "type": "string"
+                              },
+                              "parent": {
+                                "type": "string"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "notes": {
+                            "type": "string"
+                          },
+                          "phone": {
+                            "type": "string"
+                          },
+                          "photo": {
+                            "properties": {
+                              "content": {
+                                "description": "Sub-resource (StreamInterface); see the DreamApply SDK.",
+                                "type": "object"
+                              },
+                              "expires": {
+                                "nullable": true,
+                                "type": "string"
+                              },
+                              "mime": {
+                                "type": "string"
+                              },
+                              "name": {
+                                "type": "string"
+                              },
+                              "size": {
+                                "type": "integer"
+                              },
+                              "uploaded": {
+                                "nullable": true,
+                                "type": "string"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "reference": {
+                            "type": "string"
+                          },
+                          "registered": {
+                            "type": "string"
+                          },
+                          "type": {
+                            "enum": [
+                              "Child",
+                              "Legal",
+                              "Natural"
+                            ],
+                            "type": "string"
+                          },
+                          "vatin": {
+                            "nullable": true,
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "career": {
+                        "type": "array"
+                      },
+                      "contact": {
+                        "type": "array"
+                      },
+                      "created": {
+                        "type": "string"
+                      },
+                      "education": {
+                        "type": "array"
+                      },
+                      "extras": {
+                        "type": "array"
+                      },
+                      "grades": {
+                        "type": "array"
+                      },
+                      "home": {
+                        "type": "array"
+                      },
+                      "host": {
+                        "type": "array"
+                      },
+                      "id": {
+                        "type": "integer"
+                      },
+                      "languages": {
+                        "type": "array"
+                      },
+                      "legal": {
+                        "type": "array"
+                      },
+                      "misc": {
+                        "type": "array"
+                      },
+                      "motivation": {
+                        "type": "array"
+                      },
+                      "pdf": {
+                        "properties": {
+                          "content": {
+                            "description": "Sub-resource (StreamInterface); see the DreamApply SDK.",
+                            "type": "object"
+                          },
+                          "expires": {
+                            "nullable": true,
+                            "type": "string"
+                          },
+                          "mime": {
+                            "type": "string"
+                          },
+                          "name": {
+                            "type": "string"
+                          },
+                          "size": {
+                            "type": "integer"
+                          },
+                          "uploaded": {
+                            "nullable": true,
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "profile": {
+                        "type": "array"
+                      },
+                      "residences": {
+                        "type": "array"
+                      },
+                      "revised": {
+                        "nullable": true,
+                        "type": "string"
+                      },
+                      "status": {
+                        "enum": [
+                          "Blank",
+                          "Closed",
+                          "Draft",
+                          "Inactive",
+                          "Reopened",
+                          "Submitted",
+                          "Withdrawn"
+                        ],
+                        "type": "string"
+                      },
+                      "submitted": {
+                        "nullable": true,
+                        "type": "string"
+                      },
+                      "visa": {
+                        "type": "array"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Applications list"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "securitySchemes": {
+          "apiKey": {
+            "scheme": "bearer",
+            "type": "http"
+          }
+        },
+        "securitySource": "definition"
+      }
+    },
+    "GET /applications/{id}": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "getApplication",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "academicTerm": {
+                      "description": "Sub-resource (AcademicTerm); see the DreamApply SDK.",
+                      "type": "object"
+                    },
+                    "activities": {
+                      "type": "array"
+                    },
+                    "applicant": {
+                      "properties": {
+                        "address": {
+                          "nullable": true,
+                          "type": "string"
+                        },
+                        "citizenship": {
+                          "type": "string"
+                        },
+                        "email": {
+                          "type": "string"
+                        },
+                        "id": {
+                          "type": "integer"
+                        },
+                        "matriculation": {
+                          "type": "string"
+                        },
+                        "name": {
+                          "properties": {
+                            "family": {
+                              "type": "string"
+                            },
+                            "full": {
+                              "type": "string"
+                            },
+                            "given": {
+                              "type": "string"
+                            },
+                            "legal": {
+                              "type": "string"
+                            },
+                            "middle": {
+                              "type": "string"
+                            },
+                            "parent": {
+                              "type": "string"
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "notes": {
+                          "type": "string"
+                        },
+                        "phone": {
+                          "type": "string"
+                        },
+                        "photo": {
+                          "properties": {
+                            "content": {
+                              "description": "Sub-resource (StreamInterface); see the DreamApply SDK.",
+                              "type": "object"
+                            },
+                            "expires": {
+                              "nullable": true,
+                              "type": "string"
+                            },
+                            "mime": {
+                              "type": "string"
+                            },
+                            "name": {
+                              "type": "string"
+                            },
+                            "size": {
+                              "type": "integer"
+                            },
+                            "uploaded": {
+                              "nullable": true,
+                              "type": "string"
+                            }
+                          },
+                          "type": "object"
+                        },
+                        "reference": {
+                          "type": "string"
+                        },
+                        "registered": {
+                          "type": "string"
+                        },
+                        "type": {
+                          "enum": [
+                            "Child",
+                            "Legal",
+                            "Natural"
+                          ],
+                          "type": "string"
+                        },
+                        "vatin": {
+                          "nullable": true,
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "career": {
+                      "type": "array"
+                    },
+                    "contact": {
+                      "type": "array"
+                    },
+                    "created": {
+                      "type": "string"
+                    },
+                    "education": {
+                      "type": "array"
+                    },
+                    "extras": {
+                      "type": "array"
+                    },
+                    "grades": {
+                      "type": "array"
+                    },
+                    "home": {
+                      "type": "array"
+                    },
+                    "host": {
+                      "type": "array"
+                    },
+                    "id": {
+                      "type": "integer"
+                    },
+                    "languages": {
+                      "type": "array"
+                    },
+                    "legal": {
+                      "type": "array"
+                    },
+                    "misc": {
+                      "type": "array"
+                    },
+                    "motivation": {
+                      "type": "array"
+                    },
+                    "pdf": {
+                      "properties": {
+                        "content": {
+                          "description": "Sub-resource (StreamInterface); see the DreamApply SDK.",
+                          "type": "object"
+                        },
+                        "expires": {
+                          "nullable": true,
+                          "type": "string"
+                        },
+                        "mime": {
+                          "type": "string"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "size": {
+                          "type": "integer"
+                        },
+                        "uploaded": {
+                          "nullable": true,
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "profile": {
+                      "type": "array"
+                    },
+                    "residences": {
+                      "type": "array"
+                    },
+                    "revised": {
+                      "nullable": true,
+                      "type": "string"
+                    },
+                    "status": {
+                      "enum": [
+                        "Blank",
+                        "Closed",
+                        "Draft",
+                        "Inactive",
+                        "Reopened",
+                        "Submitted",
+                        "Withdrawn"
+                      ],
+                      "type": "string"
+                    },
+                    "submitted": {
+                      "nullable": true,
+                      "type": "string"
+                    },
+                    "visa": {
+                      "type": "array"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Application"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "securitySchemes": {
+          "apiKey": {
+            "scheme": "bearer",
+            "type": "http"
+          }
+        },
+        "securitySource": "definition"
+      }
+    }
   }
 }

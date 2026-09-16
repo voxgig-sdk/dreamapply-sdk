@@ -121,5 +121,463 @@
         "www": "s452"
       }
     }
+  },
+  "requests": {
+    "POST /courses": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "createCourse",
+        "parameters": [],
+        "protocol": "http",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "awards_abbr": {
+                    "type": "string"
+                  },
+                  "awards_full": {
+                    "type": "string"
+                  },
+                  "code": {
+                    "type": "string"
+                  },
+                  "country": {
+                    "type": "string"
+                  },
+                  "institution": {
+                    "type": "string"
+                  },
+                  "language": {
+                    "type": "string"
+                  },
+                  "location": {
+                    "type": "string"
+                  },
+                  "mode": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "prospect_uri": {
+                    "type": "string"
+                  },
+                  "type": {
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "accreditation": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "codeInternal": {
+                      "nullable": true,
+                      "type": "string"
+                    },
+                    "country": {
+                      "type": "string"
+                    },
+                    "credits": {
+                      "type": "string"
+                    },
+                    "duration": {
+                      "type": "string"
+                    },
+                    "featured": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "integer"
+                    },
+                    "institution": {
+                      "properties": {
+                        "address": {
+                          "type": "string"
+                        },
+                        "country": {
+                          "type": "string"
+                        },
+                        "departments": {
+                          "description": "Sub-resource (InstitutionDepartments); see the DreamApply SDK.",
+                          "type": "object"
+                        },
+                        "erasmus": {
+                          "type": "string"
+                        },
+                        "iban": {
+                          "type": "string"
+                        },
+                        "id": {
+                          "type": "integer"
+                        },
+                        "location": {
+                          "type": "string"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "registration": {
+                          "type": "string"
+                        },
+                        "status": {
+                          "type": "string"
+                        },
+                        "vat": {
+                          "type": "string"
+                        },
+                        "www": {
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "language": {
+                      "type": "string"
+                    },
+                    "location": {
+                      "type": "string"
+                    },
+                    "mode": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "quota": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "enum": [
+                        "Archived",
+                        "Closed",
+                        "Draft",
+                        "Online",
+                        "Private",
+                        "Standby"
+                      ],
+                      "type": "string"
+                    },
+                    "type": {
+                      "type": "string"
+                    },
+                    "updated": {
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Course created"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "securitySchemes": {
+          "apiKey": {
+            "scheme": "bearer",
+            "type": "http"
+          }
+        },
+        "securitySource": "definition"
+      }
+    },
+    "GET /courses": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "listCourses",
+        "parameters": [],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "properties": {
+                      "accreditation": {
+                        "type": "string"
+                      },
+                      "code": {
+                        "type": "string"
+                      },
+                      "codeInternal": {
+                        "nullable": true,
+                        "type": "string"
+                      },
+                      "country": {
+                        "type": "string"
+                      },
+                      "credits": {
+                        "type": "string"
+                      },
+                      "duration": {
+                        "type": "string"
+                      },
+                      "featured": {
+                        "type": "string"
+                      },
+                      "id": {
+                        "type": "integer"
+                      },
+                      "institution": {
+                        "properties": {
+                          "address": {
+                            "type": "string"
+                          },
+                          "country": {
+                            "type": "string"
+                          },
+                          "departments": {
+                            "description": "Sub-resource (InstitutionDepartments); see the DreamApply SDK.",
+                            "type": "object"
+                          },
+                          "erasmus": {
+                            "type": "string"
+                          },
+                          "iban": {
+                            "type": "string"
+                          },
+                          "id": {
+                            "type": "integer"
+                          },
+                          "location": {
+                            "type": "string"
+                          },
+                          "name": {
+                            "type": "string"
+                          },
+                          "registration": {
+                            "type": "string"
+                          },
+                          "status": {
+                            "type": "string"
+                          },
+                          "vat": {
+                            "type": "string"
+                          },
+                          "www": {
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "language": {
+                        "type": "string"
+                      },
+                      "location": {
+                        "type": "string"
+                      },
+                      "mode": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "quota": {
+                        "type": "string"
+                      },
+                      "status": {
+                        "enum": [
+                          "Archived",
+                          "Closed",
+                          "Draft",
+                          "Online",
+                          "Private",
+                          "Standby"
+                        ],
+                        "type": "string"
+                      },
+                      "type": {
+                        "type": "string"
+                      },
+                      "updated": {
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Courses list"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "securitySchemes": {
+          "apiKey": {
+            "scheme": "bearer",
+            "type": "http"
+          }
+        },
+        "securitySource": "definition"
+      }
+    },
+    "GET /courses/{id}": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "getCourse",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "accreditation": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "codeInternal": {
+                      "nullable": true,
+                      "type": "string"
+                    },
+                    "country": {
+                      "type": "string"
+                    },
+                    "credits": {
+                      "type": "string"
+                    },
+                    "duration": {
+                      "type": "string"
+                    },
+                    "featured": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "integer"
+                    },
+                    "institution": {
+                      "properties": {
+                        "address": {
+                          "type": "string"
+                        },
+                        "country": {
+                          "type": "string"
+                        },
+                        "departments": {
+                          "description": "Sub-resource (InstitutionDepartments); see the DreamApply SDK.",
+                          "type": "object"
+                        },
+                        "erasmus": {
+                          "type": "string"
+                        },
+                        "iban": {
+                          "type": "string"
+                        },
+                        "id": {
+                          "type": "integer"
+                        },
+                        "location": {
+                          "type": "string"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "registration": {
+                          "type": "string"
+                        },
+                        "status": {
+                          "type": "string"
+                        },
+                        "vat": {
+                          "type": "string"
+                        },
+                        "www": {
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "language": {
+                      "type": "string"
+                    },
+                    "location": {
+                      "type": "string"
+                    },
+                    "mode": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "quota": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "enum": [
+                        "Archived",
+                        "Closed",
+                        "Draft",
+                        "Online",
+                        "Private",
+                        "Standby"
+                      ],
+                      "type": "string"
+                    },
+                    "type": {
+                      "type": "string"
+                    },
+                    "updated": {
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Course"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "securitySchemes": {
+          "apiKey": {
+            "scheme": "bearer",
+            "type": "http"
+          }
+        },
+        "securitySource": "definition"
+      }
+    }
   }
 }

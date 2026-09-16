@@ -7,7 +7,7 @@
         "logged": "s3e",
         "result": "s3f",
         "role": "s40",
-        "roleId": "s41"
+        "roleId": 65
       },
       "LOGIN01": {
         "id": "LOGIN01",
@@ -15,7 +15,7 @@
         "logged": "s7a",
         "result": "s7b",
         "role": "s7c",
-        "roleId": "s7d"
+        "roleId": 125
       },
       "LOGIN02": {
         "id": "LOGIN02",
@@ -23,7 +23,7 @@
         "logged": "sb6",
         "result": "sb7",
         "role": "sb8",
-        "roleId": "sb9"
+        "roleId": 185
       }
     }
   },
@@ -34,7 +34,64 @@
         "logged": "sf2",
         "result": "sf3",
         "role": "sf4",
-        "roleId": "sf5"
+        "roleId": 245
+      }
+    }
+  },
+  "requests": {
+    "GET /logins": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "listLogins",
+        "parameters": [],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "properties": {
+                      "id": {
+                        "type": "integer"
+                      },
+                      "ip": {
+                        "type": "string"
+                      },
+                      "logged": {
+                        "type": "string"
+                      },
+                      "result": {
+                        "type": "string"
+                      },
+                      "role": {
+                        "type": "string"
+                      },
+                      "roleId": {
+                        "type": "integer"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Logins list"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "securitySchemes": {
+          "apiKey": {
+            "scheme": "bearer",
+            "type": "http"
+          }
+        },
+        "securitySource": "definition"
       }
     }
   }

@@ -15,7 +15,7 @@
         "rangeMax": "sbe",
         "rangeMin": "sbf",
         "reference": "sc0",
-        "scale": "sc1",
+        "scale": 193,
         "scored": "sc2",
         "scores": {},
         "subject": "sc4",
@@ -35,7 +35,7 @@
         "rangeMax": "s172",
         "rangeMin": "s173",
         "reference": "s174",
-        "scale": "s175",
+        "scale": 373,
         "scored": "s176",
         "scores": {},
         "subject": "s178",
@@ -55,7 +55,7 @@
         "rangeMax": "s226",
         "rangeMin": "s227",
         "reference": "s228",
-        "scale": "s229",
+        "scale": 553,
         "scored": "s22a",
         "scores": {},
         "subject": "s22c",
@@ -78,11 +78,203 @@
         "rangeMax": "s2da",
         "rangeMin": "s2db",
         "reference": "s2dc",
-        "scale": "s2dd",
+        "scale": 733,
         "scored": "s2de",
         "scores": {},
         "subject": "s2e0",
         "type": "s2e1"
+      }
+    }
+  },
+  "requests": {
+    "GET /scoresheets": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "listScoresheets",
+        "parameters": [],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "properties": {
+                      "confirmed": {
+                        "type": "string"
+                      },
+                      "created": {
+                        "type": "string"
+                      },
+                      "date": {
+                        "type": "string"
+                      },
+                      "depth": {
+                        "type": "string"
+                      },
+                      "group": {
+                        "description": "Sub-resource (object); see the DreamApply SDK.",
+                        "nullable": true,
+                        "type": "object"
+                      },
+                      "instructions": {
+                        "type": "string"
+                      },
+                      "language": {
+                        "type": "string"
+                      },
+                      "maps": {
+                        "nullable": true,
+                        "type": "array"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "rangeMax": {
+                        "type": "string"
+                      },
+                      "rangeMin": {
+                        "type": "string"
+                      },
+                      "reference": {
+                        "type": "string"
+                      },
+                      "scale": {
+                        "type": "integer"
+                      },
+                      "scored": {
+                        "type": "string"
+                      },
+                      "scores": {
+                        "description": "Sub-resource (Scores); see the DreamApply SDK.",
+                        "type": "object"
+                      },
+                      "subject": {
+                        "type": "string"
+                      },
+                      "type": {
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Scoresheets list"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "securitySchemes": {
+          "apiKey": {
+            "scheme": "bearer",
+            "type": "http"
+          }
+        },
+        "securitySource": "definition"
+      }
+    },
+    "GET /scoresheets/{id}": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "getScoresheet",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "confirmed": {
+                      "type": "string"
+                    },
+                    "created": {
+                      "type": "string"
+                    },
+                    "date": {
+                      "type": "string"
+                    },
+                    "depth": {
+                      "type": "string"
+                    },
+                    "group": {
+                      "description": "Sub-resource (object); see the DreamApply SDK.",
+                      "nullable": true,
+                      "type": "object"
+                    },
+                    "instructions": {
+                      "type": "string"
+                    },
+                    "language": {
+                      "type": "string"
+                    },
+                    "maps": {
+                      "nullable": true,
+                      "type": "array"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "rangeMax": {
+                      "type": "string"
+                    },
+                    "rangeMin": {
+                      "type": "string"
+                    },
+                    "reference": {
+                      "type": "string"
+                    },
+                    "scale": {
+                      "type": "integer"
+                    },
+                    "scored": {
+                      "type": "string"
+                    },
+                    "scores": {
+                      "description": "Sub-resource (Scores); see the DreamApply SDK.",
+                      "type": "object"
+                    },
+                    "subject": {
+                      "type": "string"
+                    },
+                    "type": {
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Scoresheet"
+          }
+        },
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "securitySchemes": {
+          "apiKey": {
+            "scheme": "bearer",
+            "type": "http"
+          }
+        },
+        "securitySource": "definition"
       }
     }
   }

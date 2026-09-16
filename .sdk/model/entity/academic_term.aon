@@ -53,6 +53,12 @@ main: kit: entity: academic_term: {
       name: "list"
       points: [
         {
+          contract: {
+            id: "GET /academic-terms"
+            json: "{\"operationId\":\"listAcademicTerms\",\"parameters\":[],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"items\":{\"properties\":{\"finish\":{\"type\":\"string\"},\"grace\":{\"type\":\"string\"},\"id\":{\"type\":\"integer\"},\"name\":{\"type\":\"string\"},\"start\":{\"type\":\"string\"},\"type\":{\"properties\":{\"name\":{\"enum\":[\"Legacy\"],\"type\":\"string\"}},\"type\":\"object\"},\"year\":{\"properties\":{\"name\":{\"type\":\"string\"},\"start\":{\"type\":\"string\"}},\"type\":\"object\"}},\"type\":\"object\"},\"type\":\"array\"}}},\"description\":\"AcademicTerms list\"}},\"security\":[{\"apiKey\":[]}],\"securitySchemes\":{\"apiKey\":{\"scheme\":\"bearer\",\"type\":\"http\"}},\"securitySource\":\"definition\"}"
+            source: "openapi3"
+            version: 1
+          }
           method: "GET"
           orig: "/academic-terms"
           segments: [
@@ -81,6 +87,12 @@ main: kit: entity: academic_term: {
                 type: "`$INTEGER`"
               }
             ]
+          }
+          contract: {
+            id: "GET /academic-terms/{id}"
+            json: "{\"operationId\":\"getAcademicTerm\",\"parameters\":[{\"in\":\"path\",\"name\":\"id\",\"required\":true,\"schema\":{\"type\":\"integer\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"finish\":{\"type\":\"string\"},\"grace\":{\"type\":\"string\"},\"id\":{\"type\":\"integer\"},\"name\":{\"type\":\"string\"},\"start\":{\"type\":\"string\"},\"type\":{\"properties\":{\"name\":{\"enum\":[\"Legacy\"],\"type\":\"string\"}},\"type\":\"object\"},\"year\":{\"properties\":{\"name\":{\"type\":\"string\"},\"start\":{\"type\":\"string\"}},\"type\":\"object\"}},\"type\":\"object\"}}},\"description\":\"AcademicTerm\"}},\"security\":[{\"apiKey\":[]}],\"securitySchemes\":{\"apiKey\":{\"scheme\":\"bearer\",\"type\":\"http\"}},\"securitySource\":\"definition\"}"
+            source: "openapi3"
+            version: 1
           }
           method: "GET"
           orig: "/academic-terms/{id}"
