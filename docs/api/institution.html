@@ -28,14 +28,14 @@
 <details><summary>SDKs</summary><a href="../sdks/go.html">Golang</a>
 <a href="../sdks/py.html">Python</a>
 <a href="../sdks/ts.html">TypeScript</a></details>
-<details><summary>Features</summary><a href="../features/debug.html">Request/response capture ring buffer for debugging</a>
-<a href="../features/idempotency.html">Idempotency keys for safe retries of mutating operations</a>
-<a href="../features/metrics.html">Statistics capture: per-operation counters and latency</a>
-<a href="../features/paging.html">Pagination signals for list operations</a>
-<a href="../features/ratelimit.html">Client-side rate limiting via a token bucket</a>
-<a href="../features/retry.html">Automatic retry of transient failures with exponential backoff</a>
-<a href="../features/test.html">In-memory mock transport for testing without a live server</a>
-<a href="../features/timeout.html">Per-request timeout with transport abort</a></details></nav><main id="content"><div class="page-context"><span class="section-dot" aria-hidden="true"></span>API</div><h1 id="institution">Institution</h1>
+<details><summary>Features</summary><a href="../features/debug.html">Debug capture</a>
+<a href="../features/idempotency.html">Idempotency</a>
+<a href="../features/metrics.html">Metrics</a>
+<a href="../features/paging.html">Paging</a>
+<a href="../features/ratelimit.html">Rate limiting</a>
+<a href="../features/retry.html">Retry</a>
+<a href="../features/test.html">Test transport</a>
+<a href="../features/timeout.html">Timeout</a></details></nav><main id="content"><div class="page-context"><span class="section-dot" aria-hidden="true"></span>API</div><h1 id="institution">Institution</h1>
 <h2 id="operations">Operations</h2>
 <p>Every route this entity exposes. Each route links to its own reference on this page.</p>
 <table>
@@ -62,6 +62,31 @@
 </tr>
 </tbody>
 </table>
+<h2 id="examples">Examples</h2>
+<p>One example per SDK, generated from the API model. The argument names are the parameters and fields of this entity, and the values are placeholders. The examples are not compiled or executed.</p>
+<h3 id="golang">Golang</h3>
+<p>Construct <code>client</code> as shown in the <a href="../sdks/go.html#set-up-the-client">Golang setup</a>, then call the operations:</p>
+<pre><code class="language-go">institutions, err := client.Institution(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(institutions)
+institution, err := client.Institution(nil).Load(map[string]any{&quot;id&quot;: 1}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(institution)
+</code></pre>
+<h3 id="python">Python</h3>
+<p>Construct <code>client</code> as shown in the <a href="../sdks/py.html#set-up-the-client">Python setup</a>, then call the operations:</p>
+<pre><code class="language-py">institutions = client.Institution().list()
+institution = client.Institution().load({&quot;id&quot;: 1})
+</code></pre>
+<h3 id="typescript">TypeScript</h3>
+<p>Construct <code>client</code> as shown in the <a href="../sdks/ts.html#set-up-the-client">TypeScript setup</a>, then call the operations:</p>
+<pre><code class="language-ts">const institutions = await client.Institution().list()
+const institution = await client.Institution().load({ id: 1 })
+</code></pre>
 <h2 id="fields">Fields</h2>
 <table>
 <thead>
@@ -77,13 +102,13 @@
 <td><code>address</code></td>
 <td><code>string</code></td>
 <td>No</td>
-<td></td>
+<td>Address</td>
 </tr>
 <tr>
 <td><code>country</code></td>
 <td><code>string</code></td>
 <td>No</td>
-<td></td>
+<td>Country</td>
 </tr>
 <tr>
 <td><code>departments</code></td>
@@ -95,55 +120,55 @@
 <td><code>erasmus</code></td>
 <td><code>string</code></td>
 <td>No</td>
-<td></td>
+<td>Erasmus</td>
 </tr>
 <tr>
 <td><code>iban</code></td>
 <td><code>string</code></td>
 <td>No</td>
-<td></td>
+<td>Iban</td>
 </tr>
 <tr>
 <td><code>id</code></td>
 <td><code>integer</code></td>
 <td>No</td>
-<td></td>
+<td>Id</td>
 </tr>
 <tr>
 <td><code>location</code></td>
 <td><code>string</code></td>
 <td>No</td>
-<td></td>
+<td>Location</td>
 </tr>
 <tr>
 <td><code>name</code></td>
 <td><code>string</code></td>
 <td>No</td>
-<td></td>
+<td>Name</td>
 </tr>
 <tr>
 <td><code>registration</code></td>
 <td><code>string</code></td>
 <td>No</td>
-<td></td>
+<td>Registration</td>
 </tr>
 <tr>
 <td><code>status</code></td>
 <td><code>string</code></td>
 <td>No</td>
-<td></td>
+<td>Status</td>
 </tr>
 <tr>
 <td><code>vat</code></td>
 <td><code>string</code></td>
 <td>No</td>
-<td></td>
+<td>Vat</td>
 </tr>
 <tr>
 <td><code>www</code></td>
 <td><code>string</code></td>
 <td>No</td>
-<td></td>
+<td>Www</td>
 </tr>
 </tbody>
 </table>

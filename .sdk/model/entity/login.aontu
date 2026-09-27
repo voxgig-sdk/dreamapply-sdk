@@ -1,0 +1,80 @@
+# Entity: login
+
+main: kit: entity: login: {
+
+  alias: field: {}
+
+  fields: {
+    id: {
+      h: "Id"
+      n: "id"
+      r: false
+      t: "`$INTEGER`"
+    }
+    ip: {
+      h: "Ip"
+      n: "ip"
+      r: false
+      t: "`$STRING`"
+    }
+    logged: {
+      h: "Logged"
+      n: "logged"
+      r: false
+      t: "`$STRING`"
+    }
+    result: {
+      h: "Result"
+      n: "result"
+      r: false
+      t: "`$STRING`"
+    }
+    role: {
+      h: "Role"
+      n: "role"
+      r: false
+      t: "`$STRING`"
+    }
+    roleId: {
+      h: "Role Id"
+      n: "roleId"
+      r: false
+      t: "`$INTEGER`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "login"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /logins"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/logins"
+          s: [
+            {
+              lit: "logins"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

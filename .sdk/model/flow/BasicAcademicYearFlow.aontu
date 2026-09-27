@@ -1,0 +1,44 @@
+# BasicAcademicYearFlow
+
+main: kit: flow: BasicAcademicYearFlow:
+{
+  entity: "academic_year",
+  kind: "basic",
+  name: "BasicAcademicYearFlow",
+  step: [
+    {
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "academic_year_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      i: {
+        ref: "academic_year_ref01",
+        srcdatavar: "academic_year_ref01_data",
+        suffix: "_dt0"
+      }
+
+      m: {
+        id: "academic_year01"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-academic_year_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicAcademicYearFlow"
+}

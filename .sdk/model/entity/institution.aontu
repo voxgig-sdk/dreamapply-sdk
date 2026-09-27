@@ -1,0 +1,159 @@
+# Entity: institution
+
+main: kit: entity: institution: {
+
+  alias: field: {}
+
+  fields: {
+    address: {
+      h: "Address"
+      n: "address"
+      r: false
+      t: "`$STRING`"
+    }
+    country: {
+      h: "Country"
+      n: "country"
+      r: false
+      t: "`$STRING`"
+    }
+    departments: {
+      h: "Departments"
+      n: "departments"
+      r: false
+      sh: "Sub-resource (InstitutionDepartments); see the DreamApply SDK."
+      t: "`$OBJECT`"
+    }
+    erasmus: {
+      h: "Erasmus"
+      n: "erasmus"
+      r: false
+      t: "`$STRING`"
+    }
+    iban: {
+      h: "Iban"
+      n: "iban"
+      r: false
+      t: "`$STRING`"
+    }
+    id: {
+      h: "Id"
+      n: "id"
+      r: false
+      t: "`$INTEGER`"
+    }
+    location: {
+      h: "Location"
+      n: "location"
+      r: false
+      t: "`$STRING`"
+    }
+    name: {
+      h: "Name"
+      n: "name"
+      r: false
+      t: "`$STRING`"
+    }
+    registration: {
+      h: "Registration"
+      n: "registration"
+      r: false
+      t: "`$STRING`"
+    }
+    status: {
+      h: "Status"
+      n: "status"
+      r: false
+      t: "`$STRING`"
+    }
+    vat: {
+      h: "Vat"
+      n: "vat"
+      r: false
+      t: "`$STRING`"
+    }
+    www: {
+      h: "Www"
+      n: "www"
+      r: false
+      t: "`$STRING`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "institution"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /institutions"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/institutions"
+          s: [
+            {
+              lit: "institutions"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /institutions/{id}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "id"
+                r: true
+                t: "`$INTEGER`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/institutions/{id}"
+          q: {
+            exist: [
+              "id"
+            ]
+          }
+          s: [
+            {
+              lit: "institutions"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.departments`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

@@ -25,10 +25,6 @@ import {
 } from '../../utility'
 
 
-// AFTER the imports on purpose: TypeScript hoists `import` above any
-// statement in the emitted CommonJS, so a loader placed above them would
-// run only after every imported module had already been evaluated - and
-// anything reading process.env at module scope would miss these values.
 loadEnvLocal(__dirname + '/../../../.env.local')
 
 
@@ -55,7 +51,7 @@ describe('LoginEntity', async () => {
     
     const setup = basicSetup()
     if (setup.live) {
-      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":[{"active":true,"name":"id","req":false,"type":"`$INTEGER`","index$":0},{"active":true,"name":"ip","req":false,"type":"`$STRING`","index$":1},{"active":true,"name":"logged","req":false,"type":"`$STRING`","index$":2},{"active":true,"name":"result","req":false,"type":"`$STRING`","index$":3},{"active":true,"name":"role","req":false,"type":"`$STRING`","index$":4},{"active":true,"name":"roleId","req":false,"type":"`$INTEGER`","index$":5}],"id":{"field":"id","name":"id"},"name":"login","op":{"list":{"input":"data","name":"list","points":[{"active":true,"args":{},"contract":{"id":"GET /logins","json":"{\"operationId\":\"listLogins\",\"parameters\":[],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"items\":{\"properties\":{\"id\":{\"type\":\"integer\"},\"ip\":{\"type\":\"string\"},\"logged\":{\"type\":\"string\"},\"result\":{\"type\":\"string\"},\"role\":{\"type\":\"string\"},\"roleId\":{\"type\":\"integer\"}},\"type\":\"object\"},\"type\":\"array\"}}},\"description\":\"Logins list\"}},\"security\":[{\"apiKey\":[]}],\"securitySchemes\":{\"apiKey\":{\"scheme\":\"bearer\",\"type\":\"http\"}},\"securitySource\":\"definition\"}","source":"openapi3","version":1},"kind":"http","method":"GET","orig":"/logins","segments":[{"lit":"logins"}],"select":{},"transform":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"list"}},"relations":{"ancestors":[]},"key$":"login","name__orig":"login","Name":"Login","name_":"login","name-":"login","NAME":"LOGIN","index$":11}, {"active":true,"entity":"login","key$":"BasicLoginFlow","kind":"basic","name":"BasicLoginFlow","param":{},"step":[{"active":true,"data":{},"input":{},"match":{},"op":"list","spec":[],"valid":[{"apply":"ItemExists","def":{"ref":"login_ref01"}}],"index$":0}]}, 'Login')
+      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":{"id":{"a":true,"h":"Id","n":"id","r":false,"t":"`$INTEGER`","key$":"id","index$":0},"ip":{"a":true,"h":"Ip","n":"ip","r":false,"t":"`$STRING`","key$":"ip","index$":1},"logged":{"a":true,"h":"Logged","n":"logged","r":false,"t":"`$STRING`","key$":"logged","index$":2},"result":{"a":true,"h":"Result","n":"result","r":false,"t":"`$STRING`","key$":"result","index$":3},"role":{"a":true,"h":"Role","n":"role","r":false,"t":"`$STRING`","key$":"role","index$":4},"roleId":{"a":true,"h":"Role Id","n":"roleId","r":false,"t":"`$INTEGER`","key$":"roleId","index$":5}},"id":{"field":"id","name":"id"},"name":"login","op":{"list":{"input":"data","name":"list","points":[{"a":true,"co":{"id":"GET /logins","source":"openapi3","version":2},"g":{},"k":"http","m":"GET","o":"/logins","q":{},"r":{},"s":[{"lit":"logins"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"list"}},"relations":{"ancestors":[]},"key$":"login","name__orig":"login","Name":"Login","name_":"login","name-":"login","NAME":"LOGIN","index$":11}, {"active":true,"entity":"login","key$":"BasicLoginFlow","kind":"basic","name":"BasicLoginFlow","param":{},"step":[{"a":true,"d":{},"i":{},"m":{},"o":"list","s":[],"v":[{"apply":"ItemExists","def":{"ref":"login_ref01"}}],"index$":0}]}, 'Login', {"GET /logins":{"protocol":"http","parameters":[]}})
     }
     const client = setup.client
     const struct = setup.struct

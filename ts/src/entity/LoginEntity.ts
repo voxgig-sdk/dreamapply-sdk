@@ -19,7 +19,6 @@ import type {
   LoginListMatch,
 } from '../DreamapplyTypes'
 
-// TODO: needs Entity superclass
 class LoginEntity extends DreamapplyEntityBase<Login> {
 
   constructor(client: DreamapplySDK, entopts: any) {

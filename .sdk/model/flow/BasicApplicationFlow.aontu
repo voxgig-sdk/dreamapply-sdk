@@ -1,0 +1,44 @@
+# BasicApplicationFlow
+
+main: kit: flow: BasicApplicationFlow:
+{
+  entity: "application",
+  kind: "basic",
+  name: "BasicApplicationFlow",
+  step: [
+    {
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "application_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      i: {
+        ref: "application_ref01",
+        srcdatavar: "application_ref01_data",
+        suffix: "_dt0"
+      }
+
+      m: {
+        id: "application01"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-application_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicApplicationFlow"
+}

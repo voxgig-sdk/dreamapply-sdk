@@ -19,19 +19,12 @@ const FEATURE_CLASS = {
     test: TestFeature_1.TestFeature,
     timeout: TimeoutFeature_1.TimeoutFeature,
 };
-// Per-feature plugin DEFINITIONS (voxgig/plugin `Definition` values), from
-// the model's active plugin groups. A feature that takes a `plugins` option
-// (secrets over sekreto) reads its own entry; a feature with no plugins has
-// none. Named imports above make each definition statically reachable, so
-// an SDK carries exactly the plugin modules its model selects — the same
-// leanness the old side-effect registry imports bought, without a registry.
 const FEATURE_PLUGINS = {};
 exports.FEATURE_PLUGINS = FEATURE_PLUGINS;
 class Config {
     makeFeature(fn) {
         const fc = FEATURE_CLASS[fn];
         const fi = new fc();
-        // TODO: errors etc
         return fi;
     }
     // False for a feature added at runtime via options.extend (station's
@@ -211,30 +204,37 @@ class Config {
             "fields": [
                 {
                     "name": "finish",
+                    "title": "Finish",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "grace",
+                    "title": "Grace",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "id",
+                    "title": "Id",
                     "type": "`$INTEGER`"
                 },
                 {
                     "name": "name",
+                    "title": "Name",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "start",
+                    "title": "Start",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "type",
+                    "title": "Type",
                     "type": "`$OBJECT`"
                 },
                 {
                     "name": "year",
+                    "title": "Year",
                     "type": "`$OBJECT`"
                 }
             ],
@@ -249,7 +249,6 @@ class Config {
                     "name": "list",
                     "points": [
                         {
-                            "args": {},
                             "kind": "http",
                             "method": "GET",
                             "orig": "/academic-terms",
@@ -258,14 +257,16 @@ class Config {
                                     "lit": "academic-terms"
                                 }
                             ],
-                            "select": {},
+                            "parts": [
+                                "academic-terms"
+                            ],
+                            "rename": {},
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
                             },
-                            "parts": [
-                                "academic-terms"
-                            ]
+                            "args": {},
+                            "select": {}
                         }
                     ]
                 },
@@ -274,17 +275,6 @@ class Config {
                     "name": "load",
                     "points": [
                         {
-                            "args": {
-                                "params": [
-                                    {
-                                        "kind": "param",
-                                        "name": "id",
-                                        "orig": "id",
-                                        "reqd": true,
-                                        "type": "`$INTEGER`"
-                                    }
-                                ]
-                            },
                             "kind": "http",
                             "method": "GET",
                             "orig": "/academic-terms/{id}",
@@ -296,19 +286,31 @@ class Config {
                                     "var": "id"
                                 }
                             ],
-                            "select": {
-                                "exist": [
-                                    "id"
-                                ]
-                            },
+                            "parts": [
+                                "academic-terms",
+                                "{id}"
+                            ],
+                            "rename": {},
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
                             },
-                            "parts": [
-                                "academic-terms",
-                                "{id}"
-                            ]
+                            "args": {
+                                "params": [
+                                    {
+                                        "name": "id",
+                                        "orig": "id",
+                                        "type": "`$INTEGER`",
+                                        "kind": "param",
+                                        "reqd": true
+                                    }
+                                ]
+                            },
+                            "select": {
+                                "exist": [
+                                    "id"
+                                ]
+                            }
                         }
                     ]
                 }
@@ -321,14 +323,17 @@ class Config {
             "fields": [
                 {
                     "name": "id",
+                    "title": "Id",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "name",
+                    "title": "Name",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "start",
+                    "title": "Start",
                     "type": "`$STRING`"
                 }
             ],
@@ -343,7 +348,6 @@ class Config {
                     "name": "list",
                     "points": [
                         {
-                            "args": {},
                             "kind": "http",
                             "method": "GET",
                             "orig": "/academic-years",
@@ -352,14 +356,16 @@ class Config {
                                     "lit": "academic-years"
                                 }
                             ],
-                            "select": {},
+                            "parts": [
+                                "academic-years"
+                            ],
+                            "rename": {},
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
                             },
-                            "parts": [
-                                "academic-years"
-                            ]
+                            "args": {},
+                            "select": {}
                         }
                     ]
                 },
@@ -368,17 +374,6 @@ class Config {
                     "name": "load",
                     "points": [
                         {
-                            "args": {
-                                "params": [
-                                    {
-                                        "kind": "param",
-                                        "name": "id",
-                                        "orig": "id",
-                                        "reqd": true,
-                                        "type": "`$INTEGER`"
-                                    }
-                                ]
-                            },
                             "kind": "http",
                             "method": "GET",
                             "orig": "/academic-years/{id}",
@@ -390,19 +385,31 @@ class Config {
                                     "var": "id"
                                 }
                             ],
-                            "select": {
-                                "exist": [
-                                    "id"
-                                ]
-                            },
+                            "parts": [
+                                "academic-years",
+                                "{id}"
+                            ],
+                            "rename": {},
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
                             },
-                            "parts": [
-                                "academic-years",
-                                "{id}"
-                            ]
+                            "args": {
+                                "params": [
+                                    {
+                                        "name": "id",
+                                        "orig": "id",
+                                        "type": "`$INTEGER`",
+                                        "kind": "param",
+                                        "reqd": true
+                                    }
+                                ]
+                            },
+                            "select": {
+                                "exist": [
+                                    "id"
+                                ]
+                            }
                         }
                     ]
                 }
@@ -415,30 +422,37 @@ class Config {
             "fields": [
                 {
                     "name": "email",
+                    "title": "Email",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "function",
+                    "title": "Function",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "id",
+                    "title": "Id",
                     "type": "`$INTEGER`"
                 },
                 {
                     "name": "name",
+                    "title": "Name",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "outgoingEmail",
+                    "title": "Outgoing Email",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "outgoingName",
+                    "title": "Outgoing Name",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "phone",
+                    "title": "Phone",
                     "type": "`$STRING`"
                 }
             ],
@@ -453,7 +467,6 @@ class Config {
                     "name": "list",
                     "points": [
                         {
-                            "args": {},
                             "kind": "http",
                             "method": "GET",
                             "orig": "/administrators",
@@ -462,14 +475,16 @@ class Config {
                                     "lit": "administrators"
                                 }
                             ],
-                            "select": {},
+                            "parts": [
+                                "administrators"
+                            ],
+                            "rename": {},
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
                             },
-                            "parts": [
-                                "administrators"
-                            ]
+                            "args": {},
+                            "select": {}
                         }
                     ]
                 },
@@ -478,17 +493,6 @@ class Config {
                     "name": "load",
                     "points": [
                         {
-                            "args": {
-                                "params": [
-                                    {
-                                        "kind": "param",
-                                        "name": "id",
-                                        "orig": "id",
-                                        "reqd": true,
-                                        "type": "`$INTEGER`"
-                                    }
-                                ]
-                            },
                             "kind": "http",
                             "method": "GET",
                             "orig": "/administrators/{id}",
@@ -500,19 +504,31 @@ class Config {
                                     "var": "id"
                                 }
                             ],
-                            "select": {
-                                "exist": [
-                                    "id"
-                                ]
-                            },
+                            "parts": [
+                                "administrators",
+                                "{id}"
+                            ],
+                            "rename": {},
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
                             },
-                            "parts": [
-                                "administrators",
-                                "{id}"
-                            ]
+                            "args": {
+                                "params": [
+                                    {
+                                        "name": "id",
+                                        "orig": "id",
+                                        "type": "`$INTEGER`",
+                                        "kind": "param",
+                                        "reqd": true
+                                    }
+                                ]
+                            },
+                            "select": {
+                                "exist": [
+                                    "id"
+                                ]
+                            }
                         }
                     ]
                 }
@@ -525,70 +541,87 @@ class Config {
             "fields": [
                 {
                     "name": "address",
+                    "title": "Address",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "citizenship",
+                    "title": "Citizenship",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "email",
+                    "title": "Email",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "id",
+                    "title": "Id",
                     "type": "`$INTEGER`"
                 },
                 {
                     "name": "matriculation",
+                    "title": "Matriculation",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "name",
+                    "title": "Name",
                     "type": "`$OBJECT`"
                 },
                 {
                     "name": "name_family",
+                    "title": "Name Family",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "name_given",
+                    "title": "Name Given",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "notes",
+                    "title": "Notes",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "phone",
+                    "title": "Phone",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "photo",
+                    "title": "Photo",
                     "type": "`$OBJECT`"
                 },
                 {
                     "name": "reference",
+                    "title": "Reference",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "region",
+                    "title": "Region",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "registered",
+                    "title": "Registered",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "tracker_ID",
+                    "title": "Tracker Id",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "type",
+                    "title": "Type",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "vatin",
+                    "title": "Vatin",
                     "type": "`$STRING`"
                 }
             ],
@@ -603,7 +636,6 @@ class Config {
                     "name": "create",
                     "points": [
                         {
-                            "args": {},
                             "kind": "http",
                             "method": "POST",
                             "orig": "/applicants",
@@ -612,14 +644,16 @@ class Config {
                                     "lit": "applicants"
                                 }
                             ],
-                            "select": {},
+                            "parts": [
+                                "applicants"
+                            ],
+                            "rename": {},
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
                             },
-                            "parts": [
-                                "applicants"
-                            ]
+                            "args": {},
+                            "select": {}
                         }
                     ]
                 },
@@ -628,7 +662,6 @@ class Config {
                     "name": "list",
                     "points": [
                         {
-                            "args": {},
                             "kind": "http",
                             "method": "GET",
                             "orig": "/applicants",
@@ -637,14 +670,16 @@ class Config {
                                     "lit": "applicants"
                                 }
                             ],
-                            "select": {},
+                            "parts": [
+                                "applicants"
+                            ],
+                            "rename": {},
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
                             },
-                            "parts": [
-                                "applicants"
-                            ]
+                            "args": {},
+                            "select": {}
                         }
                     ]
                 },
@@ -653,17 +688,6 @@ class Config {
                     "name": "load",
                     "points": [
                         {
-                            "args": {
-                                "params": [
-                                    {
-                                        "kind": "param",
-                                        "name": "id",
-                                        "orig": "id",
-                                        "reqd": true,
-                                        "type": "`$INTEGER`"
-                                    }
-                                ]
-                            },
                             "kind": "http",
                             "method": "GET",
                             "orig": "/applicants/{id}",
@@ -675,19 +699,31 @@ class Config {
                                     "var": "id"
                                 }
                             ],
-                            "select": {
-                                "exist": [
-                                    "id"
-                                ]
-                            },
+                            "parts": [
+                                "applicants",
+                                "{id}"
+                            ],
+                            "rename": {},
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
                             },
-                            "parts": [
-                                "applicants",
-                                "{id}"
-                            ]
+                            "args": {
+                                "params": [
+                                    {
+                                        "name": "id",
+                                        "orig": "id",
+                                        "type": "`$INTEGER`",
+                                        "kind": "param",
+                                        "reqd": true
+                                    }
+                                ]
+                            },
+                            "select": {
+                                "exist": [
+                                    "id"
+                                ]
+                            }
                         }
                     ]
                 }
@@ -700,95 +736,118 @@ class Config {
             "fields": [
                 {
                     "name": "academicTerm",
-                    "short": "Sub-resource (AcademicTerm); see the DreamApply SDK.",
-                    "type": "`$OBJECT`"
+                    "title": "Academic Term",
+                    "type": "`$OBJECT`",
+                    "short": "Sub-resource (AcademicTerm); see the DreamApply SDK."
                 },
                 {
                     "name": "activities",
+                    "title": "Activities",
                     "type": "`$ARRAY`"
                 },
                 {
                     "name": "applicant",
+                    "title": "Applicant",
                     "type": "`$OBJECT`"
                 },
                 {
                     "name": "career",
+                    "title": "Career",
                     "type": "`$ARRAY`"
                 },
                 {
                     "name": "contact",
+                    "title": "Contact",
                     "type": "`$ARRAY`"
                 },
                 {
                     "name": "created",
+                    "title": "Created",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "education",
+                    "title": "Education",
                     "type": "`$ARRAY`"
                 },
                 {
                     "name": "extras",
+                    "title": "Extras",
                     "type": "`$ARRAY`"
                 },
                 {
                     "name": "grades",
+                    "title": "Grades",
                     "type": "`$ARRAY`"
                 },
                 {
                     "name": "home",
+                    "title": "Home",
                     "type": "`$ARRAY`"
                 },
                 {
                     "name": "host",
+                    "title": "Host",
                     "type": "`$ARRAY`"
                 },
                 {
                     "name": "id",
+                    "title": "Id",
                     "type": "`$INTEGER`"
                 },
                 {
                     "name": "languages",
+                    "title": "Languages",
                     "type": "`$ARRAY`"
                 },
                 {
                     "name": "legal",
+                    "title": "Legal",
                     "type": "`$ARRAY`"
                 },
                 {
                     "name": "misc",
+                    "title": "Misc",
                     "type": "`$ARRAY`"
                 },
                 {
                     "name": "motivation",
+                    "title": "Motivation",
                     "type": "`$ARRAY`"
                 },
                 {
                     "name": "pdf",
+                    "title": "Pdf",
                     "type": "`$OBJECT`"
                 },
                 {
                     "name": "profile",
+                    "title": "Profile",
                     "type": "`$ARRAY`"
                 },
                 {
                     "name": "residences",
+                    "title": "Residences",
                     "type": "`$ARRAY`"
                 },
                 {
                     "name": "revised",
+                    "title": "Revised",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "status",
+                    "title": "Status",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "submitted",
+                    "title": "Submitted",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "visa",
+                    "title": "Visa",
                     "type": "`$ARRAY`"
                 }
             ],
@@ -803,7 +862,6 @@ class Config {
                     "name": "list",
                     "points": [
                         {
-                            "args": {},
                             "kind": "http",
                             "method": "GET",
                             "orig": "/applications",
@@ -812,14 +870,16 @@ class Config {
                                     "lit": "applications"
                                 }
                             ],
-                            "select": {},
+                            "parts": [
+                                "applications"
+                            ],
+                            "rename": {},
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
                             },
-                            "parts": [
-                                "applications"
-                            ]
+                            "args": {},
+                            "select": {}
                         }
                     ]
                 },
@@ -828,17 +888,6 @@ class Config {
                     "name": "load",
                     "points": [
                         {
-                            "args": {
-                                "params": [
-                                    {
-                                        "kind": "param",
-                                        "name": "id",
-                                        "orig": "id",
-                                        "reqd": true,
-                                        "type": "`$INTEGER`"
-                                    }
-                                ]
-                            },
                             "kind": "http",
                             "method": "GET",
                             "orig": "/applications/{id}",
@@ -850,19 +899,31 @@ class Config {
                                     "var": "id"
                                 }
                             ],
-                            "select": {
-                                "exist": [
-                                    "id"
-                                ]
-                            },
+                            "parts": [
+                                "applications",
+                                "{id}"
+                            ],
+                            "rename": {},
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
                             },
-                            "parts": [
-                                "applications",
-                                "{id}"
-                            ]
+                            "args": {
+                                "params": [
+                                    {
+                                        "name": "id",
+                                        "orig": "id",
+                                        "type": "`$INTEGER`",
+                                        "kind": "param",
+                                        "reqd": true
+                                    }
+                                ]
+                            },
+                            "select": {
+                                "exist": [
+                                    "id"
+                                ]
+                            }
                         }
                     ]
                 }
@@ -875,111 +936,138 @@ class Config {
             "fields": [
                 {
                     "name": "accreditation",
+                    "title": "Accreditation",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "address",
+                    "title": "Address",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "awards_abbr",
+                    "title": "Awards Abbr",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "awards_full",
+                    "title": "Awards Full",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "code",
+                    "title": "Code",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "codeInternal",
+                    "title": "Code Internal",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "country",
+                    "title": "Country",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "credits",
+                    "title": "Credits",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "departments",
-                    "short": "Sub-resource (InstitutionDepartments); see the DreamApply SDK.",
-                    "type": "`$OBJECT`"
+                    "title": "Departments",
+                    "type": "`$OBJECT`",
+                    "short": "Sub-resource (InstitutionDepartments); see the DreamApply SDK."
                 },
                 {
                     "name": "duration",
+                    "title": "Duration",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "erasmus",
+                    "title": "Erasmus",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "featured",
+                    "title": "Featured",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "iban",
+                    "title": "Iban",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "id",
+                    "title": "Id",
                     "type": "`$INTEGER`"
                 },
                 {
                     "name": "institution",
+                    "title": "Institution",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "language",
+                    "title": "Language",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "location",
+                    "title": "Location",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "mode",
+                    "title": "Mode",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "name",
+                    "title": "Name",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "prospect_uri",
+                    "title": "Prospect Uri",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "quota",
+                    "title": "Quota",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "registration",
+                    "title": "Registration",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "status",
+                    "title": "Status",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "type",
+                    "title": "Type",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "updated",
+                    "title": "Updated",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "vat",
+                    "title": "Vat",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "www",
+                    "title": "Www",
                     "type": "`$STRING`"
                 }
             ],
@@ -994,7 +1082,6 @@ class Config {
                     "name": "create",
                     "points": [
                         {
-                            "args": {},
                             "kind": "http",
                             "method": "POST",
                             "orig": "/courses",
@@ -1003,14 +1090,16 @@ class Config {
                                     "lit": "courses"
                                 }
                             ],
-                            "select": {},
+                            "parts": [
+                                "courses"
+                            ],
+                            "rename": {},
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body.institution`"
                             },
-                            "parts": [
-                                "courses"
-                            ]
+                            "args": {},
+                            "select": {}
                         }
                     ]
                 },
@@ -1019,7 +1108,6 @@ class Config {
                     "name": "list",
                     "points": [
                         {
-                            "args": {},
                             "kind": "http",
                             "method": "GET",
                             "orig": "/courses",
@@ -1028,14 +1116,16 @@ class Config {
                                     "lit": "courses"
                                 }
                             ],
-                            "select": {},
+                            "parts": [
+                                "courses"
+                            ],
+                            "rename": {},
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
                             },
-                            "parts": [
-                                "courses"
-                            ]
+                            "args": {},
+                            "select": {}
                         }
                     ]
                 },
@@ -1044,17 +1134,6 @@ class Config {
                     "name": "load",
                     "points": [
                         {
-                            "args": {
-                                "params": [
-                                    {
-                                        "kind": "param",
-                                        "name": "id",
-                                        "orig": "id",
-                                        "reqd": true,
-                                        "type": "`$INTEGER`"
-                                    }
-                                ]
-                            },
                             "kind": "http",
                             "method": "GET",
                             "orig": "/courses/{id}",
@@ -1066,19 +1145,31 @@ class Config {
                                     "var": "id"
                                 }
                             ],
-                            "select": {
-                                "exist": [
-                                    "id"
-                                ]
-                            },
+                            "parts": [
+                                "courses",
+                                "{id}"
+                            ],
+                            "rename": {},
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body.institution`"
                             },
-                            "parts": [
-                                "courses",
-                                "{id}"
-                            ]
+                            "args": {
+                                "params": [
+                                    {
+                                        "name": "id",
+                                        "orig": "id",
+                                        "type": "`$INTEGER`",
+                                        "kind": "param",
+                                        "reqd": true
+                                    }
+                                ]
+                            },
+                            "select": {
+                                "exist": [
+                                    "id"
+                                ]
+                            }
                         }
                     ]
                 }
@@ -1091,18 +1182,22 @@ class Config {
             "fields": [
                 {
                     "name": "id",
+                    "title": "Id",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "name",
+                    "title": "Name",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "notes",
+                    "title": "Notes",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "type",
+                    "title": "Type",
                     "type": "`$STRING`"
                 }
             ],
@@ -1117,7 +1212,6 @@ class Config {
                     "name": "list",
                     "points": [
                         {
-                            "args": {},
                             "kind": "http",
                             "method": "GET",
                             "orig": "/fees",
@@ -1126,14 +1220,16 @@ class Config {
                                     "lit": "fees"
                                 }
                             ],
-                            "select": {},
+                            "parts": [
+                                "fees"
+                            ],
+                            "rename": {},
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
                             },
-                            "parts": [
-                                "fees"
-                            ]
+                            "args": {},
+                            "select": {}
                         }
                     ]
                 },
@@ -1142,17 +1238,6 @@ class Config {
                     "name": "load",
                     "points": [
                         {
-                            "args": {
-                                "params": [
-                                    {
-                                        "kind": "param",
-                                        "name": "id",
-                                        "orig": "id",
-                                        "reqd": true,
-                                        "type": "`$INTEGER`"
-                                    }
-                                ]
-                            },
                             "kind": "http",
                             "method": "GET",
                             "orig": "/fees/{id}",
@@ -1164,19 +1249,31 @@ class Config {
                                     "var": "id"
                                 }
                             ],
-                            "select": {
-                                "exist": [
-                                    "id"
-                                ]
-                            },
+                            "parts": [
+                                "fees",
+                                "{id}"
+                            ],
+                            "rename": {},
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
                             },
-                            "parts": [
-                                "fees",
-                                "{id}"
-                            ]
+                            "args": {
+                                "params": [
+                                    {
+                                        "name": "id",
+                                        "orig": "id",
+                                        "type": "`$INTEGER`",
+                                        "kind": "param",
+                                        "reqd": true
+                                    }
+                                ]
+                            },
+                            "select": {
+                                "exist": [
+                                    "id"
+                                ]
+                            }
                         }
                     ]
                 }
@@ -1189,51 +1286,63 @@ class Config {
             "fields": [
                 {
                     "name": "address",
+                    "title": "Address",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "country",
+                    "title": "Country",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "departments",
-                    "short": "Sub-resource (InstitutionDepartments); see the DreamApply SDK.",
-                    "type": "`$OBJECT`"
+                    "title": "Departments",
+                    "type": "`$OBJECT`",
+                    "short": "Sub-resource (InstitutionDepartments); see the DreamApply SDK."
                 },
                 {
                     "name": "erasmus",
+                    "title": "Erasmus",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "iban",
+                    "title": "Iban",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "id",
+                    "title": "Id",
                     "type": "`$INTEGER`"
                 },
                 {
                     "name": "location",
+                    "title": "Location",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "name",
+                    "title": "Name",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "registration",
+                    "title": "Registration",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "status",
+                    "title": "Status",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "vat",
+                    "title": "Vat",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "www",
+                    "title": "Www",
                     "type": "`$STRING`"
                 }
             ],
@@ -1248,7 +1357,6 @@ class Config {
                     "name": "list",
                     "points": [
                         {
-                            "args": {},
                             "kind": "http",
                             "method": "GET",
                             "orig": "/institutions",
@@ -1257,14 +1365,16 @@ class Config {
                                     "lit": "institutions"
                                 }
                             ],
-                            "select": {},
+                            "parts": [
+                                "institutions"
+                            ],
+                            "rename": {},
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
                             },
-                            "parts": [
-                                "institutions"
-                            ]
+                            "args": {},
+                            "select": {}
                         }
                     ]
                 },
@@ -1273,17 +1383,6 @@ class Config {
                     "name": "load",
                     "points": [
                         {
-                            "args": {
-                                "params": [
-                                    {
-                                        "kind": "param",
-                                        "name": "id",
-                                        "orig": "id",
-                                        "reqd": true,
-                                        "type": "`$INTEGER`"
-                                    }
-                                ]
-                            },
                             "kind": "http",
                             "method": "GET",
                             "orig": "/institutions/{id}",
@@ -1295,19 +1394,31 @@ class Config {
                                     "var": "id"
                                 }
                             ],
-                            "select": {
-                                "exist": [
-                                    "id"
-                                ]
-                            },
+                            "parts": [
+                                "institutions",
+                                "{id}"
+                            ],
+                            "rename": {},
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body.departments`"
                             },
-                            "parts": [
-                                "institutions",
-                                "{id}"
-                            ]
+                            "args": {
+                                "params": [
+                                    {
+                                        "name": "id",
+                                        "orig": "id",
+                                        "type": "`$INTEGER`",
+                                        "kind": "param",
+                                        "reqd": true
+                                    }
+                                ]
+                            },
+                            "select": {
+                                "exist": [
+                                    "id"
+                                ]
+                            }
                         }
                     ]
                 }
@@ -1320,34 +1431,42 @@ class Config {
             "fields": [
                 {
                     "name": "arrival",
+                    "title": "Arrival",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "commence",
+                    "title": "Commence",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "decision",
+                    "title": "Decision",
                     "type": "`$OBJECT`"
                 },
                 {
                     "name": "id",
+                    "title": "Id",
                     "type": "`$INTEGER`"
                 },
                 {
                     "name": "name",
+                    "title": "Name",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "policy",
+                    "title": "Policy",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "pre",
+                    "title": "Pre",
                     "type": "`$OBJECT`"
                 },
                 {
                     "name": "start",
+                    "title": "Start",
                     "type": "`$STRING`"
                 }
             ],
@@ -1362,7 +1481,6 @@ class Config {
                     "name": "list",
                     "points": [
                         {
-                            "args": {},
                             "kind": "http",
                             "method": "GET",
                             "orig": "/intakes",
@@ -1371,14 +1489,16 @@ class Config {
                                     "lit": "intakes"
                                 }
                             ],
-                            "select": {},
+                            "parts": [
+                                "intakes"
+                            ],
+                            "rename": {},
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
                             },
-                            "parts": [
-                                "intakes"
-                            ]
+                            "args": {},
+                            "select": {}
                         }
                     ]
                 },
@@ -1387,17 +1507,6 @@ class Config {
                     "name": "load",
                     "points": [
                         {
-                            "args": {
-                                "params": [
-                                    {
-                                        "kind": "param",
-                                        "name": "id",
-                                        "orig": "id",
-                                        "reqd": true,
-                                        "type": "`$INTEGER`"
-                                    }
-                                ]
-                            },
                             "kind": "http",
                             "method": "GET",
                             "orig": "/intakes/{id}",
@@ -1409,19 +1518,31 @@ class Config {
                                     "var": "id"
                                 }
                             ],
-                            "select": {
-                                "exist": [
-                                    "id"
-                                ]
-                            },
+                            "parts": [
+                                "intakes",
+                                "{id}"
+                            ],
+                            "rename": {},
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
                             },
-                            "parts": [
-                                "intakes",
-                                "{id}"
-                            ]
+                            "args": {
+                                "params": [
+                                    {
+                                        "name": "id",
+                                        "orig": "id",
+                                        "type": "`$INTEGER`",
+                                        "kind": "param",
+                                        "reqd": true
+                                    }
+                                ]
+                            },
+                            "select": {
+                                "exist": [
+                                    "id"
+                                ]
+                            }
                         }
                     ]
                 }
@@ -1434,58 +1555,72 @@ class Config {
             "fields": [
                 {
                     "name": "applicant",
+                    "title": "Applicant",
                     "type": "`$OBJECT`"
                 },
                 {
                     "name": "application",
+                    "title": "Application",
                     "type": "`$OBJECT`"
                 },
                 {
                     "name": "collected",
+                    "title": "Collected",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "course",
+                    "title": "Course",
                     "type": "`$OBJECT`"
                 },
                 {
                     "name": "currency",
+                    "title": "Currency",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "deadline",
+                    "title": "Deadline",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "delivered",
+                    "title": "Delivered",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "id",
+                    "title": "Id",
                     "type": "`$INTEGER`"
                 },
                 {
                     "name": "instructions",
+                    "title": "Instructions",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "issued",
+                    "title": "Issued",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "nr",
+                    "title": "Nr",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "payer",
+                    "title": "Payer",
                     "type": "`$OBJECT`"
                 },
                 {
                     "name": "reminded",
+                    "title": "Reminded",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "smallprint",
+                    "title": "Smallprint",
                     "type": "`$STRING`"
                 }
             ],
@@ -1500,7 +1635,6 @@ class Config {
                     "name": "list",
                     "points": [
                         {
-                            "args": {},
                             "kind": "http",
                             "method": "GET",
                             "orig": "/invoices",
@@ -1509,14 +1643,16 @@ class Config {
                                     "lit": "invoices"
                                 }
                             ],
-                            "select": {},
+                            "parts": [
+                                "invoices"
+                            ],
+                            "rename": {},
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
                             },
-                            "parts": [
-                                "invoices"
-                            ]
+                            "args": {},
+                            "select": {}
                         }
                     ]
                 },
@@ -1525,17 +1661,6 @@ class Config {
                     "name": "load",
                     "points": [
                         {
-                            "args": {
-                                "params": [
-                                    {
-                                        "kind": "param",
-                                        "name": "id",
-                                        "orig": "id",
-                                        "reqd": true,
-                                        "type": "`$INTEGER`"
-                                    }
-                                ]
-                            },
                             "kind": "http",
                             "method": "GET",
                             "orig": "/invoices/{id}",
@@ -1547,19 +1672,31 @@ class Config {
                                     "var": "id"
                                 }
                             ],
-                            "select": {
-                                "exist": [
-                                    "id"
-                                ]
-                            },
+                            "parts": [
+                                "invoices",
+                                "{id}"
+                            ],
+                            "rename": {},
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
                             },
-                            "parts": [
-                                "invoices",
-                                "{id}"
-                            ]
+                            "args": {
+                                "params": [
+                                    {
+                                        "name": "id",
+                                        "orig": "id",
+                                        "type": "`$INTEGER`",
+                                        "kind": "param",
+                                        "reqd": true
+                                    }
+                                ]
+                            },
+                            "select": {
+                                "exist": [
+                                    "id"
+                                ]
+                            }
                         }
                     ]
                 },
@@ -1568,17 +1705,6 @@ class Config {
                     "name": "remove",
                     "points": [
                         {
-                            "args": {
-                                "params": [
-                                    {
-                                        "kind": "param",
-                                        "name": "id",
-                                        "orig": "id",
-                                        "reqd": true,
-                                        "type": "`$INTEGER`"
-                                    }
-                                ]
-                            },
                             "kind": "http",
                             "method": "DELETE",
                             "orig": "/invoices/{id}",
@@ -1590,19 +1716,31 @@ class Config {
                                     "var": "id"
                                 }
                             ],
-                            "select": {
-                                "exist": [
-                                    "id"
-                                ]
-                            },
+                            "parts": [
+                                "invoices",
+                                "{id}"
+                            ],
+                            "rename": {},
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
                             },
-                            "parts": [
-                                "invoices",
-                                "{id}"
-                            ]
+                            "args": {
+                                "params": [
+                                    {
+                                        "name": "id",
+                                        "orig": "id",
+                                        "type": "`$INTEGER`",
+                                        "kind": "param",
+                                        "reqd": true
+                                    }
+                                ]
+                            },
+                            "select": {
+                                "exist": [
+                                    "id"
+                                ]
+                            }
                         }
                     ]
                 }
@@ -1615,58 +1753,72 @@ class Config {
             "fields": [
                 {
                     "name": "administrator",
+                    "title": "Administrator",
                     "type": "`$OBJECT`"
                 },
                 {
                     "name": "applicant",
+                    "title": "Applicant",
                     "type": "`$OBJECT`"
                 },
                 {
                     "name": "application",
+                    "title": "Application",
                     "type": "`$OBJECT`"
                 },
                 {
                     "name": "bind",
+                    "title": "Bind",
                     "type": "`$ARRAY`"
                 },
                 {
                     "name": "course",
+                    "title": "Course",
                     "type": "`$OBJECT`"
                 },
                 {
                     "name": "document",
+                    "title": "Document",
                     "type": "`$OBJECT`"
                 },
                 {
                     "name": "event",
+                    "title": "Event",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "flag",
+                    "title": "Flag",
                     "type": "`$OBJECT`"
                 },
                 {
                     "name": "id",
+                    "title": "Id",
                     "type": "`$INTEGER`"
                 },
                 {
                     "name": "institution",
+                    "title": "Institution",
                     "type": "`$OBJECT`"
                 },
                 {
                     "name": "invoice",
+                    "title": "Invoice",
                     "type": "`$OBJECT`"
                 },
                 {
                     "name": "logged",
+                    "title": "Logged",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "offer",
+                    "title": "Offer",
                     "type": "`$OBJECT`"
                 },
                 {
                     "name": "tracker",
+                    "title": "Tracker",
                     "type": "`$OBJECT`"
                 }
             ],
@@ -1681,7 +1833,6 @@ class Config {
                     "name": "list",
                     "points": [
                         {
-                            "args": {},
                             "kind": "http",
                             "method": "GET",
                             "orig": "/journal",
@@ -1690,14 +1841,16 @@ class Config {
                                     "lit": "journal"
                                 }
                             ],
-                            "select": {},
+                            "parts": [
+                                "journal"
+                            ],
+                            "rename": {},
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
                             },
-                            "parts": [
-                                "journal"
-                            ]
+                            "args": {},
+                            "select": {}
                         }
                     ]
                 }
@@ -1710,26 +1863,32 @@ class Config {
             "fields": [
                 {
                     "name": "id",
+                    "title": "Id",
                     "type": "`$INTEGER`"
                 },
                 {
                     "name": "ip",
+                    "title": "Ip",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "logged",
+                    "title": "Logged",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "result",
+                    "title": "Result",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "role",
+                    "title": "Role",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "roleId",
+                    "title": "Role Id",
                     "type": "`$INTEGER`"
                 }
             ],
@@ -1744,7 +1903,6 @@ class Config {
                     "name": "list",
                     "points": [
                         {
-                            "args": {},
                             "kind": "http",
                             "method": "GET",
                             "orig": "/logins",
@@ -1753,14 +1911,16 @@ class Config {
                                     "lit": "logins"
                                 }
                             ],
-                            "select": {},
+                            "parts": [
+                                "logins"
+                            ],
+                            "rename": {},
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
                             },
-                            "parts": [
-                                "logins"
-                            ]
+                            "args": {},
+                            "select": {}
                         }
                     ]
                 }
@@ -1773,76 +1933,94 @@ class Config {
             "fields": [
                 {
                     "name": "confirmed",
+                    "title": "Confirmed",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "created",
+                    "title": "Created",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "date",
+                    "title": "Date",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "depth",
+                    "title": "Depth",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "group",
-                    "short": "Sub-resource (object); see the DreamApply SDK.",
-                    "type": "`$OBJECT`"
+                    "title": "Group",
+                    "type": "`$OBJECT`",
+                    "short": "Sub-resource (object); see the DreamApply SDK."
                 },
                 {
                     "name": "id",
+                    "title": "Id",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "instructions",
+                    "title": "Instructions",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "language",
+                    "title": "Language",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "maps",
+                    "title": "Maps",
                     "type": "`$ARRAY`"
                 },
                 {
                     "name": "name",
+                    "title": "Name",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "rangeMax",
+                    "title": "Range Max",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "rangeMin",
+                    "title": "Range Min",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "reference",
+                    "title": "Reference",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "scale",
+                    "title": "Scale",
                     "type": "`$INTEGER`"
                 },
                 {
                     "name": "scored",
+                    "title": "Scored",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "scores",
-                    "short": "Sub-resource (Scores); see the DreamApply SDK.",
-                    "type": "`$OBJECT`"
+                    "title": "Scores",
+                    "type": "`$OBJECT`",
+                    "short": "Sub-resource (Scores); see the DreamApply SDK."
                 },
                 {
                     "name": "subject",
+                    "title": "Subject",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "type",
+                    "title": "Type",
                     "type": "`$STRING`"
                 }
             ],
@@ -1857,7 +2035,6 @@ class Config {
                     "name": "list",
                     "points": [
                         {
-                            "args": {},
                             "kind": "http",
                             "method": "GET",
                             "orig": "/scoresheets",
@@ -1866,14 +2043,16 @@ class Config {
                                     "lit": "scoresheets"
                                 }
                             ],
-                            "select": {},
+                            "parts": [
+                                "scoresheets"
+                            ],
+                            "rename": {},
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
                             },
-                            "parts": [
-                                "scoresheets"
-                            ]
+                            "args": {},
+                            "select": {}
                         }
                     ]
                 },
@@ -1882,17 +2061,6 @@ class Config {
                     "name": "load",
                     "points": [
                         {
-                            "args": {
-                                "params": [
-                                    {
-                                        "kind": "param",
-                                        "name": "id",
-                                        "orig": "id",
-                                        "reqd": true,
-                                        "type": "`$INTEGER`"
-                                    }
-                                ]
-                            },
                             "kind": "http",
                             "method": "GET",
                             "orig": "/scoresheets/{id}",
@@ -1904,19 +2072,31 @@ class Config {
                                     "var": "id"
                                 }
                             ],
-                            "select": {
-                                "exist": [
-                                    "id"
-                                ]
-                            },
+                            "parts": [
+                                "scoresheets",
+                                "{id}"
+                            ],
+                            "rename": {},
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
                             },
-                            "parts": [
-                                "scoresheets",
-                                "{id}"
-                            ]
+                            "args": {
+                                "params": [
+                                    {
+                                        "name": "id",
+                                        "orig": "id",
+                                        "type": "`$INTEGER`",
+                                        "kind": "param",
+                                        "reqd": true
+                                    }
+                                ]
+                            },
+                            "select": {
+                                "exist": [
+                                    "id"
+                                ]
+                            }
                         }
                     ]
                 }
@@ -1929,47 +2109,58 @@ class Config {
             "fields": [
                 {
                     "name": "content",
-                    "short": "Sub-resource (StreamInterface); see the DreamApply SDK.",
-                    "type": "`$OBJECT`"
+                    "title": "Content",
+                    "type": "`$OBJECT`",
+                    "short": "Sub-resource (StreamInterface); see the DreamApply SDK."
                 },
                 {
                     "name": "created",
+                    "title": "Created",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "expires",
+                    "title": "Expires",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "id",
+                    "title": "Id",
                     "type": "`$INTEGER`"
                 },
                 {
                     "name": "mime",
+                    "title": "Mime",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "modified",
+                    "title": "Modified",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "name",
+                    "title": "Name",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "size",
+                    "title": "Size",
                     "type": "`$INTEGER`"
                 },
                 {
                     "name": "tabledata",
+                    "title": "Tabledata",
                     "type": "`$OBJECT`"
                 },
                 {
                     "name": "title",
+                    "title": "Title",
                     "type": "`$STRING`"
                 },
                 {
                     "name": "uploaded",
+                    "title": "Uploaded",
                     "type": "`$STRING`"
                 }
             ],
@@ -1984,7 +2175,6 @@ class Config {
                     "name": "list",
                     "points": [
                         {
-                            "args": {},
                             "kind": "http",
                             "method": "GET",
                             "orig": "/tableviews",
@@ -1993,14 +2183,16 @@ class Config {
                                     "lit": "tableviews"
                                 }
                             ],
-                            "select": {},
+                            "parts": [
+                                "tableviews"
+                            ],
+                            "rename": {},
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body`"
                             },
-                            "parts": [
-                                "tableviews"
-                            ]
+                            "args": {},
+                            "select": {}
                         }
                     ]
                 },
@@ -2009,17 +2201,6 @@ class Config {
                     "name": "load",
                     "points": [
                         {
-                            "args": {
-                                "params": [
-                                    {
-                                        "kind": "param",
-                                        "name": "id",
-                                        "orig": "id",
-                                        "reqd": true,
-                                        "type": "`$INTEGER`"
-                                    }
-                                ]
-                            },
                             "kind": "http",
                             "method": "GET",
                             "orig": "/tableviews/{id}",
@@ -2031,19 +2212,31 @@ class Config {
                                     "var": "id"
                                 }
                             ],
-                            "select": {
-                                "exist": [
-                                    "id"
-                                ]
-                            },
+                            "parts": [
+                                "tableviews",
+                                "{id}"
+                            ],
+                            "rename": {},
                             "transform": {
                                 "req": "`reqdata`",
                                 "res": "`body.tabledata`"
                             },
-                            "parts": [
-                                "tableviews",
-                                "{id}"
-                            ]
+                            "args": {
+                                "params": [
+                                    {
+                                        "name": "id",
+                                        "orig": "id",
+                                        "type": "`$INTEGER`",
+                                        "kind": "param",
+                                        "reqd": true
+                                    }
+                                ]
+                            },
+                            "select": {
+                                "exist": [
+                                    "id"
+                                ]
+                            }
                         }
                     ]
                 }

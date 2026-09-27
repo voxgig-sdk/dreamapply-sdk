@@ -1,0 +1,225 @@
+# Entity: application
+
+main: kit: entity: application: {
+
+  alias: field: {}
+
+  fields: {
+    academicTerm: {
+      h: "Academic Term"
+      n: "academicTerm"
+      r: false
+      sh: "Sub-resource (AcademicTerm); see the DreamApply SDK."
+      t: "`$OBJECT`"
+    }
+    activities: {
+      h: "Activities"
+      n: "activities"
+      r: false
+      t: "`$ARRAY`"
+    }
+    applicant: {
+      h: "Applicant"
+      n: "applicant"
+      r: false
+      t: "`$OBJECT`"
+    }
+    career: {
+      h: "Career"
+      n: "career"
+      r: false
+      t: "`$ARRAY`"
+    }
+    contact: {
+      h: "Contact"
+      n: "contact"
+      r: false
+      t: "`$ARRAY`"
+    }
+    created: {
+      h: "Created"
+      n: "created"
+      r: false
+      t: "`$STRING`"
+    }
+    education: {
+      h: "Education"
+      n: "education"
+      r: false
+      t: "`$ARRAY`"
+    }
+    extras: {
+      h: "Extras"
+      n: "extras"
+      r: false
+      t: "`$ARRAY`"
+    }
+    grades: {
+      h: "Grades"
+      n: "grades"
+      r: false
+      t: "`$ARRAY`"
+    }
+    home: {
+      h: "Home"
+      n: "home"
+      r: false
+      t: "`$ARRAY`"
+    }
+    host: {
+      h: "Host"
+      n: "host"
+      r: false
+      t: "`$ARRAY`"
+    }
+    id: {
+      h: "Id"
+      n: "id"
+      r: false
+      t: "`$INTEGER`"
+    }
+    languages: {
+      h: "Languages"
+      n: "languages"
+      r: false
+      t: "`$ARRAY`"
+    }
+    legal: {
+      h: "Legal"
+      n: "legal"
+      r: false
+      t: "`$ARRAY`"
+    }
+    misc: {
+      h: "Misc"
+      n: "misc"
+      r: false
+      t: "`$ARRAY`"
+    }
+    motivation: {
+      h: "Motivation"
+      n: "motivation"
+      r: false
+      t: "`$ARRAY`"
+    }
+    pdf: {
+      h: "Pdf"
+      n: "pdf"
+      r: false
+      t: "`$OBJECT`"
+    }
+    profile: {
+      h: "Profile"
+      n: "profile"
+      r: false
+      t: "`$ARRAY`"
+    }
+    residences: {
+      h: "Residences"
+      n: "residences"
+      r: false
+      t: "`$ARRAY`"
+    }
+    revised: {
+      h: "Revised"
+      n: "revised"
+      r: false
+      t: "`$STRING`"
+    }
+    status: {
+      h: "Status"
+      n: "status"
+      r: false
+      t: "`$STRING`"
+    }
+    submitted: {
+      h: "Submitted"
+      n: "submitted"
+      r: false
+      t: "`$STRING`"
+    }
+    visa: {
+      h: "Visa"
+      n: "visa"
+      r: false
+      t: "`$ARRAY`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "application"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /applications"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/applications"
+          s: [
+            {
+              lit: "applications"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /applications/{id}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "id"
+                r: true
+                t: "`$INTEGER`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/applications/{id}"
+          q: {
+            exist: [
+              "id"
+            ]
+          }
+          s: [
+            {
+              lit: "applications"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

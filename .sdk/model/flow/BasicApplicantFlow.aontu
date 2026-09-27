@@ -1,0 +1,52 @@
+# BasicApplicantFlow
+
+main: kit: flow: BasicApplicantFlow:
+{
+  entity: "applicant",
+  kind: "basic",
+  name: "BasicApplicantFlow",
+  step: [
+    {
+      i: {
+        ref: "applicant_ref01"
+      }
+
+      o: "create"
+    }
+
+    {
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "applicant_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      i: {
+        ref: "applicant_ref01",
+        srcdatavar: "applicant_ref01_data",
+        suffix: "_dt0"
+      }
+
+      m: {
+        id: "applicant01"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-applicant_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicApplicantFlow"
+}

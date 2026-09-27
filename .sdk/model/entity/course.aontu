@@ -1,0 +1,272 @@
+# Entity: course
+
+main: kit: entity: course: {
+
+  alias: field: {}
+
+  fields: {
+    accreditation: {
+      h: "Accreditation"
+      n: "accreditation"
+      r: false
+      t: "`$STRING`"
+    }
+    address: {
+      h: "Address"
+      n: "address"
+      r: false
+      t: "`$STRING`"
+    }
+    awards_abbr: {
+      h: "Awards Abbr"
+      n: "awards_abbr"
+      r: false
+      t: "`$STRING`"
+    }
+    awards_full: {
+      h: "Awards Full"
+      n: "awards_full"
+      r: false
+      t: "`$STRING`"
+    }
+    code: {
+      h: "Code"
+      n: "code"
+      r: false
+      t: "`$STRING`"
+    }
+    codeInternal: {
+      h: "Code Internal"
+      n: "codeInternal"
+      r: false
+      t: "`$STRING`"
+    }
+    country: {
+      h: "Country"
+      n: "country"
+      r: false
+      t: "`$STRING`"
+    }
+    credits: {
+      h: "Credits"
+      n: "credits"
+      r: false
+      t: "`$STRING`"
+    }
+    departments: {
+      h: "Departments"
+      n: "departments"
+      r: false
+      sh: "Sub-resource (InstitutionDepartments); see the DreamApply SDK."
+      t: "`$OBJECT`"
+    }
+    duration: {
+      h: "Duration"
+      n: "duration"
+      r: false
+      t: "`$STRING`"
+    }
+    erasmus: {
+      h: "Erasmus"
+      n: "erasmus"
+      r: false
+      t: "`$STRING`"
+    }
+    featured: {
+      h: "Featured"
+      n: "featured"
+      r: false
+      t: "`$STRING`"
+    }
+    iban: {
+      h: "Iban"
+      n: "iban"
+      r: false
+      t: "`$STRING`"
+    }
+    id: {
+      h: "Id"
+      n: "id"
+      r: false
+      t: "`$INTEGER`"
+    }
+    institution: {
+      h: "Institution"
+      n: "institution"
+      r: false
+      t: "`$STRING`"
+    }
+    language: {
+      h: "Language"
+      n: "language"
+      r: false
+      t: "`$STRING`"
+    }
+    location: {
+      h: "Location"
+      n: "location"
+      r: false
+      t: "`$STRING`"
+    }
+    mode: {
+      h: "Mode"
+      n: "mode"
+      r: false
+      t: "`$STRING`"
+    }
+    name: {
+      h: "Name"
+      n: "name"
+      r: false
+      t: "`$STRING`"
+    }
+    prospect_uri: {
+      h: "Prospect Uri"
+      n: "prospect_uri"
+      r: false
+      t: "`$STRING`"
+    }
+    quota: {
+      h: "Quota"
+      n: "quota"
+      r: false
+      t: "`$STRING`"
+    }
+    registration: {
+      h: "Registration"
+      n: "registration"
+      r: false
+      t: "`$STRING`"
+    }
+    status: {
+      h: "Status"
+      n: "status"
+      r: false
+      t: "`$STRING`"
+    }
+    type: {
+      h: "Type"
+      n: "type"
+      r: false
+      t: "`$STRING`"
+    }
+    updated: {
+      h: "Updated"
+      n: "updated"
+      r: false
+      t: "`$STRING`"
+    }
+    vat: {
+      h: "Vat"
+      n: "vat"
+      r: false
+      t: "`$STRING`"
+    }
+    www: {
+      h: "Www"
+      n: "www"
+      r: false
+      t: "`$STRING`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "course"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          co: {
+            id: "POST /courses"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/courses"
+          s: [
+            {
+              lit: "courses"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.institution`"
+          }
+        }
+      ]
+    }
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /courses"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/courses"
+          s: [
+            {
+              lit: "courses"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /courses/{id}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "id"
+                r: true
+                t: "`$INTEGER`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/courses/{id}"
+          q: {
+            exist: [
+              "id"
+            ]
+          }
+          s: [
+            {
+              lit: "courses"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.institution`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

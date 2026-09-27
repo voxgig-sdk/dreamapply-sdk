@@ -19,7 +19,6 @@ import type {
   JournalListMatch,
 } from '../DreamapplyTypes'
 
-// TODO: needs Entity superclass
 class JournalEntity extends DreamapplyEntityBase<Journal> {
 
   constructor(client: DreamapplySDK, entopts: any) {

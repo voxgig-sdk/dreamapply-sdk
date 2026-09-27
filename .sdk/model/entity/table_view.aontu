@@ -1,0 +1,153 @@
+# Entity: table_view
+
+main: kit: entity: table_view: {
+
+  alias: field: {}
+
+  fields: {
+    content: {
+      h: "Content"
+      n: "content"
+      r: false
+      sh: "Sub-resource (StreamInterface); see the DreamApply SDK."
+      t: "`$OBJECT`"
+    }
+    created: {
+      h: "Created"
+      n: "created"
+      r: false
+      t: "`$STRING`"
+    }
+    expires: {
+      h: "Expires"
+      n: "expires"
+      r: false
+      t: "`$STRING`"
+    }
+    id: {
+      h: "Id"
+      n: "id"
+      r: false
+      t: "`$INTEGER`"
+    }
+    mime: {
+      h: "Mime"
+      n: "mime"
+      r: false
+      t: "`$STRING`"
+    }
+    modified: {
+      h: "Modified"
+      n: "modified"
+      r: false
+      t: "`$STRING`"
+    }
+    name: {
+      h: "Name"
+      n: "name"
+      r: false
+      t: "`$STRING`"
+    }
+    size: {
+      h: "Size"
+      n: "size"
+      r: false
+      t: "`$INTEGER`"
+    }
+    tabledata: {
+      h: "Tabledata"
+      n: "tabledata"
+      r: false
+      t: "`$OBJECT`"
+    }
+    title: {
+      h: "Title"
+      n: "title"
+      r: false
+      t: "`$STRING`"
+    }
+    uploaded: {
+      h: "Uploaded"
+      n: "uploaded"
+      r: false
+      t: "`$STRING`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "table_view"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /tableviews"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/tableviews"
+          s: [
+            {
+              lit: "tableviews"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /tableviews/{id}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "id"
+                r: true
+                t: "`$INTEGER`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/tableviews/{id}"
+          q: {
+            exist: [
+              "id"
+            ]
+          }
+          s: [
+            {
+              lit: "tableviews"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.tabledata`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

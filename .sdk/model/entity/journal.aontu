@@ -1,0 +1,128 @@
+# Entity: journal
+
+main: kit: entity: journal: {
+
+  alias: field: {}
+
+  fields: {
+    administrator: {
+      h: "Administrator"
+      n: "administrator"
+      r: false
+      t: "`$OBJECT`"
+    }
+    applicant: {
+      h: "Applicant"
+      n: "applicant"
+      r: false
+      t: "`$OBJECT`"
+    }
+    application: {
+      h: "Application"
+      n: "application"
+      r: false
+      t: "`$OBJECT`"
+    }
+    bind: {
+      h: "Bind"
+      n: "bind"
+      r: false
+      t: "`$ARRAY`"
+    }
+    course: {
+      h: "Course"
+      n: "course"
+      r: false
+      t: "`$OBJECT`"
+    }
+    document: {
+      h: "Document"
+      n: "document"
+      r: false
+      t: "`$OBJECT`"
+    }
+    event: {
+      h: "Event"
+      n: "event"
+      r: false
+      t: "`$STRING`"
+    }
+    flag: {
+      h: "Flag"
+      n: "flag"
+      r: false
+      t: "`$OBJECT`"
+    }
+    id: {
+      h: "Id"
+      n: "id"
+      r: false
+      t: "`$INTEGER`"
+    }
+    institution: {
+      h: "Institution"
+      n: "institution"
+      r: false
+      t: "`$OBJECT`"
+    }
+    invoice: {
+      h: "Invoice"
+      n: "invoice"
+      r: false
+      t: "`$OBJECT`"
+    }
+    logged: {
+      h: "Logged"
+      n: "logged"
+      r: false
+      t: "`$STRING`"
+    }
+    offer: {
+      h: "Offer"
+      n: "offer"
+      r: false
+      t: "`$OBJECT`"
+    }
+    tracker: {
+      h: "Tracker"
+      n: "tracker"
+      r: false
+      t: "`$OBJECT`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "journal"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /journal"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/journal"
+          s: [
+            {
+              lit: "journal"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

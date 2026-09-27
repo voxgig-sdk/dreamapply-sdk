@@ -1,0 +1,196 @@
+# Entity: scoresheet
+
+main: kit: entity: scoresheet: {
+
+  alias: field: {}
+
+  fields: {
+    confirmed: {
+      h: "Confirmed"
+      n: "confirmed"
+      r: false
+      t: "`$STRING`"
+    }
+    created: {
+      h: "Created"
+      n: "created"
+      r: false
+      t: "`$STRING`"
+    }
+    date: {
+      h: "Date"
+      n: "date"
+      r: false
+      t: "`$STRING`"
+    }
+    depth: {
+      h: "Depth"
+      n: "depth"
+      r: false
+      t: "`$STRING`"
+    }
+    group: {
+      h: "Group"
+      n: "group"
+      r: false
+      sh: "Sub-resource (object); see the DreamApply SDK."
+      t: "`$OBJECT`"
+    }
+    id: {
+      h: "Id"
+      n: "id"
+      r: false
+      t: "`$STRING`"
+    }
+    instructions: {
+      h: "Instructions"
+      n: "instructions"
+      r: false
+      t: "`$STRING`"
+    }
+    language: {
+      h: "Language"
+      n: "language"
+      r: false
+      t: "`$STRING`"
+    }
+    maps: {
+      h: "Maps"
+      n: "maps"
+      r: false
+      t: "`$ARRAY`"
+    }
+    name: {
+      h: "Name"
+      n: "name"
+      r: false
+      t: "`$STRING`"
+    }
+    rangeMax: {
+      h: "Range Max"
+      n: "rangeMax"
+      r: false
+      t: "`$STRING`"
+    }
+    rangeMin: {
+      h: "Range Min"
+      n: "rangeMin"
+      r: false
+      t: "`$STRING`"
+    }
+    reference: {
+      h: "Reference"
+      n: "reference"
+      r: false
+      t: "`$STRING`"
+    }
+    scale: {
+      h: "Scale"
+      n: "scale"
+      r: false
+      t: "`$INTEGER`"
+    }
+    scored: {
+      h: "Scored"
+      n: "scored"
+      r: false
+      t: "`$STRING`"
+    }
+    scores: {
+      h: "Scores"
+      n: "scores"
+      r: false
+      sh: "Sub-resource (Scores); see the DreamApply SDK."
+      t: "`$OBJECT`"
+    }
+    subject: {
+      h: "Subject"
+      n: "subject"
+      r: false
+      t: "`$STRING`"
+    }
+    type: {
+      h: "Type"
+      n: "type"
+      r: false
+      t: "`$STRING`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "scoresheet"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /scoresheets"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/scoresheets"
+          s: [
+            {
+              lit: "scoresheets"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /scoresheets/{id}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "id"
+                r: true
+                t: "`$INTEGER`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/scoresheets/{id}"
+          q: {
+            exist: [
+              "id"
+            ]
+          }
+          s: [
+            {
+              lit: "scoresheets"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

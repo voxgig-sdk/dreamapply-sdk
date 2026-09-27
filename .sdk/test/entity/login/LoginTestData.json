@@ -41,58 +41,8 @@
   "requests": {
     "GET /logins": {
       "provenance": "operation-contract",
-      "contract": {
-        "operationId": "listLogins",
-        "parameters": [],
-        "protocol": "http",
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "items": {
-                    "properties": {
-                      "id": {
-                        "type": "integer"
-                      },
-                      "ip": {
-                        "type": "string"
-                      },
-                      "logged": {
-                        "type": "string"
-                      },
-                      "result": {
-                        "type": "string"
-                      },
-                      "role": {
-                        "type": "string"
-                      },
-                      "roleId": {
-                        "type": "integer"
-                      }
-                    },
-                    "type": "object"
-                  },
-                  "type": "array"
-                }
-              }
-            },
-            "description": "Logins list"
-          }
-        },
-        "security": [
-          {
-            "apiKey": []
-          }
-        ],
-        "securitySchemes": {
-          "apiKey": {
-            "scheme": "bearer",
-            "type": "http"
-          }
-        },
-        "securitySource": "definition"
-      }
+      "version": 2,
+      "source": "openapi3"
     }
   }
 }

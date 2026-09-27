@@ -21,7 +21,6 @@ import type {
   InvoiceRemoveMatch,
 } from '../DreamapplyTypes'
 
-// TODO: needs Entity superclass
 class InvoiceEntity extends DreamapplyEntityBase<Invoice> {
 
   constructor(client: DreamapplySDK, entopts: any) {
@@ -132,12 +131,6 @@ class InvoiceEntity extends DreamapplyEntityBase<Invoice> {
 
       const out = done(ctx)
 
-      // An operation resolves to the ENTITY, not the raw data — the record
-      // has just been absorbed into this instance and is reached through
-      // data(). `done` still runs: it completes the pipeline and raises on
-      // failure, and when throwing is disabled it hands back the error
-      // payload, which passes through unchanged. See AGENTS.md "Entity
-      // operations return ENTITIES".
       return (ctx.result && ctx.result.ok) ? this : out
     }
     catch (err: any) {
@@ -272,14 +265,6 @@ class InvoiceEntity extends DreamapplyEntityBase<Invoice> {
 
 
 
-  // Resolves to THIS entity, marked as deleted — like every other operation,
-  // which resolve to the entity too (see AGENTS.md). The instance keeps the
-  // data it held, so a caller can still read what was removed; `deleted()`
-  // reports that it is no longer a live record.
-  //
-  // A DELETE that answers 204 No Content therefore still resolves to
-  // something useful, where returning the raw body resolved to `undefined`
-  // against a signature that promised a record.
   async remove(
     this: any, reqmatch?: InvoiceRemoveMatch, ctrl?: Control,
   ): Promise<InvoiceEntity> {
@@ -377,14 +362,7 @@ class InvoiceEntity extends DreamapplyEntityBase<Invoice> {
 
       const out = done(ctx)
 
-      // An operation resolves to the ENTITY, not the raw data — the record
-      // has just been absorbed into this instance and is reached through
-      // data(). `done` still runs: it completes the pipeline and raises on
-      // failure, and when throwing is disabled it hands back the error
-      // payload, which passes through unchanged. See AGENTS.md "Entity
-      // operations return ENTITIES".
       if (ctx.result && ctx.result.ok) {
-        // A removed entity keeps its data but is no longer a live record.
         this.markDeleted()
         return this
       }

@@ -1,0 +1,44 @@
+# BasicScoresheetFlow
+
+main: kit: flow: BasicScoresheetFlow:
+{
+  entity: "scoresheet",
+  kind: "basic",
+  name: "BasicScoresheetFlow",
+  step: [
+    {
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "scoresheet_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      i: {
+        ref: "scoresheet_ref01",
+        srcdatavar: "scoresheet_ref01_data",
+        suffix: "_dt0"
+      }
+
+      m: {
+        id: "scoresheet01"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-scoresheet_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicScoresheetFlow"
+}

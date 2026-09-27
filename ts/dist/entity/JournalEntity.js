@@ -2,7 +2,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.JournalEntity = void 0;
 const DreamapplyEntityBase_1 = require("../DreamapplyEntityBase");
-// TODO: needs Entity superclass
 class JournalEntity extends DreamapplyEntityBase_1.DreamapplyEntityBase {
     constructor(client, entopts) {
         super(client, entopts);

@@ -1,0 +1,128 @@
+# Entity: academic_term
+
+main: kit: entity: academic_term: {
+
+  alias: field: {}
+
+  fields: {
+    finish: {
+      h: "Finish"
+      n: "finish"
+      r: false
+      t: "`$STRING`"
+    }
+    grace: {
+      h: "Grace"
+      n: "grace"
+      r: false
+      t: "`$STRING`"
+    }
+    id: {
+      h: "Id"
+      n: "id"
+      r: false
+      t: "`$INTEGER`"
+    }
+    name: {
+      h: "Name"
+      n: "name"
+      r: false
+      t: "`$STRING`"
+    }
+    start: {
+      h: "Start"
+      n: "start"
+      r: false
+      t: "`$STRING`"
+    }
+    type: {
+      h: "Type"
+      n: "type"
+      r: false
+      t: "`$OBJECT`"
+    }
+    year: {
+      h: "Year"
+      n: "year"
+      r: false
+      t: "`$OBJECT`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "academic_term"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /academic-terms"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/academic-terms"
+          s: [
+            {
+              lit: "academic-terms"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /academic-terms/{id}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "id"
+                r: true
+                t: "`$INTEGER`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/academic-terms/{id}"
+          q: {
+            exist: [
+              "id"
+            ]
+          }
+          s: [
+            {
+              lit: "academic-terms"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

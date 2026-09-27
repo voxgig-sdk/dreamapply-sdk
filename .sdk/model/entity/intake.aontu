@@ -1,0 +1,134 @@
+# Entity: intake
+
+main: kit: entity: intake: {
+
+  alias: field: {}
+
+  fields: {
+    arrival: {
+      h: "Arrival"
+      n: "arrival"
+      r: false
+      t: "`$STRING`"
+    }
+    commence: {
+      h: "Commence"
+      n: "commence"
+      r: false
+      t: "`$STRING`"
+    }
+    decision: {
+      h: "Decision"
+      n: "decision"
+      r: false
+      t: "`$OBJECT`"
+    }
+    id: {
+      h: "Id"
+      n: "id"
+      r: false
+      t: "`$INTEGER`"
+    }
+    name: {
+      h: "Name"
+      n: "name"
+      r: false
+      t: "`$STRING`"
+    }
+    policy: {
+      h: "Policy"
+      n: "policy"
+      r: false
+      t: "`$STRING`"
+    }
+    pre: {
+      h: "Pre"
+      n: "pre"
+      r: false
+      t: "`$OBJECT`"
+    }
+    start: {
+      h: "Start"
+      n: "start"
+      r: false
+      t: "`$STRING`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "intake"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /intakes"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/intakes"
+          s: [
+            {
+              lit: "intakes"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /intakes/{id}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "id"
+                r: true
+                t: "`$INTEGER`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/intakes/{id}"
+          q: {
+            exist: [
+              "id"
+            ]
+          }
+          s: [
+            {
+              lit: "intakes"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

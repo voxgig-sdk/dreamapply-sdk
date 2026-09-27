@@ -1,0 +1,212 @@
+# Entity: invoice
+
+main: kit: entity: invoice: {
+
+  alias: field: {}
+
+  fields: {
+    applicant: {
+      h: "Applicant"
+      n: "applicant"
+      r: false
+      t: "`$OBJECT`"
+    }
+    application: {
+      h: "Application"
+      n: "application"
+      r: false
+      t: "`$OBJECT`"
+    }
+    collected: {
+      h: "Collected"
+      n: "collected"
+      r: false
+      t: "`$STRING`"
+    }
+    course: {
+      h: "Course"
+      n: "course"
+      r: false
+      t: "`$OBJECT`"
+    }
+    currency: {
+      h: "Currency"
+      n: "currency"
+      r: false
+      t: "`$STRING`"
+    }
+    deadline: {
+      h: "Deadline"
+      n: "deadline"
+      r: false
+      t: "`$STRING`"
+    }
+    delivered: {
+      h: "Delivered"
+      n: "delivered"
+      r: false
+      t: "`$STRING`"
+    }
+    id: {
+      h: "Id"
+      n: "id"
+      r: false
+      t: "`$INTEGER`"
+    }
+    instructions: {
+      h: "Instructions"
+      n: "instructions"
+      r: false
+      t: "`$STRING`"
+    }
+    issued: {
+      h: "Issued"
+      n: "issued"
+      r: false
+      t: "`$STRING`"
+    }
+    nr: {
+      h: "Nr"
+      n: "nr"
+      r: false
+      t: "`$STRING`"
+    }
+    payer: {
+      h: "Payer"
+      n: "payer"
+      r: false
+      t: "`$OBJECT`"
+    }
+    reminded: {
+      h: "Reminded"
+      n: "reminded"
+      r: false
+      t: "`$STRING`"
+    }
+    smallprint: {
+      h: "Smallprint"
+      n: "smallprint"
+      r: false
+      t: "`$STRING`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "invoice"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /invoices"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/invoices"
+          s: [
+            {
+              lit: "invoices"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /invoices/{id}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "id"
+                r: true
+                t: "`$INTEGER`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/invoices/{id}"
+          q: {
+            exist: [
+              "id"
+            ]
+          }
+          s: [
+            {
+              lit: "invoices"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    remove: {
+      name: "remove"
+      points: [
+        {
+          co: {
+            id: "DELETE /invoices/{id}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "id"
+                r: true
+                t: "`$INTEGER`"
+              }
+            ]
+          }
+          m: "DELETE"
+          o: "/invoices/{id}"
+          q: {
+            exist: [
+              "id"
+            ]
+          }
+          s: [
+            {
+              lit: "invoices"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

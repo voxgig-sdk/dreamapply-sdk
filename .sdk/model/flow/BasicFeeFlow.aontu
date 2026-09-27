@@ -1,0 +1,44 @@
+# BasicFeeFlow
+
+main: kit: flow: BasicFeeFlow:
+{
+  entity: "fee",
+  kind: "basic",
+  name: "BasicFeeFlow",
+  step: [
+    {
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "fee_ref01"
+          }
+        }
+      ]
+    }
+
+    {
+      i: {
+        ref: "fee_ref01",
+        srcdatavar: "fee_ref01_data",
+        suffix: "_dt0"
+      }
+
+      m: {
+        id: "fee01"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-fee_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicFeeFlow"
+}

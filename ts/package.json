@@ -1,5 +1,5 @@
 {
-  "name": "@voxgig-sdk/dreamapply",
+  "name": "@voxgig-sdk/dreamapply-sdk",
   "version": "0.1.2",
   "description": "Unofficial generated TypeScript SDK for the DreamApply public API. Not affiliated with or endorsed by the upstream API provider.",
   "keywords": [
@@ -23,7 +23,8 @@
   "types": "dist/DreamapplySDK.d.ts",
   "files": [
     "dist",
-    "src"
+    "src",
+    "README.md"
   ],
   "scripts": {
     "pretest": "npm run build",

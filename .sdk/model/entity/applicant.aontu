@@ -1,0 +1,211 @@
+# Entity: applicant
+
+main: kit: entity: applicant: {
+
+  alias: field: {}
+
+  fields: {
+    address: {
+      h: "Address"
+      n: "address"
+      r: false
+      t: "`$STRING`"
+    }
+    citizenship: {
+      h: "Citizenship"
+      n: "citizenship"
+      r: false
+      t: "`$STRING`"
+    }
+    email: {
+      h: "Email"
+      n: "email"
+      r: false
+      t: "`$STRING`"
+    }
+    id: {
+      h: "Id"
+      n: "id"
+      r: false
+      t: "`$INTEGER`"
+    }
+    matriculation: {
+      h: "Matriculation"
+      n: "matriculation"
+      r: false
+      t: "`$STRING`"
+    }
+    name: {
+      h: "Name"
+      n: "name"
+      r: false
+      t: "`$OBJECT`"
+    }
+    name_family: {
+      h: "Name Family"
+      n: "name_family"
+      r: false
+      t: "`$STRING`"
+    }
+    name_given: {
+      h: "Name Given"
+      n: "name_given"
+      r: false
+      t: "`$STRING`"
+    }
+    notes: {
+      h: "Notes"
+      n: "notes"
+      r: false
+      t: "`$STRING`"
+    }
+    phone: {
+      h: "Phone"
+      n: "phone"
+      r: false
+      t: "`$STRING`"
+    }
+    photo: {
+      h: "Photo"
+      n: "photo"
+      r: false
+      t: "`$OBJECT`"
+    }
+    reference: {
+      h: "Reference"
+      n: "reference"
+      r: false
+      t: "`$STRING`"
+    }
+    region: {
+      h: "Region"
+      n: "region"
+      r: false
+      t: "`$STRING`"
+    }
+    registered: {
+      h: "Registered"
+      n: "registered"
+      r: false
+      t: "`$STRING`"
+    }
+    tracker_ID: {
+      h: "Tracker Id"
+      n: "tracker_ID"
+      r: false
+      t: "`$STRING`"
+    }
+    type: {
+      h: "Type"
+      n: "type"
+      r: false
+      t: "`$STRING`"
+    }
+    vatin: {
+      h: "Vatin"
+      n: "vatin"
+      r: false
+      t: "`$STRING`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "applicant"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          co: {
+            id: "POST /applicants"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/applicants"
+          s: [
+            {
+              lit: "applicants"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /applicants"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/applicants"
+          s: [
+            {
+              lit: "applicants"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /applicants/{id}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "id"
+                r: true
+                t: "`$INTEGER`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/applicants/{id}"
+          q: {
+            exist: [
+              "id"
+            ]
+          }
+          s: [
+            {
+              lit: "applicants"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}
