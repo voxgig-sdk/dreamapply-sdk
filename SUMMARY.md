@@ -1,6 +1,10 @@
 # DreamApply API
 
-Student admissions and application management API. UNOFFICIAL SPEC. DreamApply publishes no OpenAPI description. This spec was DERIVED MECHANICALLY from the vendor&#39;s own MIT-licensed PHP SDK (github.com/dream-group/dream-apply-sdk), whose gen/ directory is itself @generated and encodes field names, PHP types, nullability, enum domains and URL structure. Known limits, stated plainly: HTTP verbs are inferred from the SDK&#39;s base classes and traits rather than declared; PHP types carry no JSON formats, so dates appear as plain strings; and the SDK may lag the live API. Nothing here has been verified against a running instance.
+> Student admissions and application management API.
+>
+> UNOFFICIAL SPEC. DreamApply publishes no OpenAPI description. This spec was DERIVED MECHANICALLY from the vendor&#39;s own MIT-licensed PHP SDK (github.com/dream-group/dream-apply-sdk), whose gen/ directory is itself @generated and encodes field names, PHP types, nullability, enum domains and URL structure.
+>
+> Known limits, stated plainly: HTTP verbs are inferred from the SDK&#39;s base classes and traits rather than declared; PHP types carry no JSON formats, so dates appear as plain strings; and the SDK may lag the live API. Nothing here has been verified against a running instance.
 
 ## Start here
 
@@ -12,31 +16,31 @@ An entity groups related API operations. An operation can have several routes wi
 
 ## What the API provides
 
-### [AcademicTerm](docs/api/academic_term.html)
+### AcademicTerm
 
 Results: AcademicTerms list; AcademicTerm.
 
 SDK operations: `list`, `load`.
 
-### [AcademicYear](docs/api/academic_year.html)
+### AcademicYear
 
 Results: AcademicYears list; AcademicYear.
 
 SDK operations: `list`, `load`.
 
-### [Administrator](docs/api/administrator.html)
+### Administrator
 
 Results: Administrators list; Administrator.
 
 SDK operations: `list`, `load`.
 
-### [Applicant](docs/api/applicant.html)
+### Applicant
 
 Results: Applicant created; Applicants list; Applicant.
 
 SDK operations: `create`, `list`, `load`.
 
-### [Application](docs/api/application.html)
+### Application
 
 Results: Applications list; Application.
 
@@ -46,23 +50,19 @@ Key fields to recognise:
 
 - `academicTerm`: Sub-resource (AcademicTerm); see the DreamApply SDK.
 
-### [Course](docs/api/course.html)
+### Course
 
 Results: Course created; Courses list; Course.
 
 SDK operations: `create`, `list`, `load`.
 
-Key fields to recognise:
-
-- `departments`: Sub-resource (InstitutionDepartments); see the DreamApply SDK.
-
-### [Fee](docs/api/fee.html)
+### Fee
 
 Results: Fees list; Fee.
 
 SDK operations: `list`, `load`.
 
-### [Institution](docs/api/institution.html)
+### Institution
 
 Results: Institutions list; Institution.
 
@@ -72,31 +72,31 @@ Key fields to recognise:
 
 - `departments`: Sub-resource (InstitutionDepartments); see the DreamApply SDK.
 
-### [Intake](docs/api/intake.html)
+### Intake
 
 Results: Intakes list; Intake.
 
 SDK operations: `list`, `load`.
 
-### [Invoice](docs/api/invoice.html)
+### Invoice
 
 Results: Invoices list; Invoice; Deleted.
 
 SDK operations: `list`, `load`, `remove`.
 
-### [Journal](docs/api/journal.html)
+### Journal
 
 Results: Journal list.
 
 SDK operations: `list`.
 
-### [Login](docs/api/login.html)
+### Login
 
 Results: Logins list.
 
 SDK operations: `list`.
 
-### [Scoresheet](docs/api/scoresheet.html)
+### Scoresheet
 
 Results: Scoresheets list; Scoresheet.
 
@@ -107,15 +107,11 @@ Key fields to recognise:
 - `group`: Sub-resource (object); see the DreamApply SDK.
 - `scores`: Sub-resource (Scores); see the DreamApply SDK.
 
-### [TableView](docs/api/table_view.html)
+### TableView
 
 Results: TableViews list; TableView.
 
 SDK operations: `list`, `load`.
-
-Key fields to recognise:
-
-- `content`: Sub-resource (StreamInterface); see the DreamApply SDK.
 
 ### Route map
 
@@ -123,35 +119,35 @@ Use this map to locate a capability. Consult the entity reference before supplyi
 
 | Entity | SDK operation | HTTP route | Authentication |
 | --- | --- | --- | --- |
-| [AcademicTerm](docs/api/academic_term.html) | `list` | `GET /academic-terms` | Required |
-| [AcademicTerm](docs/api/academic_term.html) | `load` | `GET /academic-terms/{id}` | Required |
-| [AcademicYear](docs/api/academic_year.html) | `list` | `GET /academic-years` | Required |
-| [AcademicYear](docs/api/academic_year.html) | `load` | `GET /academic-years/{id}` | Required |
-| [Administrator](docs/api/administrator.html) | `list` | `GET /administrators` | Required |
-| [Administrator](docs/api/administrator.html) | `load` | `GET /administrators/{id}` | Required |
-| [Applicant](docs/api/applicant.html) | `create` | `POST /applicants` | Required |
-| [Applicant](docs/api/applicant.html) | `list` | `GET /applicants` | Required |
-| [Applicant](docs/api/applicant.html) | `load` | `GET /applicants/{id}` | Required |
-| [Application](docs/api/application.html) | `list` | `GET /applications` | Required |
-| [Application](docs/api/application.html) | `load` | `GET /applications/{id}` | Required |
-| [Course](docs/api/course.html) | `create` | `POST /courses` | Required |
-| [Course](docs/api/course.html) | `list` | `GET /courses` | Required |
-| [Course](docs/api/course.html) | `load` | `GET /courses/{id}` | Required |
-| [Fee](docs/api/fee.html) | `list` | `GET /fees` | Required |
-| [Fee](docs/api/fee.html) | `load` | `GET /fees/{id}` | Required |
-| [Institution](docs/api/institution.html) | `list` | `GET /institutions` | Required |
-| [Institution](docs/api/institution.html) | `load` | `GET /institutions/{id}` | Required |
-| [Intake](docs/api/intake.html) | `list` | `GET /intakes` | Required |
-| [Intake](docs/api/intake.html) | `load` | `GET /intakes/{id}` | Required |
-| [Invoice](docs/api/invoice.html) | `list` | `GET /invoices` | Required |
-| [Invoice](docs/api/invoice.html) | `load` | `GET /invoices/{id}` | Required |
-| [Invoice](docs/api/invoice.html) | `remove` | `DELETE /invoices/{id}` | Required |
-| [Journal](docs/api/journal.html) | `list` | `GET /journal` | Required |
-| [Login](docs/api/login.html) | `list` | `GET /logins` | Required |
-| [Scoresheet](docs/api/scoresheet.html) | `list` | `GET /scoresheets` | Required |
-| [Scoresheet](docs/api/scoresheet.html) | `load` | `GET /scoresheets/{id}` | Required |
-| [TableView](docs/api/table_view.html) | `list` | `GET /tableviews` | Required |
-| [TableView](docs/api/table_view.html) | `load` | `GET /tableviews/{id}` | Required |
+| AcademicTerm | `list` | `GET /academic-terms` | Required |
+| AcademicTerm | `load` | `GET /academic-terms/{id}` | Required |
+| AcademicYear | `list` | `GET /academic-years` | Required |
+| AcademicYear | `load` | `GET /academic-years/{id}` | Required |
+| Administrator | `list` | `GET /administrators` | Required |
+| Administrator | `load` | `GET /administrators/{id}` | Required |
+| Applicant | `create` | `POST /applicants` | Required |
+| Applicant | `list` | `GET /applicants` | Required |
+| Applicant | `load` | `GET /applicants/{id}` | Required |
+| Application | `list` | `GET /applications` | Required |
+| Application | `load` | `GET /applications/{id}` | Required |
+| Course | `create` | `POST /courses` | Required |
+| Course | `list` | `GET /courses` | Required |
+| Course | `load` | `GET /courses/{id}` | Required |
+| Fee | `list` | `GET /fees` | Required |
+| Fee | `load` | `GET /fees/{id}` | Required |
+| Institution | `list` | `GET /institutions` | Required |
+| Institution | `load` | `GET /institutions/{id}` | Required |
+| Intake | `list` | `GET /intakes` | Required |
+| Intake | `load` | `GET /intakes/{id}` | Required |
+| Invoice | `list` | `GET /invoices` | Required |
+| Invoice | `load` | `GET /invoices/{id}` | Required |
+| Invoice | `remove` | `DELETE /invoices/{id}` | Required |
+| Journal | `list` | `GET /journal` | Required |
+| Login | `list` | `GET /logins` | Required |
+| Scoresheet | `list` | `GET /scoresheets` | Required |
+| Scoresheet | `load` | `GET /scoresheets/{id}` | Required |
+| TableView | `list` | `GET /tableviews` | Required |
+| TableView | `load` | `GET /tableviews/{id}` | Required |
 
 ## Connect to the API
 
@@ -175,9 +171,9 @@ Choose the language already used by your application or service. The clients rep
 
 | Client | Repository directory | Distribution |
 | --- | --- | --- |
-| [Golang](docs/sdks/go.html) | `go/` | Build from source |
-| [Python](docs/sdks/py.html) | `py/` | Build from source |
-| [TypeScript](docs/sdks/ts.html) | `ts/` | Build from source |
+| Golang | `go/` | Build from source |
+| Python | `py/` | Build from source |
+| TypeScript | `ts/` | Build from source |
 
 Build-from-source entries are not marked as published in the project model. Follow the build instructions in that target’s README, then consume the resulting package using your language’s local dependency mechanism. Published entries give the installation command recorded for that client.
 
@@ -185,21 +181,21 @@ Build-from-source entries are not marked as published in the project model. Foll
 
 Features supply behaviour around API calls, such as request handling, diagnostics, or local testing. Inclusion in this project does not mean a feature is enabled at runtime. Check the selected SDK’s supported features and configuration defaults, then enable the behaviour your application needs.
 
-- [`debug`](docs/features/debug.html): Request/response capture ring buffer for debugging
-- [`idempotency`](docs/features/idempotency.html): Idempotency keys for safe retries of mutating operations
-- [`metrics`](docs/features/metrics.html): Statistics capture: per-operation counters and latency
-- [`paging`](docs/features/paging.html): Pagination signals for list operations
-- [`ratelimit`](docs/features/ratelimit.html): Client-side rate limiting via a token bucket
-- [`retry`](docs/features/retry.html): Automatic retry of transient failures with exponential backoff
-- [`test`](docs/features/test.html): In-memory mock transport for testing without a live server
-- [`timeout`](docs/features/timeout.html): Per-request timeout with transport abort
+- `debug`: Request/response capture ring buffer for debugging
+- `idempotency`: Idempotency keys for safe retries of mutating operations
+- `metrics`: Statistics capture: per-operation counters and latency
+- `paging`: Pagination signals for list operations
+- `ratelimit`: Client-side rate limiting via a token bucket
+- `retry`: Automatic retry of transient failures with exponential backoff
+- `test`: In-memory mock transport for testing without a live server
+- `timeout`: Per-request timeout with transport abort
 
 Start with the default client configuration. Add request limits and diagnostics as needed, test error paths, and review retry behaviour before using operations that change data. A retry can repeat an operation unless the API provides a suitable guarantee.
 
 ## Continue with the documentation
 
-- Follow the [first-call guide](docs/guides/first-call.html) for the setup sequence.
-- Read the [authentication guide](docs/guides/authentication.html) before using protected routes.
-- Use the [API reference](docs/api/index.html) for request schemas, response formats, and status codes.
+- Follow the first-call guide for the setup sequence.
+- Read the authentication guide before using protected routes.
+- Use the API reference for request schemas, response formats, and status codes.
 - Check the chosen SDK or companion tool reference for its configuration and supported operations.
 

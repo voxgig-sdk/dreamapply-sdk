@@ -141,6 +141,7 @@ func MakeConfig() map[string]any {
 				},
 				"optspec": map[string]any{
 					"clearTimer": "`$FUNCTION`",
+					"now": "`$FUNCTION`",
 					"setTimer": "`$FUNCTION`",
 				},
 				"strict": false,
@@ -243,6 +244,10 @@ func MakeConfig() map[string]any {
 								},
 								"args": map[string]any{},
 								"select": map[string]any{},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
+								},
 							},
 						},
 					},
@@ -286,6 +291,10 @@ func MakeConfig() map[string]any {
 									"exist": []any{
 										"id",
 									},
+								},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
 								},
 							},
 						},
@@ -342,6 +351,10 @@ func MakeConfig() map[string]any {
 								},
 								"args": map[string]any{},
 								"select": map[string]any{},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
+								},
 							},
 						},
 					},
@@ -385,6 +398,10 @@ func MakeConfig() map[string]any {
 									"exist": []any{
 										"id",
 									},
+								},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
 								},
 							},
 						},
@@ -461,6 +478,10 @@ func MakeConfig() map[string]any {
 								},
 								"args": map[string]any{},
 								"select": map[string]any{},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
+								},
 							},
 						},
 					},
@@ -504,6 +525,10 @@ func MakeConfig() map[string]any {
 									"exist": []any{
 										"id",
 									},
+								},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
 								},
 							},
 						},
@@ -630,6 +655,10 @@ func MakeConfig() map[string]any {
 								},
 								"args": map[string]any{},
 								"select": map[string]any{},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
+								},
 							},
 						},
 					},
@@ -656,6 +685,10 @@ func MakeConfig() map[string]any {
 								},
 								"args": map[string]any{},
 								"select": map[string]any{},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
+								},
 							},
 						},
 					},
@@ -699,6 +732,10 @@ func MakeConfig() map[string]any {
 									"exist": []any{
 										"id",
 									},
+								},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
 								},
 							},
 						},
@@ -856,6 +893,10 @@ func MakeConfig() map[string]any {
 								},
 								"args": map[string]any{},
 								"select": map[string]any{},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
+								},
 							},
 						},
 					},
@@ -900,6 +941,10 @@ func MakeConfig() map[string]any {
 										"id",
 									},
 								},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
+								},
 							},
 						},
 					},
@@ -913,11 +958,6 @@ func MakeConfig() map[string]any {
 					map[string]any{
 						"name": "accreditation",
 						"title": "Accreditation",
-						"type": "`$STRING`",
-					},
-					map[string]any{
-						"name": "address",
-						"title": "Address",
 						"type": "`$STRING`",
 					},
 					map[string]any{
@@ -951,29 +991,13 @@ func MakeConfig() map[string]any {
 						"type": "`$STRING`",
 					},
 					map[string]any{
-						"name": "departments",
-						"title": "Departments",
-						"type": "`$OBJECT`",
-						"short": "Sub-resource (InstitutionDepartments); see the DreamApply SDK.",
-					},
-					map[string]any{
 						"name": "duration",
 						"title": "Duration",
 						"type": "`$STRING`",
 					},
 					map[string]any{
-						"name": "erasmus",
-						"title": "Erasmus",
-						"type": "`$STRING`",
-					},
-					map[string]any{
 						"name": "featured",
 						"title": "Featured",
-						"type": "`$STRING`",
-					},
-					map[string]any{
-						"name": "iban",
-						"title": "Iban",
 						"type": "`$STRING`",
 					},
 					map[string]any{
@@ -984,7 +1008,7 @@ func MakeConfig() map[string]any {
 					map[string]any{
 						"name": "institution",
 						"title": "Institution",
-						"type": "`$STRING`",
+						"type": "`$OBJECT`",
 					},
 					map[string]any{
 						"name": "language",
@@ -1017,11 +1041,6 @@ func MakeConfig() map[string]any {
 						"type": "`$STRING`",
 					},
 					map[string]any{
-						"name": "registration",
-						"title": "Registration",
-						"type": "`$STRING`",
-					},
-					map[string]any{
 						"name": "status",
 						"title": "Status",
 						"type": "`$STRING`",
@@ -1034,16 +1053,6 @@ func MakeConfig() map[string]any {
 					map[string]any{
 						"name": "updated",
 						"title": "Updated",
-						"type": "`$STRING`",
-					},
-					map[string]any{
-						"name": "vat",
-						"title": "Vat",
-						"type": "`$STRING`",
-					},
-					map[string]any{
-						"name": "www",
-						"title": "Www",
 						"type": "`$STRING`",
 					},
 				},
@@ -1072,10 +1081,14 @@ func MakeConfig() map[string]any {
 								"rename": map[string]any{},
 								"transform": map[string]any{
 									"req": "`reqdata`",
-									"res": "`body.institution`",
+									"res": "`body`",
 								},
 								"args": map[string]any{},
 								"select": map[string]any{},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
+								},
 							},
 						},
 					},
@@ -1102,6 +1115,10 @@ func MakeConfig() map[string]any {
 								},
 								"args": map[string]any{},
 								"select": map[string]any{},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
+								},
 							},
 						},
 					},
@@ -1128,7 +1145,7 @@ func MakeConfig() map[string]any {
 								"rename": map[string]any{},
 								"transform": map[string]any{
 									"req": "`reqdata`",
-									"res": "`body.institution`",
+									"res": "`body`",
 								},
 								"args": map[string]any{
 									"params": []any{
@@ -1145,6 +1162,10 @@ func MakeConfig() map[string]any {
 									"exist": []any{
 										"id",
 									},
+								},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
 								},
 							},
 						},
@@ -1206,6 +1227,10 @@ func MakeConfig() map[string]any {
 								},
 								"args": map[string]any{},
 								"select": map[string]any{},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
+								},
 							},
 						},
 					},
@@ -1249,6 +1274,10 @@ func MakeConfig() map[string]any {
 									"exist": []any{
 										"id",
 									},
+								},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
 								},
 							},
 						},
@@ -1351,6 +1380,10 @@ func MakeConfig() map[string]any {
 								},
 								"args": map[string]any{},
 								"select": map[string]any{},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
+								},
 							},
 						},
 					},
@@ -1377,7 +1410,7 @@ func MakeConfig() map[string]any {
 								"rename": map[string]any{},
 								"transform": map[string]any{
 									"req": "`reqdata`",
-									"res": "`body.departments`",
+									"res": "`body`",
 								},
 								"args": map[string]any{
 									"params": []any{
@@ -1394,6 +1427,10 @@ func MakeConfig() map[string]any {
 									"exist": []any{
 										"id",
 									},
+								},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
 								},
 							},
 						},
@@ -1475,6 +1512,10 @@ func MakeConfig() map[string]any {
 								},
 								"args": map[string]any{},
 								"select": map[string]any{},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
+								},
 							},
 						},
 					},
@@ -1518,6 +1559,10 @@ func MakeConfig() map[string]any {
 									"exist": []any{
 										"id",
 									},
+								},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
 								},
 							},
 						},
@@ -1629,6 +1674,10 @@ func MakeConfig() map[string]any {
 								},
 								"args": map[string]any{},
 								"select": map[string]any{},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
+								},
 							},
 						},
 					},
@@ -1672,6 +1721,10 @@ func MakeConfig() map[string]any {
 									"exist": []any{
 										"id",
 									},
+								},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
 								},
 							},
 						},
@@ -1827,6 +1880,10 @@ func MakeConfig() map[string]any {
 								},
 								"args": map[string]any{},
 								"select": map[string]any{},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
+								},
 							},
 						},
 					},
@@ -1897,6 +1954,10 @@ func MakeConfig() map[string]any {
 								},
 								"args": map[string]any{},
 								"select": map[string]any{},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
+								},
 							},
 						},
 					},
@@ -2029,6 +2090,10 @@ func MakeConfig() map[string]any {
 								},
 								"args": map[string]any{},
 								"select": map[string]any{},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
+								},
 							},
 						},
 					},
@@ -2073,6 +2138,10 @@ func MakeConfig() map[string]any {
 										"id",
 									},
 								},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
+								},
 							},
 						},
 					},
@@ -2084,19 +2153,8 @@ func MakeConfig() map[string]any {
 			"table_view": map[string]any{
 				"fields": []any{
 					map[string]any{
-						"name": "content",
-						"title": "Content",
-						"type": "`$OBJECT`",
-						"short": "Sub-resource (StreamInterface); see the DreamApply SDK.",
-					},
-					map[string]any{
 						"name": "created",
 						"title": "Created",
-						"type": "`$STRING`",
-					},
-					map[string]any{
-						"name": "expires",
-						"title": "Expires",
 						"type": "`$STRING`",
 					},
 					map[string]any{
@@ -2105,24 +2163,9 @@ func MakeConfig() map[string]any {
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
-						"name": "mime",
-						"title": "Mime",
-						"type": "`$STRING`",
-					},
-					map[string]any{
 						"name": "modified",
 						"title": "Modified",
 						"type": "`$STRING`",
-					},
-					map[string]any{
-						"name": "name",
-						"title": "Name",
-						"type": "`$STRING`",
-					},
-					map[string]any{
-						"name": "size",
-						"title": "Size",
-						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "tabledata",
@@ -2132,11 +2175,6 @@ func MakeConfig() map[string]any {
 					map[string]any{
 						"name": "title",
 						"title": "Title",
-						"type": "`$STRING`",
-					},
-					map[string]any{
-						"name": "uploaded",
-						"title": "Uploaded",
 						"type": "`$STRING`",
 					},
 				},
@@ -2169,6 +2207,10 @@ func MakeConfig() map[string]any {
 								},
 								"args": map[string]any{},
 								"select": map[string]any{},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
+								},
 							},
 						},
 					},
@@ -2195,7 +2237,7 @@ func MakeConfig() map[string]any {
 								"rename": map[string]any{},
 								"transform": map[string]any{
 									"req": "`reqdata`",
-									"res": "`body.tabledata`",
+									"res": "`body`",
 								},
 								"args": map[string]any{
 									"params": []any{
@@ -2212,6 +2254,10 @@ func MakeConfig() map[string]any {
 									"exist": []any{
 										"id",
 									},
+								},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
 								},
 							},
 						},

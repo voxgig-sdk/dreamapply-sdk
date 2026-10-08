@@ -9,7 +9,7 @@ import { createLiveTransport } from '../../live-runner'
 import { runLiveEntity } from '../../live-entity'
 
 
-import { DreamapplySDK, BaseFeature, stdutil } from '../../..'
+import { DreamapplySDK, BaseFeature, config, stdutil } from '../../..'
 
 import {
   envOverride,
@@ -41,6 +41,64 @@ describe('ScoresheetEntity', async () => {
   })
 
 
+  class FailHook extends BaseFeature {
+    name = 'failhook'
+    version = '0.0.1'
+    active = true
+    unexpected = 0
+    init() { }
+    PreSpec() { throw new Error('scoresheet hook failed') }
+    PreUnexpected() { this.unexpected++ }
+  }
+
+  test('stream-error', async () => {
+    const offline = { net: { offline: true } }
+    await assert.rejects(async () => {
+      for await (const _item of DreamapplySDK.test(offline).Scoresheet().stream('list')) { }
+    }, /offline/)
+
+    for await (const _item of DreamapplySDK.test(offline).Scoresheet()
+      .stream('list', undefined, { ctrl: { throw: false } })) { }
+
+    if (null != (config as any).feature?.rbac) {
+      const denied = DreamapplySDK.test(undefined, { feature: { rbac: { active: true, deny: true } } })
+      await assert.rejects(async () => {
+        for await (const _item of denied.Scoresheet().stream('list')) { }
+      }, (err: any) => 'rbac_denied' === err.code)
+    }
+  })
+
+  test('stream-ctrl', async () => {
+    const explain: any = {}
+    const ctrl: any = { explain }
+    for await (const _item of DreamapplySDK.test().Scoresheet().stream('list', undefined, { ctrl })) { }
+    assert.deepStrictEqual(Object.keys(ctrl), ['explain'])
+    assert(explain === ctrl.explain && 0 < Object.keys(explain).length)
+  })
+
+  test('unexpected', async () => {
+    const hook = new FailHook()
+    const client = new DreamapplySDK({ feature: { test: { active: true } }, extend: [hook] })
+    await assert.rejects(client.Scoresheet().list(), /hook failed/)
+    assert(0 < hook.unexpected)
+
+    const fired = hook.unexpected
+    assert.strictEqual(await client.Scoresheet().list(undefined, { throw: false }), undefined)
+    assert(fired < hook.unexpected)
+  })
+
+  test('validate', async (t) => {
+    if (null == (config as any).feature?.validate) {
+      t.skip('feature not present in this SDK: validate')
+      return
+    }
+    const client = DreamapplySDK.test(undefined, { feature: { validate: { active: true } } })
+    await assert.rejects(client.Scoresheet().list({"confirmed":1} as any),
+      (err: any) => 'validate_failed' === err.code)
+  })
+
+
+
   test('basic', async (t) => {
 
     const live = 'TRUE' === process.env.DREAMAPPLY_TEST_LIVE
@@ -51,7 +109,7 @@ describe('ScoresheetEntity', async () => {
     
     const setup = basicSetup()
     if (setup.live) {
-      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":{"confirmed":{"a":true,"h":"Confirmed","n":"confirmed","r":false,"t":"`$STRING`","key$":"confirmed","index$":0},"created":{"a":true,"h":"Created","n":"created","r":false,"t":"`$STRING`","key$":"created","index$":1},"date":{"a":true,"h":"Date","n":"date","r":false,"t":"`$STRING`","key$":"date","index$":2},"depth":{"a":true,"h":"Depth","n":"depth","r":false,"t":"`$STRING`","key$":"depth","index$":3},"group":{"a":true,"h":"Group","n":"group","r":false,"sh":"Sub-resource (object); see the DreamApply SDK.","t":"`$OBJECT`","key$":"group","index$":4},"id":{"a":true,"h":"Id","n":"id","r":false,"t":"`$STRING`","key$":"id","index$":5},"instructions":{"a":true,"h":"Instructions","n":"instructions","r":false,"t":"`$STRING`","key$":"instructions","index$":6},"language":{"a":true,"h":"Language","n":"language","r":false,"t":"`$STRING`","key$":"language","index$":7},"maps":{"a":true,"h":"Maps","n":"maps","r":false,"t":"`$ARRAY`","key$":"maps","index$":8},"name":{"a":true,"h":"Name","n":"name","r":false,"t":"`$STRING`","key$":"name","index$":9},"rangeMax":{"a":true,"h":"Range Max","n":"rangeMax","r":false,"t":"`$STRING`","key$":"rangeMax","index$":10},"rangeMin":{"a":true,"h":"Range Min","n":"rangeMin","r":false,"t":"`$STRING`","key$":"rangeMin","index$":11},"reference":{"a":true,"h":"Reference","n":"reference","r":false,"t":"`$STRING`","key$":"reference","index$":12},"scale":{"a":true,"h":"Scale","n":"scale","r":false,"t":"`$INTEGER`","key$":"scale","index$":13},"scored":{"a":true,"h":"Scored","n":"scored","r":false,"t":"`$STRING`","key$":"scored","index$":14},"scores":{"a":true,"h":"Scores","n":"scores","r":false,"sh":"Sub-resource (Scores); see the DreamApply SDK.","t":"`$OBJECT`","key$":"scores","index$":15},"subject":{"a":true,"h":"Subject","n":"subject","r":false,"t":"`$STRING`","key$":"subject","index$":16},"type":{"a":true,"h":"Type","n":"type","r":false,"t":"`$STRING`","key$":"type","index$":17}},"id":{"field":"id","name":"id"},"name":"scoresheet","op":{"list":{"input":"data","name":"list","points":[{"a":true,"co":{"id":"GET /scoresheets","source":"openapi3","version":2},"g":{},"k":"http","m":"GET","o":"/scoresheets","q":{},"r":{},"s":[{"lit":"scoresheets"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"list"},"load":{"input":"data","name":"load","points":[{"a":true,"co":{"id":"GET /scoresheets/{id}","source":"openapi3","version":2},"g":{"params":[{"a":true,"k":"param","n":"id","or":"id","r":true,"t":"`$INTEGER`","index$":0}]},"k":"http","m":"GET","o":"/scoresheets/{id}","q":{"exist":["id"]},"r":{},"s":[{"lit":"scoresheets"},{"var":"id"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"load"}},"relations":{"ancestors":[]},"key$":"scoresheet","name__orig":"scoresheet","Name":"Scoresheet","name_":"scoresheet","name-":"scoresheet","NAME":"SCORESHEET","index$":12}, {"active":true,"entity":"scoresheet","key$":"BasicScoresheetFlow","kind":"basic","name":"BasicScoresheetFlow","param":{},"step":[{"a":true,"d":{},"i":{},"m":{},"o":"list","s":[],"v":[{"apply":"ItemExists","def":{"ref":"scoresheet_ref01"}}],"index$":0},{"a":true,"d":{},"i":{"ref":"scoresheet_ref01","srcdatavar":"scoresheet_ref01_data","suffix":"_dt0"},"m":{"id":"scoresheet01"},"o":"load","s":[],"v":[{"apply":"TextFieldMark","def":{"mark":"Mark01-scoresheet_ref01"}}],"index$":1}]}, 'Scoresheet', {"GET /scoresheets":{"protocol":"http","parameters":[]},"GET /scoresheets/{id}":{"protocol":"http","parameters":[{"name":"id","in":"path","required":true,"schema":{"type":"integer"},"index$":0}]}})
+      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":{"confirmed":{"a":true,"h":"Confirmed","n":"confirmed","r":false,"t":"`$STRING`","key$":"confirmed","index$":0},"created":{"a":true,"h":"Created","n":"created","r":false,"t":"`$STRING`","key$":"created","index$":1},"date":{"a":true,"h":"Date","n":"date","r":false,"t":"`$STRING`","key$":"date","index$":2},"depth":{"a":true,"h":"Depth","n":"depth","r":false,"t":"`$STRING`","key$":"depth","index$":3},"group":{"a":true,"h":"Group","n":"group","r":false,"sh":"Sub-resource (object); see the DreamApply SDK.","t":"`$OBJECT`","key$":"group","index$":4},"id":{"a":true,"h":"Id","n":"id","r":false,"t":"`$STRING`","key$":"id","index$":5},"instructions":{"a":true,"h":"Instructions","n":"instructions","r":false,"t":"`$STRING`","key$":"instructions","index$":6},"language":{"a":true,"h":"Language","n":"language","r":false,"t":"`$STRING`","key$":"language","index$":7},"maps":{"a":true,"h":"Maps","n":"maps","r":false,"t":"`$ARRAY`","key$":"maps","index$":8},"name":{"a":true,"h":"Name","n":"name","r":false,"t":"`$STRING`","key$":"name","index$":9},"rangeMax":{"a":true,"h":"Range Max","n":"rangeMax","r":false,"t":"`$STRING`","key$":"rangeMax","index$":10},"rangeMin":{"a":true,"h":"Range Min","n":"rangeMin","r":false,"t":"`$STRING`","key$":"rangeMin","index$":11},"reference":{"a":true,"h":"Reference","n":"reference","r":false,"t":"`$STRING`","key$":"reference","index$":12},"scale":{"a":true,"h":"Scale","n":"scale","r":false,"t":"`$INTEGER`","key$":"scale","index$":13},"scored":{"a":true,"h":"Scored","n":"scored","r":false,"t":"`$STRING`","key$":"scored","index$":14},"scores":{"a":true,"h":"Scores","n":"scores","r":false,"sh":"Sub-resource (Scores); see the DreamApply SDK.","t":"`$OBJECT`","key$":"scores","index$":15},"subject":{"a":true,"h":"Subject","n":"subject","r":false,"t":"`$STRING`","key$":"subject","index$":16},"type":{"a":true,"h":"Type","n":"type","r":false,"t":"`$STRING`","key$":"type","index$":17}},"id":{"field":"id","name":"id"},"name":"scoresheet","op":{"list":{"input":"data","name":"list","points":[{"a":true,"co":{"id":"GET /scoresheets","source":"openapi3","version":2},"g":{},"k":"http","m":"GET","o":"/scoresheets","q":{},"r":{},"rs":{"kind":"json","media":"application/json"},"s":[{"lit":"scoresheets"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"list"},"load":{"input":"data","name":"load","points":[{"a":true,"co":{"id":"GET /scoresheets/{id}","source":"openapi3","version":2},"g":{"params":[{"a":true,"k":"param","n":"id","or":"id","r":true,"t":"`$INTEGER`","index$":0}]},"k":"http","m":"GET","o":"/scoresheets/{id}","q":{"exist":["id"]},"r":{},"rs":{"kind":"json","media":"application/json"},"s":[{"lit":"scoresheets"},{"var":"id"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"load"}},"relations":{"ancestors":[]},"key$":"scoresheet","name__orig":"scoresheet","Name":"Scoresheet","name_":"scoresheet","name-":"scoresheet","NAME":"SCORESHEET","index$":12}, {"active":true,"entity":"scoresheet","key$":"BasicScoresheetFlow","kind":"basic","name":"BasicScoresheetFlow","param":{},"step":[{"a":true,"d":{},"i":{},"m":{},"o":"list","s":[],"v":[{"apply":"ItemExists","def":{"ref":"scoresheet_ref01"}}],"index$":0},{"a":true,"d":{},"i":{"ref":"scoresheet_ref01","srcdatavar":"scoresheet_ref01_data","suffix":"_dt0"},"m":{"id":"scoresheet01"},"o":"load","s":[],"v":[{"apply":"TextFieldMark","def":{"mark":"Mark01-scoresheet_ref01"}}],"index$":1}]}, 'Scoresheet', {"GET /scoresheets":{"protocol":"http","parameters":[]},"GET /scoresheets/{id}":{"protocol":"http","parameters":[{"name":"id","in":"path","required":true,"schema":{"type":"integer"},"index$":0}]}}, { strict: LIVE_STRICT, t })
     }
     const client = setup.client
     const struct = setup.struct
@@ -79,6 +137,12 @@ describe('ScoresheetEntity', async () => {
 })
 
 
+
+// main.kit.test.live.strict is true (the default is true): a live
+// request that fails, or a live test missing an input it needs,
+// fails the test.
+// An account with no record for a test to read skips it either way.
+const LIVE_STRICT = true
 
 function basicSetup(extra?: any) {
   // TODO: fix test def options

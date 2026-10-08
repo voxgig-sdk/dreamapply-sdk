@@ -164,6 +164,10 @@ main: kit: entity: application: {
           }
           m: "GET"
           o: "/applications"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
           s: [
             {
               lit: "applications"
@@ -202,6 +206,10 @@ main: kit: entity: application: {
             exist: [
               "id"
             ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {

@@ -15,9 +15,13 @@ predictable and low-friction for both humans and AI agents.
 
 ## Install
 This package is not yet published to npm. Install it from the GitHub
-release tag (`ts/vX.Y.Z`):
+release tag (`ts/vX.Y.Z`, see [Tags](https://github.com/voxgig-sdk/dreamapply-sdk/tags)), or from a
+clone, which carries the compiled `dist/`:
 
-- Releases: [https://github.com/voxgig-sdk/dreamapply-sdk/releases](https://github.com/voxgig-sdk/dreamapply-sdk/releases)
+```bash
+git clone https://github.com/voxgig-sdk/dreamapply-sdk
+npm install ./dreamapply-sdk/ts
+```
 
 
 ## Tutorial: your first API call
@@ -49,18 +53,18 @@ resolves to entities, not raw records. Iterate them directly, and call
 const academicterms = await client.AcademicTerm().list()
 
 for (const academicterm of academicterms) {
-  console.log(academicterm)
+  console.log(academicterm.data())
 }
 ```
 
 ### 3. Load an academicterm
 
-`load()` returns the entity directly and throws on failure:
+`load()` returns the entity and throws on failure; `.data()` reads its record:
 
 ```ts
 try {
   const academicterm = await client.AcademicTerm().load({ id: 1 })
-  console.log(academicterm)
+  console.log(academicterm.data())
 } catch (err) {
   console.error('load failed:', err)
 }
@@ -73,15 +77,16 @@ Entity operations reject on failure, so wrap them in `try` / `catch`:
 
 ```ts
 try {
-  const tableviews = await client.TableView().list()
-  console.log(tableviews)
+  const institutions = await client.Institution().list()
+  console.log(institutions.map((item) => item.data()))
 } catch (err) {
   console.error('list failed:', err)
 }
 ```
 
 The low-level `direct()` method does **not** throw — it returns the
-value or an `Error`, so check the result before using it:
+result envelope. Branch on `ok`; on failure `status` holds the HTTP status
+(for error responses) and `err` holds the error:
 
 ```ts
 const result = await client.direct({
@@ -90,8 +95,8 @@ const result = await client.direct({
   params: { id: 'example_id' },
 })
 
-if (result instanceof Error) {
-  throw result
+if (!result.ok) {
+  console.error('request failed:', result.status, result.err)
 }
 ```
 
@@ -109,9 +114,6 @@ const result = await client.direct({
   params: { id: 'example' },
 })
 
-if (result instanceof Error) {
-  throw result
-}
 if (result.ok) {
   console.log(result.status)  // 200
   console.log(result.data)    // response body
@@ -140,10 +142,9 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = DreamapplySDK.test()
 
-const tableview = await client.TableView().list()
-// tableview is the entity, populated with mock response data
-// — call tableview.data() for the record itself
-console.log(tableview)
+const institutions = await client.Institution().list()
+// institutions is an array of Institution entities, one per mock record
+console.log(institutions.map((institution) => institution.data()))
 ```
 
 You can also use the instance method:
@@ -158,7 +159,7 @@ const testClient = client.tester()
 Entity instances remember their last match and data:
 
 ```ts
-const entity = client.TableView()
+const entity = client.Institution()
 
 // First call runs the operation and stores its result
 await entity.list()
@@ -277,10 +278,10 @@ All entities share the same interface.
 
 | Method | Signature | Description |
 | --- | --- | --- |
-| `load` | `load(reqmatch?, ctrl?): Promise<Entity>` | Load a single entity by match criteria. |
-| `list` | `list(reqmatch?, ctrl?): Promise<Entity[]>` | List entities matching the criteria. |
-| `create` | `create(reqdata?, ctrl?): Promise<Entity>` | Create a new entity. |
-| `remove` | `remove(reqmatch?, ctrl?): Promise<void>` | Remove an entity. |
+| `load` | `load(reqmatch?, ctrl?): Promise<Entity>` | Load a single entity by match criteria, and return it. |
+| `list` | `list(reqmatch?, ctrl?): Promise<Entity[]>` | List entities matching the criteria, one per record. |
+| `create` | `create(reqdata?, ctrl?): Promise<Entity>` | Create a new entity, and return it. |
+| `remove` | `remove(reqmatch?, ctrl?): Promise<Entity>` | Remove an entity, and return it marked as deleted. |
 | `data` | `data(data?: Partial<Entity>): Entity` | Get or set entity data. |
 | `match` | `match(match?: Partial<Entity>): Partial<Entity>` | Get or set entity match criteria. |
 | `make` | `make(): Entity` | Create a new instance with the same options. |
@@ -289,13 +290,13 @@ All entities share the same interface.
 
 #### Return values
 
-Entity operations resolve to the entity data directly — there is no
-result envelope:
+Entity operations resolve to the entity itself — there is no result
+envelope, and an entity's `data()` reads its record:
 
 - `load` and `create` resolve to a single entity object.
 - `list` resolves to an **array** of entity objects (iterate it directly;
   there is no `.data` and no `.ok`).
-- `remove` resolves to `void`.
+- `remove` resolves to the entity, marked as deleted.
 
 On a failed request these methods **throw**, so wrap calls in
 `try`/`catch` to handle errors. Only `direct()` returns the result
@@ -438,18 +439,14 @@ API path: `/applications`
 | Field | Description |
 | --- | --- |
 | `accreditation` |  |
-| `address` |  |
 | `awards_abbr` |  |
 | `awards_full` |  |
 | `code` |  |
 | `codeInternal` |  |
 | `country` |  |
 | `credits` |  |
-| `departments` | Sub-resource (InstitutionDepartments); see the DreamApply SDK. |
 | `duration` |  |
-| `erasmus` |  |
 | `featured` |  |
-| `iban` |  |
 | `id` |  |
 | `institution` |  |
 | `language` |  |
@@ -458,12 +455,9 @@ API path: `/applications`
 | `name` |  |
 | `prospect_uri` |  |
 | `quota` |  |
-| `registration` |  |
 | `status` |  |
 | `type` |  |
 | `updated` |  |
-| `vat` |  |
-| `www` |  |
 
 Operations: create, list, load.
 
@@ -612,17 +606,11 @@ API path: `/scoresheets`
 
 | Field | Description |
 | --- | --- |
-| `content` | Sub-resource (StreamInterface); see the DreamApply SDK. |
 | `created` |  |
-| `expires` |  |
 | `id` |  |
-| `mime` |  |
 | `modified` |  |
-| `name` |  |
-| `size` |  |
 | `tabledata` |  |
 | `title` |  |
-| `uploaded` |  |
 
 Operations: list, load.
 
@@ -860,32 +848,25 @@ Create an instance: `const course = client.Course()`
 | Field | Type | Description |
 | --- | --- | --- |
 | `accreditation` | `string` |  |
-| `address` | `string` |  |
 | `awards_abbr` | `string` |  |
 | `awards_full` | `string` |  |
 | `code` | `string` |  |
 | `codeInternal` | `string` |  |
 | `country` | `string` |  |
 | `credits` | `string` |  |
-| `departments` | `Record<string, any>` | Sub-resource (InstitutionDepartments); see the DreamApply SDK. |
 | `duration` | `string` |  |
-| `erasmus` | `string` |  |
 | `featured` | `string` |  |
-| `iban` | `string` |  |
 | `id` | `number` |  |
-| `institution` | `string` |  |
+| `institution` | `Record<string, any>` |  |
 | `language` | `string` |  |
 | `location` | `string` |  |
 | `mode` | `string` |  |
 | `name` | `string` |  |
 | `prospect_uri` | `string` |  |
 | `quota` | `string` |  |
-| `registration` | `string` |  |
 | `status` | `string` |  |
 | `type` | `string` |  |
 | `updated` | `string` |  |
-| `vat` | `string` |  |
-| `www` | `string` |  |
 
 #### Example: Load
 
@@ -1188,17 +1169,11 @@ Create an instance: `const table_view = client.TableView()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `content` | `Record<string, any>` | Sub-resource (StreamInterface); see the DreamApply SDK. |
 | `created` | `string` |  |
-| `expires` | `string` |  |
 | `id` | `number` |  |
-| `mime` | `string` |  |
 | `modified` | `string` |  |
-| `name` | `string` |  |
-| `size` | `number` |  |
 | `tabledata` | `Record<string, any>` |  |
 | `title` | `string` |  |
-| `uploaded` | `string` |  |
 
 #### Example: Load
 
@@ -1425,11 +1400,11 @@ stores the returned data and match criteria internally. Subsequent
 calls on the same instance can rely on this state.
 
 ```ts
-const tableview = client.TableView()
-await tableview.list()
+const institution = client.Institution()
+await institution.list()
 
-// tableview.data() now returns the tableview data from the last `list`
-// tableview.match() returns the last match criteria
+// institution.data() now returns the institution data from the last `list`
+// institution.match() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

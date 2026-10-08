@@ -54,6 +54,53 @@ const utility_1 = require("../../utility");
         const ent = testsdk.Invoice();
         (0, node_assert_1.default)(null != ent);
     });
+    class FailHook extends __1.BaseFeature {
+        name = 'failhook';
+        version = '0.0.1';
+        active = true;
+        unexpected = 0;
+        init() { }
+        PreSpec() { throw new Error('invoice hook failed'); }
+        PreUnexpected() { this.unexpected++; }
+    }
+    (0, node_test_1.test)('stream-error', async () => {
+        const offline = { net: { offline: true } };
+        await node_assert_1.default.rejects(async () => {
+            for await (const _item of __1.DreamapplySDK.test(offline).Invoice().stream('list')) { }
+        }, /offline/);
+        for await (const _item of __1.DreamapplySDK.test(offline).Invoice()
+            .stream('list', undefined, { ctrl: { throw: false } })) { }
+        if (null != __1.config.feature?.rbac) {
+            const denied = __1.DreamapplySDK.test(undefined, { feature: { rbac: { active: true, deny: true } } });
+            await node_assert_1.default.rejects(async () => {
+                for await (const _item of denied.Invoice().stream('list')) { }
+            }, (err) => 'rbac_denied' === err.code);
+        }
+    });
+    (0, node_test_1.test)('stream-ctrl', async () => {
+        const explain = {};
+        const ctrl = { explain };
+        for await (const _item of __1.DreamapplySDK.test().Invoice().stream('list', undefined, { ctrl })) { }
+        node_assert_1.default.deepStrictEqual(Object.keys(ctrl), ['explain']);
+        (0, node_assert_1.default)(explain === ctrl.explain && 0 < Object.keys(explain).length);
+    });
+    (0, node_test_1.test)('unexpected', async () => {
+        const hook = new FailHook();
+        const client = new __1.DreamapplySDK({ feature: { test: { active: true } }, extend: [hook] });
+        await node_assert_1.default.rejects(client.Invoice().list(), /hook failed/);
+        (0, node_assert_1.default)(0 < hook.unexpected);
+        const fired = hook.unexpected;
+        node_assert_1.default.strictEqual(await client.Invoice().list(undefined, { throw: false }), undefined);
+        (0, node_assert_1.default)(fired < hook.unexpected);
+    });
+    (0, node_test_1.test)('validate', async (t) => {
+        if (null == __1.config.feature?.validate) {
+            t.skip('feature not present in this SDK: validate');
+            return;
+        }
+        const client = __1.DreamapplySDK.test(undefined, { feature: { validate: { active: true } } });
+        await node_assert_1.default.rejects(client.Invoice().list({ "collected": 1 }), (err) => 'validate_failed' === err.code);
+    });
     (0, node_test_1.test)('basic', async (t) => {
         const live = 'TRUE' === process.env.DREAMAPPLY_TEST_LIVE;
         for (const op of ['list', 'load']) {
@@ -62,7 +109,7 @@ const utility_1 = require("../../utility");
         }
         const setup = basicSetup();
         if (setup.live) {
-            return (0, live_entity_1.runLiveEntity)(setup, { "active": true, "alias": { "field": {} }, "fields": { "applicant": { "a": true, "h": "Applicant", "n": "applicant", "r": false, "t": "`$OBJECT`", "key$": "applicant", "index$": 0 }, "application": { "a": true, "h": "Application", "n": "application", "r": false, "t": "`$OBJECT`", "key$": "application", "index$": 1 }, "collected": { "a": true, "h": "Collected", "n": "collected", "r": false, "t": "`$STRING`", "key$": "collected", "index$": 2 }, "course": { "a": true, "h": "Course", "n": "course", "r": false, "t": "`$OBJECT`", "key$": "course", "index$": 3 }, "currency": { "a": true, "h": "Currency", "n": "currency", "r": false, "t": "`$STRING`", "key$": "currency", "index$": 4 }, "deadline": { "a": true, "h": "Deadline", "n": "deadline", "r": false, "t": "`$STRING`", "key$": "deadline", "index$": 5 }, "delivered": { "a": true, "h": "Delivered", "n": "delivered", "r": false, "t": "`$STRING`", "key$": "delivered", "index$": 6 }, "id": { "a": true, "h": "Id", "n": "id", "r": false, "t": "`$INTEGER`", "key$": "id", "index$": 7 }, "instructions": { "a": true, "h": "Instructions", "n": "instructions", "r": false, "t": "`$STRING`", "key$": "instructions", "index$": 8 }, "issued": { "a": true, "h": "Issued", "n": "issued", "r": false, "t": "`$STRING`", "key$": "issued", "index$": 9 }, "nr": { "a": true, "h": "Nr", "n": "nr", "r": false, "t": "`$STRING`", "key$": "nr", "index$": 10 }, "payer": { "a": true, "h": "Payer", "n": "payer", "r": false, "t": "`$OBJECT`", "key$": "payer", "index$": 11 }, "reminded": { "a": true, "h": "Reminded", "n": "reminded", "r": false, "t": "`$STRING`", "key$": "reminded", "index$": 12 }, "smallprint": { "a": true, "h": "Smallprint", "n": "smallprint", "r": false, "t": "`$STRING`", "key$": "smallprint", "index$": 13 } }, "id": { "field": "id", "name": "id" }, "name": "invoice", "op": { "list": { "input": "data", "name": "list", "points": [{ "a": true, "co": { "id": "GET /invoices", "source": "openapi3", "version": 2 }, "g": {}, "k": "http", "m": "GET", "o": "/invoices", "q": {}, "r": {}, "s": [{ "lit": "invoices" }], "t": { "req": "`reqdata`", "res": "`body`" }, "index$": 0 }], "key$": "list" }, "load": { "input": "data", "name": "load", "points": [{ "a": true, "co": { "id": "GET /invoices/{id}", "source": "openapi3", "version": 2 }, "g": { "params": [{ "a": true, "k": "param", "n": "id", "or": "id", "r": true, "t": "`$INTEGER`", "index$": 0 }] }, "k": "http", "m": "GET", "o": "/invoices/{id}", "q": { "exist": ["id"] }, "r": {}, "s": [{ "lit": "invoices" }, { "var": "id" }], "t": { "req": "`reqdata`", "res": "`body`" }, "index$": 0 }], "key$": "load" }, "remove": { "input": "data", "name": "remove", "points": [{ "a": true, "co": { "id": "DELETE /invoices/{id}", "source": "openapi3", "version": 2 }, "g": { "params": [{ "a": true, "k": "param", "n": "id", "or": "id", "r": true, "t": "`$INTEGER`", "index$": 0 }] }, "k": "http", "m": "DELETE", "o": "/invoices/{id}", "q": { "exist": ["id"] }, "r": {}, "s": [{ "lit": "invoices" }, { "var": "id" }], "t": { "req": "`reqdata`", "res": "`body`" }, "index$": 0 }], "key$": "remove" } }, "relations": { "ancestors": [] }, "key$": "invoice", "name__orig": "invoice", "Name": "Invoice", "name_": "invoice", "name-": "invoice", "NAME": "INVOICE", "index$": 9 }, { "active": true, "entity": "invoice", "key$": "BasicInvoiceFlow", "kind": "basic", "name": "BasicInvoiceFlow", "param": {}, "step": [{ "a": true, "d": {}, "i": {}, "m": {}, "o": "list", "s": [], "v": [{ "apply": "ItemExists", "def": { "ref": "invoice_ref01" } }], "index$": 0 }, { "a": true, "d": {}, "i": { "ref": "invoice_ref01", "srcdatavar": "invoice_ref01_data", "suffix": "_dt0" }, "m": { "id": "invoice01" }, "o": "load", "s": [], "v": [{ "apply": "TextFieldMark", "def": { "mark": "Mark01-invoice_ref01" } }], "index$": 1 }] }, 'Invoice', { "GET /invoices": { "protocol": "http", "parameters": [] }, "GET /invoices/{id}": { "protocol": "http", "parameters": [{ "name": "id", "in": "path", "required": true, "schema": { "type": "integer" }, "index$": 0 }] }, "DELETE /invoices/{id}": { "protocol": "http", "parameters": [{ "name": "id", "in": "path", "required": true, "schema": { "type": "integer" }, "index$": 0 }] } });
+            return (0, live_entity_1.runLiveEntity)(setup, { "active": true, "alias": { "field": {} }, "fields": { "applicant": { "a": true, "h": "Applicant", "n": "applicant", "r": false, "t": "`$OBJECT`", "key$": "applicant", "index$": 0 }, "application": { "a": true, "h": "Application", "n": "application", "r": false, "t": "`$OBJECT`", "key$": "application", "index$": 1 }, "collected": { "a": true, "h": "Collected", "n": "collected", "r": false, "t": "`$STRING`", "key$": "collected", "index$": 2 }, "course": { "a": true, "h": "Course", "n": "course", "r": false, "t": "`$OBJECT`", "key$": "course", "index$": 3 }, "currency": { "a": true, "h": "Currency", "n": "currency", "r": false, "t": "`$STRING`", "key$": "currency", "index$": 4 }, "deadline": { "a": true, "h": "Deadline", "n": "deadline", "r": false, "t": "`$STRING`", "key$": "deadline", "index$": 5 }, "delivered": { "a": true, "h": "Delivered", "n": "delivered", "r": false, "t": "`$STRING`", "key$": "delivered", "index$": 6 }, "id": { "a": true, "h": "Id", "n": "id", "r": false, "t": "`$INTEGER`", "key$": "id", "index$": 7 }, "instructions": { "a": true, "h": "Instructions", "n": "instructions", "r": false, "t": "`$STRING`", "key$": "instructions", "index$": 8 }, "issued": { "a": true, "h": "Issued", "n": "issued", "r": false, "t": "`$STRING`", "key$": "issued", "index$": 9 }, "nr": { "a": true, "h": "Nr", "n": "nr", "r": false, "t": "`$STRING`", "key$": "nr", "index$": 10 }, "payer": { "a": true, "h": "Payer", "n": "payer", "r": false, "t": "`$OBJECT`", "key$": "payer", "index$": 11 }, "reminded": { "a": true, "h": "Reminded", "n": "reminded", "r": false, "t": "`$STRING`", "key$": "reminded", "index$": 12 }, "smallprint": { "a": true, "h": "Smallprint", "n": "smallprint", "r": false, "t": "`$STRING`", "key$": "smallprint", "index$": 13 } }, "id": { "field": "id", "name": "id" }, "name": "invoice", "op": { "list": { "input": "data", "name": "list", "points": [{ "a": true, "co": { "id": "GET /invoices", "source": "openapi3", "version": 2 }, "g": {}, "k": "http", "m": "GET", "o": "/invoices", "q": {}, "r": {}, "rs": { "kind": "json", "media": "application/json" }, "s": [{ "lit": "invoices" }], "t": { "req": "`reqdata`", "res": "`body`" }, "index$": 0 }], "key$": "list" }, "load": { "input": "data", "name": "load", "points": [{ "a": true, "co": { "id": "GET /invoices/{id}", "source": "openapi3", "version": 2 }, "g": { "params": [{ "a": true, "k": "param", "n": "id", "or": "id", "r": true, "t": "`$INTEGER`", "index$": 0 }] }, "k": "http", "m": "GET", "o": "/invoices/{id}", "q": { "exist": ["id"] }, "r": {}, "rs": { "kind": "json", "media": "application/json" }, "s": [{ "lit": "invoices" }, { "var": "id" }], "t": { "req": "`reqdata`", "res": "`body`" }, "index$": 0 }], "key$": "load" }, "remove": { "input": "data", "name": "remove", "points": [{ "a": true, "co": { "id": "DELETE /invoices/{id}", "source": "openapi3", "version": 2 }, "g": { "params": [{ "a": true, "k": "param", "n": "id", "or": "id", "r": true, "t": "`$INTEGER`", "index$": 0 }] }, "k": "http", "m": "DELETE", "o": "/invoices/{id}", "q": { "exist": ["id"] }, "r": {}, "s": [{ "lit": "invoices" }, { "var": "id" }], "t": { "req": "`reqdata`", "res": "`body`" }, "index$": 0 }], "key$": "remove" } }, "relations": { "ancestors": [] }, "key$": "invoice", "name__orig": "invoice", "Name": "Invoice", "name_": "invoice", "name-": "invoice", "NAME": "INVOICE", "index$": 9 }, { "active": true, "entity": "invoice", "key$": "BasicInvoiceFlow", "kind": "basic", "name": "BasicInvoiceFlow", "param": {}, "step": [{ "a": true, "d": {}, "i": {}, "m": {}, "o": "list", "s": [], "v": [{ "apply": "ItemExists", "def": { "ref": "invoice_ref01" } }], "index$": 0 }, { "a": true, "d": {}, "i": { "ref": "invoice_ref01", "srcdatavar": "invoice_ref01_data", "suffix": "_dt0" }, "m": { "id": "invoice01" }, "o": "load", "s": [], "v": [{ "apply": "TextFieldMark", "def": { "mark": "Mark01-invoice_ref01" } }], "index$": 1 }] }, 'Invoice', { "GET /invoices": { "protocol": "http", "parameters": [] }, "GET /invoices/{id}": { "protocol": "http", "parameters": [{ "name": "id", "in": "path", "required": true, "schema": { "type": "integer" }, "index$": 0 }] }, "DELETE /invoices/{id}": { "protocol": "http", "parameters": [{ "name": "id", "in": "path", "required": true, "schema": { "type": "integer" }, "index$": 0 }] } }, { strict: LIVE_STRICT, t });
         }
         const client = setup.client;
         const struct = setup.struct;
@@ -80,6 +127,11 @@ const utility_1 = require("../../utility");
         (0, node_assert_1.default)(invoice_ref01_data_dt0.id === invoice_ref01_data.id);
     });
 });
+// main.kit.test.live.strict is true (the default is true): a live
+// request that fails, or a live test missing an input it needs,
+// fails the test.
+// An account with no record for a test to read skips it either way.
+const LIVE_STRICT = true;
 function basicSetup(extra) {
     // TODO: fix test def options
     const options = {}; // null

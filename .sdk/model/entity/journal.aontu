@@ -109,6 +109,10 @@ main: kit: entity: journal: {
           }
           m: "GET"
           o: "/journal"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
           s: [
             {
               lit: "journal"

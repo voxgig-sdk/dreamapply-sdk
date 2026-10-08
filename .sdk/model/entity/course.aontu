@@ -11,12 +11,6 @@ main: kit: entity: course: {
       r: false
       t: "`$STRING`"
     }
-    address: {
-      h: "Address"
-      n: "address"
-      r: false
-      t: "`$STRING`"
-    }
     awards_abbr: {
       h: "Awards Abbr"
       n: "awards_abbr"
@@ -53,34 +47,15 @@ main: kit: entity: course: {
       r: false
       t: "`$STRING`"
     }
-    departments: {
-      h: "Departments"
-      n: "departments"
-      r: false
-      sh: "Sub-resource (InstitutionDepartments); see the DreamApply SDK."
-      t: "`$OBJECT`"
-    }
     duration: {
       h: "Duration"
       n: "duration"
       r: false
       t: "`$STRING`"
     }
-    erasmus: {
-      h: "Erasmus"
-      n: "erasmus"
-      r: false
-      t: "`$STRING`"
-    }
     featured: {
       h: "Featured"
       n: "featured"
-      r: false
-      t: "`$STRING`"
-    }
-    iban: {
-      h: "Iban"
-      n: "iban"
       r: false
       t: "`$STRING`"
     }
@@ -94,7 +69,7 @@ main: kit: entity: course: {
       h: "Institution"
       n: "institution"
       r: false
-      t: "`$STRING`"
+      t: "`$OBJECT`"
     }
     language: {
       h: "Language"
@@ -132,12 +107,6 @@ main: kit: entity: course: {
       r: false
       t: "`$STRING`"
     }
-    registration: {
-      h: "Registration"
-      n: "registration"
-      r: false
-      t: "`$STRING`"
-    }
     status: {
       h: "Status"
       n: "status"
@@ -156,18 +125,6 @@ main: kit: entity: course: {
       r: false
       t: "`$STRING`"
     }
-    vat: {
-      h: "Vat"
-      n: "vat"
-      r: false
-      t: "`$STRING`"
-    }
-    www: {
-      h: "Www"
-      n: "www"
-      r: false
-      t: "`$STRING`"
-    }
   }
 
   id: {
@@ -181,6 +138,19 @@ main: kit: entity: course: {
       name: "create"
       points: [
         {
+          bf: [
+            "awards_abbr"
+            "awards_full"
+            "code"
+            "country"
+            "institution"
+            "language"
+            "location"
+            "mode"
+            "name"
+            "prospect_uri"
+            "type"
+          ]
           co: {
             id: "POST /courses"
             source: "openapi3"
@@ -188,6 +158,10 @@ main: kit: entity: course: {
           }
           m: "POST"
           o: "/courses"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
           s: [
             {
               lit: "courses"
@@ -195,7 +169,7 @@ main: kit: entity: course: {
           ]
           t: {
             req: "`reqdata`"
-            res: "`body.institution`"
+            res: "`body`"
           }
         }
       ]
@@ -211,6 +185,10 @@ main: kit: entity: course: {
           }
           m: "GET"
           o: "/courses"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
           s: [
             {
               lit: "courses"
@@ -250,6 +228,10 @@ main: kit: entity: course: {
               "id"
             ]
           }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
           s: [
             {
               lit: "courses"
@@ -260,7 +242,7 @@ main: kit: entity: course: {
           ]
           t: {
             req: "`reqdata`"
-            res: "`body.institution`"
+            res: "`body`"
           }
         }
       ]

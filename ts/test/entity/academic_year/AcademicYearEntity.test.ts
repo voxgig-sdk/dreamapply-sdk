@@ -9,7 +9,7 @@ import { createLiveTransport } from '../../live-runner'
 import { runLiveEntity } from '../../live-entity'
 
 
-import { DreamapplySDK, BaseFeature, stdutil } from '../../..'
+import { DreamapplySDK, BaseFeature, config, stdutil } from '../../..'
 
 import {
   envOverride,
@@ -41,6 +41,64 @@ describe('AcademicYearEntity', async () => {
   })
 
 
+  class FailHook extends BaseFeature {
+    name = 'failhook'
+    version = '0.0.1'
+    active = true
+    unexpected = 0
+    init() { }
+    PreSpec() { throw new Error('academic_year hook failed') }
+    PreUnexpected() { this.unexpected++ }
+  }
+
+  test('stream-error', async () => {
+    const offline = { net: { offline: true } }
+    await assert.rejects(async () => {
+      for await (const _item of DreamapplySDK.test(offline).AcademicYear().stream('list')) { }
+    }, /offline/)
+
+    for await (const _item of DreamapplySDK.test(offline).AcademicYear()
+      .stream('list', undefined, { ctrl: { throw: false } })) { }
+
+    if (null != (config as any).feature?.rbac) {
+      const denied = DreamapplySDK.test(undefined, { feature: { rbac: { active: true, deny: true } } })
+      await assert.rejects(async () => {
+        for await (const _item of denied.AcademicYear().stream('list')) { }
+      }, (err: any) => 'rbac_denied' === err.code)
+    }
+  })
+
+  test('stream-ctrl', async () => {
+    const explain: any = {}
+    const ctrl: any = { explain }
+    for await (const _item of DreamapplySDK.test().AcademicYear().stream('list', undefined, { ctrl })) { }
+    assert.deepStrictEqual(Object.keys(ctrl), ['explain'])
+    assert(explain === ctrl.explain && 0 < Object.keys(explain).length)
+  })
+
+  test('unexpected', async () => {
+    const hook = new FailHook()
+    const client = new DreamapplySDK({ feature: { test: { active: true } }, extend: [hook] })
+    await assert.rejects(client.AcademicYear().list(), /hook failed/)
+    assert(0 < hook.unexpected)
+
+    const fired = hook.unexpected
+    assert.strictEqual(await client.AcademicYear().list(undefined, { throw: false }), undefined)
+    assert(fired < hook.unexpected)
+  })
+
+  test('validate', async (t) => {
+    if (null == (config as any).feature?.validate) {
+      t.skip('feature not present in this SDK: validate')
+      return
+    }
+    const client = DreamapplySDK.test(undefined, { feature: { validate: { active: true } } })
+    await assert.rejects(client.AcademicYear().list({"id":1} as any),
+      (err: any) => 'validate_failed' === err.code)
+  })
+
+
+
   test('basic', async (t) => {
 
     const live = 'TRUE' === process.env.DREAMAPPLY_TEST_LIVE
@@ -51,7 +109,7 @@ describe('AcademicYearEntity', async () => {
     
     const setup = basicSetup()
     if (setup.live) {
-      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":{"id":{"a":true,"h":"Id","n":"id","r":false,"t":"`$STRING`","key$":"id","index$":0},"name":{"a":true,"h":"Name","n":"name","r":false,"t":"`$STRING`","key$":"name","index$":1},"start":{"a":true,"h":"Start","n":"start","r":false,"t":"`$STRING`","key$":"start","index$":2}},"id":{"field":"id","name":"id"},"name":"academic_year","op":{"list":{"input":"data","name":"list","points":[{"a":true,"co":{"id":"GET /academic-years","source":"openapi3","version":2},"g":{},"k":"http","m":"GET","o":"/academic-years","q":{},"r":{},"s":[{"lit":"academic-years"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"list"},"load":{"input":"data","name":"load","points":[{"a":true,"co":{"id":"GET /academic-years/{id}","source":"openapi3","version":2},"g":{"params":[{"a":true,"k":"param","n":"id","or":"id","r":true,"t":"`$INTEGER`","index$":0}]},"k":"http","m":"GET","o":"/academic-years/{id}","q":{"exist":["id"]},"r":{},"s":[{"lit":"academic-years"},{"var":"id"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"load"}},"relations":{"ancestors":[]},"key$":"academic_year","name__orig":"academic_year","Name":"AcademicYear","name_":"academic_year","name-":"academic-year","NAME":"ACADEMIC_YEAR","index$":1}, {"active":true,"entity":"academic_year","key$":"BasicAcademicYearFlow","kind":"basic","name":"BasicAcademicYearFlow","param":{},"step":[{"a":true,"d":{},"i":{},"m":{},"o":"list","s":[],"v":[{"apply":"ItemExists","def":{"ref":"academic_year_ref01"}}],"index$":0},{"a":true,"d":{},"i":{"ref":"academic_year_ref01","srcdatavar":"academic_year_ref01_data","suffix":"_dt0"},"m":{"id":"academic_year01"},"o":"load","s":[],"v":[{"apply":"TextFieldMark","def":{"mark":"Mark01-academic_year_ref01"}}],"index$":1}]}, 'AcademicYear', {"GET /academic-years":{"protocol":"http","parameters":[]},"GET /academic-years/{id}":{"protocol":"http","parameters":[{"name":"id","in":"path","required":true,"schema":{"type":"integer"},"index$":0}]}})
+      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":{"id":{"a":true,"h":"Id","n":"id","r":false,"t":"`$STRING`","key$":"id","index$":0},"name":{"a":true,"h":"Name","n":"name","r":false,"t":"`$STRING`","key$":"name","index$":1},"start":{"a":true,"h":"Start","n":"start","r":false,"t":"`$STRING`","key$":"start","index$":2}},"id":{"field":"id","name":"id"},"name":"academic_year","op":{"list":{"input":"data","name":"list","points":[{"a":true,"co":{"id":"GET /academic-years","source":"openapi3","version":2},"g":{},"k":"http","m":"GET","o":"/academic-years","q":{},"r":{},"rs":{"kind":"json","media":"application/json"},"s":[{"lit":"academic-years"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"list"},"load":{"input":"data","name":"load","points":[{"a":true,"co":{"id":"GET /academic-years/{id}","source":"openapi3","version":2},"g":{"params":[{"a":true,"k":"param","n":"id","or":"id","r":true,"t":"`$INTEGER`","index$":0}]},"k":"http","m":"GET","o":"/academic-years/{id}","q":{"exist":["id"]},"r":{},"rs":{"kind":"json","media":"application/json"},"s":[{"lit":"academic-years"},{"var":"id"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"load"}},"relations":{"ancestors":[]},"key$":"academic_year","name__orig":"academic_year","Name":"AcademicYear","name_":"academic_year","name-":"academic-year","NAME":"ACADEMIC_YEAR","index$":1}, {"active":true,"entity":"academic_year","key$":"BasicAcademicYearFlow","kind":"basic","name":"BasicAcademicYearFlow","param":{},"step":[{"a":true,"d":{},"i":{},"m":{},"o":"list","s":[],"v":[{"apply":"ItemExists","def":{"ref":"academic_year_ref01"}}],"index$":0},{"a":true,"d":{},"i":{"ref":"academic_year_ref01","srcdatavar":"academic_year_ref01_data","suffix":"_dt0"},"m":{"id":"academic_year01"},"o":"load","s":[],"v":[{"apply":"TextFieldMark","def":{"mark":"Mark01-academic_year_ref01"}}],"index$":1}]}, 'AcademicYear', {"GET /academic-years":{"protocol":"http","parameters":[]},"GET /academic-years/{id}":{"protocol":"http","parameters":[{"name":"id","in":"path","required":true,"schema":{"type":"integer"},"index$":0}]}}, { strict: LIVE_STRICT, t })
     }
     const client = setup.client
     const struct = setup.struct
@@ -79,6 +137,12 @@ describe('AcademicYearEntity', async () => {
 })
 
 
+
+// main.kit.test.live.strict is true (the default is true): a live
+// request that fails, or a live test missing an input it needs,
+// fails the test.
+// An account with no record for a test to read skips it either way.
+const LIVE_STRICT = true
 
 function basicSetup(extra?: any) {
   // TODO: fix test def options

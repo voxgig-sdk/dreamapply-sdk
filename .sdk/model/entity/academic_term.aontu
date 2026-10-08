@@ -67,6 +67,10 @@ main: kit: entity: academic_term: {
           }
           m: "GET"
           o: "/academic-terms"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
           s: [
             {
               lit: "academic-terms"
@@ -105,6 +109,10 @@ main: kit: entity: academic_term: {
             exist: [
               "id"
             ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {

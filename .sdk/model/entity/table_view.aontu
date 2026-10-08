@@ -5,22 +5,9 @@ main: kit: entity: table_view: {
   alias: field: {}
 
   fields: {
-    content: {
-      h: "Content"
-      n: "content"
-      r: false
-      sh: "Sub-resource (StreamInterface); see the DreamApply SDK."
-      t: "`$OBJECT`"
-    }
     created: {
       h: "Created"
       n: "created"
-      r: false
-      t: "`$STRING`"
-    }
-    expires: {
-      h: "Expires"
-      n: "expires"
       r: false
       t: "`$STRING`"
     }
@@ -30,29 +17,11 @@ main: kit: entity: table_view: {
       r: false
       t: "`$INTEGER`"
     }
-    mime: {
-      h: "Mime"
-      n: "mime"
-      r: false
-      t: "`$STRING`"
-    }
     modified: {
       h: "Modified"
       n: "modified"
       r: false
       t: "`$STRING`"
-    }
-    name: {
-      h: "Name"
-      n: "name"
-      r: false
-      t: "`$STRING`"
-    }
-    size: {
-      h: "Size"
-      n: "size"
-      r: false
-      t: "`$INTEGER`"
     }
     tabledata: {
       h: "Tabledata"
@@ -63,12 +32,6 @@ main: kit: entity: table_view: {
     title: {
       h: "Title"
       n: "title"
-      r: false
-      t: "`$STRING`"
-    }
-    uploaded: {
-      h: "Uploaded"
-      n: "uploaded"
       r: false
       t: "`$STRING`"
     }
@@ -92,6 +55,10 @@ main: kit: entity: table_view: {
           }
           m: "GET"
           o: "/tableviews"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
           s: [
             {
               lit: "tableviews"
@@ -131,6 +98,10 @@ main: kit: entity: table_view: {
               "id"
             ]
           }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
           s: [
             {
               lit: "tableviews"
@@ -141,7 +112,7 @@ main: kit: entity: table_view: {
           ]
           t: {
             req: "`reqdata`"
-            res: "`body.tabledata`"
+            res: "`body`"
           }
         }
       ]

@@ -9,7 +9,7 @@ import { createLiveTransport } from '../../live-runner'
 import { runLiveEntity } from '../../live-entity'
 
 
-import { DreamapplySDK, BaseFeature, stdutil } from '../../..'
+import { DreamapplySDK, BaseFeature, config, stdutil } from '../../..'
 
 import {
   envOverride,
@@ -41,6 +41,64 @@ describe('InstitutionEntity', async () => {
   })
 
 
+  class FailHook extends BaseFeature {
+    name = 'failhook'
+    version = '0.0.1'
+    active = true
+    unexpected = 0
+    init() { }
+    PreSpec() { throw new Error('institution hook failed') }
+    PreUnexpected() { this.unexpected++ }
+  }
+
+  test('stream-error', async () => {
+    const offline = { net: { offline: true } }
+    await assert.rejects(async () => {
+      for await (const _item of DreamapplySDK.test(offline).Institution().stream('list')) { }
+    }, /offline/)
+
+    for await (const _item of DreamapplySDK.test(offline).Institution()
+      .stream('list', undefined, { ctrl: { throw: false } })) { }
+
+    if (null != (config as any).feature?.rbac) {
+      const denied = DreamapplySDK.test(undefined, { feature: { rbac: { active: true, deny: true } } })
+      await assert.rejects(async () => {
+        for await (const _item of denied.Institution().stream('list')) { }
+      }, (err: any) => 'rbac_denied' === err.code)
+    }
+  })
+
+  test('stream-ctrl', async () => {
+    const explain: any = {}
+    const ctrl: any = { explain }
+    for await (const _item of DreamapplySDK.test().Institution().stream('list', undefined, { ctrl })) { }
+    assert.deepStrictEqual(Object.keys(ctrl), ['explain'])
+    assert(explain === ctrl.explain && 0 < Object.keys(explain).length)
+  })
+
+  test('unexpected', async () => {
+    const hook = new FailHook()
+    const client = new DreamapplySDK({ feature: { test: { active: true } }, extend: [hook] })
+    await assert.rejects(client.Institution().list(), /hook failed/)
+    assert(0 < hook.unexpected)
+
+    const fired = hook.unexpected
+    assert.strictEqual(await client.Institution().list(undefined, { throw: false }), undefined)
+    assert(fired < hook.unexpected)
+  })
+
+  test('validate', async (t) => {
+    if (null == (config as any).feature?.validate) {
+      t.skip('feature not present in this SDK: validate')
+      return
+    }
+    const client = DreamapplySDK.test(undefined, { feature: { validate: { active: true } } })
+    await assert.rejects(client.Institution().list({"address":1} as any),
+      (err: any) => 'validate_failed' === err.code)
+  })
+
+
+
   test('basic', async (t) => {
 
     const live = 'TRUE' === process.env.DREAMAPPLY_TEST_LIVE
@@ -51,7 +109,7 @@ describe('InstitutionEntity', async () => {
     
     const setup = basicSetup()
     if (setup.live) {
-      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":{"address":{"a":true,"h":"Address","n":"address","r":false,"t":"`$STRING`","key$":"address","index$":0},"country":{"a":true,"h":"Country","n":"country","r":false,"t":"`$STRING`","key$":"country","index$":1},"departments":{"a":true,"h":"Departments","n":"departments","r":false,"sh":"Sub-resource (InstitutionDepartments); see the DreamApply SDK.","t":"`$OBJECT`","key$":"departments","index$":2},"erasmus":{"a":true,"h":"Erasmus","n":"erasmus","r":false,"t":"`$STRING`","key$":"erasmus","index$":3},"iban":{"a":true,"h":"Iban","n":"iban","r":false,"t":"`$STRING`","key$":"iban","index$":4},"id":{"a":true,"h":"Id","n":"id","r":false,"t":"`$INTEGER`","key$":"id","index$":5},"location":{"a":true,"h":"Location","n":"location","r":false,"t":"`$STRING`","key$":"location","index$":6},"name":{"a":true,"h":"Name","n":"name","r":false,"t":"`$STRING`","key$":"name","index$":7},"registration":{"a":true,"h":"Registration","n":"registration","r":false,"t":"`$STRING`","key$":"registration","index$":8},"status":{"a":true,"h":"Status","n":"status","r":false,"t":"`$STRING`","key$":"status","index$":9},"vat":{"a":true,"h":"Vat","n":"vat","r":false,"t":"`$STRING`","key$":"vat","index$":10},"www":{"a":true,"h":"Www","n":"www","r":false,"t":"`$STRING`","key$":"www","index$":11}},"id":{"field":"id","name":"id"},"name":"institution","op":{"list":{"input":"data","name":"list","points":[{"a":true,"co":{"id":"GET /institutions","source":"openapi3","version":2},"g":{},"k":"http","m":"GET","o":"/institutions","q":{},"r":{},"s":[{"lit":"institutions"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"list"},"load":{"input":"data","name":"load","points":[{"a":true,"co":{"id":"GET /institutions/{id}","source":"openapi3","version":2},"g":{"params":[{"a":true,"k":"param","n":"id","or":"id","r":true,"t":"`$INTEGER`","index$":0}]},"k":"http","m":"GET","o":"/institutions/{id}","q":{"exist":["id"]},"r":{},"s":[{"lit":"institutions"},{"var":"id"}],"t":{"req":"`reqdata`","res":"`body.departments`"},"index$":0}],"key$":"load"}},"relations":{"ancestors":[]},"key$":"institution","name__orig":"institution","Name":"Institution","name_":"institution","name-":"institution","NAME":"INSTITUTION","index$":7}, {"active":true,"entity":"institution","key$":"BasicInstitutionFlow","kind":"basic","name":"BasicInstitutionFlow","param":{},"step":[{"a":true,"d":{},"i":{},"m":{},"o":"list","s":[],"v":[{"apply":"ItemExists","def":{"ref":"institution_ref01"}}],"index$":0},{"a":true,"d":{},"i":{"ref":"institution_ref01","srcdatavar":"institution_ref01_data","suffix":"_dt0"},"m":{"id":"institution01"},"o":"load","s":[],"v":[{"apply":"TextFieldMark","def":{"mark":"Mark01-institution_ref01"}}],"index$":1}]}, 'Institution', {"GET /institutions":{"protocol":"http","parameters":[]},"GET /institutions/{id}":{"protocol":"http","parameters":[{"name":"id","in":"path","required":true,"schema":{"type":"integer"},"index$":0}]}})
+      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":{"address":{"a":true,"h":"Address","n":"address","r":false,"t":"`$STRING`","key$":"address","index$":0},"country":{"a":true,"h":"Country","n":"country","r":false,"t":"`$STRING`","key$":"country","index$":1},"departments":{"a":true,"h":"Departments","n":"departments","r":false,"sh":"Sub-resource (InstitutionDepartments); see the DreamApply SDK.","t":"`$OBJECT`","key$":"departments","index$":2},"erasmus":{"a":true,"h":"Erasmus","n":"erasmus","r":false,"t":"`$STRING`","key$":"erasmus","index$":3},"iban":{"a":true,"h":"Iban","n":"iban","r":false,"t":"`$STRING`","key$":"iban","index$":4},"id":{"a":true,"h":"Id","n":"id","r":false,"t":"`$INTEGER`","key$":"id","index$":5},"location":{"a":true,"h":"Location","n":"location","r":false,"t":"`$STRING`","key$":"location","index$":6},"name":{"a":true,"h":"Name","n":"name","r":false,"t":"`$STRING`","key$":"name","index$":7},"registration":{"a":true,"h":"Registration","n":"registration","r":false,"t":"`$STRING`","key$":"registration","index$":8},"status":{"a":true,"h":"Status","n":"status","r":false,"t":"`$STRING`","key$":"status","index$":9},"vat":{"a":true,"h":"Vat","n":"vat","r":false,"t":"`$STRING`","key$":"vat","index$":10},"www":{"a":true,"h":"Www","n":"www","r":false,"t":"`$STRING`","key$":"www","index$":11}},"id":{"field":"id","name":"id"},"name":"institution","op":{"list":{"input":"data","name":"list","points":[{"a":true,"co":{"id":"GET /institutions","source":"openapi3","version":2},"g":{},"k":"http","m":"GET","o":"/institutions","q":{},"r":{},"rs":{"kind":"json","media":"application/json"},"s":[{"lit":"institutions"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"list"},"load":{"input":"data","name":"load","points":[{"a":true,"co":{"id":"GET /institutions/{id}","source":"openapi3","version":2},"g":{"params":[{"a":true,"k":"param","n":"id","or":"id","r":true,"t":"`$INTEGER`","index$":0}]},"k":"http","m":"GET","o":"/institutions/{id}","q":{"exist":["id"]},"r":{},"rs":{"kind":"json","media":"application/json"},"s":[{"lit":"institutions"},{"var":"id"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"load"}},"relations":{"ancestors":[]},"key$":"institution","name__orig":"institution","Name":"Institution","name_":"institution","name-":"institution","NAME":"INSTITUTION","index$":7}, {"active":true,"entity":"institution","key$":"BasicInstitutionFlow","kind":"basic","name":"BasicInstitutionFlow","param":{},"step":[{"a":true,"d":{},"i":{},"m":{},"o":"list","s":[],"v":[{"apply":"ItemExists","def":{"ref":"institution_ref01"}}],"index$":0},{"a":true,"d":{},"i":{"ref":"institution_ref01","srcdatavar":"institution_ref01_data","suffix":"_dt0"},"m":{"id":"institution01"},"o":"load","s":[],"v":[{"apply":"TextFieldMark","def":{"mark":"Mark01-institution_ref01"}}],"index$":1}]}, 'Institution', {"GET /institutions":{"protocol":"http","parameters":[]},"GET /institutions/{id}":{"protocol":"http","parameters":[{"name":"id","in":"path","required":true,"schema":{"type":"integer"},"index$":0}]}}, { strict: LIVE_STRICT, t })
     }
     const client = setup.client
     const struct = setup.struct
@@ -79,6 +137,12 @@ describe('InstitutionEntity', async () => {
 })
 
 
+
+// main.kit.test.live.strict is true (the default is true): a live
+// request that fails, or a live test missing an input it needs,
+// fails the test.
+// An account with no record for a test to read skips it either way.
+const LIVE_STRICT = true
 
 function basicSetup(extra?: any) {
   // TODO: fix test def options

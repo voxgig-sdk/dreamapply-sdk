@@ -98,6 +98,10 @@ main: kit: entity: institution: {
           }
           m: "GET"
           o: "/institutions"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
           s: [
             {
               lit: "institutions"
@@ -137,6 +141,10 @@ main: kit: entity: institution: {
               "id"
             ]
           }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
           s: [
             {
               lit: "institutions"
@@ -147,7 +155,7 @@ main: kit: entity: institution: {
           ]
           t: {
             req: "`reqdata`"
-            res: "`body.departments`"
+            res: "`body`"
           }
         }
       ]

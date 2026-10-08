@@ -9,7 +9,7 @@ import { createLiveTransport } from '../../live-runner'
 import { runLiveEntity } from '../../live-entity'
 
 
-import { DreamapplySDK, BaseFeature, stdutil } from '../../..'
+import { DreamapplySDK, BaseFeature, config, stdutil } from '../../..'
 
 import {
   envOverride,
@@ -41,6 +41,64 @@ describe('TableViewEntity', async () => {
   })
 
 
+  class FailHook extends BaseFeature {
+    name = 'failhook'
+    version = '0.0.1'
+    active = true
+    unexpected = 0
+    init() { }
+    PreSpec() { throw new Error('table_view hook failed') }
+    PreUnexpected() { this.unexpected++ }
+  }
+
+  test('stream-error', async () => {
+    const offline = { net: { offline: true } }
+    await assert.rejects(async () => {
+      for await (const _item of DreamapplySDK.test(offline).TableView().stream('list')) { }
+    }, /offline/)
+
+    for await (const _item of DreamapplySDK.test(offline).TableView()
+      .stream('list', undefined, { ctrl: { throw: false } })) { }
+
+    if (null != (config as any).feature?.rbac) {
+      const denied = DreamapplySDK.test(undefined, { feature: { rbac: { active: true, deny: true } } })
+      await assert.rejects(async () => {
+        for await (const _item of denied.TableView().stream('list')) { }
+      }, (err: any) => 'rbac_denied' === err.code)
+    }
+  })
+
+  test('stream-ctrl', async () => {
+    const explain: any = {}
+    const ctrl: any = { explain }
+    for await (const _item of DreamapplySDK.test().TableView().stream('list', undefined, { ctrl })) { }
+    assert.deepStrictEqual(Object.keys(ctrl), ['explain'])
+    assert(explain === ctrl.explain && 0 < Object.keys(explain).length)
+  })
+
+  test('unexpected', async () => {
+    const hook = new FailHook()
+    const client = new DreamapplySDK({ feature: { test: { active: true } }, extend: [hook] })
+    await assert.rejects(client.TableView().list(), /hook failed/)
+    assert(0 < hook.unexpected)
+
+    const fired = hook.unexpected
+    assert.strictEqual(await client.TableView().list(undefined, { throw: false }), undefined)
+    assert(fired < hook.unexpected)
+  })
+
+  test('validate', async (t) => {
+    if (null == (config as any).feature?.validate) {
+      t.skip('feature not present in this SDK: validate')
+      return
+    }
+    const client = DreamapplySDK.test(undefined, { feature: { validate: { active: true } } })
+    await assert.rejects(client.TableView().list({"created":1} as any),
+      (err: any) => 'validate_failed' === err.code)
+  })
+
+
+
   test('basic', async (t) => {
 
     const live = 'TRUE' === process.env.DREAMAPPLY_TEST_LIVE
@@ -51,7 +109,7 @@ describe('TableViewEntity', async () => {
     
     const setup = basicSetup()
     if (setup.live) {
-      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":{"content":{"a":true,"h":"Content","n":"content","r":false,"sh":"Sub-resource (StreamInterface); see the DreamApply SDK.","t":"`$OBJECT`","key$":"content","index$":0},"created":{"a":true,"h":"Created","n":"created","r":false,"t":"`$STRING`","key$":"created","index$":1},"expires":{"a":true,"h":"Expires","n":"expires","r":false,"t":"`$STRING`","key$":"expires","index$":2},"id":{"a":true,"h":"Id","n":"id","r":false,"t":"`$INTEGER`","key$":"id","index$":3},"mime":{"a":true,"h":"Mime","n":"mime","r":false,"t":"`$STRING`","key$":"mime","index$":4},"modified":{"a":true,"h":"Modified","n":"modified","r":false,"t":"`$STRING`","key$":"modified","index$":5},"name":{"a":true,"h":"Name","n":"name","r":false,"t":"`$STRING`","key$":"name","index$":6},"size":{"a":true,"h":"Size","n":"size","r":false,"t":"`$INTEGER`","key$":"size","index$":7},"tabledata":{"a":true,"h":"Tabledata","n":"tabledata","r":false,"t":"`$OBJECT`","key$":"tabledata","index$":8},"title":{"a":true,"h":"Title","n":"title","r":false,"t":"`$STRING`","key$":"title","index$":9},"uploaded":{"a":true,"h":"Uploaded","n":"uploaded","r":false,"t":"`$STRING`","key$":"uploaded","index$":10}},"id":{"field":"id","name":"id"},"name":"table_view","op":{"list":{"input":"data","name":"list","points":[{"a":true,"co":{"id":"GET /tableviews","source":"openapi3","version":2},"g":{},"k":"http","m":"GET","o":"/tableviews","q":{},"r":{},"s":[{"lit":"tableviews"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"list"},"load":{"input":"data","name":"load","points":[{"a":true,"co":{"id":"GET /tableviews/{id}","source":"openapi3","version":2},"g":{"params":[{"a":true,"k":"param","n":"id","or":"id","r":true,"t":"`$INTEGER`","index$":0}]},"k":"http","m":"GET","o":"/tableviews/{id}","q":{"exist":["id"]},"r":{},"s":[{"lit":"tableviews"},{"var":"id"}],"t":{"req":"`reqdata`","res":"`body.tabledata`"},"index$":0}],"key$":"load"}},"relations":{"ancestors":[]},"key$":"table_view","name__orig":"table_view","Name":"TableView","name_":"table_view","name-":"table-view","NAME":"TABLE_VIEW","index$":13}, {"active":true,"entity":"table_view","key$":"BasicTableViewFlow","kind":"basic","name":"BasicTableViewFlow","param":{},"step":[{"a":true,"d":{},"i":{},"m":{},"o":"list","s":[],"v":[{"apply":"ItemExists","def":{"ref":"table_view_ref01"}}],"index$":0},{"a":true,"d":{},"i":{"ref":"table_view_ref01","srcdatavar":"table_view_ref01_data","suffix":"_dt0"},"m":{"id":"table_view01"},"o":"load","s":[],"v":[{"apply":"TextFieldMark","def":{"mark":"Mark01-table_view_ref01"}}],"index$":1}]}, 'TableView', {"GET /tableviews":{"protocol":"http","parameters":[]},"GET /tableviews/{id}":{"protocol":"http","parameters":[{"name":"id","in":"path","required":true,"schema":{"type":"integer"},"index$":0}]}})
+      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":{"created":{"a":true,"h":"Created","n":"created","r":false,"t":"`$STRING`","key$":"created","index$":0},"id":{"a":true,"h":"Id","n":"id","r":false,"t":"`$INTEGER`","key$":"id","index$":1},"modified":{"a":true,"h":"Modified","n":"modified","r":false,"t":"`$STRING`","key$":"modified","index$":2},"tabledata":{"a":true,"h":"Tabledata","n":"tabledata","r":false,"t":"`$OBJECT`","key$":"tabledata","index$":3},"title":{"a":true,"h":"Title","n":"title","r":false,"t":"`$STRING`","key$":"title","index$":4}},"id":{"field":"id","name":"id"},"name":"table_view","op":{"list":{"input":"data","name":"list","points":[{"a":true,"co":{"id":"GET /tableviews","source":"openapi3","version":2},"g":{},"k":"http","m":"GET","o":"/tableviews","q":{},"r":{},"rs":{"kind":"json","media":"application/json"},"s":[{"lit":"tableviews"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"list"},"load":{"input":"data","name":"load","points":[{"a":true,"co":{"id":"GET /tableviews/{id}","source":"openapi3","version":2},"g":{"params":[{"a":true,"k":"param","n":"id","or":"id","r":true,"t":"`$INTEGER`","index$":0}]},"k":"http","m":"GET","o":"/tableviews/{id}","q":{"exist":["id"]},"r":{},"rs":{"kind":"json","media":"application/json"},"s":[{"lit":"tableviews"},{"var":"id"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"load"}},"relations":{"ancestors":[]},"key$":"table_view","name__orig":"table_view","Name":"TableView","name_":"table_view","name-":"table-view","NAME":"TABLE_VIEW","index$":13}, {"active":true,"entity":"table_view","key$":"BasicTableViewFlow","kind":"basic","name":"BasicTableViewFlow","param":{},"step":[{"a":true,"d":{},"i":{},"m":{},"o":"list","s":[],"v":[{"apply":"ItemExists","def":{"ref":"table_view_ref01"}}],"index$":0},{"a":true,"d":{},"i":{"ref":"table_view_ref01","srcdatavar":"table_view_ref01_data","suffix":"_dt0"},"m":{"id":"table_view01"},"o":"load","s":[],"v":[{"apply":"TextFieldMark","def":{"mark":"Mark01-table_view_ref01"}}],"index$":1}]}, 'TableView', {"GET /tableviews":{"protocol":"http","parameters":[]},"GET /tableviews/{id}":{"protocol":"http","parameters":[{"name":"id","in":"path","required":true,"schema":{"type":"integer"},"index$":0}]}}, { strict: LIVE_STRICT, t })
     }
     const client = setup.client
     const struct = setup.struct
@@ -79,6 +137,12 @@ describe('TableViewEntity', async () => {
 })
 
 
+
+// main.kit.test.live.strict is true (the default is true): a live
+// request that fails, or a live test missing an input it needs,
+// fails the test.
+// An account with no record for a test to read skips it either way.
+const LIVE_STRICT = true
 
 function basicSetup(extra?: any) {
   // TODO: fix test def options

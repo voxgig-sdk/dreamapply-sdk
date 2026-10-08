@@ -12,7 +12,7 @@ Learn more about Voxgig SDKs at [voxgig.com/sdk](https://voxgig.com/sdk/).
 
 > TypeScript, Python, Golang SDKs — all generated from one OpenAPI spec by [@voxgig/sdkgen](https://github.com/voxgig/sdkgen).
 
-> **Features:** `undefined`, `undefined`, `undefined`, `undefined`, `undefined`, `undefined`, `undefined`, `undefined` — opt-in,
+> **Features:** `debug`, `idempotency`, `metrics`, `paging`, `ratelimit`, `retry`, `test`, `timeout` — opt-in,
 > inactive until switched on, and configured per client. See the Features
 > section of any SDK README below for what each one does.
 
@@ -44,30 +44,29 @@ network, and no credentials:
 // Shape: { entity: { <entity-name>: { <id>: <record> } } }
 const client = DreamapplySDK.test({
   entity: {
-    table_view: {
+    institution: {
       test01: { id: 'test01' },
     },
   },
 })
-const tableviews = await client.TableView().list()
-// tableviews is an array of TableView entities, populated with mock data
-// — call tableviews[0].data() for the record itself
-console.log(tableviews)
+const institutions = await client.Institution().list()
+// institutions is an array of Institution entities, one per mock record
+console.log(institutions.map((institution) => institution.data()))
 ```
 
 ### Python
 
 ```python
 client = DreamapplySDK.test()
-tableviews = client.TableView().list()
-print(tableviews)
+institutions = client.Institution().list()
+print([item.data_get() for item in institutions])
 ```
 
 ### Golang
 
 ```go
 client := sdk.Test()
-result, err := client.TableView(nil).List(
+result, err := client.Institution(nil).List(
     nil, nil,
 )
 ```
@@ -76,8 +75,8 @@ result, err := client.TableView(nil).List(
 
 | Language | Package | Install |
 | --- | --- | --- |
-| TypeScript | `@voxgig-sdk/dreamapply-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/dreamapply-sdk/tags) |
-| Python | `voxgig-sdk-dreamapply-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/dreamapply-sdk/tags) |
+| TypeScript | `@voxgig-sdk/dreamapply-sdk` | publish pending — [install from source](ts/README.md#install) |
+| Python | `voxgig-sdk-dreamapply-sdk` | publish pending — [install from source](py/README.md#install) |
 | Golang | `github.com/voxgig-sdk/dreamapply-sdk/go` | `go get github.com/voxgig-sdk/dreamapply-sdk/go@latest` |
 
 ## Quickstart
@@ -95,10 +94,10 @@ const client = new DreamapplySDK({
   },
 })
 
-// List all academicterms (returns AcademicTermEntity[] — .data() for the record)
+// List all academicterms (returns AcademicTermEntity[], one entity per record)
 const academicterms = await client.AcademicTerm().list()
 for (const academicterm of academicterms) {
-  console.log(academicterm)
+  console.log(academicterm.data())
 }
 ```
 
@@ -149,14 +148,14 @@ client = DreamapplySDK({
     },
 })
 
-# List all academicterms (returns a list, raises on error)
+# List all academicterms (a list of entities, one per record; raises on error)
 academicterms = client.AcademicTerm().list()
 for academicterm in academicterms:
-    print(academicterm)
+    print(academicterm.data_get())
 
-# Load a specific academicterm (returns the record, raises on error)
+# Load a specific academicterm (returns the entity, raises on error)
 academicterm = client.AcademicTerm().load({"id": 1})
-print(academicterm)
+print(academicterm.data_get())
 ```
 
 ### Golang
@@ -171,12 +170,14 @@ client := sdk.NewDreamapplySDK(map[string]any{
     },
 })
 
-// List all academicterms
+// List all academicterms (one entity per record; err is non-nil on failure)
 academicTerms, err := client.AcademicTerm(nil).List(nil, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(academicTerms)
+for _, academicTerm := range academicTerms.([]any) {
+    fmt.Println(academicTerm.(sdk.Entity).Data())
+}
 ```
 
 ## Direct and prepare
@@ -202,10 +203,9 @@ const result = await client.direct({
   method: 'GET',
   params: { id: 'example' },
 })
-if (result instanceof Error) {
-  throw result
+if (result.ok) {
+  console.log(result.data)
 }
-console.log(result.data)
 ```
 
 **Python:**
@@ -276,10 +276,12 @@ customizable without forking any upstream tool:
 - **Templates** (`.sdk/tm/`) and **components** (`.sdk/src/cmp/`) are
   the two layers of generation, copied into this repo: templates are the
   literal per-language source, components generate the API-shaped parts.
-- **Regeneration merges.** By default, newly generated content is
-  three-way merged into existing files, so generator updates and local
-  edits usually converge without manual conflict handling. A project can
-  opt for plain overwrite instead.
+- **Regeneration overwrites.** Each run rewrites every generated file from
+  the model, the templates and the components, so an edit made to
+  generated output is lost. Say what this project needs in its own model
+  (`.sdk/model/sdk.aontu`), or extend a target with a component of its
+  own in `.sdk/src/cmp/<target>/`, registered with `registerComponent`,
+  which `voxgig-sdkgen doctor` reports as an addition rather than drift.
 - **Custom features and entire custom targets** arrive through sdkgen
   packages (`voxgig-sdkgen package add`), on the same rails as the
   bundled languages, and `voxgig-sdkgen doctor` reports any drift from

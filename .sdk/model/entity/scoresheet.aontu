@@ -135,6 +135,10 @@ main: kit: entity: scoresheet: {
           }
           m: "GET"
           o: "/scoresheets"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
           s: [
             {
               lit: "scoresheets"
@@ -173,6 +177,10 @@ main: kit: entity: scoresheet: {
             exist: [
               "id"
             ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {

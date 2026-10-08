@@ -166,6 +166,7 @@ def make_config():
         },
         "optspec": {
           "clearTimer": "`$FUNCTION`",
+          "now": "`$FUNCTION`",
           "setTimer": "`$FUNCTION`",
         },
         "strict": False,
@@ -268,6 +269,10 @@ def make_config():
                 },
                 "args": {},
                 "select": {},
+                "response": {
+                  "kind": "json",
+                  "media": "application/json",
+                },
               },
             ],
           },
@@ -311,6 +316,10 @@ def make_config():
                   "exist": [
                     "id",
                   ],
+                },
+                "response": {
+                  "kind": "json",
+                  "media": "application/json",
                 },
               },
             ],
@@ -367,6 +376,10 @@ def make_config():
                 },
                 "args": {},
                 "select": {},
+                "response": {
+                  "kind": "json",
+                  "media": "application/json",
+                },
               },
             ],
           },
@@ -410,6 +423,10 @@ def make_config():
                   "exist": [
                     "id",
                   ],
+                },
+                "response": {
+                  "kind": "json",
+                  "media": "application/json",
                 },
               },
             ],
@@ -486,6 +503,10 @@ def make_config():
                 },
                 "args": {},
                 "select": {},
+                "response": {
+                  "kind": "json",
+                  "media": "application/json",
+                },
               },
             ],
           },
@@ -529,6 +550,10 @@ def make_config():
                   "exist": [
                     "id",
                   ],
+                },
+                "response": {
+                  "kind": "json",
+                  "media": "application/json",
                 },
               },
             ],
@@ -655,6 +680,10 @@ def make_config():
                 },
                 "args": {},
                 "select": {},
+                "response": {
+                  "kind": "json",
+                  "media": "application/json",
+                },
               },
             ],
           },
@@ -681,6 +710,10 @@ def make_config():
                 },
                 "args": {},
                 "select": {},
+                "response": {
+                  "kind": "json",
+                  "media": "application/json",
+                },
               },
             ],
           },
@@ -724,6 +757,10 @@ def make_config():
                   "exist": [
                     "id",
                   ],
+                },
+                "response": {
+                  "kind": "json",
+                  "media": "application/json",
                 },
               },
             ],
@@ -881,6 +918,10 @@ def make_config():
                 },
                 "args": {},
                 "select": {},
+                "response": {
+                  "kind": "json",
+                  "media": "application/json",
+                },
               },
             ],
           },
@@ -925,6 +966,10 @@ def make_config():
                     "id",
                   ],
                 },
+                "response": {
+                  "kind": "json",
+                  "media": "application/json",
+                },
               },
             ],
           },
@@ -938,11 +983,6 @@ def make_config():
           {
             "name": "accreditation",
             "title": "Accreditation",
-            "type": "`$STRING`",
-          },
-          {
-            "name": "address",
-            "title": "Address",
             "type": "`$STRING`",
           },
           {
@@ -976,29 +1016,13 @@ def make_config():
             "type": "`$STRING`",
           },
           {
-            "name": "departments",
-            "title": "Departments",
-            "type": "`$OBJECT`",
-            "short": "Sub-resource (InstitutionDepartments); see the DreamApply SDK.",
-          },
-          {
             "name": "duration",
             "title": "Duration",
             "type": "`$STRING`",
           },
           {
-            "name": "erasmus",
-            "title": "Erasmus",
-            "type": "`$STRING`",
-          },
-          {
             "name": "featured",
             "title": "Featured",
-            "type": "`$STRING`",
-          },
-          {
-            "name": "iban",
-            "title": "Iban",
             "type": "`$STRING`",
           },
           {
@@ -1009,7 +1033,7 @@ def make_config():
           {
             "name": "institution",
             "title": "Institution",
-            "type": "`$STRING`",
+            "type": "`$OBJECT`",
           },
           {
             "name": "language",
@@ -1042,11 +1066,6 @@ def make_config():
             "type": "`$STRING`",
           },
           {
-            "name": "registration",
-            "title": "Registration",
-            "type": "`$STRING`",
-          },
-          {
             "name": "status",
             "title": "Status",
             "type": "`$STRING`",
@@ -1059,16 +1078,6 @@ def make_config():
           {
             "name": "updated",
             "title": "Updated",
-            "type": "`$STRING`",
-          },
-          {
-            "name": "vat",
-            "title": "Vat",
-            "type": "`$STRING`",
-          },
-          {
-            "name": "www",
-            "title": "Www",
             "type": "`$STRING`",
           },
         ],
@@ -1097,10 +1106,14 @@ def make_config():
                 "rename": {},
                 "transform": {
                   "req": "`reqdata`",
-                  "res": "`body.institution`",
+                  "res": "`body`",
                 },
                 "args": {},
                 "select": {},
+                "response": {
+                  "kind": "json",
+                  "media": "application/json",
+                },
               },
             ],
           },
@@ -1127,6 +1140,10 @@ def make_config():
                 },
                 "args": {},
                 "select": {},
+                "response": {
+                  "kind": "json",
+                  "media": "application/json",
+                },
               },
             ],
           },
@@ -1153,7 +1170,7 @@ def make_config():
                 "rename": {},
                 "transform": {
                   "req": "`reqdata`",
-                  "res": "`body.institution`",
+                  "res": "`body`",
                 },
                 "args": {
                   "params": [
@@ -1170,6 +1187,10 @@ def make_config():
                   "exist": [
                     "id",
                   ],
+                },
+                "response": {
+                  "kind": "json",
+                  "media": "application/json",
                 },
               },
             ],
@@ -1231,6 +1252,10 @@ def make_config():
                 },
                 "args": {},
                 "select": {},
+                "response": {
+                  "kind": "json",
+                  "media": "application/json",
+                },
               },
             ],
           },
@@ -1274,6 +1299,10 @@ def make_config():
                   "exist": [
                     "id",
                   ],
+                },
+                "response": {
+                  "kind": "json",
+                  "media": "application/json",
                 },
               },
             ],
@@ -1376,6 +1405,10 @@ def make_config():
                 },
                 "args": {},
                 "select": {},
+                "response": {
+                  "kind": "json",
+                  "media": "application/json",
+                },
               },
             ],
           },
@@ -1402,7 +1435,7 @@ def make_config():
                 "rename": {},
                 "transform": {
                   "req": "`reqdata`",
-                  "res": "`body.departments`",
+                  "res": "`body`",
                 },
                 "args": {
                   "params": [
@@ -1419,6 +1452,10 @@ def make_config():
                   "exist": [
                     "id",
                   ],
+                },
+                "response": {
+                  "kind": "json",
+                  "media": "application/json",
                 },
               },
             ],
@@ -1500,6 +1537,10 @@ def make_config():
                 },
                 "args": {},
                 "select": {},
+                "response": {
+                  "kind": "json",
+                  "media": "application/json",
+                },
               },
             ],
           },
@@ -1543,6 +1584,10 @@ def make_config():
                   "exist": [
                     "id",
                   ],
+                },
+                "response": {
+                  "kind": "json",
+                  "media": "application/json",
                 },
               },
             ],
@@ -1654,6 +1699,10 @@ def make_config():
                 },
                 "args": {},
                 "select": {},
+                "response": {
+                  "kind": "json",
+                  "media": "application/json",
+                },
               },
             ],
           },
@@ -1697,6 +1746,10 @@ def make_config():
                   "exist": [
                     "id",
                   ],
+                },
+                "response": {
+                  "kind": "json",
+                  "media": "application/json",
                 },
               },
             ],
@@ -1852,6 +1905,10 @@ def make_config():
                 },
                 "args": {},
                 "select": {},
+                "response": {
+                  "kind": "json",
+                  "media": "application/json",
+                },
               },
             ],
           },
@@ -1922,6 +1979,10 @@ def make_config():
                 },
                 "args": {},
                 "select": {},
+                "response": {
+                  "kind": "json",
+                  "media": "application/json",
+                },
               },
             ],
           },
@@ -2054,6 +2115,10 @@ def make_config():
                 },
                 "args": {},
                 "select": {},
+                "response": {
+                  "kind": "json",
+                  "media": "application/json",
+                },
               },
             ],
           },
@@ -2098,6 +2163,10 @@ def make_config():
                     "id",
                   ],
                 },
+                "response": {
+                  "kind": "json",
+                  "media": "application/json",
+                },
               },
             ],
           },
@@ -2109,19 +2178,8 @@ def make_config():
       "table_view": {
         "fields": [
           {
-            "name": "content",
-            "title": "Content",
-            "type": "`$OBJECT`",
-            "short": "Sub-resource (StreamInterface); see the DreamApply SDK.",
-          },
-          {
             "name": "created",
             "title": "Created",
-            "type": "`$STRING`",
-          },
-          {
-            "name": "expires",
-            "title": "Expires",
             "type": "`$STRING`",
           },
           {
@@ -2130,24 +2188,9 @@ def make_config():
             "type": "`$INTEGER`",
           },
           {
-            "name": "mime",
-            "title": "Mime",
-            "type": "`$STRING`",
-          },
-          {
             "name": "modified",
             "title": "Modified",
             "type": "`$STRING`",
-          },
-          {
-            "name": "name",
-            "title": "Name",
-            "type": "`$STRING`",
-          },
-          {
-            "name": "size",
-            "title": "Size",
-            "type": "`$INTEGER`",
           },
           {
             "name": "tabledata",
@@ -2157,11 +2200,6 @@ def make_config():
           {
             "name": "title",
             "title": "Title",
-            "type": "`$STRING`",
-          },
-          {
-            "name": "uploaded",
-            "title": "Uploaded",
             "type": "`$STRING`",
           },
         ],
@@ -2194,6 +2232,10 @@ def make_config():
                 },
                 "args": {},
                 "select": {},
+                "response": {
+                  "kind": "json",
+                  "media": "application/json",
+                },
               },
             ],
           },
@@ -2220,7 +2262,7 @@ def make_config():
                 "rename": {},
                 "transform": {
                   "req": "`reqdata`",
-                  "res": "`body.tabledata`",
+                  "res": "`body`",
                 },
                 "args": {
                   "params": [
@@ -2237,6 +2279,10 @@ def make_config():
                   "exist": [
                     "id",
                   ],
+                },
+                "response": {
+                  "kind": "json",
+                  "media": "application/json",
                 },
               },
             ],

@@ -165,6 +165,7 @@ class Config {
             },
             "optspec": {
                 "clearTimer": "`$FUNCTION`",
+                "now": "`$FUNCTION`",
                 "setTimer": "`$FUNCTION`"
             },
             "strict": false,
@@ -266,7 +267,11 @@ class Config {
                                 "res": "`body`"
                             },
                             "args": {},
-                            "select": {}
+                            "select": {},
+                            "response": {
+                                "kind": "json",
+                                "media": "application/json"
+                            }
                         }
                     ]
                 },
@@ -310,6 +315,10 @@ class Config {
                                 "exist": [
                                     "id"
                                 ]
+                            },
+                            "response": {
+                                "kind": "json",
+                                "media": "application/json"
                             }
                         }
                     ]
@@ -365,7 +374,11 @@ class Config {
                                 "res": "`body`"
                             },
                             "args": {},
-                            "select": {}
+                            "select": {},
+                            "response": {
+                                "kind": "json",
+                                "media": "application/json"
+                            }
                         }
                     ]
                 },
@@ -409,6 +422,10 @@ class Config {
                                 "exist": [
                                     "id"
                                 ]
+                            },
+                            "response": {
+                                "kind": "json",
+                                "media": "application/json"
                             }
                         }
                     ]
@@ -484,7 +501,11 @@ class Config {
                                 "res": "`body`"
                             },
                             "args": {},
-                            "select": {}
+                            "select": {},
+                            "response": {
+                                "kind": "json",
+                                "media": "application/json"
+                            }
                         }
                     ]
                 },
@@ -528,6 +549,10 @@ class Config {
                                 "exist": [
                                     "id"
                                 ]
+                            },
+                            "response": {
+                                "kind": "json",
+                                "media": "application/json"
                             }
                         }
                     ]
@@ -653,7 +678,11 @@ class Config {
                                 "res": "`body`"
                             },
                             "args": {},
-                            "select": {}
+                            "select": {},
+                            "response": {
+                                "kind": "json",
+                                "media": "application/json"
+                            }
                         }
                     ]
                 },
@@ -679,7 +708,11 @@ class Config {
                                 "res": "`body`"
                             },
                             "args": {},
-                            "select": {}
+                            "select": {},
+                            "response": {
+                                "kind": "json",
+                                "media": "application/json"
+                            }
                         }
                     ]
                 },
@@ -723,6 +756,10 @@ class Config {
                                 "exist": [
                                     "id"
                                 ]
+                            },
+                            "response": {
+                                "kind": "json",
+                                "media": "application/json"
                             }
                         }
                     ]
@@ -879,7 +916,11 @@ class Config {
                                 "res": "`body`"
                             },
                             "args": {},
-                            "select": {}
+                            "select": {},
+                            "response": {
+                                "kind": "json",
+                                "media": "application/json"
+                            }
                         }
                     ]
                 },
@@ -923,6 +964,10 @@ class Config {
                                 "exist": [
                                     "id"
                                 ]
+                            },
+                            "response": {
+                                "kind": "json",
+                                "media": "application/json"
                             }
                         }
                     ]
@@ -937,11 +982,6 @@ class Config {
                 {
                     "name": "accreditation",
                     "title": "Accreditation",
-                    "type": "`$STRING`"
-                },
-                {
-                    "name": "address",
-                    "title": "Address",
                     "type": "`$STRING`"
                 },
                 {
@@ -975,29 +1015,13 @@ class Config {
                     "type": "`$STRING`"
                 },
                 {
-                    "name": "departments",
-                    "title": "Departments",
-                    "type": "`$OBJECT`",
-                    "short": "Sub-resource (InstitutionDepartments); see the DreamApply SDK."
-                },
-                {
                     "name": "duration",
                     "title": "Duration",
                     "type": "`$STRING`"
                 },
                 {
-                    "name": "erasmus",
-                    "title": "Erasmus",
-                    "type": "`$STRING`"
-                },
-                {
                     "name": "featured",
                     "title": "Featured",
-                    "type": "`$STRING`"
-                },
-                {
-                    "name": "iban",
-                    "title": "Iban",
                     "type": "`$STRING`"
                 },
                 {
@@ -1008,7 +1032,7 @@ class Config {
                 {
                     "name": "institution",
                     "title": "Institution",
-                    "type": "`$STRING`"
+                    "type": "`$OBJECT`"
                 },
                 {
                     "name": "language",
@@ -1041,11 +1065,6 @@ class Config {
                     "type": "`$STRING`"
                 },
                 {
-                    "name": "registration",
-                    "title": "Registration",
-                    "type": "`$STRING`"
-                },
-                {
                     "name": "status",
                     "title": "Status",
                     "type": "`$STRING`"
@@ -1058,16 +1077,6 @@ class Config {
                 {
                     "name": "updated",
                     "title": "Updated",
-                    "type": "`$STRING`"
-                },
-                {
-                    "name": "vat",
-                    "title": "Vat",
-                    "type": "`$STRING`"
-                },
-                {
-                    "name": "www",
-                    "title": "Www",
                     "type": "`$STRING`"
                 }
             ],
@@ -1096,10 +1105,14 @@ class Config {
                             "rename": {},
                             "transform": {
                                 "req": "`reqdata`",
-                                "res": "`body.institution`"
+                                "res": "`body`"
                             },
                             "args": {},
-                            "select": {}
+                            "select": {},
+                            "response": {
+                                "kind": "json",
+                                "media": "application/json"
+                            }
                         }
                     ]
                 },
@@ -1125,7 +1138,11 @@ class Config {
                                 "res": "`body`"
                             },
                             "args": {},
-                            "select": {}
+                            "select": {},
+                            "response": {
+                                "kind": "json",
+                                "media": "application/json"
+                            }
                         }
                     ]
                 },
@@ -1152,7 +1169,7 @@ class Config {
                             "rename": {},
                             "transform": {
                                 "req": "`reqdata`",
-                                "res": "`body.institution`"
+                                "res": "`body`"
                             },
                             "args": {
                                 "params": [
@@ -1169,6 +1186,10 @@ class Config {
                                 "exist": [
                                     "id"
                                 ]
+                            },
+                            "response": {
+                                "kind": "json",
+                                "media": "application/json"
                             }
                         }
                     ]
@@ -1229,7 +1250,11 @@ class Config {
                                 "res": "`body`"
                             },
                             "args": {},
-                            "select": {}
+                            "select": {},
+                            "response": {
+                                "kind": "json",
+                                "media": "application/json"
+                            }
                         }
                     ]
                 },
@@ -1273,6 +1298,10 @@ class Config {
                                 "exist": [
                                     "id"
                                 ]
+                            },
+                            "response": {
+                                "kind": "json",
+                                "media": "application/json"
                             }
                         }
                     ]
@@ -1374,7 +1403,11 @@ class Config {
                                 "res": "`body`"
                             },
                             "args": {},
-                            "select": {}
+                            "select": {},
+                            "response": {
+                                "kind": "json",
+                                "media": "application/json"
+                            }
                         }
                     ]
                 },
@@ -1401,7 +1434,7 @@ class Config {
                             "rename": {},
                             "transform": {
                                 "req": "`reqdata`",
-                                "res": "`body.departments`"
+                                "res": "`body`"
                             },
                             "args": {
                                 "params": [
@@ -1418,6 +1451,10 @@ class Config {
                                 "exist": [
                                     "id"
                                 ]
+                            },
+                            "response": {
+                                "kind": "json",
+                                "media": "application/json"
                             }
                         }
                     ]
@@ -1498,7 +1535,11 @@ class Config {
                                 "res": "`body`"
                             },
                             "args": {},
-                            "select": {}
+                            "select": {},
+                            "response": {
+                                "kind": "json",
+                                "media": "application/json"
+                            }
                         }
                     ]
                 },
@@ -1542,6 +1583,10 @@ class Config {
                                 "exist": [
                                     "id"
                                 ]
+                            },
+                            "response": {
+                                "kind": "json",
+                                "media": "application/json"
                             }
                         }
                     ]
@@ -1652,7 +1697,11 @@ class Config {
                                 "res": "`body`"
                             },
                             "args": {},
-                            "select": {}
+                            "select": {},
+                            "response": {
+                                "kind": "json",
+                                "media": "application/json"
+                            }
                         }
                     ]
                 },
@@ -1696,6 +1745,10 @@ class Config {
                                 "exist": [
                                     "id"
                                 ]
+                            },
+                            "response": {
+                                "kind": "json",
+                                "media": "application/json"
                             }
                         }
                     ]
@@ -1850,7 +1903,11 @@ class Config {
                                 "res": "`body`"
                             },
                             "args": {},
-                            "select": {}
+                            "select": {},
+                            "response": {
+                                "kind": "json",
+                                "media": "application/json"
+                            }
                         }
                     ]
                 }
@@ -1920,7 +1977,11 @@ class Config {
                                 "res": "`body`"
                             },
                             "args": {},
-                            "select": {}
+                            "select": {},
+                            "response": {
+                                "kind": "json",
+                                "media": "application/json"
+                            }
                         }
                     ]
                 }
@@ -2052,7 +2113,11 @@ class Config {
                                 "res": "`body`"
                             },
                             "args": {},
-                            "select": {}
+                            "select": {},
+                            "response": {
+                                "kind": "json",
+                                "media": "application/json"
+                            }
                         }
                     ]
                 },
@@ -2096,6 +2161,10 @@ class Config {
                                 "exist": [
                                     "id"
                                 ]
+                            },
+                            "response": {
+                                "kind": "json",
+                                "media": "application/json"
                             }
                         }
                     ]
@@ -2108,19 +2177,8 @@ class Config {
         "table_view": {
             "fields": [
                 {
-                    "name": "content",
-                    "title": "Content",
-                    "type": "`$OBJECT`",
-                    "short": "Sub-resource (StreamInterface); see the DreamApply SDK."
-                },
-                {
                     "name": "created",
                     "title": "Created",
-                    "type": "`$STRING`"
-                },
-                {
-                    "name": "expires",
-                    "title": "Expires",
                     "type": "`$STRING`"
                 },
                 {
@@ -2129,24 +2187,9 @@ class Config {
                     "type": "`$INTEGER`"
                 },
                 {
-                    "name": "mime",
-                    "title": "Mime",
-                    "type": "`$STRING`"
-                },
-                {
                     "name": "modified",
                     "title": "Modified",
                     "type": "`$STRING`"
-                },
-                {
-                    "name": "name",
-                    "title": "Name",
-                    "type": "`$STRING`"
-                },
-                {
-                    "name": "size",
-                    "title": "Size",
-                    "type": "`$INTEGER`"
                 },
                 {
                     "name": "tabledata",
@@ -2156,11 +2199,6 @@ class Config {
                 {
                     "name": "title",
                     "title": "Title",
-                    "type": "`$STRING`"
-                },
-                {
-                    "name": "uploaded",
-                    "title": "Uploaded",
                     "type": "`$STRING`"
                 }
             ],
@@ -2192,7 +2230,11 @@ class Config {
                                 "res": "`body`"
                             },
                             "args": {},
-                            "select": {}
+                            "select": {},
+                            "response": {
+                                "kind": "json",
+                                "media": "application/json"
+                            }
                         }
                     ]
                 },
@@ -2219,7 +2261,7 @@ class Config {
                             "rename": {},
                             "transform": {
                                 "req": "`reqdata`",
-                                "res": "`body.tabledata`"
+                                "res": "`body`"
                             },
                             "args": {
                                 "params": [
@@ -2236,6 +2278,10 @@ class Config {
                                 "exist": [
                                     "id"
                                 ]
+                            },
+                            "response": {
+                                "kind": "json",
+                                "media": "application/json"
                             }
                         }
                     ]

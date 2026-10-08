@@ -54,6 +54,53 @@ const utility_1 = require("../../utility");
         const ent = testsdk.Login();
         (0, node_assert_1.default)(null != ent);
     });
+    class FailHook extends __1.BaseFeature {
+        name = 'failhook';
+        version = '0.0.1';
+        active = true;
+        unexpected = 0;
+        init() { }
+        PreSpec() { throw new Error('login hook failed'); }
+        PreUnexpected() { this.unexpected++; }
+    }
+    (0, node_test_1.test)('stream-error', async () => {
+        const offline = { net: { offline: true } };
+        await node_assert_1.default.rejects(async () => {
+            for await (const _item of __1.DreamapplySDK.test(offline).Login().stream('list')) { }
+        }, /offline/);
+        for await (const _item of __1.DreamapplySDK.test(offline).Login()
+            .stream('list', undefined, { ctrl: { throw: false } })) { }
+        if (null != __1.config.feature?.rbac) {
+            const denied = __1.DreamapplySDK.test(undefined, { feature: { rbac: { active: true, deny: true } } });
+            await node_assert_1.default.rejects(async () => {
+                for await (const _item of denied.Login().stream('list')) { }
+            }, (err) => 'rbac_denied' === err.code);
+        }
+    });
+    (0, node_test_1.test)('stream-ctrl', async () => {
+        const explain = {};
+        const ctrl = { explain };
+        for await (const _item of __1.DreamapplySDK.test().Login().stream('list', undefined, { ctrl })) { }
+        node_assert_1.default.deepStrictEqual(Object.keys(ctrl), ['explain']);
+        (0, node_assert_1.default)(explain === ctrl.explain && 0 < Object.keys(explain).length);
+    });
+    (0, node_test_1.test)('unexpected', async () => {
+        const hook = new FailHook();
+        const client = new __1.DreamapplySDK({ feature: { test: { active: true } }, extend: [hook] });
+        await node_assert_1.default.rejects(client.Login().list(), /hook failed/);
+        (0, node_assert_1.default)(0 < hook.unexpected);
+        const fired = hook.unexpected;
+        node_assert_1.default.strictEqual(await client.Login().list(undefined, { throw: false }), undefined);
+        (0, node_assert_1.default)(fired < hook.unexpected);
+    });
+    (0, node_test_1.test)('validate', async (t) => {
+        if (null == __1.config.feature?.validate) {
+            t.skip('feature not present in this SDK: validate');
+            return;
+        }
+        const client = __1.DreamapplySDK.test(undefined, { feature: { validate: { active: true } } });
+        await node_assert_1.default.rejects(client.Login().list({ "id": "x" }), (err) => 'validate_failed' === err.code);
+    });
     (0, node_test_1.test)('basic', async (t) => {
         const live = 'TRUE' === process.env.DREAMAPPLY_TEST_LIVE;
         for (const op of ['list']) {
@@ -62,7 +109,7 @@ const utility_1 = require("../../utility");
         }
         const setup = basicSetup();
         if (setup.live) {
-            return (0, live_entity_1.runLiveEntity)(setup, { "active": true, "alias": { "field": {} }, "fields": { "id": { "a": true, "h": "Id", "n": "id", "r": false, "t": "`$INTEGER`", "key$": "id", "index$": 0 }, "ip": { "a": true, "h": "Ip", "n": "ip", "r": false, "t": "`$STRING`", "key$": "ip", "index$": 1 }, "logged": { "a": true, "h": "Logged", "n": "logged", "r": false, "t": "`$STRING`", "key$": "logged", "index$": 2 }, "result": { "a": true, "h": "Result", "n": "result", "r": false, "t": "`$STRING`", "key$": "result", "index$": 3 }, "role": { "a": true, "h": "Role", "n": "role", "r": false, "t": "`$STRING`", "key$": "role", "index$": 4 }, "roleId": { "a": true, "h": "Role Id", "n": "roleId", "r": false, "t": "`$INTEGER`", "key$": "roleId", "index$": 5 } }, "id": { "field": "id", "name": "id" }, "name": "login", "op": { "list": { "input": "data", "name": "list", "points": [{ "a": true, "co": { "id": "GET /logins", "source": "openapi3", "version": 2 }, "g": {}, "k": "http", "m": "GET", "o": "/logins", "q": {}, "r": {}, "s": [{ "lit": "logins" }], "t": { "req": "`reqdata`", "res": "`body`" }, "index$": 0 }], "key$": "list" } }, "relations": { "ancestors": [] }, "key$": "login", "name__orig": "login", "Name": "Login", "name_": "login", "name-": "login", "NAME": "LOGIN", "index$": 11 }, { "active": true, "entity": "login", "key$": "BasicLoginFlow", "kind": "basic", "name": "BasicLoginFlow", "param": {}, "step": [{ "a": true, "d": {}, "i": {}, "m": {}, "o": "list", "s": [], "v": [{ "apply": "ItemExists", "def": { "ref": "login_ref01" } }], "index$": 0 }] }, 'Login', { "GET /logins": { "protocol": "http", "parameters": [] } });
+            return (0, live_entity_1.runLiveEntity)(setup, { "active": true, "alias": { "field": {} }, "fields": { "id": { "a": true, "h": "Id", "n": "id", "r": false, "t": "`$INTEGER`", "key$": "id", "index$": 0 }, "ip": { "a": true, "h": "Ip", "n": "ip", "r": false, "t": "`$STRING`", "key$": "ip", "index$": 1 }, "logged": { "a": true, "h": "Logged", "n": "logged", "r": false, "t": "`$STRING`", "key$": "logged", "index$": 2 }, "result": { "a": true, "h": "Result", "n": "result", "r": false, "t": "`$STRING`", "key$": "result", "index$": 3 }, "role": { "a": true, "h": "Role", "n": "role", "r": false, "t": "`$STRING`", "key$": "role", "index$": 4 }, "roleId": { "a": true, "h": "Role Id", "n": "roleId", "r": false, "t": "`$INTEGER`", "key$": "roleId", "index$": 5 } }, "id": { "field": "id", "name": "id" }, "name": "login", "op": { "list": { "input": "data", "name": "list", "points": [{ "a": true, "co": { "id": "GET /logins", "source": "openapi3", "version": 2 }, "g": {}, "k": "http", "m": "GET", "o": "/logins", "q": {}, "r": {}, "rs": { "kind": "json", "media": "application/json" }, "s": [{ "lit": "logins" }], "t": { "req": "`reqdata`", "res": "`body`" }, "index$": 0 }], "key$": "list" } }, "relations": { "ancestors": [] }, "key$": "login", "name__orig": "login", "Name": "Login", "name_": "login", "name-": "login", "NAME": "LOGIN", "index$": 11 }, { "active": true, "entity": "login", "key$": "BasicLoginFlow", "kind": "basic", "name": "BasicLoginFlow", "param": {}, "step": [{ "a": true, "d": {}, "i": {}, "m": {}, "o": "list", "s": [], "v": [{ "apply": "ItemExists", "def": { "ref": "login_ref01" } }], "index$": 0 }] }, 'Login', { "GET /logins": { "protocol": "http", "parameters": [] } }, { strict: LIVE_STRICT, t });
         }
         const client = setup.client;
         const struct = setup.struct;
@@ -75,6 +122,11 @@ const utility_1 = require("../../utility");
         const login_ref01_list = (await login_ref01_ent.list(login_ref01_match)).map((e) => e.data());
     });
 });
+// main.kit.test.live.strict is true (the default is true): a live
+// request that fails, or a live test missing an input it needs,
+// fails the test.
+// An account with no record for a test to read skips it either way.
+const LIVE_STRICT = true;
 function basicSetup(extra) {
     // TODO: fix test def options
     const options = {}; // null

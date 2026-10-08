@@ -49,6 +49,10 @@ main: kit: entity: fee: {
           }
           m: "GET"
           o: "/fees"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
           s: [
             {
               lit: "fees"
@@ -87,6 +91,10 @@ main: kit: entity: fee: {
             exist: [
               "id"
             ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {

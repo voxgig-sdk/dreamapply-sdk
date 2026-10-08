@@ -167,63 +167,49 @@ type CourseLoadMatch struct {
 // CourseListMatch is the typed request payload for Course.ListTyped.
 type CourseListMatch struct {
 	Accreditation *string `json:"accreditation,omitempty"`
-	Address *string `json:"address,omitempty"`
 	AwardsAbbr *string `json:"awards_abbr,omitempty"`
 	AwardsFull *string `json:"awards_full,omitempty"`
 	Code *string `json:"code,omitempty"`
 	CodeInternal *string `json:"codeInternal,omitempty"`
 	Country *string `json:"country,omitempty"`
 	Credits *string `json:"credits,omitempty"`
-	Departments *map[string]any `json:"departments,omitempty"`
 	Duration *string `json:"duration,omitempty"`
-	Erasmus *string `json:"erasmus,omitempty"`
 	Featured *string `json:"featured,omitempty"`
-	Iban *string `json:"iban,omitempty"`
 	Id *int `json:"id,omitempty"`
-	Institution *string `json:"institution,omitempty"`
+	Institution *map[string]any `json:"institution,omitempty"`
 	Language *string `json:"language,omitempty"`
 	Location *string `json:"location,omitempty"`
 	Mode *string `json:"mode,omitempty"`
 	Name *string `json:"name,omitempty"`
 	ProspectUri *string `json:"prospect_uri,omitempty"`
 	Quota *string `json:"quota,omitempty"`
-	Registration *string `json:"registration,omitempty"`
 	Status *string `json:"status,omitempty"`
 	Type *string `json:"type,omitempty"`
 	Updated *string `json:"updated,omitempty"`
-	Vat *string `json:"vat,omitempty"`
-	Www *string `json:"www,omitempty"`
 }
 
 // CourseCreateData is the typed request payload for Course.CreateTyped.
 type CourseCreateData struct {
 	Accreditation *string `json:"accreditation,omitempty"`
-	Address *string `json:"address,omitempty"`
 	AwardsAbbr *string `json:"awards_abbr,omitempty"`
 	AwardsFull *string `json:"awards_full,omitempty"`
 	Code *string `json:"code,omitempty"`
 	CodeInternal *string `json:"codeInternal,omitempty"`
 	Country *string `json:"country,omitempty"`
 	Credits *string `json:"credits,omitempty"`
-	Departments *map[string]any `json:"departments,omitempty"`
 	Duration *string `json:"duration,omitempty"`
-	Erasmus *string `json:"erasmus,omitempty"`
 	Featured *string `json:"featured,omitempty"`
-	Iban *string `json:"iban,omitempty"`
 	Id *int `json:"id,omitempty"`
-	Institution *string `json:"institution,omitempty"`
+	Institution *map[string]any `json:"institution,omitempty"`
 	Language *string `json:"language,omitempty"`
 	Location *string `json:"location,omitempty"`
 	Mode *string `json:"mode,omitempty"`
 	Name *string `json:"name,omitempty"`
 	ProspectUri *string `json:"prospect_uri,omitempty"`
 	Quota *string `json:"quota,omitempty"`
-	Registration *string `json:"registration,omitempty"`
 	Status *string `json:"status,omitempty"`
 	Type *string `json:"type,omitempty"`
 	Updated *string `json:"updated,omitempty"`
-	Vat *string `json:"vat,omitempty"`
-	Www *string `json:"www,omitempty"`
 }
 
 // Fee is the typed data model for the fee entity.
@@ -399,17 +385,11 @@ type TableViewLoadMatch struct {
 
 // TableViewListMatch is the typed request payload for TableView.ListTyped.
 type TableViewListMatch struct {
-	Content *map[string]any `json:"content,omitempty"`
 	Created *string `json:"created,omitempty"`
-	Expires *string `json:"expires,omitempty"`
 	Id *int `json:"id,omitempty"`
-	Mime *string `json:"mime,omitempty"`
 	Modified *string `json:"modified,omitempty"`
-	Name *string `json:"name,omitempty"`
-	Size *int `json:"size,omitempty"`
 	Tabledata *map[string]any `json:"tabledata,omitempty"`
 	Title *string `json:"title,omitempty"`
-	Uploaded *string `json:"uploaded,omitempty"`
 }
 
 // asMap turns a typed request/data struct into the map[string]any the

@@ -120,6 +120,19 @@ main: kit: entity: applicant: {
       name: "create"
       points: [
         {
+          bf: [
+            "citizenship"
+            "email"
+            "matriculation"
+            "name"
+            "name_family"
+            "name_given"
+            "notes"
+            "phone"
+            "reference"
+            "region"
+            "tracker_ID"
+          ]
           co: {
             id: "POST /applicants"
             source: "openapi3"
@@ -127,6 +140,10 @@ main: kit: entity: applicant: {
           }
           m: "POST"
           o: "/applicants"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
           s: [
             {
               lit: "applicants"
@@ -150,6 +167,10 @@ main: kit: entity: applicant: {
           }
           m: "GET"
           o: "/applicants"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
           s: [
             {
               lit: "applicants"
@@ -188,6 +209,10 @@ main: kit: entity: applicant: {
             exist: [
               "id"
             ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {

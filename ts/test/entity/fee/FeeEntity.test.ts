@@ -9,7 +9,7 @@ import { createLiveTransport } from '../../live-runner'
 import { runLiveEntity } from '../../live-entity'
 
 
-import { DreamapplySDK, BaseFeature, stdutil } from '../../..'
+import { DreamapplySDK, BaseFeature, config, stdutil } from '../../..'
 
 import {
   envOverride,
@@ -41,6 +41,64 @@ describe('FeeEntity', async () => {
   })
 
 
+  class FailHook extends BaseFeature {
+    name = 'failhook'
+    version = '0.0.1'
+    active = true
+    unexpected = 0
+    init() { }
+    PreSpec() { throw new Error('fee hook failed') }
+    PreUnexpected() { this.unexpected++ }
+  }
+
+  test('stream-error', async () => {
+    const offline = { net: { offline: true } }
+    await assert.rejects(async () => {
+      for await (const _item of DreamapplySDK.test(offline).Fee().stream('list')) { }
+    }, /offline/)
+
+    for await (const _item of DreamapplySDK.test(offline).Fee()
+      .stream('list', undefined, { ctrl: { throw: false } })) { }
+
+    if (null != (config as any).feature?.rbac) {
+      const denied = DreamapplySDK.test(undefined, { feature: { rbac: { active: true, deny: true } } })
+      await assert.rejects(async () => {
+        for await (const _item of denied.Fee().stream('list')) { }
+      }, (err: any) => 'rbac_denied' === err.code)
+    }
+  })
+
+  test('stream-ctrl', async () => {
+    const explain: any = {}
+    const ctrl: any = { explain }
+    for await (const _item of DreamapplySDK.test().Fee().stream('list', undefined, { ctrl })) { }
+    assert.deepStrictEqual(Object.keys(ctrl), ['explain'])
+    assert(explain === ctrl.explain && 0 < Object.keys(explain).length)
+  })
+
+  test('unexpected', async () => {
+    const hook = new FailHook()
+    const client = new DreamapplySDK({ feature: { test: { active: true } }, extend: [hook] })
+    await assert.rejects(client.Fee().list(), /hook failed/)
+    assert(0 < hook.unexpected)
+
+    const fired = hook.unexpected
+    assert.strictEqual(await client.Fee().list(undefined, { throw: false }), undefined)
+    assert(fired < hook.unexpected)
+  })
+
+  test('validate', async (t) => {
+    if (null == (config as any).feature?.validate) {
+      t.skip('feature not present in this SDK: validate')
+      return
+    }
+    const client = DreamapplySDK.test(undefined, { feature: { validate: { active: true } } })
+    await assert.rejects(client.Fee().list({"id":1} as any),
+      (err: any) => 'validate_failed' === err.code)
+  })
+
+
+
   test('basic', async (t) => {
 
     const live = 'TRUE' === process.env.DREAMAPPLY_TEST_LIVE
@@ -51,7 +109,7 @@ describe('FeeEntity', async () => {
     
     const setup = basicSetup()
     if (setup.live) {
-      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":{"id":{"a":true,"h":"Id","n":"id","r":false,"t":"`$STRING`","key$":"id","index$":0},"name":{"a":true,"h":"Name","n":"name","r":false,"t":"`$STRING`","key$":"name","index$":1},"notes":{"a":true,"h":"Notes","n":"notes","r":false,"t":"`$STRING`","key$":"notes","index$":2},"type":{"a":true,"h":"Type","n":"type","r":false,"t":"`$STRING`","key$":"type","index$":3}},"id":{"field":"id","name":"id"},"name":"fee","op":{"list":{"input":"data","name":"list","points":[{"a":true,"co":{"id":"GET /fees","source":"openapi3","version":2},"g":{},"k":"http","m":"GET","o":"/fees","q":{},"r":{},"s":[{"lit":"fees"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"list"},"load":{"input":"data","name":"load","points":[{"a":true,"co":{"id":"GET /fees/{id}","source":"openapi3","version":2},"g":{"params":[{"a":true,"k":"param","n":"id","or":"id","r":true,"t":"`$INTEGER`","index$":0}]},"k":"http","m":"GET","o":"/fees/{id}","q":{"exist":["id"]},"r":{},"s":[{"lit":"fees"},{"var":"id"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"load"}},"relations":{"ancestors":[]},"key$":"fee","name__orig":"fee","Name":"Fee","name_":"fee","name-":"fee","NAME":"FEE","index$":6}, {"active":true,"entity":"fee","key$":"BasicFeeFlow","kind":"basic","name":"BasicFeeFlow","param":{},"step":[{"a":true,"d":{},"i":{},"m":{},"o":"list","s":[],"v":[{"apply":"ItemExists","def":{"ref":"fee_ref01"}}],"index$":0},{"a":true,"d":{},"i":{"ref":"fee_ref01","srcdatavar":"fee_ref01_data","suffix":"_dt0"},"m":{"id":"fee01"},"o":"load","s":[],"v":[{"apply":"TextFieldMark","def":{"mark":"Mark01-fee_ref01"}}],"index$":1}]}, 'Fee', {"GET /fees":{"protocol":"http","parameters":[]},"GET /fees/{id}":{"protocol":"http","parameters":[{"name":"id","in":"path","required":true,"schema":{"type":"integer"},"index$":0}]}})
+      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":{"id":{"a":true,"h":"Id","n":"id","r":false,"t":"`$STRING`","key$":"id","index$":0},"name":{"a":true,"h":"Name","n":"name","r":false,"t":"`$STRING`","key$":"name","index$":1},"notes":{"a":true,"h":"Notes","n":"notes","r":false,"t":"`$STRING`","key$":"notes","index$":2},"type":{"a":true,"h":"Type","n":"type","r":false,"t":"`$STRING`","key$":"type","index$":3}},"id":{"field":"id","name":"id"},"name":"fee","op":{"list":{"input":"data","name":"list","points":[{"a":true,"co":{"id":"GET /fees","source":"openapi3","version":2},"g":{},"k":"http","m":"GET","o":"/fees","q":{},"r":{},"rs":{"kind":"json","media":"application/json"},"s":[{"lit":"fees"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"list"},"load":{"input":"data","name":"load","points":[{"a":true,"co":{"id":"GET /fees/{id}","source":"openapi3","version":2},"g":{"params":[{"a":true,"k":"param","n":"id","or":"id","r":true,"t":"`$INTEGER`","index$":0}]},"k":"http","m":"GET","o":"/fees/{id}","q":{"exist":["id"]},"r":{},"rs":{"kind":"json","media":"application/json"},"s":[{"lit":"fees"},{"var":"id"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"load"}},"relations":{"ancestors":[]},"key$":"fee","name__orig":"fee","Name":"Fee","name_":"fee","name-":"fee","NAME":"FEE","index$":6}, {"active":true,"entity":"fee","key$":"BasicFeeFlow","kind":"basic","name":"BasicFeeFlow","param":{},"step":[{"a":true,"d":{},"i":{},"m":{},"o":"list","s":[],"v":[{"apply":"ItemExists","def":{"ref":"fee_ref01"}}],"index$":0},{"a":true,"d":{},"i":{"ref":"fee_ref01","srcdatavar":"fee_ref01_data","suffix":"_dt0"},"m":{"id":"fee01"},"o":"load","s":[],"v":[{"apply":"TextFieldMark","def":{"mark":"Mark01-fee_ref01"}}],"index$":1}]}, 'Fee', {"GET /fees":{"protocol":"http","parameters":[]},"GET /fees/{id}":{"protocol":"http","parameters":[{"name":"id","in":"path","required":true,"schema":{"type":"integer"},"index$":0}]}}, { strict: LIVE_STRICT, t })
     }
     const client = setup.client
     const struct = setup.struct
@@ -79,6 +137,12 @@ describe('FeeEntity', async () => {
 })
 
 
+
+// main.kit.test.live.strict is true (the default is true): a live
+// request that fails, or a live test missing an input it needs,
+// fails the test.
+// An account with no record for a test to read skips it either way.
+const LIVE_STRICT = true
 
 function basicSetup(extra?: any) {
   // TODO: fix test def options

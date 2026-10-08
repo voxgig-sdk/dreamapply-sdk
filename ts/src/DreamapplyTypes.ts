@@ -191,32 +191,25 @@ export interface ApplicationListMatch {
 
 export interface Course {
   accreditation?: string
-  address?: string
   awards_abbr?: string
   awards_full?: string
   code?: string
   codeInternal?: string
   country?: string
   credits?: string
-  departments?: Record<string, any>
   duration?: string
-  erasmus?: string
   featured?: string
-  iban?: string
   id?: number
-  institution?: string
+  institution?: Record<string, any>
   language?: string
   location?: string
   mode?: string
   name?: string
   prospect_uri?: string
   quota?: string
-  registration?: string
   status?: string
   type?: string
   updated?: string
-  vat?: string
-  www?: string
 }
 
 export interface CourseLoadMatch {
@@ -225,62 +218,48 @@ export interface CourseLoadMatch {
 
 export interface CourseListMatch {
   accreditation?: string
-  address?: string
   awards_abbr?: string
   awards_full?: string
   code?: string
   codeInternal?: string
   country?: string
   credits?: string
-  departments?: Record<string, any>
   duration?: string
-  erasmus?: string
   featured?: string
-  iban?: string
   id?: number
-  institution?: string
+  institution?: Record<string, any>
   language?: string
   location?: string
   mode?: string
   name?: string
   prospect_uri?: string
   quota?: string
-  registration?: string
   status?: string
   type?: string
   updated?: string
-  vat?: string
-  www?: string
 }
 
 export interface CourseCreateData {
   accreditation?: string
-  address?: string
   awards_abbr?: string
   awards_full?: string
   code?: string
   codeInternal?: string
   country?: string
   credits?: string
-  departments?: Record<string, any>
   duration?: string
-  erasmus?: string
   featured?: string
-  iban?: string
   id?: number
-  institution?: string
+  institution?: Record<string, any>
   language?: string
   location?: string
   mode?: string
   name?: string
   prospect_uri?: string
   quota?: string
-  registration?: string
   status?: string
   type?: string
   updated?: string
-  vat?: string
-  www?: string
 }
 
 export interface Fee {
@@ -502,17 +481,11 @@ export interface ScoresheetListMatch {
 }
 
 export interface TableView {
-  content?: Record<string, any>
   created?: string
-  expires?: string
   id?: number
-  mime?: string
   modified?: string
-  name?: string
-  size?: number
   tabledata?: Record<string, any>
   title?: string
-  uploaded?: string
 }
 
 export interface TableViewLoadMatch {
@@ -520,16 +493,10 @@ export interface TableViewLoadMatch {
 }
 
 export interface TableViewListMatch {
-  content?: Record<string, any>
   created?: string
-  expires?: string
   id?: number
-  mime?: string
   modified?: string
-  name?: string
-  size?: number
   tabledata?: Record<string, any>
   title?: string
-  uploaded?: string
 }
 

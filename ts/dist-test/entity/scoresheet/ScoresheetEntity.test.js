@@ -54,6 +54,53 @@ const utility_1 = require("../../utility");
         const ent = testsdk.Scoresheet();
         (0, node_assert_1.default)(null != ent);
     });
+    class FailHook extends __1.BaseFeature {
+        name = 'failhook';
+        version = '0.0.1';
+        active = true;
+        unexpected = 0;
+        init() { }
+        PreSpec() { throw new Error('scoresheet hook failed'); }
+        PreUnexpected() { this.unexpected++; }
+    }
+    (0, node_test_1.test)('stream-error', async () => {
+        const offline = { net: { offline: true } };
+        await node_assert_1.default.rejects(async () => {
+            for await (const _item of __1.DreamapplySDK.test(offline).Scoresheet().stream('list')) { }
+        }, /offline/);
+        for await (const _item of __1.DreamapplySDK.test(offline).Scoresheet()
+            .stream('list', undefined, { ctrl: { throw: false } })) { }
+        if (null != __1.config.feature?.rbac) {
+            const denied = __1.DreamapplySDK.test(undefined, { feature: { rbac: { active: true, deny: true } } });
+            await node_assert_1.default.rejects(async () => {
+                for await (const _item of denied.Scoresheet().stream('list')) { }
+            }, (err) => 'rbac_denied' === err.code);
+        }
+    });
+    (0, node_test_1.test)('stream-ctrl', async () => {
+        const explain = {};
+        const ctrl = { explain };
+        for await (const _item of __1.DreamapplySDK.test().Scoresheet().stream('list', undefined, { ctrl })) { }
+        node_assert_1.default.deepStrictEqual(Object.keys(ctrl), ['explain']);
+        (0, node_assert_1.default)(explain === ctrl.explain && 0 < Object.keys(explain).length);
+    });
+    (0, node_test_1.test)('unexpected', async () => {
+        const hook = new FailHook();
+        const client = new __1.DreamapplySDK({ feature: { test: { active: true } }, extend: [hook] });
+        await node_assert_1.default.rejects(client.Scoresheet().list(), /hook failed/);
+        (0, node_assert_1.default)(0 < hook.unexpected);
+        const fired = hook.unexpected;
+        node_assert_1.default.strictEqual(await client.Scoresheet().list(undefined, { throw: false }), undefined);
+        (0, node_assert_1.default)(fired < hook.unexpected);
+    });
+    (0, node_test_1.test)('validate', async (t) => {
+        if (null == __1.config.feature?.validate) {
+            t.skip('feature not present in this SDK: validate');
+            return;
+        }
+        const client = __1.DreamapplySDK.test(undefined, { feature: { validate: { active: true } } });
+        await node_assert_1.default.rejects(client.Scoresheet().list({ "confirmed": 1 }), (err) => 'validate_failed' === err.code);
+    });
     (0, node_test_1.test)('basic', async (t) => {
         const live = 'TRUE' === process.env.DREAMAPPLY_TEST_LIVE;
         for (const op of ['list', 'load']) {
@@ -62,7 +109,7 @@ const utility_1 = require("../../utility");
         }
         const setup = basicSetup();
         if (setup.live) {
-            return (0, live_entity_1.runLiveEntity)(setup, { "active": true, "alias": { "field": {} }, "fields": { "confirmed": { "a": true, "h": "Confirmed", "n": "confirmed", "r": false, "t": "`$STRING`", "key$": "confirmed", "index$": 0 }, "created": { "a": true, "h": "Created", "n": "created", "r": false, "t": "`$STRING`", "key$": "created", "index$": 1 }, "date": { "a": true, "h": "Date", "n": "date", "r": false, "t": "`$STRING`", "key$": "date", "index$": 2 }, "depth": { "a": true, "h": "Depth", "n": "depth", "r": false, "t": "`$STRING`", "key$": "depth", "index$": 3 }, "group": { "a": true, "h": "Group", "n": "group", "r": false, "sh": "Sub-resource (object); see the DreamApply SDK.", "t": "`$OBJECT`", "key$": "group", "index$": 4 }, "id": { "a": true, "h": "Id", "n": "id", "r": false, "t": "`$STRING`", "key$": "id", "index$": 5 }, "instructions": { "a": true, "h": "Instructions", "n": "instructions", "r": false, "t": "`$STRING`", "key$": "instructions", "index$": 6 }, "language": { "a": true, "h": "Language", "n": "language", "r": false, "t": "`$STRING`", "key$": "language", "index$": 7 }, "maps": { "a": true, "h": "Maps", "n": "maps", "r": false, "t": "`$ARRAY`", "key$": "maps", "index$": 8 }, "name": { "a": true, "h": "Name", "n": "name", "r": false, "t": "`$STRING`", "key$": "name", "index$": 9 }, "rangeMax": { "a": true, "h": "Range Max", "n": "rangeMax", "r": false, "t": "`$STRING`", "key$": "rangeMax", "index$": 10 }, "rangeMin": { "a": true, "h": "Range Min", "n": "rangeMin", "r": false, "t": "`$STRING`", "key$": "rangeMin", "index$": 11 }, "reference": { "a": true, "h": "Reference", "n": "reference", "r": false, "t": "`$STRING`", "key$": "reference", "index$": 12 }, "scale": { "a": true, "h": "Scale", "n": "scale", "r": false, "t": "`$INTEGER`", "key$": "scale", "index$": 13 }, "scored": { "a": true, "h": "Scored", "n": "scored", "r": false, "t": "`$STRING`", "key$": "scored", "index$": 14 }, "scores": { "a": true, "h": "Scores", "n": "scores", "r": false, "sh": "Sub-resource (Scores); see the DreamApply SDK.", "t": "`$OBJECT`", "key$": "scores", "index$": 15 }, "subject": { "a": true, "h": "Subject", "n": "subject", "r": false, "t": "`$STRING`", "key$": "subject", "index$": 16 }, "type": { "a": true, "h": "Type", "n": "type", "r": false, "t": "`$STRING`", "key$": "type", "index$": 17 } }, "id": { "field": "id", "name": "id" }, "name": "scoresheet", "op": { "list": { "input": "data", "name": "list", "points": [{ "a": true, "co": { "id": "GET /scoresheets", "source": "openapi3", "version": 2 }, "g": {}, "k": "http", "m": "GET", "o": "/scoresheets", "q": {}, "r": {}, "s": [{ "lit": "scoresheets" }], "t": { "req": "`reqdata`", "res": "`body`" }, "index$": 0 }], "key$": "list" }, "load": { "input": "data", "name": "load", "points": [{ "a": true, "co": { "id": "GET /scoresheets/{id}", "source": "openapi3", "version": 2 }, "g": { "params": [{ "a": true, "k": "param", "n": "id", "or": "id", "r": true, "t": "`$INTEGER`", "index$": 0 }] }, "k": "http", "m": "GET", "o": "/scoresheets/{id}", "q": { "exist": ["id"] }, "r": {}, "s": [{ "lit": "scoresheets" }, { "var": "id" }], "t": { "req": "`reqdata`", "res": "`body`" }, "index$": 0 }], "key$": "load" } }, "relations": { "ancestors": [] }, "key$": "scoresheet", "name__orig": "scoresheet", "Name": "Scoresheet", "name_": "scoresheet", "name-": "scoresheet", "NAME": "SCORESHEET", "index$": 12 }, { "active": true, "entity": "scoresheet", "key$": "BasicScoresheetFlow", "kind": "basic", "name": "BasicScoresheetFlow", "param": {}, "step": [{ "a": true, "d": {}, "i": {}, "m": {}, "o": "list", "s": [], "v": [{ "apply": "ItemExists", "def": { "ref": "scoresheet_ref01" } }], "index$": 0 }, { "a": true, "d": {}, "i": { "ref": "scoresheet_ref01", "srcdatavar": "scoresheet_ref01_data", "suffix": "_dt0" }, "m": { "id": "scoresheet01" }, "o": "load", "s": [], "v": [{ "apply": "TextFieldMark", "def": { "mark": "Mark01-scoresheet_ref01" } }], "index$": 1 }] }, 'Scoresheet', { "GET /scoresheets": { "protocol": "http", "parameters": [] }, "GET /scoresheets/{id}": { "protocol": "http", "parameters": [{ "name": "id", "in": "path", "required": true, "schema": { "type": "integer" }, "index$": 0 }] } });
+            return (0, live_entity_1.runLiveEntity)(setup, { "active": true, "alias": { "field": {} }, "fields": { "confirmed": { "a": true, "h": "Confirmed", "n": "confirmed", "r": false, "t": "`$STRING`", "key$": "confirmed", "index$": 0 }, "created": { "a": true, "h": "Created", "n": "created", "r": false, "t": "`$STRING`", "key$": "created", "index$": 1 }, "date": { "a": true, "h": "Date", "n": "date", "r": false, "t": "`$STRING`", "key$": "date", "index$": 2 }, "depth": { "a": true, "h": "Depth", "n": "depth", "r": false, "t": "`$STRING`", "key$": "depth", "index$": 3 }, "group": { "a": true, "h": "Group", "n": "group", "r": false, "sh": "Sub-resource (object); see the DreamApply SDK.", "t": "`$OBJECT`", "key$": "group", "index$": 4 }, "id": { "a": true, "h": "Id", "n": "id", "r": false, "t": "`$STRING`", "key$": "id", "index$": 5 }, "instructions": { "a": true, "h": "Instructions", "n": "instructions", "r": false, "t": "`$STRING`", "key$": "instructions", "index$": 6 }, "language": { "a": true, "h": "Language", "n": "language", "r": false, "t": "`$STRING`", "key$": "language", "index$": 7 }, "maps": { "a": true, "h": "Maps", "n": "maps", "r": false, "t": "`$ARRAY`", "key$": "maps", "index$": 8 }, "name": { "a": true, "h": "Name", "n": "name", "r": false, "t": "`$STRING`", "key$": "name", "index$": 9 }, "rangeMax": { "a": true, "h": "Range Max", "n": "rangeMax", "r": false, "t": "`$STRING`", "key$": "rangeMax", "index$": 10 }, "rangeMin": { "a": true, "h": "Range Min", "n": "rangeMin", "r": false, "t": "`$STRING`", "key$": "rangeMin", "index$": 11 }, "reference": { "a": true, "h": "Reference", "n": "reference", "r": false, "t": "`$STRING`", "key$": "reference", "index$": 12 }, "scale": { "a": true, "h": "Scale", "n": "scale", "r": false, "t": "`$INTEGER`", "key$": "scale", "index$": 13 }, "scored": { "a": true, "h": "Scored", "n": "scored", "r": false, "t": "`$STRING`", "key$": "scored", "index$": 14 }, "scores": { "a": true, "h": "Scores", "n": "scores", "r": false, "sh": "Sub-resource (Scores); see the DreamApply SDK.", "t": "`$OBJECT`", "key$": "scores", "index$": 15 }, "subject": { "a": true, "h": "Subject", "n": "subject", "r": false, "t": "`$STRING`", "key$": "subject", "index$": 16 }, "type": { "a": true, "h": "Type", "n": "type", "r": false, "t": "`$STRING`", "key$": "type", "index$": 17 } }, "id": { "field": "id", "name": "id" }, "name": "scoresheet", "op": { "list": { "input": "data", "name": "list", "points": [{ "a": true, "co": { "id": "GET /scoresheets", "source": "openapi3", "version": 2 }, "g": {}, "k": "http", "m": "GET", "o": "/scoresheets", "q": {}, "r": {}, "rs": { "kind": "json", "media": "application/json" }, "s": [{ "lit": "scoresheets" }], "t": { "req": "`reqdata`", "res": "`body`" }, "index$": 0 }], "key$": "list" }, "load": { "input": "data", "name": "load", "points": [{ "a": true, "co": { "id": "GET /scoresheets/{id}", "source": "openapi3", "version": 2 }, "g": { "params": [{ "a": true, "k": "param", "n": "id", "or": "id", "r": true, "t": "`$INTEGER`", "index$": 0 }] }, "k": "http", "m": "GET", "o": "/scoresheets/{id}", "q": { "exist": ["id"] }, "r": {}, "rs": { "kind": "json", "media": "application/json" }, "s": [{ "lit": "scoresheets" }, { "var": "id" }], "t": { "req": "`reqdata`", "res": "`body`" }, "index$": 0 }], "key$": "load" } }, "relations": { "ancestors": [] }, "key$": "scoresheet", "name__orig": "scoresheet", "Name": "Scoresheet", "name_": "scoresheet", "name-": "scoresheet", "NAME": "SCORESHEET", "index$": 12 }, { "active": true, "entity": "scoresheet", "key$": "BasicScoresheetFlow", "kind": "basic", "name": "BasicScoresheetFlow", "param": {}, "step": [{ "a": true, "d": {}, "i": {}, "m": {}, "o": "list", "s": [], "v": [{ "apply": "ItemExists", "def": { "ref": "scoresheet_ref01" } }], "index$": 0 }, { "a": true, "d": {}, "i": { "ref": "scoresheet_ref01", "srcdatavar": "scoresheet_ref01_data", "suffix": "_dt0" }, "m": { "id": "scoresheet01" }, "o": "load", "s": [], "v": [{ "apply": "TextFieldMark", "def": { "mark": "Mark01-scoresheet_ref01" } }], "index$": 1 }] }, 'Scoresheet', { "GET /scoresheets": { "protocol": "http", "parameters": [] }, "GET /scoresheets/{id}": { "protocol": "http", "parameters": [{ "name": "id", "in": "path", "required": true, "schema": { "type": "integer" }, "index$": 0 }] } }, { strict: LIVE_STRICT, t });
         }
         const client = setup.client;
         const struct = setup.struct;
@@ -80,6 +127,11 @@ const utility_1 = require("../../utility");
         (0, node_assert_1.default)(scoresheet_ref01_data_dt0.id === scoresheet_ref01_data.id);
     });
 });
+// main.kit.test.live.strict is true (the default is true): a live
+// request that fails, or a live test missing an input it needs,
+// fails the test.
+// An account with no record for a test to read skips it either way.
+const LIVE_STRICT = true;
 function basicSetup(extra) {
     // TODO: fix test def options
     const options = {}; // null

@@ -16,7 +16,7 @@ go get github.com/voxgig-sdk/dreamapply-sdk/go@latest
 ```
 
 The Go module proxy resolves the version from the `go/vX.Y.Z` GitHub
-release tag — see [Releases](https://github.com/voxgig-sdk/dreamapply-sdk/releases) for the available versions.
+release tag — see [Tags](https://github.com/voxgig-sdk/dreamapply-sdk/tags) for the available versions.
 
 To vendor from a local checkout instead, clone this repo alongside your
 project and add a `replace` directive pointing at the checked-out
@@ -35,9 +35,10 @@ loading a specific record.
 ### Quickstart
 
 A complete program: create a client, then call the entity operations.
-Each operation returns `(value, error)` — the value is the data itself
-(there is no `{ok, data}` wrapper), so check `err` and use the value
-directly.
+Each operation returns `(value, error)` — the value is the entity, and for
+`List` a `[]any` of entities, one per record (there is no `{ok, data}`
+wrapper), so check `err` and read a record through the entity's
+`Data()`.
 
 ```go
 package main
@@ -56,21 +57,21 @@ func main() {
     },
     })
 
-    // List academicTerm records — the value is the array of records itself.
+    // List academicTerm records — the value is a []any of entities, one per record.
     academicTerms, err := client.AcademicTerm(nil).List(nil, nil)
     if err != nil {
         panic(err)
     }
     for _, item := range academicTerms.([]any) {
-        fmt.Println(item)
+        fmt.Println(item.(sdk.Entity).Data())
     }
 
-    // Load a single academicTerm — the value is the loaded record.
+    // Load a single academicTerm — the value is the entity; Data() reads its record.
     academicTerm, err := client.AcademicTerm(nil).Load(map[string]any{"id": 1}, nil)
     if err != nil {
         panic(err)
     }
-    fmt.Println(academicTerm)
+    fmt.Println(academicTerm.(sdk.Entity).Data())
 }
 ```
 
@@ -81,12 +82,12 @@ Every entity operation returns `(value, error)`. Check `err` before
 using the value — there is no exception to catch:
 
 ```go
-tableviews, err := client.TableView(nil).List(nil, nil)
+institutions, err := client.Institution(nil).List(nil, nil)
 if err != nil {
     // handle err
     return
 }
-_ = tableviews
+_ = institutions
 ```
 
 `Direct` follows the same `(value, error)` convention:
@@ -150,13 +151,16 @@ Create a mock client for unit testing — no server required:
 ```go
 client := sdk.Test()
 
-tableView, err := client.TableView(nil).List(
+institutions, err := client.Institution(nil).List(
     nil, nil,
 )
 if err != nil {
     panic(err)
 }
-fmt.Println(tableView) // the returned mock data
+// A []any of entities, one per mock record.
+for _, item := range institutions.([]any) {
+    fmt.Println(item.(sdk.Entity).Data())
+}
 ```
 
 ### Use a custom fetch function
@@ -256,10 +260,10 @@ All entities implement the `DreamapplyEntity` interface.
 
 | Method | Signature | Description |
 | --- | --- | --- |
-| `Load` | `(reqmatch, ctrl map[string]any) (any, error)` | Load a single entity by match criteria. |
-| `List` | `(reqmatch, ctrl map[string]any) (any, error)` | List entities matching the criteria. |
-| `Create` | `(reqdata, ctrl map[string]any) (any, error)` | Create a new entity. |
-| `Remove` | `(reqmatch, ctrl map[string]any) (any, error)` | Remove an entity. |
+| `Load` | `(reqmatch, ctrl map[string]any) (any, error)` | Load a single entity by match criteria, and return it. |
+| `List` | `(reqmatch, ctrl map[string]any) (any, error)` | List entities matching the criteria, one per record. |
+| `Create` | `(reqdata, ctrl map[string]any) (any, error)` | Create a new entity, and return it. |
+| `Remove` | `(reqmatch, ctrl map[string]any) (any, error)` | Remove an entity, and return it marked as deleted. |
 | `Data` | `(args ...any) any` | Get or set entity data. |
 | `Match` | `(args ...any) any` | Get or set entity match criteria. |
 | `Make` | `() Entity` | Create a new instance with the same options. |
@@ -267,21 +271,21 @@ All entities implement the `DreamapplyEntity` interface.
 
 ### Result shape
 
-Entity operations return `(value, error)`. The `value` is the
-operation's data **directly** — there is no wrapper:
+Entity operations return `(value, error)`. The `value` is the entity
+itself — there is no wrapper:
 
 | Operation | `value` |
 | --- | --- |
-| `Load` / `Create` / `Remove` | the entity record (`map[string]any`) |
-| `List` | a `[]any` of entity records |
+| `Load` / `Create` / `Remove` | the entity, whose `Data()` reads its record (`map[string]any`) |
+| `List` | a `[]any` of entities, one per record |
 
 Check `err` first, then use the value directly (or the typed
 `...Typed` variants, which return the entity's model struct and a typed
 slice):
 
-    academicTerm, err := client.AcademicTerm(nil).List(map[string]any{/* fields */}, nil)
+    academicTerm, err := client.AcademicTerm(nil).List(nil, nil)
     if err != nil { /* handle */ }
-    // academicTerm is the returned record
+    // academicTerm is a []any of entities, one per record
 
 Only `Direct()` returns a response envelope — a `map[string]any` with
 `"ok"`, `"status"`, `"headers"`, and `"data"` keys.
@@ -395,18 +399,14 @@ API path: `/applications`
 | Field | Description |
 | --- | --- |
 | `"accreditation"` |  |
-| `"address"` |  |
 | `"awards_abbr"` |  |
 | `"awards_full"` |  |
 | `"code"` |  |
 | `"codeInternal"` |  |
 | `"country"` |  |
 | `"credits"` |  |
-| `"departments"` | Sub-resource (InstitutionDepartments); see the DreamApply SDK. |
 | `"duration"` |  |
-| `"erasmus"` |  |
 | `"featured"` |  |
-| `"iban"` |  |
 | `"id"` |  |
 | `"institution"` |  |
 | `"language"` |  |
@@ -415,12 +415,9 @@ API path: `/applications`
 | `"name"` |  |
 | `"prospect_uri"` |  |
 | `"quota"` |  |
-| `"registration"` |  |
 | `"status"` |  |
 | `"type"` |  |
 | `"updated"` |  |
-| `"vat"` |  |
-| `"www"` |  |
 
 Operations: Create, List, Load.
 
@@ -569,17 +566,11 @@ API path: `/scoresheets`
 
 | Field | Description |
 | --- | --- |
-| `"content"` | Sub-resource (StreamInterface); see the DreamApply SDK. |
 | `"created"` |  |
-| `"expires"` |  |
 | `"id"` |  |
-| `"mime"` |  |
 | `"modified"` |  |
-| `"name"` |  |
-| `"size"` |  |
 | `"tabledata"` |  |
 | `"title"` |  |
-| `"uploaded"` |  |
 
 Operations: List, Load.
 
@@ -620,7 +611,7 @@ academicTerm, err := client.AcademicTerm(nil).Load(map[string]any{"id": 1}, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(academicTerm) // the loaded record
+fmt.Println(academicTerm.(sdk.Entity).Data()) // the loaded entity's record
 ```
 
 #### Example: List
@@ -630,7 +621,10 @@ academicTerms, err := client.AcademicTerm(nil).List(nil, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(academicTerms) // the array of records
+// A []any of entities, one per record.
+for _, item := range academicTerms.([]any) {
+    fmt.Println(item.(sdk.Entity).Data())
+}
 ```
 
 
@@ -660,7 +654,7 @@ academicYear, err := client.AcademicYear(nil).Load(map[string]any{"id": 1}, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(academicYear) // the loaded record
+fmt.Println(academicYear.(sdk.Entity).Data()) // the loaded entity's record
 ```
 
 #### Example: List
@@ -670,7 +664,10 @@ academicYears, err := client.AcademicYear(nil).List(nil, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(academicYears) // the array of records
+// A []any of entities, one per record.
+for _, item := range academicYears.([]any) {
+    fmt.Println(item.(sdk.Entity).Data())
+}
 ```
 
 
@@ -704,7 +701,7 @@ administrator, err := client.Administrator(nil).Load(map[string]any{"id": 1}, ni
 if err != nil {
     panic(err)
 }
-fmt.Println(administrator) // the loaded record
+fmt.Println(administrator.(sdk.Entity).Data()) // the loaded entity's record
 ```
 
 #### Example: List
@@ -714,7 +711,10 @@ administrators, err := client.Administrator(nil).List(nil, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(administrators) // the array of records
+// A []any of entities, one per record.
+for _, item := range administrators.([]any) {
+    fmt.Println(item.(sdk.Entity).Data())
+}
 ```
 
 
@@ -759,7 +759,7 @@ applicant, err := client.Applicant(nil).Load(map[string]any{"id": 1}, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(applicant) // the loaded record
+fmt.Println(applicant.(sdk.Entity).Data()) // the loaded entity's record
 ```
 
 #### Example: List
@@ -769,7 +769,10 @@ applicants, err := client.Applicant(nil).List(nil, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(applicants) // the array of records
+// A []any of entities, one per record.
+for _, item := range applicants.([]any) {
+    fmt.Println(item.(sdk.Entity).Data())
+}
 ```
 
 #### Example: Create
@@ -780,7 +783,7 @@ result, err := client.Applicant(nil).Create(map[string]any{
 if err != nil {
     panic(err)
 }
-fmt.Println(result)
+fmt.Println(result.(sdk.Entity).Data()) // the created entity's record
 ```
 
 
@@ -830,7 +833,7 @@ application, err := client.Application(nil).Load(map[string]any{"id": 1}, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(application) // the loaded record
+fmt.Println(application.(sdk.Entity).Data()) // the loaded entity's record
 ```
 
 #### Example: List
@@ -840,7 +843,10 @@ applications, err := client.Application(nil).List(nil, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(applications) // the array of records
+// A []any of entities, one per record.
+for _, item := range applications.([]any) {
+    fmt.Println(item.(sdk.Entity).Data())
+}
 ```
 
 
@@ -861,32 +867,25 @@ Create an instance: `course := client.Course(nil)`
 | Field | Type | Description |
 | --- | --- | --- |
 | `accreditation` | `string` |  |
-| `address` | `string` |  |
 | `awards_abbr` | `string` |  |
 | `awards_full` | `string` |  |
 | `code` | `string` |  |
 | `codeInternal` | `string` |  |
 | `country` | `string` |  |
 | `credits` | `string` |  |
-| `departments` | `map[string]any` | Sub-resource (InstitutionDepartments); see the DreamApply SDK. |
 | `duration` | `string` |  |
-| `erasmus` | `string` |  |
 | `featured` | `string` |  |
-| `iban` | `string` |  |
 | `id` | `int` |  |
-| `institution` | `string` |  |
+| `institution` | `map[string]any` |  |
 | `language` | `string` |  |
 | `location` | `string` |  |
 | `mode` | `string` |  |
 | `name` | `string` |  |
 | `prospect_uri` | `string` |  |
 | `quota` | `string` |  |
-| `registration` | `string` |  |
 | `status` | `string` |  |
 | `type` | `string` |  |
 | `updated` | `string` |  |
-| `vat` | `string` |  |
-| `www` | `string` |  |
 
 #### Example: Load
 
@@ -895,7 +894,7 @@ course, err := client.Course(nil).Load(map[string]any{"id": 1}, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(course) // the loaded record
+fmt.Println(course.(sdk.Entity).Data()) // the loaded entity's record
 ```
 
 #### Example: List
@@ -905,7 +904,10 @@ courses, err := client.Course(nil).List(nil, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(courses) // the array of records
+// A []any of entities, one per record.
+for _, item := range courses.([]any) {
+    fmt.Println(item.(sdk.Entity).Data())
+}
 ```
 
 #### Example: Create
@@ -916,7 +918,7 @@ result, err := client.Course(nil).Create(map[string]any{
 if err != nil {
     panic(err)
 }
-fmt.Println(result)
+fmt.Println(result.(sdk.Entity).Data()) // the created entity's record
 ```
 
 
@@ -947,7 +949,7 @@ fee, err := client.Fee(nil).Load(map[string]any{"id": 1}, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(fee) // the loaded record
+fmt.Println(fee.(sdk.Entity).Data()) // the loaded entity's record
 ```
 
 #### Example: List
@@ -957,7 +959,10 @@ fees, err := client.Fee(nil).List(nil, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(fees) // the array of records
+// A []any of entities, one per record.
+for _, item := range fees.([]any) {
+    fmt.Println(item.(sdk.Entity).Data())
+}
 ```
 
 
@@ -996,7 +1001,7 @@ institution, err := client.Institution(nil).Load(map[string]any{"id": 1}, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(institution) // the loaded record
+fmt.Println(institution.(sdk.Entity).Data()) // the loaded entity's record
 ```
 
 #### Example: List
@@ -1006,7 +1011,10 @@ institutions, err := client.Institution(nil).List(nil, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(institutions) // the array of records
+// A []any of entities, one per record.
+for _, item := range institutions.([]any) {
+    fmt.Println(item.(sdk.Entity).Data())
+}
 ```
 
 
@@ -1041,7 +1049,7 @@ intake, err := client.Intake(nil).Load(map[string]any{"id": 1}, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(intake) // the loaded record
+fmt.Println(intake.(sdk.Entity).Data()) // the loaded entity's record
 ```
 
 #### Example: List
@@ -1051,7 +1059,10 @@ intakes, err := client.Intake(nil).List(nil, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(intakes) // the array of records
+// A []any of entities, one per record.
+for _, item := range intakes.([]any) {
+    fmt.Println(item.(sdk.Entity).Data())
+}
 ```
 
 
@@ -1093,7 +1104,7 @@ invoice, err := client.Invoice(nil).Load(map[string]any{"id": 1}, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(invoice) // the loaded record
+fmt.Println(invoice.(sdk.Entity).Data()) // the loaded entity's record
 ```
 
 #### Example: List
@@ -1103,7 +1114,10 @@ invoices, err := client.Invoice(nil).List(nil, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(invoices) // the array of records
+// A []any of entities, one per record.
+for _, item := range invoices.([]any) {
+    fmt.Println(item.(sdk.Entity).Data())
+}
 ```
 
 
@@ -1143,7 +1157,10 @@ journals, err := client.Journal(nil).List(nil, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(journals) // the array of records
+// A []any of entities, one per record.
+for _, item := range journals.([]any) {
+    fmt.Println(item.(sdk.Entity).Data())
+}
 ```
 
 
@@ -1175,7 +1192,10 @@ logins, err := client.Login(nil).List(nil, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(logins) // the array of records
+// A []any of entities, one per record.
+for _, item := range logins.([]any) {
+    fmt.Println(item.(sdk.Entity).Data())
+}
 ```
 
 
@@ -1220,7 +1240,7 @@ scoresheet, err := client.Scoresheet(nil).Load(map[string]any{"id": 1}, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(scoresheet) // the loaded record
+fmt.Println(scoresheet.(sdk.Entity).Data()) // the loaded entity's record
 ```
 
 #### Example: List
@@ -1230,7 +1250,10 @@ scoresheets, err := client.Scoresheet(nil).List(nil, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(scoresheets) // the array of records
+// A []any of entities, one per record.
+for _, item := range scoresheets.([]any) {
+    fmt.Println(item.(sdk.Entity).Data())
+}
 ```
 
 
@@ -1249,17 +1272,11 @@ Create an instance: `tableView := client.TableView(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `content` | `map[string]any` | Sub-resource (StreamInterface); see the DreamApply SDK. |
 | `created` | `string` |  |
-| `expires` | `string` |  |
 | `id` | `int` |  |
-| `mime` | `string` |  |
 | `modified` | `string` |  |
-| `name` | `string` |  |
-| `size` | `int` |  |
 | `tabledata` | `map[string]any` |  |
 | `title` | `string` |  |
-| `uploaded` | `string` |  |
 
 #### Example: Load
 
@@ -1268,7 +1285,7 @@ tableView, err := client.TableView(nil).Load(map[string]any{"id": 1}, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(tableView) // the loaded record
+fmt.Println(tableView.(sdk.Entity).Data()) // the loaded entity's record
 ```
 
 #### Example: List
@@ -1278,7 +1295,10 @@ tableViews, err := client.TableView(nil).List(nil, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(tableViews) // the array of records
+// A []any of entities, one per record.
+for _, item := range tableViews.([]any) {
+    fmt.Println(item.(sdk.Entity).Data())
+}
 ```
 
 ## Features
@@ -1474,7 +1494,9 @@ The Go SDK uses `map[string]any` throughout rather than typed structs.
 This mirrors the dynamic nature of the API and keeps the SDK
 flexible — no code generation is needed when the API schema changes.
 
-Use `core.ToMapAny()` to safely cast results and nested data.
+An operation returns the entity, and its `Data()` returns the record. Use
+`core.ToMapAny()` to safely cast that record, or data nested in it, to
+`map[string]any`: it returns `nil` for anything else, an entity included.
 
 ### Package structure
 
@@ -1498,11 +1520,11 @@ Entity instances are stateful. After a successful `List`, the entity
 stores the returned data and match criteria internally.
 
 ```go
-tableview := client.TableView(nil)
-tableview.List(nil, nil)
+institution := client.Institution(nil)
+institution.List(nil, nil)
 
-// tableview.Data() now returns the tableview data from the last list
-// tableview.Match() returns the last match criteria
+// institution.Data() now returns the institution data from the last list
+// institution.Match() returns the last match criteria
 ```
 
 Call `Make()` to create a fresh instance with the same configuration

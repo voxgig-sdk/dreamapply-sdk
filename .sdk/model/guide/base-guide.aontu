@@ -57,12 +57,10 @@ guide: {
   entity: course: {
     path: "/courses": {
       op: create: method: *POST
-      op: create: transform: res: *("`body.institution`")|top
       op: list: method: *GET
     }
     path: "/courses/{id}": {
       op: load: method: *GET
-      op: load: transform: res: *("`body.institution`")|top
     }
   }
 
@@ -81,7 +79,6 @@ guide: {
     }
     path: "/institutions/{id}": {
       op: load: method: *GET
-      op: load: transform: res: *("`body.departments`")|top
     }
   }
 
@@ -131,7 +128,6 @@ guide: {
     }
     path: "/tableviews/{id}": {
       op: load: method: *GET
-      op: load: transform: res: *("`body.tabledata`")|top
     }
   }
 

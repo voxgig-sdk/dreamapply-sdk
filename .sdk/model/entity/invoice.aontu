@@ -109,6 +109,10 @@ main: kit: entity: invoice: {
           }
           m: "GET"
           o: "/invoices"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
           s: [
             {
               lit: "invoices"
@@ -147,6 +151,10 @@ main: kit: entity: invoice: {
             exist: [
               "id"
             ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {

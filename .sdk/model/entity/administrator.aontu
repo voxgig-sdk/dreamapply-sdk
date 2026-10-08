@@ -67,6 +67,10 @@ main: kit: entity: administrator: {
           }
           m: "GET"
           o: "/administrators"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
           s: [
             {
               lit: "administrators"
@@ -105,6 +109,10 @@ main: kit: entity: administrator: {
             exist: [
               "id"
             ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {

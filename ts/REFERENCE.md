@@ -244,8 +244,10 @@ Make a direct HTTP request to any API endpoint.
 | `fetchargs.headers` | `object` | Request headers (merged with defaults). |
 | `fetchargs.body` | `any` | Request body (objects are JSON-serialized). |
 | `fetchargs.ctrl` | `object` | Control options (e.g. `{ explain: true }`). |
+| `fetchargs.ctrl.signal` | `AbortSignal` | Aborts the request in flight: `ok` is then `false` and `err.code` is `request_aborted`. |
 
-**Returns:** `Promise<{ ok, status, headers, data } | Error>`
+**Returns:** `Promise<{ ok, status, headers, data }>`. On a failure
+`ok` is `false` and `err` holds the error.
 
 #### `prepare(fetchargs?: object)`
 
@@ -259,6 +261,15 @@ same parameters as `direct()`.
 Alias for `DreamapplySDK.test()`.
 
 **Returns:** `DreamapplySDK` instance in test mode.
+
+#### Cancelling a call
+
+Every entity operation takes an optional `ctrl` object after its match or
+data, and an `AbortSignal` in `ctrl.signal` cancels the request in flight.
+The operation then rejects with an error whose `code` is
+`request_aborted` and whose `cause` is the signal's reason. A request
+whose signal has already aborted is not sent. `stream()` takes the signal
+as `callopts.signal`, and ends when it aborts.
 
 
 ---
@@ -285,7 +296,7 @@ const academic_term = client.AcademicTerm()
 
 #### `list(match: object, ctrl?: object)`
 
-List entities matching the given criteria. Returns an array.
+List entities matching the given criteria. Resolves to an array of entities, one per record.
 
 ```ts
 const results = await client.AcademicTerm().list()
@@ -293,7 +304,7 @@ const results = await client.AcademicTerm().list()
 
 #### `load(match: object, ctrl?: object)`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Resolves to the entity, whose record `data()` reads.
 
 ```ts
 const result = await client.AcademicTerm().load({ id: 1 })
@@ -345,7 +356,7 @@ const academic_year = client.AcademicYear()
 
 #### `list(match: object, ctrl?: object)`
 
-List entities matching the given criteria. Returns an array.
+List entities matching the given criteria. Resolves to an array of entities, one per record.
 
 ```ts
 const results = await client.AcademicYear().list()
@@ -353,7 +364,7 @@ const results = await client.AcademicYear().list()
 
 #### `load(match: object, ctrl?: object)`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Resolves to the entity, whose record `data()` reads.
 
 ```ts
 const result = await client.AcademicYear().load({ id: 1 })
@@ -409,7 +420,7 @@ const administrator = client.Administrator()
 
 #### `list(match: object, ctrl?: object)`
 
-List entities matching the given criteria. Returns an array.
+List entities matching the given criteria. Resolves to an array of entities, one per record.
 
 ```ts
 const results = await client.Administrator().list()
@@ -417,7 +428,7 @@ const results = await client.Administrator().list()
 
 #### `load(match: object, ctrl?: object)`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Resolves to the entity, whose record `data()` reads.
 
 ```ts
 const result = await client.Administrator().load({ id: 1 })
@@ -483,7 +494,7 @@ const applicant = client.Applicant()
 
 #### `create(data: object, ctrl?: object)`
 
-Create a new entity with the given data.
+Create a new entity with the given data. Resolves to the created entity.
 
 ```ts
 const result = await client.Applicant().create({
@@ -492,7 +503,7 @@ const result = await client.Applicant().create({
 
 #### `list(match: object, ctrl?: object)`
 
-List entities matching the given criteria. Returns an array.
+List entities matching the given criteria. Resolves to an array of entities, one per record.
 
 ```ts
 const results = await client.Applicant().list()
@@ -500,7 +511,7 @@ const results = await client.Applicant().list()
 
 #### `load(match: object, ctrl?: object)`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Resolves to the entity, whose record `data()` reads.
 
 ```ts
 const result = await client.Applicant().load({ id: 1 })
@@ -572,7 +583,7 @@ const application = client.Application()
 
 #### `list(match: object, ctrl?: object)`
 
-List entities matching the given criteria. Returns an array.
+List entities matching the given criteria. Resolves to an array of entities, one per record.
 
 ```ts
 const results = await client.Application().list()
@@ -580,7 +591,7 @@ const results = await client.Application().list()
 
 #### `load(match: object, ctrl?: object)`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Resolves to the entity, whose record `data()` reads.
 
 ```ts
 const result = await client.Application().load({ id: 1 })
@@ -625,38 +636,31 @@ const course = client.Course()
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `accreditation` | `string` | No |  |
-| `address` | `string` | No |  |
 | `awards_abbr` | `string` | No |  |
 | `awards_full` | `string` | No |  |
 | `code` | `string` | No |  |
 | `codeInternal` | `string` | No |  |
 | `country` | `string` | No |  |
 | `credits` | `string` | No |  |
-| `departments` | `Record<string, any>` | No | Sub-resource (InstitutionDepartments); see the DreamApply SDK. |
 | `duration` | `string` | No |  |
-| `erasmus` | `string` | No |  |
 | `featured` | `string` | No |  |
-| `iban` | `string` | No |  |
 | `id` | `number` | No |  |
-| `institution` | `string` | No |  |
+| `institution` | `Record<string, any>` | No |  |
 | `language` | `string` | No |  |
 | `location` | `string` | No |  |
 | `mode` | `string` | No |  |
 | `name` | `string` | No |  |
 | `prospect_uri` | `string` | No |  |
 | `quota` | `string` | No |  |
-| `registration` | `string` | No |  |
 | `status` | `string` | No |  |
 | `type` | `string` | No |  |
 | `updated` | `string` | No |  |
-| `vat` | `string` | No |  |
-| `www` | `string` | No |  |
 
 ### Operations
 
 #### `create(data: object, ctrl?: object)`
 
-Create a new entity with the given data.
+Create a new entity with the given data. Resolves to the created entity.
 
 ```ts
 const result = await client.Course().create({
@@ -665,7 +669,7 @@ const result = await client.Course().create({
 
 #### `list(match: object, ctrl?: object)`
 
-List entities matching the given criteria. Returns an array.
+List entities matching the given criteria. Resolves to an array of entities, one per record.
 
 ```ts
 const results = await client.Course().list()
@@ -673,7 +677,7 @@ const results = await client.Course().list()
 
 #### `load(match: object, ctrl?: object)`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Resolves to the entity, whose record `data()` reads.
 
 ```ts
 const result = await client.Course().load({ id: 1 })
@@ -726,7 +730,7 @@ const fee = client.Fee()
 
 #### `list(match: object, ctrl?: object)`
 
-List entities matching the given criteria. Returns an array.
+List entities matching the given criteria. Resolves to an array of entities, one per record.
 
 ```ts
 const results = await client.Fee().list()
@@ -734,7 +738,7 @@ const results = await client.Fee().list()
 
 #### `load(match: object, ctrl?: object)`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Resolves to the entity, whose record `data()` reads.
 
 ```ts
 const result = await client.Fee().load({ id: 1 })
@@ -795,7 +799,7 @@ const institution = client.Institution()
 
 #### `list(match: object, ctrl?: object)`
 
-List entities matching the given criteria. Returns an array.
+List entities matching the given criteria. Resolves to an array of entities, one per record.
 
 ```ts
 const results = await client.Institution().list()
@@ -803,7 +807,7 @@ const results = await client.Institution().list()
 
 #### `load(match: object, ctrl?: object)`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Resolves to the entity, whose record `data()` reads.
 
 ```ts
 const result = await client.Institution().load({ id: 1 })
@@ -860,7 +864,7 @@ const intake = client.Intake()
 
 #### `list(match: object, ctrl?: object)`
 
-List entities matching the given criteria. Returns an array.
+List entities matching the given criteria. Resolves to an array of entities, one per record.
 
 ```ts
 const results = await client.Intake().list()
@@ -868,7 +872,7 @@ const results = await client.Intake().list()
 
 #### `load(match: object, ctrl?: object)`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Resolves to the entity, whose record `data()` reads.
 
 ```ts
 const result = await client.Intake().load({ id: 1 })
@@ -931,7 +935,7 @@ const invoice = client.Invoice()
 
 #### `list(match: object, ctrl?: object)`
 
-List entities matching the given criteria. Returns an array.
+List entities matching the given criteria. Resolves to an array of entities, one per record.
 
 ```ts
 const results = await client.Invoice().list()
@@ -939,7 +943,7 @@ const results = await client.Invoice().list()
 
 #### `load(match: object, ctrl?: object)`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Resolves to the entity, whose record `data()` reads.
 
 ```ts
 const result = await client.Invoice().load({ id: 1 })
@@ -947,7 +951,7 @@ const result = await client.Invoice().load({ id: 1 })
 
 #### `remove(match: object, ctrl?: object)`
 
-Remove the entity matching the given criteria.
+Remove the entity matching the given criteria. Resolves to the entity, marked as deleted.
 
 ```ts
 const result = await client.Invoice().remove({ id: 1 })
@@ -1010,7 +1014,7 @@ const journal = client.Journal()
 
 #### `list(match: object, ctrl?: object)`
 
-List entities matching the given criteria. Returns an array.
+List entities matching the given criteria. Resolves to an array of entities, one per record.
 
 ```ts
 const results = await client.Journal().list()
@@ -1065,7 +1069,7 @@ const login = client.Login()
 
 #### `list(match: object, ctrl?: object)`
 
-List entities matching the given criteria. Returns an array.
+List entities matching the given criteria. Resolves to an array of entities, one per record.
 
 ```ts
 const results = await client.Login().list()
@@ -1132,7 +1136,7 @@ const scoresheet = client.Scoresheet()
 
 #### `list(match: object, ctrl?: object)`
 
-List entities matching the given criteria. Returns an array.
+List entities matching the given criteria. Resolves to an array of entities, one per record.
 
 ```ts
 const results = await client.Scoresheet().list()
@@ -1140,7 +1144,7 @@ const results = await client.Scoresheet().list()
 
 #### `load(match: object, ctrl?: object)`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Resolves to the entity, whose record `data()` reads.
 
 ```ts
 const result = await client.Scoresheet().load({ id: 1 })
@@ -1184,23 +1188,17 @@ const table_view = client.TableView()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `content` | `Record<string, any>` | No | Sub-resource (StreamInterface); see the DreamApply SDK. |
 | `created` | `string` | No |  |
-| `expires` | `string` | No |  |
 | `id` | `number` | No |  |
-| `mime` | `string` | No |  |
 | `modified` | `string` | No |  |
-| `name` | `string` | No |  |
-| `size` | `number` | No |  |
 | `tabledata` | `Record<string, any>` | No |  |
 | `title` | `string` | No |  |
-| `uploaded` | `string` | No |  |
 
 ### Operations
 
 #### `list(match: object, ctrl?: object)`
 
-List entities matching the given criteria. Returns an array.
+List entities matching the given criteria. Resolves to an array of entities, one per record.
 
 ```ts
 const results = await client.TableView().list()
@@ -1208,7 +1206,7 @@ const results = await client.TableView().list()
 
 #### `load(match: object, ctrl?: object)`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Resolves to the entity, whose record `data()` reads.
 
 ```ts
 const result = await client.TableView().load({ id: 1 })
@@ -1532,6 +1530,7 @@ Timeout.
 | Option | Type |
 |---|---|
 | `clearTimer` | function |
+| `now` | function |
 | `setTimer` | function |
 
 These take no default: the feature behaves one way when you supply them and

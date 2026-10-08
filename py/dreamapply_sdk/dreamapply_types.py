@@ -202,32 +202,25 @@ class ApplicationListMatch(TypedDict, total=False):
 
 class Course(TypedDict, total=False):
     accreditation: str
-    address: str
     awards_abbr: str
     awards_full: str
     code: str
     codeInternal: str
     country: str
     credits: str
-    departments: dict
     duration: str
-    erasmus: str
     featured: str
-    iban: str
     id: int
-    institution: str
+    institution: dict
     language: str
     location: str
     mode: str
     name: str
     prospect_uri: str
     quota: str
-    registration: str
     status: str
     type: str
     updated: str
-    vat: str
-    www: str
 
 
 class CourseLoadMatch(TypedDict):
@@ -236,62 +229,48 @@ class CourseLoadMatch(TypedDict):
 
 class CourseListMatch(TypedDict, total=False):
     accreditation: str
-    address: str
     awards_abbr: str
     awards_full: str
     code: str
     codeInternal: str
     country: str
     credits: str
-    departments: dict
     duration: str
-    erasmus: str
     featured: str
-    iban: str
     id: int
-    institution: str
+    institution: dict
     language: str
     location: str
     mode: str
     name: str
     prospect_uri: str
     quota: str
-    registration: str
     status: str
     type: str
     updated: str
-    vat: str
-    www: str
 
 
 class CourseCreateData(TypedDict, total=False):
     accreditation: str
-    address: str
     awards_abbr: str
     awards_full: str
     code: str
     codeInternal: str
     country: str
     credits: str
-    departments: dict
     duration: str
-    erasmus: str
     featured: str
-    iban: str
     id: int
-    institution: str
+    institution: dict
     language: str
     location: str
     mode: str
     name: str
     prospect_uri: str
     quota: str
-    registration: str
     status: str
     type: str
     updated: str
-    vat: str
-    www: str
 
 
 class Fee(TypedDict, total=False):
@@ -513,17 +492,11 @@ class ScoresheetListMatch(TypedDict, total=False):
 
 
 class TableView(TypedDict, total=False):
-    content: dict
     created: str
-    expires: str
     id: int
-    mime: str
     modified: str
-    name: str
-    size: int
     tabledata: dict
     title: str
-    uploaded: str
 
 
 class TableViewLoadMatch(TypedDict):
@@ -531,14 +504,8 @@ class TableViewLoadMatch(TypedDict):
 
 
 class TableViewListMatch(TypedDict, total=False):
-    content: dict
     created: str
-    expires: str
     id: int
-    mime: str
     modified: str
-    name: str
-    size: int
     tabledata: dict
     title: str
-    uploaded: str

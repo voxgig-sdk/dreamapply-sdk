@@ -73,6 +73,10 @@ main: kit: entity: intake: {
           }
           m: "GET"
           o: "/intakes"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
           s: [
             {
               lit: "intakes"
@@ -111,6 +115,10 @@ main: kit: entity: intake: {
             exist: [
               "id"
             ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {

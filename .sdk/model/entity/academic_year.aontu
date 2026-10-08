@@ -43,6 +43,10 @@ main: kit: entity: academic_year: {
           }
           m: "GET"
           o: "/academic-years"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
           s: [
             {
               lit: "academic-years"
@@ -81,6 +85,10 @@ main: kit: entity: academic_year: {
             exist: [
               "id"
             ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {
